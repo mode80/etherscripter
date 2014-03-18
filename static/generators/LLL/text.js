@@ -79,7 +79,7 @@ Blockly.LLL['text_isEmpty'] = function(block) {
   // Is the string null?
   var argument0 = Blockly.LLL.valueToCode(block, 'VALUE',
       Blockly.LLL.ORDER_MEMBER) || '""';
-  return ['= 0 ' + argument0, Blockly.LLL.ORDER_NONE];
+  return ['= 0 ' + argument0, Blockly.LLL.ORDER_ATOMIC];
 };
 
 /*
