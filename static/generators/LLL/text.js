@@ -17,24 +17,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @license
+ * Ethereum LLL generator for Blockly
+ *
+ * Copyright 2014 mode80
+ */
 
 /**
- * @fileoverview Generating JavaScript for text blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Generating LLL for text blocks.
+ * @author mode80@users.noreply.github.com
  */
+
 'use strict';
 
-goog.provide('Blockly.JavaScript.text');
+goog.provide('Blockly.LLL.text');
 
-goog.require('Blockly.JavaScript');
+goog.require('Blockly.LLL');
 
 
-Blockly.JavaScript['text'] = function(block) {
+Blockly.LLL['text'] = function(block) {
   // Text value.
-  var code = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  // TODO: should this truncate past 32 byte Ethereum max len?
+  var code = Blockly.LLL.quote_(block.getFieldValue('TEXT'));
+  return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
+/**
 Blockly.JavaScript['text_join'] = function(block) {
   // Create a string made up of any number of elements of any type.
   var code;
@@ -62,7 +71,9 @@ Blockly.JavaScript['text_join'] = function(block) {
     return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
   }
 };
+*/
 
+/*
 Blockly.JavaScript['text_append'] = function(block) {
   // Append to a variable in place.
   var varName = Blockly.JavaScript.variableDB_.getName(
@@ -71,21 +82,26 @@ Blockly.JavaScript['text_append'] = function(block) {
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   return varName + ' = String(' + varName + ') + String(' + argument0 + ');\n';
 };
+*/
 
+
+/*
 Blockly.JavaScript['text_length'] = function(block) {
   // String length.
   var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
       Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
 };
+*/
 
-Blockly.JavaScript['text_isEmpty'] = function(block) {
+Blockly.LLL['text_isEmpty'] = function(block) {
   // Is the string null?
-  var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
-      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
-  return ['!' + argument0, Blockly.JavaScript.ORDER_LOGICAL_NOT];
+  var argument0 = Blockly.LLL.valueToCode(block, 'VALUE',
+      Blockly.LLL.ORDER_MEMBER) || '""';
+  return ['= 0 ' + argument0, Blockly.LLL.ORDER_NONE];
 };
 
+/*
 Blockly.JavaScript['text_indexOf'] = function(block) {
   // Search the text for a substring.
   var operator = block.getFieldValue('END') == 'FIRST' ?
@@ -212,7 +228,7 @@ Blockly.JavaScript['text_changeCase'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript['text_trim'] = function(block) {
+Bockly.JavaScript['text_trim'] = function(block) {
   // Trim spaces.
   var OPERATORS = {
     LEFT: '.trimLeft()',
@@ -242,3 +258,4 @@ Blockly.JavaScript['text_prompt'] = function(block) {
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+/*
