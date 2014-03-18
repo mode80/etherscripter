@@ -2,7 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Blockly Demo: Generating JavaScript</title>
+  <title>EtherScripter - Smart Contract Visual Editor for Ethereum</title>
+
+  <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet" >
+
   <script type="text/javascript" src="blockly_uncompressed.js"></script>
 
   <script type="text/javascript" src="blocks/colour.js"></script>
@@ -32,33 +35,52 @@
   <script type="text/javascript" src="generators/python/text.js"></script>
   <script type="text/javascript" src="generators/python/variables.js"></script>
 
-  <script type="text/javascript" src="msg/js/en.js"></script>
+  <script type="text/javascript" src="msg/messages.js"></script>
+
   <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
+    body { padding-top: 50px; }
   </style>
+
 </head>
 <body>
-  <h1><a href="https://blockly.googlecode.com/">Blockly</a> &gt;
-    <a href="../index.html">Demos</a> &gt; Generating JavaScript</h1>
 
-  <p>This is a simple demo of generating code from blocks.</p>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container " >
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">EtherScripter</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Editor</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 
-  <p>&rarr; More info on <a href="http://code.google.com/p/blockly/wiki/LanguageGenerators">Language Generators</a>...</p>
+  <div class="container jumbotron" >
 
-  <p>
-    <button onclick="showCode()">Show JavaScript</button>
-    <button onclick="showPython()">Show Python</button>
-    <button onclick="runCode()">Run JavaScript</button>
-  </p>
+    <div class="row" >
+      <div class="col-md-10" >
+        <div id="blocklyDiv" style="height:800px"></div>
+      </div>
+      <div class="col-md-2">
+        <div class="btn-group-vertical">
+          <button class="btn btn-default " onclick="showCode()">Show JavaScript</button>
+          <button class="btn btn-default " onclick="showPython()">Show Python</button>
+          <button class="btn btn-default " onclick="runCode()">Run JavaScript</button>
+        </>
+      </div>
+    </div>
 
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+  </div>
 
   <xml id="toolbox" style="display: none">
     <category name="Control">
@@ -90,9 +112,14 @@
     </category>
   </xml>
 
+
   <script>
     Blockly.inject(document.getElementById('blocklyDiv'),
-        {path: '../../', toolbox: document.getElementById('toolbox')});
+        {path: '../../',
+         toolbox:  document.getElementById('toolbox'),
+         scrollbars: true,
+         trashcan: false
+        });
 
     function showCode() {
       // Generate JavaScript code and display it.
