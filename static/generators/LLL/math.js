@@ -17,20 +17,21 @@ goog.provide('Blockly.LLL.math');
 goog.require('Blockly.LLL');
 
 
-Blockly.JavaScript['math_number'] = function(block) {
+Blockly.LLL['math_number'] = function(block) {
   // Numeric value.
-  var code = parseFloat(block.getFieldValue('NUM'));
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  // TODO: enforce no floats at the block UI level
+  var code = parseInt(block.getFieldValue('NUM'));
+  return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript['math_arithmetic'] = function(block) {
+Blockly.LLL['math_arithmetic'] = function(block) {
   // Basic arithmetic operators, and power.
   var OPERATORS = {
-    ADD: [' + ', Blockly.JavaScript.ORDER_ADDITION],
-    MINUS: [' - ', Blockly.JavaScript.ORDER_SUBTRACTION],
-    MULTIPLY: [' * ', Blockly.JavaScript.ORDER_MULTIPLICATION],
-    DIVIDE: [' / ', Blockly.JavaScript.ORDER_DIVISION],
-    POWER: [null, Blockly.JavaScript.ORDER_COMMA]  // Handle power separately.
+    ADD: ['+', Blockly.JavaScript.ORDER_ATOMIC],
+    MINUS: ['-', Blockly.JavaScript.ORDER_ATOMIC],
+    MULTIPLY: ['*', Blockly.JavaScript.ORDER_ATOMIC],
+    DIVIDE: ['/', Blockly.JavaScript.ORDER_ATOMIC],
+    POWER: ['EXP', Blockly.JavaScript.ORDER_ATOMIC]
   };
   var tuple = OPERATORS[block.getFieldValue('OP')];
   var operator = tuple[0];
@@ -38,15 +39,14 @@ Blockly.JavaScript['math_arithmetic'] = function(block) {
   var argument0 = Blockly.JavaScript.valueToCode(block, 'A', order) || '0';
   var argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
   var code;
-  // Power in JavaScript requires a special case since it has no operator.
-  if (!operator) {
-    code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
-    return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-  }
-  code = argument0 + operator + argument1;
+  code = "(" + operator + ' ' + argument0 + ' ' + argument1 + ')';
   return [code, order];
 };
 
+
+// TODO Need a UI block and generator here to support NEG
+
+/*
 Blockly.JavaScript['math_single'] = function(block) {
   // Math operators with single operand.
   var operator = block.getFieldValue('OP');
@@ -144,6 +144,7 @@ Blockly.JavaScript['math_constant'] = function(block) {
   return CONSTANTS[block.getFieldValue('CONSTANT')];
 };
 
+
 Blockly.JavaScript['math_number_property'] = function(block) {
   // Check if a number is even, odd, prime, whole, positive, or negative
   // or if it is divisible by certain number. Returns true or false.
@@ -211,6 +212,7 @@ Blockly.JavaScript['math_change'] = function(block) {
   return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName +
       ' : 0) + ' + argument0 + ';\n';
 };
+
 
 // Rounding functions have a single operand.
 Blockly.JavaScript['math_round'] = Blockly.JavaScript['math_single'];
@@ -347,16 +349,19 @@ Blockly.JavaScript['math_on_list'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript['math_modulo'] = function(block) {
+*/
+
+Blockly.LLL['math_modulo'] = function(block) {
   // Remainder computation.
-  var argument0 = Blockly.JavaScript.valueToCode(block, 'DIVIDEND',
-      Blockly.JavaScript.ORDER_MODULUS) || '0';
+  var argument0 = Blockly.LLL.valueToCode(block, 'DIVIDEND',
+      Blockly.LLL.ORDER_MODULUS) || '0';
   var argument1 = Blockly.JavaScript.valueToCode(block, 'DIVISOR',
-      Blockly.JavaScript.ORDER_MODULUS) || '0';
-  var code = argument0 + ' % ' + argument1;
-  return [code, Blockly.JavaScript.ORDER_MODULUS];
+      Blockly.LLL.ORDER_MODULUS) || '0';
+  var code = "(% " + argument0 + ' ' + argument1 " )";
+  return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
+/*
 Blockly.JavaScript['math_constrain'] = function(block) {
   // Constrain a number between two limits.
   var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
@@ -396,3 +401,5 @@ Blockly.JavaScript['math_random_float'] = function(block) {
   // Random fraction between 0 and 1.
   return ['Math.random()', Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+
+*/
