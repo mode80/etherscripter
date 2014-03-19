@@ -35,6 +35,15 @@
   <script type="text/javascript" src="generators/python/text.js"></script>
   <script type="text/javascript" src="generators/python/variables.js"></script>
 
+  <script type="text/javascript" src="generators/LLL.js"></script>
+  <script type="text/javascript" src="generators/LLL/lists.js"></script>
+  <script type="text/javascript" src="generators/LLL/logic.js"></script>
+  <script type="text/javascript" src="generators/LLL/loops.js"></script>
+  <script type="text/javascript" src="generators/LLL/math.js"></script>
+  <script type="text/javascript" src="generators/LLL/procedures.js"></script>
+  <script type="text/javascript" src="generators/LLL/text.js"></script>
+  <script type="text/javascript" src="generators/LLL/variables.js"></script>
+
   <script type="text/javascript" src="msg/messages.js"></script>
 
   <style>
@@ -75,7 +84,7 @@
         <div class="btn-group-vertical">
           <button class="btn btn-default " onclick="showCode()">Show JavaScript</button>
           <button class="btn btn-default " onclick="showPython()">Show Python</button>
-          <button class="btn btn-default " onclick="runCode()">Run JavaScript</button>
+          <button class="btn btn-default " onclick="showLLL()">Show LLL</button>
         </>
       </div>
     </div>
@@ -284,6 +293,13 @@
       // Generate Python code and display it.
       Blockly.Python.INFINITE_LOOP_TRAP = null;
       var code = Blockly.Python.workspaceToCode();
+      alert(code);
+    }
+
+    function showLLL() {
+      // Generate LLL code and display it.
+      Blockly.LLL.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.LLL.workspaceToCode();
       alert(code);
     }
 

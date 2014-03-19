@@ -38,8 +38,7 @@ Blockly.LLL['math_arithmetic'] = function(block) {
   var order = tuple[1];
   var argument0 = Blockly.JavaScript.valueToCode(block, 'A', order) || '0';
   var argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
-  var code;
-  code = "(" + operator + ' ' + argument0 + ' ' + argument1 + ')';
+  var code = '(' + operator + ' ' + argument0 + ' ' + argument1 + ')';
   return [code, order];
 };
 
@@ -357,7 +356,7 @@ Blockly.LLL['math_modulo'] = function(block) {
       Blockly.LLL.ORDER_MODULUS) || '0';
   var argument1 = Blockly.JavaScript.valueToCode(block, 'DIVISOR',
       Blockly.LLL.ORDER_MODULUS) || '0';
-  var code = "(% " + argument0 + ' ' + argument1 " )";
+  var code = '(% ' + argument0 + ' ' + argument1 + ' )';
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 

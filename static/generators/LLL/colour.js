@@ -1,33 +1,21 @@
 /**
  * @license
- * Visual Blocks Language
+ * Ethereum LLL generator for Blockly
  *
- * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2014 mode80
  */
 
 /**
- * @fileoverview Generating JavaScript for colour blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Generating LLL for colour blocks.
+ * @author mode80@users.noreply.github.com
  */
+
 'use strict';
+goog.provide('Blockly.LLL.colour');
 
-goog.provide('Blockly.JavaScript.colour');
+goog.require('Blockly.LLL');
 
-goog.require('Blockly.JavaScript');
-
+/*
 
 Blockly.JavaScript['colour_picker'] = function(block) {
   // Colour picker.
@@ -101,3 +89,4 @@ Blockly.JavaScript['colour_blend'] = function(block) {
   var code = functionName + '(' + c1 + ', ' + c2 + ', ' + ratio + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+*/

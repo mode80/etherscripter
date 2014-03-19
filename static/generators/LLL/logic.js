@@ -20,26 +20,27 @@ goog.require('Blockly.LLL');
 Blockly.LLL['controls_if'] = function(block) {
   // If/elseif/else condition.
   var n = 0;
+  var code = ""
   var argument = Blockly.LLL.valueToCode(block, 'IF' + n,
       Blockly.LLL.ORDER_NONE) || 'false';
   var branch = Blockly.LLL.statementToCode(block, 'DO' + n);
   var if_or_when = (block.elseCount_ + block.elseifCount_) ? "when" : "if"
-  var code =  '(' + if_or_when + ' ' + argument + '\n';
-  var code += '  (seq \n' +  branch + '\n  )' ;
+  code += '(' + if_or_when + ' ' + argument + '\n';
+  code += '  (seq \n' +  branch + '\n  )' ;
     for (n = 0; n <= block.elseifCount_; n++) {
       argument = Blockly.JavaScript.valueToCode(block, 'IF' + n,
           Blockly.LLL.ORDER_NONE) || 'false';
       branch = Blockly.LLL.statementToCode(block, 'DO' + n);
       if_or_when = (n == block.elseifCount_) ? "when" : "if"
-      var code += '(' + if_or_when + ' ' + argument + '\n';
-      var code += '  (seq \n' +  branch + '\n  )' ;
+      code += '(' + if_or_when + ' ' + argument + '\n';
+      code += '  (seq \n' +  branch + '\n  )' ;
     }
     for (n = 0; n <= block.elseifCount_; n++) {
       code += '\n)'
     }
   if (block.elseCount_) {
     branch = Blockly.LLL.statementToCode(block, 'ELSE');
-    code += (seq \n' + branch + '\n  )' ;
+    code += '(seq \n' + branch + '\n  )' ;
   }
   return code + ')\n';
 };

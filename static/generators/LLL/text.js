@@ -82,7 +82,7 @@ Blockly.LLL['text_isEmpty'] = function(block) {
   return ['= 0 ' + argument0, Blockly.LLL.ORDER_ATOMIC];
 };
 
-/*
+/**
 Blockly.JavaScript['text_indexOf'] = function(block) {
   // Search the text for a substring.
   var operator = block.getFieldValue('END') == 'FIRST' ?
@@ -239,4 +239,4 @@ Blockly.JavaScript['text_prompt'] = function(block) {
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
-/*
+*/
