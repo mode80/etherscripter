@@ -1,34 +1,23 @@
 /**
  * @license
- * Visual Blocks Language
+ * Ethereum LLL generator for Blockly
  *
- * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2014 mode80
  */
 
 /**
- * @fileoverview Generating JavaScript for loop blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Generating LLL for loop blocks.
+ * @author mode80@users.noreply.github.com
  */
+
 'use strict';
 
-goog.provide('Blockly.JavaScript.loops');
+goog.provide('Blockly.LLL.loops');
 
-goog.require('Blockly.JavaScript');
+goog.require('Blockly.LLL');
 
 
+/**
 Blockly.JavaScript['controls_repeat'] = function(block) {
   // Repeat n times (internal number).
   var repeats = Number(block.getFieldValue('TIMES'));
@@ -70,24 +59,26 @@ Blockly.JavaScript['controls_repeat_ext'] = function(block) {
       branch + '}\n';
   return code;
 };
+*/
 
-Blockly.JavaScript['controls_whileUntil'] = function(block) {
+Blockly.LLL['controls_whileUntil'] = function(block) {
   // Do while/until loop.
   var until = block.getFieldValue('MODE') == 'UNTIL';
-  var argument0 = Blockly.JavaScript.valueToCode(block, 'BOOL',
-      until ? Blockly.JavaScript.ORDER_LOGICAL_NOT :
-      Blockly.JavaScript.ORDER_NONE) || 'false';
-  var branch = Blockly.JavaScript.statementToCode(block, 'DO');
-  if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
-    branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
+  var argument0 = Blockly.LLL.valueToCode(block, 'BOOL',
+      until ? Blockly.LLL.ORDER_LOGICAL_NOT :
+      Blockly.LLL.ORDER_NONE) || 'false';
+  var branch = Blockly.LLL.statementToCode(block, 'DO');
+  if (Blockly.LLL.INFINITE_LOOP_TRAP) {
+    branch = Blockly.LLL.INFINITE_LOOP_TRAP.replace(/%1/g,
         '\'' + block.id + '\'') + branch;
   }
   if (until) {
-    argument0 = '!' + argument0;
+    argument0 = '(! ' + argument0 + ' )';
   }
-  return 'while (' + argument0 + ') {\n' + branch + '}\n';
+  return '(for ' + argument0 + '\n  (seq \n' + branch + '\n  ) \n)';
 };
 
+/**
 Blockly.JavaScript['controls_for'] = function(block) {
   // For loop.
   var variable0 = Blockly.JavaScript.variableDB_.getName(
@@ -186,3 +177,4 @@ Blockly.JavaScript['controls_flow_statements'] = function(block) {
   }
   throw 'Unknown flow statement.';
 };
+*/

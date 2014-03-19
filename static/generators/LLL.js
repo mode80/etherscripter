@@ -41,8 +41,38 @@ Blockly.LLL.addReservedWords(
 /**
  * Order of operation ENUMs.
  */
-Blockly.LLL.ORDER_ATOMIC = 0;         // 0 "" ...
-Blockly.LLL.ORDER_NONE = 99;          // (...)
+Blockly.JavaScript.ORDER_ATOMIC = 0;         // 0 "" ...
+Blockly.JavaScript.ORDER_MEMBER = 1;         // . []
+Blockly.JavaScript.ORDER_NEW = 1;            // new
+Blockly.JavaScript.ORDER_FUNCTION_CALL = 2;  // ()
+Blockly.JavaScript.ORDER_INCREMENT = 3;      // ++
+Blockly.JavaScript.ORDER_DECREMENT = 3;      // --
+Blockly.JavaScript.ORDER_LOGICAL_NOT = 4;    // !
+Blockly.JavaScript.ORDER_BITWISE_NOT = 4;    // ~
+Blockly.JavaScript.ORDER_UNARY_PLUS = 4;     // +
+Blockly.JavaScript.ORDER_UNARY_NEGATION = 4; // -
+Blockly.JavaScript.ORDER_TYPEOF = 4;         // typeof
+Blockly.JavaScript.ORDER_VOID = 4;           // void
+Blockly.JavaScript.ORDER_DELETE = 4;         // delete
+Blockly.JavaScript.ORDER_MULTIPLICATION = 5; // *
+Blockly.JavaScript.ORDER_DIVISION = 5;       // /
+Blockly.JavaScript.ORDER_MODULUS = 5;        // %
+Blockly.JavaScript.ORDER_ADDITION = 6;       // +
+Blockly.JavaScript.ORDER_SUBTRACTION = 6;    // -
+Blockly.JavaScript.ORDER_BITWISE_SHIFT = 7;  // << >> >>>
+Blockly.JavaScript.ORDER_RELATIONAL = 8;     // < <= > >=
+Blockly.JavaScript.ORDER_IN = 8;             // in
+Blockly.JavaScript.ORDER_INSTANCEOF = 8;     // instanceof
+Blockly.JavaScript.ORDER_EQUALITY = 9;       // == != === !==
+Blockly.JavaScript.ORDER_BITWISE_AND = 10;   // &
+Blockly.JavaScript.ORDER_BITWISE_XOR = 11;   // ^
+Blockly.JavaScript.ORDER_BITWISE_OR = 12;    // |
+Blockly.JavaScript.ORDER_LOGICAL_AND = 13;   // &&
+Blockly.JavaScript.ORDER_LOGICAL_OR = 14;    // ||
+Blockly.JavaScript.ORDER_CONDITIONAL = 15;   // ?:
+Blockly.JavaScript.ORDER_ASSIGNMENT = 16;    // = += -= *= /= %= <<= >>= ...
+Blockly.JavaScript.ORDER_COMMA = 17;         // ,
+Blockly.JavaScript.ORDER_NONE = 99;          // (...)
 
 /**
  * Arbitrary code to inject into locations that risk causing infinite loops.
