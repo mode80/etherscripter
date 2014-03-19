@@ -1,52 +1,47 @@
 /**
  * @license
- * Visual Blocks Language
+ * Ethereum LLL generator for Blockly
  *
- * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2014 mode80
  */
 
 /**
- * @fileoverview Generating JavaScript for logic blocks.
- * @author q.neutron@gmail.com (Quynh Neutron)
+ * @fileoverview Generating LLL for logic blocks.
+ * @author mode80@users.noreply.github.com
  */
+
 'use strict';
 
-goog.provide('Blockly.JavaScript.logic');
+goog.provide('Blockly.LLL.logic');
 
-goog.require('Blockly.JavaScript');
+goog.require('Blockly.LLL');
 
 
-Blockly.JavaScript['controls_if'] = function(block) {
+Blockly.LLL['controls_if'] = function(block) {
   // If/elseif/else condition.
   var n = 0;
-  var argument = Blockly.JavaScript.valueToCode(block, 'IF' + n,
-      Blockly.JavaScript.ORDER_NONE) || 'false';
-  var branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
-  var code = 'if (' + argument + ') {\n' + branch + '}';
-  for (n = 1; n <= block.elseifCount_; n++) {
-    argument = Blockly.JavaScript.valueToCode(block, 'IF' + n,
-        Blockly.JavaScript.ORDER_NONE) || 'false';
-    branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
-    code += ' else if (' + argument + ') {\n' + branch + '}';
-  }
+  var argument = Blockly.LLL.valueToCode(block, 'IF' + n,
+      Blockly.LLL.ORDER_NONE) || 'false';
+  var branch = Blockly.LLL.statementToCode(block, 'DO' + n);
+  var if_or_when = (block.elseCount_ + block.elseifCount_) ? "when" : "if"
+  var code =  '(' + if_or_when + ' ' + argument + '\n';
+  var code += '  (seq \n' +  branch + '\n  )' ;
+    for (n = 0; n <= block.elseifCount_; n++) {
+      argument = Blockly.JavaScript.valueToCode(block, 'IF' + n,
+          Blockly.LLL.ORDER_NONE) || 'false';
+      branch = Blockly.LLL.statementToCode(block, 'DO' + n);
+      if_or_when = (n == block.elseifCount_) ? "when" : "if"
+      var code += '(' + if_or_when + ' ' + argument + '\n';
+      var code += '  (seq \n' +  branch + '\n  )' ;
+    }
+    for (n = 0; n <= block.elseifCount_; n++) {
+      code += '\n)'
+    }
   if (block.elseCount_) {
-    branch = Blockly.JavaScript.statementToCode(block, 'ELSE');
-    code += ' else {\n' + branch + '}';
+    branch = Blockly.LLL.statementToCode(block, 'ELSE');
+    code += (seq \n' + branch + '\n  )' ;
   }
-  return code + '\n';
+  return code + ')\n';
 };
 
 Blockly.JavaScript['logic_compare'] = function(block) {
