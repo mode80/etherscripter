@@ -103,9 +103,9 @@ Blockly.LLL.init = function() {
     var defvars = [];
     var variables = Blockly.Variables.allVariables();
     for (var x = 0; x < variables.length; x++) {
-      defvars[x] = ';; ' +
-          Blockly.LLL.variableDB_.getName(variables[x],
-          Blockly.Variables.NAME_TYPE) ;
+      defvars[x] = ';; ("' +
+          Blockly.LLL.variableDB_.getName(variables[x] ,
+          Blockly.Variables.NAME_TYPE) + '" 0)' ;
     }
     Blockly.LLL.definitions_['variables'] = defvars.join('\n');
   }

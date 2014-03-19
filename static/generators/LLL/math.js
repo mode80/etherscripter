@@ -27,19 +27,19 @@ Blockly.LLL['math_number'] = function(block) {
 Blockly.LLL['math_arithmetic'] = function(block) {
   // Basic arithmetic operators, and power.
   var OPERATORS = {
-    ADD: ['+', Blockly.JavaScript.ORDER_ATOMIC],
-    MINUS: ['-', Blockly.JavaScript.ORDER_ATOMIC],
-    MULTIPLY: ['*', Blockly.JavaScript.ORDER_ATOMIC],
-    DIVIDE: ['/', Blockly.JavaScript.ORDER_ATOMIC],
-    POWER: ['EXP', Blockly.JavaScript.ORDER_ATOMIC]
+    ADD: ['+', Blockly.LLL.ORDER_ADDITION],
+    MINUS: ['-', Blockly.LLL.ORDER_SUBTRACTION],
+    MULTIPLY: ['*', Blockly.LLL.ORDER_MULTIPLICATION],
+    DIVIDE: ['/', Blockly.LLL.ORDER_DIVISION],
+    POWER: ['EXP', Blockly.LLL.ORDER_COMMA]
   };
   var tuple = OPERATORS[block.getFieldValue('OP')];
   var operator = tuple[0];
   var order = tuple[1];
-  var argument0 = Blockly.JavaScript.valueToCode(block, 'A', order) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
+  var argument0 = Blockly.LLL.valueToCode(block, 'A', order) || '0';
+  var argument1 = Blockly.LLL.valueToCode(block, 'B', order) || '0';
   var code = '(' + operator + ' ' + argument0 + ' ' + argument1 + ')';
-  return [code, order];
+  return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
 

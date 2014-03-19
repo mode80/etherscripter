@@ -22,25 +22,22 @@ Blockly.LLL['controls_if'] = function(block) {
   var n = 0;
   var code = ""
   var argument = Blockly.LLL.valueToCode(block, 'IF' + n,
-      Blockly.LLL.ORDER_NONE) || 'false';
+      Blockly.LLL.ORDER_NONE) || '0';
   var branch = Blockly.LLL.statementToCode(block, 'DO' + n);
-  var if_or_when = (block.elseCount_ + block.elseifCount_) ? "when" : "if"
+  var if_or_when = (block.elseCount_ + block.elseifCount_) ? "if" : "when"
   code += '(' + if_or_when + ' ' + argument + '\n';
-  code += '  (seq \n' +  branch + '\n  )' ;
-    for (n = 0; n <= block.elseifCount_; n++) {
-      argument = Blockly.JavaScript.valueToCode(block, 'IF' + n,
-          Blockly.LLL.ORDER_NONE) || 'false';
+  code += ' (seq \n' +  branch + ' )\n' ;
+    for (n = 1; n <= block.elseifCount_; n++) {
+      argument = Blockly.LLL.valueToCode(block, 'IF' + n,
+          Blockly.LLL.ORDER_NONE) || '0';
       branch = Blockly.LLL.statementToCode(block, 'DO' + n);
       if_or_when = (n == block.elseifCount_) ? "when" : "if"
-      code += '(' + if_or_when + ' ' + argument + '\n';
-      code += '  (seq \n' +  branch + '\n  )' ;
-    }
-    for (n = 0; n <= block.elseifCount_; n++) {
-      code += '\n)'
+      code += ' (' + if_or_when + ' ' + argument + '\n';
+      code += ' (seq \n' +  branch + ' )\n' ;
     }
   if (block.elseCount_) {
     branch = Blockly.LLL.statementToCode(block, 'ELSE');
-    code += '(seq \n' + branch + '\n  )' ;
+    code += ' (seq \n' + branch + ' )\n' ;
   }
   return code + ')\n';
 };
@@ -56,9 +53,11 @@ Blockly.LLL['logic_compare'] = function(block) {
     GTE: '>='
   };
   var operator = OPERATORS[block.getFieldValue('OP')];
+  var order = (operator == '==' || operator == '!=') ?
+      Blockly.LLL.ORDER_EQUALITY : Blockly.LLL.ORDER_RELATIONAL;
   var argument0 = Blockly.LLL.valueToCode(block, 'A', order) || '0';
   var argument1 = Blockly.LLL.valueToCode(block, 'B', order) || '0';
-  var code = '(' + operator + ' ' + argument0 + ' ' + argument1 ')';
+  var code = '(' + operator + ' ' + argument0 + ' ' + argument1 + ')';
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
@@ -71,8 +70,8 @@ Blockly.LLL['logic_operation'] = function(block) {
   var argument1 = Blockly.LLL.valueToCode(block, 'B', order);
   if (!argument0 && !argument1) {
     // If there are no arguments, then the return value is false.
-    argument0 = 'false';
-    argument1 = 'false';
+    argument0 = '0';
+    argument1 = '0';
   } else {
     // Single missing arguments have no effect on the return value.
     var defaultArgument = (operator == 'and') ? '1' : '0';
@@ -87,19 +86,19 @@ Blockly.LLL['logic_operation'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript['logic_negate'] = function(block) {
+Blockly.LLL['logic_negate'] = function(block) {
   // Negation.
-  var order = Blockly.JavaScript.ORDER_LOGICAL_NOT;
-  var argument0 = Blockly.JavaScript.valueToCode(block, 'BOOL', order) ||
-      'true';
+  var order = Blockly.LLL.ORDER_LOGICAL_NOT;
+  var argument0 = Blockly.LLL.valueToCode(block, 'BOOL', order) ||
+      '1';
   var code = '(! ' + argument0 + ')';
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript['logic_boolean'] = function(block) {
+Blockly.LLL['logic_boolean'] = function(block) {
   // Boolean values true and false.
   var code = (block.getFieldValue('BOOL') == 'TRUE') ? '1' : '0';
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
 /*

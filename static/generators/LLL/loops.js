@@ -75,7 +75,7 @@ Blockly.LLL['controls_whileUntil'] = function(block) {
   if (until) {
     argument0 = '(! ' + argument0 + ' )';
   }
-  return '(for ' + argument0 + '\n  (seq \n' + branch + '\n  ) \n)';
+  return '(for ' + argument0 + '\n (seq \n' + branch + ' ) \n)\n';
 };
 
 /**

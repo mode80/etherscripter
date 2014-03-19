@@ -73,7 +73,6 @@ Blockly.JavaScript['text_length'] = function(block) {
       Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
 };
-*/
 
 Blockly.LLL['text_isEmpty'] = function(block) {
   // Is the string null?
@@ -82,7 +81,6 @@ Blockly.LLL['text_isEmpty'] = function(block) {
   return ['= 0 ' + argument0, Blockly.LLL.ORDER_ATOMIC];
 };
 
-/**
 Blockly.JavaScript['text_indexOf'] = function(block) {
   // Search the text for a substring.
   var operator = block.getFieldValue('END') == 'FIRST' ?
