@@ -117,20 +117,6 @@
          trashcan: false
         });
 
-    function showJS() {
-      // Generate JavaScript code and display it.
-      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-      var code = Blockly.JavaScript.workspaceToCode();
-      alert(code);
-    }
-
-    function showPython() {
-      // Generate Python code and display it.
-      Blockly.Python.INFINITE_LOOP_TRAP = null;
-      var code = Blockly.Python.workspaceToCode();
-      alert(code);
-    }
-
     function showLLL() {
       // Generate LLL code and display it.
       Blockly.LLL.INFINITE_LOOP_TRAP = null;
@@ -143,6 +129,20 @@
       var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var xmlText = Blockly.Xml.domToPrettyText(xmlDom)
       alert(xmlText);
+    }
+
+    function showJS() {
+      // Generate JavaScript code and display it.
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.workspaceToCode();
+      alert(code);
+    }
+
+    function showPython() {
+      // Generate Python code and display it.
+      Blockly.Python.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Python.workspaceToCode();
+      alert(code);
     }
 
   </script>
