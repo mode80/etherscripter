@@ -82,10 +82,13 @@
       </div>
       <div class="col-md-2">
         <div class="btn-group-vertical">
-          <button class="btn btn-default " onclick="showCode()">Show JavaScript</button>
-          <button class="btn btn-default " onclick="showPython()">Show Python</button>
-          <button class="btn btn-default " onclick="showLLL()">Show LLL</button>
-        </>
+          <li class="btn btn-default active" onclick="showXML()" >Show Blocks</li>
+          <li class="btn btn-default " onclick="showJS()" >Show JavaScript</li>
+          <li class="btn btn-default " onclick="showPython()">Show Python</li>
+          <li class="btn btn-default " onclick="showLLL()">Show LLL</li>
+          <li class="btn btn-default " onclick="showHLL()">Show HLL</li>
+          <li class="btn btn-default " onclick="showXML()">Show XML</li>
+        </div>
       </div>
     </div>
 
@@ -114,7 +117,7 @@
          trashcan: false
         });
 
-    function showCode() {
+    function showJS() {
       // Generate JavaScript code and display it.
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
       var code = Blockly.JavaScript.workspaceToCode();
@@ -135,19 +138,13 @@
       alert(code);
     }
 
-    function runCode() {
-      // Generate JavaScript code and run it.
-      window.LoopTrap = 1000;
-      Blockly.JavaScript.INFINITE_LOOP_TRAP =
-          'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-      var code = Blockly.JavaScript.workspaceToCode();
-      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-      try {
-        eval(code);
-      } catch (e) {
-        alert(e);
-      }
+    function showXML() {
+      // Get XML and display it.
+      var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var xmlText = Blockly.Xml.domToPrettyText(xmlDom)
+      alert(xmlText);
     }
+
   </script>
 
 </body>
