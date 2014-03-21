@@ -48,6 +48,7 @@
 
   <style>
     body { padding-top: 50px; }
+    .code { font-family: monospace; }
   </style>
 
 </head>
@@ -79,15 +80,18 @@
     <div class="row" >
       <div class="col-md-10" >
         <div id="blocklyDiv" style="height:800px"></div>
+        <div><textarea id="content_XML" wrap="off" class="code" style="display:none; width:100%; height: 800px"></textarea></div>
+        <div><textarea id="content_JS"  wrap="off" class="code" style="display:none; width:100%; height: 800px"></textarea></div>
+        <div><textarea id="content_LLL" wrap="off" class="code" style="display:none; width:100%; height: 800px"></textarea></div>
+        <div><textarea id="content_python" wrap="off" class="code" style="display:none; width:100%; height: 800px"></textarea></div>
       </div>
       <div class="col-md-2">
         <div class="btn-group-vertical">
-          <li class="btn btn-default active" onclick="showXML()" >Show Blocks</li>
-          <li class="btn btn-default " onclick="showJS()" >Show JavaScript</li>
-          <li class="btn btn-default " onclick="showPython()">Show Python</li>
-          <li class="btn btn-default " onclick="showLLL()">Show LLL</li>
-          <li class="btn btn-default " onclick="showHLL()">Show HLL</li>
-          <li class="btn btn-default " onclick="showXML()">Show XML</li>
+          <li id="btn_blocks" class="btn btn-default active" onclick="showBlocks()" >Show Blocks</li>
+          <li id="btn_JS" class="btn btn-default " onclick="showJS()" >Show JavaScript</li>
+          <li id="btn_python" class="btn btn-default " onclick="showPython()">Show Python</li>
+          <li id="btn_LLL" class="btn btn-default " onclick="showLLL()">Show LLL</li>
+          <li id="btn_XML" class="btn btn-default " onclick="showXML()">Show XML</li>
         </div>
       </div>
     </div>
@@ -110,39 +114,82 @@
   </xml>
 
   <script>
-    Blockly.inject(document.getElementById('blocklyDiv'),
+    // DOM manipulation shortcuts
+      var doc = document ; doc.el = doc.getElementById
+      var unclass = goog.dom.classes.remove
+      var addclass = goog.dom.classes.add
+
+
+    Blockly.inject(doc.el('blocklyDiv'),
         {path: '../../',
-         toolbox:  document.getElementById('toolbox'),
+         toolbox:  doc.el('toolbox'),
          scrollbars: true,
          trashcan: false
         });
 
-    function showLLL() {
-      // Generate LLL code and display it.
-      Blockly.LLL.INFINITE_LOOP_TRAP = null;
-      var code = Blockly.LLL.workspaceToCode();
-      alert(code);
+    function showBlocks() {
+      // Show Blockly
+      var blocklyDiv = doc.el("blocklyDiv")
+      hideOthers()
+      addclass(doc.el("blocklyDiv"),"active")
+      blocklyDiv.style.display = "block"
     }
 
     function showXML() {
       // Get XML and display it.
       var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var xmlText = Blockly.Xml.domToPrettyText(xmlDom)
-      alert(xmlText);
+      var content_XML = doc.el("content_XML")
+      hideOthers()
+      addclass(doc.el("btn_XML"),"active")
+      content_XML.style.display = "block"
+      content_XML.innerHTML = xmlText
     }
+
+    function showLLL() {
+      // Generate LLL code and display it.
+      doc.el("content_LLL").display = "block"
+      var code = Blockly.LLL.workspaceToCode();
+      var content_LLL = doc.el("content_LLL")
+      hideOthers()
+      addclass(doc.el("btn_LLL"),"active")
+      content_LLL.style.display = "block"
+      content_LLL.innerHTML = code
+    }
+
 
     function showJS() {
       // Generate JavaScript code and display it.
-      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
       var code = Blockly.JavaScript.workspaceToCode();
-      alert(code);
+      var content_JS = doc.el("content_JS")
+      hideOthers()
+      addclass(doc.el("btn_JS"),"active")
+      content_JS.style.display = "block"
+      content_JS.innerHTML = code
     }
 
     function showPython() {
       // Generate Python code and display it.
       Blockly.Python.INFINITE_LOOP_TRAP = null;
       var code = Blockly.Python.workspaceToCode();
-      alert(code);
+      var content_python = doc.el("content_python")
+      hideOthers()
+      addclass(doc.el("btn_python"),"active")
+      content_python.style.display = "block"
+      content_python.innerHTML = code
+    }
+
+    function hideOthers() {
+      doc.el("blocklyDiv").style.display = "none"
+      unclass(doc.el("btn_blocks"), "active")
+      doc.el("content_XML").style.display = "none"
+      unclass(doc.el("btn_XML"), "active")
+      doc.el("content_JS").style.display = "none"
+      unclass(doc.el("btn_JS"), "active")
+      doc.el("content_LLL").style.display = "none"
+      unclass(doc.el("btn_LLL"), "active")
+      doc.el("content_python").style.display = "none"
+      unclass(doc.el("btn_python"), "active")
     }
 
   </script>
