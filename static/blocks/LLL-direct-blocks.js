@@ -36,6 +36,7 @@ Blockly.Blocks['LLL_block'] = {
          ['basefee', 'basefee']];
     this.setColour(10);
     this.setOutput(true, 'Number');
+    this.setInputsInline(true);
     this.appendDummyInput()
         .appendField('block');
     this.appendDummyInput()
@@ -55,9 +56,9 @@ Blockly.Blocks['LLL_transaction'] = {
          ['data_count', "data_count"]];
     this.setColour(10);
     this.setOutput(true, 'Number');
+    this.setInputsInline(true);
     this.appendDummyInput()
-        .appendField('transaction');
-    this.appendDummyInput()
+        .appendField('transaction')
         .appendField(new Blockly.FieldDropdown(VALS), 'VAL');
   }
 };
@@ -73,29 +74,77 @@ Blockly.Blocks['LLL_contract'] = {
          ['balance', 'balance']];
     this.setColour(10);
     this.setOutput(true, 'Number');
+    this.setInputsInline(true);
     this.appendDummyInput()
-        .appendField('contract');
-    this.appendDummyInput()
+        .appendField('contract')
         .appendField(new Blockly.FieldDropdown(VALS), 'VAL');
+  }
+};
+
+//
+// 1-input flow control
+//
+
+Blockly.Blocks['LLL_seq'] = {
+  /**
+   * Block for wrapping a sequence of statements.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(20);
+    this.appendDummyInput()
+        .appendField("in sequence")
+    this.appendStatementInput('DO')
+        .appendField("do");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
   }
 };
 
 
 /*
-// 1-input flow
-
-	'seq
-
-// 2-input flow
+// 2-input flow control
 
     'if,when,unless,for,seq,and,or' +
 
 // 2-input operators
 
-    'add,mul,sub,div,sdiv,mod,smod,exp,neg,' +
+    'add,mul,sub,div,sdiv,mod,smod,exp,' +
+*/
+
+Blockly.Blocks['LLL_math'] = {
+  /**
+   * Block for basic arithmetic operator.
+   * @this Blockly.Block
+   */
+  init: function() {
+    var OPERATORS =
+      [['add', 'add'],
+      ['multiply', 'mul'],
+      ['subtract', 'sub'],
+      ['divide', 'sdiv'],
+      ['raise', 'exp'],
+      ['remainder of', 'smod'],
+      ['+divide+', 'div'],
+      ['+remainder of+', 'mod']];
+    this.setColour(40);
+    this.setOutput(true, 'Number');
+    this.appendDummyInput()
+   	  .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.appendValueInput('A')
+      .setCheck('Number')
+    this.appendDummyInput()
+      .appendField("with")
+    this.appendValueInput('B')
+      .setCheck('Number')
+    this.setInputsInline(true);
+  }
+};
+
+/*
 
 // 1-input expresions
-	not,
+	not,neg,
 
 // 2-input expressions
 

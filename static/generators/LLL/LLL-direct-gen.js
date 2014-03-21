@@ -50,3 +50,19 @@ Blockly.LLL['LLL_contract'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
+Blockly.LLL['LLL_seq'] = function(block) {
+  var repeats = Number(block.getFieldValue('TIMES'));
+  var branch = Blockly.LLL.statementToCode(block, 'DO');
+  var code = '(seq \n' + branch + ')\n';
+  return code;
+};
+
+Blockly.LLL['LLL_math'] = function(block) {
+  var op = block.getFieldValue('OP')
+  var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
+  var b = Blockly.LLL.valueToCode(block, 'B', Blockly.LLL.ORDER_NONE)
+  var code = '(' + op + ' ' + a + ' ' + b + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+}
+
+
