@@ -27,17 +27,17 @@ Blockly.LLL = new Blockly.Generator('LLL');
  */
 Blockly.LLL.addReservedWords(
     // best guesses per https://github.com/ethereum/cpp-ethereum/wiki/LLL
-    'if,when,unless,for,seq,and,or' +
+    'if,when,unless,for,and,or,seq,' +
     // also the opcodes from https://github.com/ethereum/wiki/wiki/%5BEnglish%5D-White-Paper#language-specification
     'add,mul,sub,div,sdiv,mod,smod,exp,neg,' +
     'lt,le,gt,ge,eq,not,' +
     'myaddress,balance,' +
     'txsender,txvalue,txdatan,txdata,' +
     'blk_prevhash,blk_coinbase,blk_timestamp,blk_number,blk_difficulty,blk_nonce,basefee,' +
-    'stop,extro,mktx,suicide' +
+    'stop,extro,mktx,suicide,' +
     'sha256,ripemd160,ecmul,ecadd,ecsign,ecrecover,ecvalid,sha3,' +
     'mload,mstore,sload,sstore,' +
-    'push,pop,dup,swap,jmp,jmpi,ind,' 
+    'push,pop,dup,swap,jmp,jmpi,ind' 
      );
 
 /**
