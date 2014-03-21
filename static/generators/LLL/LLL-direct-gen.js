@@ -65,4 +65,12 @@ Blockly.LLL['LLL_math'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
+Blockly.LLL['LLL_neg'] = function(block) {
+  // Negative.
+  var order = Blockly.LLL.ORDER_NONE;
+  var num = Blockly.LLL.valueToCode(block, 'NUM', order) || '0';
+  var code = '(neg ' + num + ')';
+  return [code, Blockly.LLL.ORDER_ATOMIC];
+};
+
 

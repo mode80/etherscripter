@@ -101,20 +101,22 @@ Blockly.Blocks['LLL_seq'] = {
   }
 };
 
-
-/*
+//
 // 2-input flow control
+// if, for
 
-    'if,when,unless,for,seq,and,or' +
+//
+// 2-input logic 
+// 'and', 'or'.
 
+//
 // 2-input operators
-
-    'add,mul,sub,div,sdiv,mod,smod,exp,' +
-*/
+//
 
 Blockly.Blocks['LLL_math'] = {
   /**
-   * Block for basic arithmetic operator.
+   * Block for arithmetic operators.
+   * add,mul,sub,div,sdiv,mod,smod,exp 
    * @this Blockly.Block
    */
   init: function() {
@@ -141,10 +143,29 @@ Blockly.Blocks['LLL_math'] = {
   }
 };
 
-/*
+Blockly.Blocks['LLL_neg'] = {
+  /**
+   * Block for negative.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(50);
+    this.setOutput(true, 'Number');
+    this.setInputsInline(true);
+    this.appendDummyInput()
+      .appendField("negative")
+    this.appendValueInput('NUM')
+      .setCheck('Number')
+  }
+};
 
-// 1-input expresions
-	not,neg,
+/*
+// 1-input flow control 
+	when,unless,not
+
+// 1-input math 
+	neg,
+
 
 // 2-input expressions
 
