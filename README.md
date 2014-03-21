@@ -3,9 +3,6 @@ block-like-language editor for Ethereum smart contracts
 ##
 
 ### TODO
-* upgrade index.html to support full tabs for better testing
-  - first local storage to preserve data between pages
-  - bootstrap tabs
 * implement blocks for remaining LLL/EVM primitives
 * save functionality using appengine cloud storage
 * create generator targeting HLL, based on python.js?

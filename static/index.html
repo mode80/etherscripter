@@ -6,49 +6,50 @@
 
   <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet" >
 
-  <script type="text/javascript" src="blockly_uncompressed.js"></script>
+  <script src="blockly_uncompressed.js"></script>
 
-  <script type="text/javascript" src="blocks/colour.js"></script>
-  <script type="text/javascript" src="blocks/lists.js"></script>
-  <script type="text/javascript" src="blocks/logic.js"></script>
-  <script type="text/javascript" src="blocks/loops.js"></script>
-  <script type="text/javascript" src="blocks/math.js"></script>
-  <script type="text/javascript" src="blocks/procedures.js"></script>
-  <script type="text/javascript" src="blocks/text.js"></script>
-  <script type="text/javascript" src="blocks/variables.js"></script>
+  <script src="blocks/colour.js"></script>
+  <script src="blocks/lists.js"></script>
+  <script src="blocks/logic.js"></script>
+  <script src="blocks/loops.js"></script>
+  <script src="blocks/math.js"></script>
+  <script src="blocks/procedures.js"></script>
+  <script src="blocks/text.js"></script>
+  <script src="blocks/variables.js"></script>
 
-  <script type="text/javascript" src="generators/javascript.js"></script>
-  <script type="text/javascript" src="generators/javascript/lists.js"></script>
-  <script type="text/javascript" src="generators/javascript/logic.js"></script>
-  <script type="text/javascript" src="generators/javascript/loops.js"></script>
-  <script type="text/javascript" src="generators/javascript/math.js"></script>
-  <script type="text/javascript" src="generators/javascript/procedures.js"></script>
-  <script type="text/javascript" src="generators/javascript/text.js"></script>
-  <script type="text/javascript" src="generators/javascript/variables.js"></script>
+  <script src="generators/javascript.js"></script>
+  <script src="generators/javascript/lists.js"></script>
+  <script src="generators/javascript/logic.js"></script>
+  <script src="generators/javascript/loops.js"></script>
+  <script src="generators/javascript/math.js"></script>
+  <script src="generators/javascript/procedures.js"></script>
+  <script src="generators/javascript/text.js"></script>
+  <script src="generators/javascript/variables.js"></script>
 
-  <script type="text/javascript" src="generators/python.js"></script>
-  <script type="text/javascript" src="generators/python/lists.js"></script>
-  <script type="text/javascript" src="generators/python/logic.js"></script>
-  <script type="text/javascript" src="generators/python/loops.js"></script>
-  <script type="text/javascript" src="generators/python/math.js"></script>
-  <script type="text/javascript" src="generators/python/procedures.js"></script>
-  <script type="text/javascript" src="generators/python/text.js"></script>
-  <script type="text/javascript" src="generators/python/variables.js"></script>
+  <script src="generators/python.js"></script>
+  <script src="generators/python/lists.js"></script>
+  <script src="generators/python/logic.js"></script>
+  <script src="generators/python/loops.js"></script>
+  <script src="generators/python/math.js"></script>
+  <script src="generators/python/procedures.js"></script>
+  <script src="generators/python/text.js"></script>
+  <script src="generators/python/variables.js"></script>
 
-  <script type="text/javascript" src="generators/LLL.js"></script>
-  <script type="text/javascript" src="generators/LLL/lists.js"></script>
-  <script type="text/javascript" src="generators/LLL/logic.js"></script>
-  <script type="text/javascript" src="generators/LLL/loops.js"></script>
-  <script type="text/javascript" src="generators/LLL/math.js"></script>
-  <script type="text/javascript" src="generators/LLL/procedures.js"></script>
-  <script type="text/javascript" src="generators/LLL/text.js"></script>
-  <script type="text/javascript" src="generators/LLL/variables.js"></script>
+  <script src="generators/LLL.js"></script>
+  <script src="generators/LLL/lists.js"></script>
+  <script src="generators/LLL/logic.js"></script>
+  <script src="generators/LLL/loops.js"></script>
+  <script src="generators/LLL/math.js"></script>
+  <script src="generators/LLL/procedures.js"></script>
+  <script src="generators/LLL/text.js"></script>
+  <script src="generators/LLL/variables.js"></script>
 
-  <script type="text/javascript" src="msg/messages.js"></script>
+  <script src="msg/messages.js"></script>
+  <script src="storage.js"></script>
 
   <style>
     body { padding-top: 50px; }
-    .code { font-family: monospace; }
+    .code { font-family: monospace; font-size: 18px }
   </style>
 
 </head>
@@ -127,8 +128,12 @@
          trashcan: false
         });
 
+    // wire up local storage save/restore
+      window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+      BlocklyStorage.backupOnUnload();
+
     function showBlocks() {
-      // Show Blockly
+      // Show Blockly workspace 
       var blocklyDiv = doc.el("blocklyDiv")
       hideOthers()
       addclass(doc.el("blocklyDiv"),"active")
