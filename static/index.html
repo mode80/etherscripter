@@ -45,7 +45,7 @@
   <script src="generators/LLL/variables.js"></script>
 
   <script src="msg/messages.js"></script>
-  <script src="storage.js"></script>
+  <script src="appengine/storage.js"></script>
 
   <style>
     body { padding-top: 50px; }
@@ -100,6 +100,7 @@
   </div>
 
   <xml id="toolbox" style="display: none">
+    <category name="Language Neutral">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -112,10 +113,17 @@
       <block type="text"></block>
       <block type="variables_get"></block>
       <block type="variables_set"></block>
+    </category>
+    <category name="LLL">
+      <category name="operators"></category>
+      <category name="expressions"></category>
+    </category>
+    <category name="Library"></category>
+    <category name="Samples"></category>
   </xml>
 
   <script>
-    // DOM manipulation shortcuts
+    // DOM manipulation abbreviations 
       var doc = document ; doc.el = doc.getElementById
       var unclass = goog.dom.classes.remove
       var addclass = goog.dom.classes.add
