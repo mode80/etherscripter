@@ -21,10 +21,6 @@ goog.require('Blockly.Blocks');
 //
 
 Blockly.Blocks['LLL_block'] = {
-  /**
-   * Block for transaction values.
-   * @this Blockly.Block
-   */
   init: function() {
     var VALS =
         [['number', 'number'],
@@ -34,64 +30,52 @@ Blockly.Blocks['LLL_block'] = {
          ['difficulty', 'difficulty'],
          ['nonce', 'nonce'],
          ['basefee', 'basefee']];
-    this.setColour(10);
+    this.setColour(60);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
         .appendField('block');
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown(VALS), 'VAL');
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
   }
 };
 
 Blockly.Blocks['LLL_transaction'] = {
-  /**
-   * Block for transaction values.
-   * @this Blockly.Block
-   */
   init: function() {
     var VALS =
         [['value', 'value'],
          ['sender', 'sender'],
          ['data_count', "data_count"]];
-    this.setColour(10);
+    this.setColour(60);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
         .appendField('transaction')
-        .appendField(new Blockly.FieldDropdown(VALS), 'VAL');
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
   }
 };
 
 Blockly.Blocks['LLL_contract'] = {
-  /**
-   * Block for contract values.
-   * @this Blockly.Block
-   */
   init: function() {
     var VALS =
         [['address', 'address'],
          ['balance', 'balance']];
-    this.setColour(10);
+    this.setColour(60);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
         .appendField('contract')
-        .appendField(new Blockly.FieldDropdown(VALS), 'VAL');
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
   }
 };
 
 //
-// 1-input flow control
+// 0-input flow control
 //
 
 Blockly.Blocks['LLL_seq'] = {
-  /**
-   * Block for wrapping a sequence of statements.
-   * @this Blockly.Block
-   */
   init: function() {
-    this.setColour(20);
+    this.setColour(60);
     this.appendDummyInput()
         .appendField("in sequence")
     this.appendStatementInput('DO')
@@ -102,54 +86,42 @@ Blockly.Blocks['LLL_seq'] = {
 };
 
 //
-// 2-input flow control
-// if, for
-
-//
-// 2-input logic 
-// 'and', 'or'.
-
-//
-// 2-input operators
+// 2-input math 
 //
 
 Blockly.Blocks['LLL_math'] = {
-  /**
-   * Block for arithmetic operators.
-   * add,mul,sub,div,sdiv,mod,smod,exp 
-   * @this Blockly.Block
-   */
+  /** add,mul,sub,div,sdiv,mod,smod,exp */
   init: function() {
     var OPERATORS =
-      [['add', 'add'],
+      [['increase', 'add'],
       ['multiply', 'mul'],
-      ['subtract', 'sub'],
+      ['reduce', 'sub'],
       ['divide', 'sdiv'],
       ['raise', 'exp'],
       ['remainder of', 'smod'],
       ['+divide+', 'div'],
       ['+remainder of+', 'mod']];
-    this.setColour(40);
+    this.setColour(60);
     this.setOutput(true, 'Number');
     this.appendDummyInput()
    	  .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.appendValueInput('A')
       .setCheck('Number')
     this.appendDummyInput()
-      .appendField("with")
+      .appendField("by")
     this.appendValueInput('B')
       .setCheck('Number')
     this.setInputsInline(true);
   }
 };
 
+//
+// 1-input math 
+//
+
 Blockly.Blocks['LLL_neg'] = {
-  /**
-   * Block for negative.
-   * @this Blockly.Block
-   */
   init: function() {
-    this.setColour(50);
+    this.setColour(60);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -159,27 +131,93 @@ Blockly.Blocks['LLL_neg'] = {
   }
 };
 
+// 
+// statements
+// 
+
+Blockly.Blocks['LLL_stop'] = {
+  init: function() {
+    this.setColour(60);
+    this.appendDummyInput()
+      .appendField("stop")
+    this.setPreviousStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_mktx'] = {
+  init: function() {
+    this.setColour(60);
+    this.appendDummyInput().appendField("send")
+    this.appendValueInput('MONEY')
+      .setCheck('Currency')
+    this.appendDummyInput()
+      .appendField("To")
+    this.appendValueInput('TO')
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_currency'] = {
+  init: function() {
+    var DENOMS =
+      [
+      ['wei','wei'],
+      ['Kwei','Kwei'],
+      ['Mwei','Mwei'],
+      ['Gwei','Gwei'],
+      ['szabo','szabo'],
+      ['finney','finney'],
+      ['ether','ether'],
+      ['Kether','Kether'],
+      ['Mether','Mether'],
+      ['Gether','Gether'],
+      ['Tether','Tether'],
+      ['Pether','Pether'],
+      ['Eether','Eether'],
+      ['Zether','Zether'],
+      ['Yether','Yether'],
+      ['Nether','Nether'],
+      ['Dether','Dether'],
+      ['Vether','Vether'],
+      ['Uether','Uether'],
+      ];
+    this.setColour(60);
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldTextInput('0',
+	    Blockly.FieldTextInput.numberValidator), 'AMT')
+   	  .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
+    this.setInputsInline(true);
+    this.setOutput(true, 'Currency');
+  }
+};
+
 /*
-// 1-input flow control 
-	when,unless,not
-
-// 1-input math 
-	neg,
+// other statements 
+    ',extro,mktx,suicide' +
 
 
-// 2-input expressions
+//
 
-    'lt,le,gt,ge,eq,' +
+// ether values: wei, finney etc
 
 // arrayish statements 2-input
-
     'mload,mstore,sload,sstore,txdata,' +
 
-// other statements 
-
-    'stop,extro,mktx,suicide' +
-
 // crypto
-
     'sha256,ripemd160,ecmul,ecadd,ecsign,ecrecover,ecvalid,sha3,' +
+
+// 2-input expressions
+//   'lt,le,gt,ge,eq,' +
+
+// 2-input flow control
+// if, for when, unless
+
+// 1-input flow contro
+// not
+
+// 2-input logic 
+// 'and', 'or'.
+
 */

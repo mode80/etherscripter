@@ -18,7 +18,7 @@ goog.require('Blockly.LLL');
 Blockly.LLL['LLL_block'] = function(block) {
   // Boolean values true and false.
   var code
-  var val = block.getFieldValue('VAL');
+  var val = block.getFieldValue('PROP');
   if (val == 'basefee')
   	code = '(basefee)'
   else
@@ -29,7 +29,7 @@ Blockly.LLL['LLL_block'] = function(block) {
 Blockly.LLL['LLL_transaction'] = function(block) {
   // Boolean values true and false.
   var code
-  var val = block.getFieldValue('VAL');
+  var val = block.getFieldValue('PROP');
   if (val == "value")
   	code = "(txvalue)"
   else if (val == "sender")
@@ -42,7 +42,7 @@ Blockly.LLL['LLL_transaction'] = function(block) {
 Blockly.LLL['LLL_contract'] = function(block) {
   // Boolean values true and false.
   var code
-  var val = block.getFieldValue('VAL');
+  var val = block.getFieldValue('PROP');
   if (val == "address")
   	code = "(myaddress)"
   else if (val == "balance")
@@ -73,4 +73,26 @@ Blockly.LLL['LLL_neg'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
+Blockly.LLL['LLL_stop'] = function(block) {
+  // stop statement
+  return "(stop)\n" 
+};
+
+Blockly.LLL['LLL_currency'] = function(block) {
+  // stop statement
+  var order = Blockly.LLL.ORDER_NONE;
+  var amt = block.getFieldValue('AMT')
+  var denom = block.getFieldValue('DENOM')
+  var code = amt + '' + denom 
+  return [code, Blockly.LLL.ORDER_ATOMIC] 
+};
+
+Blockly.LLL['LLL_mktx'] = function(block) {
+  // mktx statement
+  var order = Blockly.LLL.ORDER_NONE;
+  var to = Blockly.LLL.valueToCode(block,'TO', order) || 0 
+  var money = Blockly.LLL.valueToCode(block,'MONEY', order) || '0wei' 
+  var code = '(mktx ' + to + ' ' + money + ' 0)' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
 
