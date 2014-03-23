@@ -4,11 +4,13 @@ block-like-language editor for Ethereum smart contracts
 
 ### TODO
 * implement blocks for remaining LLL/EVM primitives
-* make convert -1 to (neg 1) and restrict strings to max (.setCheck)
-* add data array input to mktx block
-* restrict use of "text" block in wrong places (ie mktx addy)
 * make samples
-* test on ipad
+* fit screen, test on ipad
+* DEMO ready
+* add data array input to mktx block
+* make convert -1 to (neg 1) and restrict strings to max (.setCheck)
+* restrict use of "text" block in wrong places (ie mktx addy)
+* create & use Blockly.FieldTextInput.ethereumAddressValidator
 * add tooltips and help urls
 * create generator targeting HLL, based on python.js?
   - then integrate vitalik's compiler for free LLL?

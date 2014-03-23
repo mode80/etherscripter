@@ -92,7 +92,15 @@ Blockly.LLL['LLL_mktx'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var to = Blockly.LLL.valueToCode(block,'TO', order) || 0 
   var money = Blockly.LLL.valueToCode(block,'MONEY', order) || '0wei' 
-  var code = '(mktx ' + to + ' ' + money + ' 0)' 
-  return [code, Blockly.LLL.ORDER_ATOMIC]
+  var code = '(mktx ' + to + ' ' + money + ' 0)\n' 
+  return code
+};
+
+Blockly.LLL['LLL_suicide'] = function(block) {
+  // suicide statement
+  var order = Blockly.LLL.ORDER_NONE;
+  var to = Blockly.LLL.valueToCode(block,'TO', order) || 0 
+  var code = '(suicide ' + to + ')\n' 
+  return code
 };
 

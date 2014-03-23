@@ -70,7 +70,50 @@ Blockly.Blocks['LLL_contract'] = {
 };
 
 //
-// 0-input flow control
+// 1-input values 
+//
+
+Blockly.Blocks['LLL_currency'] = {
+  init: function() {
+    var DENOMS =
+      [
+      ['wei','wei'],
+      ['Kwei','Kwei'],
+      ['Mwei','Mwei'],
+      ['Gwei','Gwei'],
+      ['szabo','szabo'],
+      ['finney','finney'],
+      ['ether','ether'],
+      ['Kether','Kether'],
+      ['Mether','Mether'],
+      ['Gether','Gether'],
+      ['Tether','Tether'],
+      ['Pether','Pether'],
+      ['Eether','Eether'],
+      ['Zether','Zether'],
+      ['Yether','Yether'],
+      ['Nether','Nether'],
+      ['Dether','Dether'],
+      ['Vether','Vether'],
+      ['Uether','Uether'],
+      ];
+    this.setColour(60);
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldTextInput('0',
+	    Blockly.FieldTextInput.nonnegativeIntegerValidator), 'AMT')
+   	  .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
+    this.setInputsInline(true);
+    this.setOutput(true, 'Currency');
+  }
+};
+
+// TODO validated ethereum string/text block 
+
+// TODO validated ethereum number 
+
+
+//
+// flow control
 //
 
 Blockly.Blocks['LLL_seq'] = {
@@ -84,6 +127,8 @@ Blockly.Blocks['LLL_seq'] = {
     this.setNextStatement(true);
   }
 };
+
+// TODO ethereum specific if block 
 
 //
 // 2-input math 
@@ -144,6 +189,19 @@ Blockly.Blocks['LLL_stop'] = {
   }
 };
 
+Blockly.Blocks['LLL_suicide'] = {
+  init: function() {
+    this.setColour(60);
+    this.appendDummyInput()
+      .appendField("self-destruct to")
+    this.appendValueInput('TO')
+    this.setPreviousStatement(true);
+    this.setInputsInline(true);
+    this.setTooltip("contract sends full balance to specified address, then self-destructs");
+  }
+};
+
+
 Blockly.Blocks['LLL_mktx'] = {
   init: function() {
     this.setColour(60);
@@ -151,7 +209,7 @@ Blockly.Blocks['LLL_mktx'] = {
     this.appendValueInput('MONEY')
       .setCheck('Currency')
     this.appendDummyInput()
-      .appendField("To")
+      .appendField("to")
     this.appendValueInput('TO')
     this.setInputsInline(true);
     this.setPreviousStatement(true);
@@ -159,48 +217,13 @@ Blockly.Blocks['LLL_mktx'] = {
   }
 };
 
-Blockly.Blocks['LLL_currency'] = {
-  init: function() {
-    var DENOMS =
-      [
-      ['wei','wei'],
-      ['Kwei','Kwei'],
-      ['Mwei','Mwei'],
-      ['Gwei','Gwei'],
-      ['szabo','szabo'],
-      ['finney','finney'],
-      ['ether','ether'],
-      ['Kether','Kether'],
-      ['Mether','Mether'],
-      ['Gether','Gether'],
-      ['Tether','Tether'],
-      ['Pether','Pether'],
-      ['Eether','Eether'],
-      ['Zether','Zether'],
-      ['Yether','Yether'],
-      ['Nether','Nether'],
-      ['Dether','Dether'],
-      ['Vether','Vether'],
-      ['Uether','Uether'],
-      ];
-    this.setColour(60);
-    this.appendDummyInput()
-      .appendField(new Blockly.FieldTextInput('0',
-	    Blockly.FieldTextInput.numberValidator), 'AMT')
-   	  .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
-    this.setInputsInline(true);
-    this.setOutput(true, 'Currency');
-  }
-};
-
 /*
 // other statements 
-    ',extro,mktx,suicide' +
+    ',extro (deprecated), return(undocumented) ' +
 
 
 //
 
-// ether values: wei, finney etc
 
 // arrayish statements 2-input
     'mload,mstore,sload,sstore,txdata,' +
