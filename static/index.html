@@ -92,10 +92,12 @@
       <div class="col-md-2">
         <div class="btn-group-vertical">
           <li id="btn_blocks" class="btn btn-default active" onclick="showBlocks()" >Show Blocks</li>
+          <li id="btn_XML" class="btn btn-default " onclick="showXML()">Show XML</li>
+          <li id="btn_CLL" class="btn btn-default disabled" onclick="showLLL()">Show CLL</li>
+          <li id="btn_LLL" class="btn btn-default " onclick="showLLL()">Show LLL</li>
+          <li id="btn_EVM" class="btn btn-default disabled" onclick="showLLL()">Show EVM</li>
           <li id="btn_JS" class="hidden btn btn-default " onclick="showJS()" >Show JavaScript</li>
           <li id="btn_python" class="hidden btn btn-default " onclick="showPython()">Show Python</li>
-          <li id="btn_LLL" class="btn btn-default " onclick="showLLL()">Show LLL</li>
-          <li id="btn_XML" class="btn btn-default " onclick="showXML()">Show XML</li>
         </div>
       </div>
     </div>
@@ -157,7 +159,7 @@
       // Show Blockly workspace 
       var blocklyDiv = doc.el("blocklyDiv")
       hideOthers()
-      addclass(doc.el("blocklyDiv"),"active")
+      addclass(doc.el("btn_blocks"),"active")
       blocklyDiv.style.display = "block"
     }
 

@@ -5,7 +5,7 @@ block-like-language editor for Ethereum smart contracts
 ### TODO
 * implement blocks for remaining LLL/EVM primitives
 * make samples
-* fit screen, test on ipad
+* fit screen, color categories, test on ipad
 * DEMO ready
 * add data array input to mktx block
 * make LLL-specific value blocks that convert -1 to (neg 1) and restrict strings to max (.setCheck)

@@ -30,7 +30,7 @@ Blockly.Blocks['LLL_block'] = {
          ['difficulty', 'difficulty'],
          ['nonce', 'nonce'],
          ['basefee', 'basefee']];
-    this.setColour(60);
+    this.setColour(190);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -46,7 +46,7 @@ Blockly.Blocks['LLL_transaction'] = {
         [['value', 'value'],
          ['sender', 'sender'],
          ['data count', "data_count"]];
-    this.setColour(60);
+    this.setColour(190);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -60,7 +60,7 @@ Blockly.Blocks['LLL_contract'] = {
     var VALS =
         [['address', 'address'],
          ['balance', 'balance']];
-    this.setColour(60);
+    this.setColour(190);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -93,7 +93,7 @@ Blockly.Blocks['LLL_currency'] = {
       ['Vether','Vether'],
       ['Uether','Uether'],
       ];
-    this.setColour(60);
+    this.setColour(190);
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('0',
 	    Blockly.FieldTextInput.nonnegativeIntegerValidator), 'AMT')
@@ -127,7 +127,7 @@ Blockly.Blocks['LLL_math'] = {
       ['divide', 'sdiv'],
       ['raise', 'exp'],
       ['remainder of', 'smod']];
-    this.setColour(60);
+    this.setColour(190);
     this.setOutput(true, 'Number');
     this.appendDummyInput()
    	  .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
@@ -143,7 +143,7 @@ Blockly.Blocks['LLL_math'] = {
 
 Blockly.Blocks['LLL_neg'] = {
   init: function() {
-    this.setColour(60);
+    this.setColour(190);
     this.setOutput(true, 'Number');
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -159,7 +159,7 @@ Blockly.Blocks['LLL_load'] = {
 	  [["memory", "mload"],
 	  ["storage", "sload"],
 	  ["transaction data", "txdata"]]
-    this.setColour(60);
+    this.setColour(190);
     this.appendDummyInput()
    	  .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE');
     this.appendDummyInput()
@@ -177,7 +177,7 @@ Blockly.Blocks['LLL_load'] = {
 
 Blockly.Blocks['LLL_seq'] = {
   init: function() {
-    this.setColour(60);
+    this.setColour(190);
     this.appendDummyInput()
         .appendField("in sequence")
     this.appendStatementInput('DO')
@@ -189,7 +189,7 @@ Blockly.Blocks['LLL_seq'] = {
 
 Blockly.Blocks['LLL_stop'] = {
   init: function() {
-    this.setColour(60);
+    this.setColour(190);
     this.appendDummyInput()
       .appendField("stop")
     this.setPreviousStatement(true);
@@ -198,7 +198,7 @@ Blockly.Blocks['LLL_stop'] = {
 
 Blockly.Blocks['LLL_suicide'] = {
   init: function() {
-    this.setColour(60);
+    this.setColour(190);
     this.appendDummyInput()
       .appendField("self-destruct to")
     this.appendValueInput('TO')
@@ -210,7 +210,7 @@ Blockly.Blocks['LLL_suicide'] = {
 
 Blockly.Blocks['LLL_mktx'] = {
   init: function() {
-    this.setColour(60);
+    this.setColour(190);
     this.appendDummyInput().appendField("send")
     this.appendValueInput('MONEY')
       .setCheck('Number')
@@ -228,7 +228,7 @@ Blockly.Blocks['LLL_store'] = {
     var PLACES = 
 	  [["memory", "mstore"],
 	  ["storage", "sstore"]]
-    this.setColour(60);
+    this.setColour(190);
     this.appendDummyInput().appendField("store")
     this.appendValueInput('VAL')
     this.appendDummyInput()
@@ -244,9 +244,6 @@ Blockly.Blocks['LLL_store'] = {
     this.setNextStatement(true);
   }
 };
-
-// arrayish 2-input
-//    'mload,mstore,sload,sstore,txdata,' +
 
 
 /*
