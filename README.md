@@ -1,5 +1,5 @@
 # EtherScripter
-block-like-language editor for Ethereum smart contracts
+Visual smart contract builder for Ethereum
 ##
 
 ### TODO
