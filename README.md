@@ -8,7 +8,7 @@ block-like-language editor for Ethereum smart contracts
 * fit screen, test on ipad
 * DEMO ready
 * add data array input to mktx block
-* make convert -1 to (neg 1) and restrict strings to max (.setCheck)
+* make LLL-specific value blocks that convert -1 to (neg 1) and restrict strings to max (.setCheck)
 * restrict use of "text" block in wrong places (ie mktx addy)
 * create & use Blockly.FieldTextInput.ethereumAddressValidator
 * add tooltips and help urls
@@ -21,6 +21,7 @@ block-like-language editor for Ethereum smart contracts
 * create samples taken from community LLL
   - eg (gavin samples, vitalik samples, i want half etc.)
 * intro.js or similar guided tour
+* jslint my code
 * RELEASE
 * style the builder UI
 * integrate EVM compiler

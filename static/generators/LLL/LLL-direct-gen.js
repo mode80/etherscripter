@@ -104,3 +104,21 @@ Blockly.LLL['LLL_suicide'] = function(block) {
   return code
 };
 
+Blockly.LLL['LLL_load'] = function(block) {
+  // mload sload txdata value functions 
+  var order = Blockly.LLL.ORDER_NONE;
+  var place = Blockly.LLL.valueToCode(block,'PLACE', order) || 'mload' 
+  var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
+  code = '('+ place + ' ' + slot + ')'
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
+Blockly.LLL['LLL_store'] = function(block) {
+  // mstore sstore statements
+  var order = Blockly.LLL.ORDER_NONE;
+  var place = Blockly.LLL.valueToCode(block,'PLACE', order) || 'mstore' 
+  var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
+  var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
+  code = '('+ place + ' ' + slot + ' ' + val + ')\n'
+  return code
+};
