@@ -21,6 +21,7 @@ Visual smart contract builder for Ethereum
 * create samples taken from community LLL
   - eg (gavin samples, vitalik samples, i want half etc.)
 * intro.js or similar guided tour
+* make workspace height exactly the window height - navbar
 * jslint my code
 * RELEASE
 * style the builder UI
