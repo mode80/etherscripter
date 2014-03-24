@@ -105,14 +105,20 @@
       <block type="LLL_store"></block>
       <block type="LLL_math"></block>
       <block type="LLL_stop"></block>
-      <block type="LLL_currency"></block>
       <block type="LLL_mktx"></block>
       <block type="LLL_suicide"></block>
       <block type="LLL_contract"></block>
       <block type="LLL_if"></block>
       <block type="LLL_when"></block>
       <block type="LLL_for"></block>
-
+      <block type="LLL_currency">
+        <field name="DENOM">ether</field>
+        <value name="AMT">
+          <block type="LLL_val">
+            <field name="VAL">0</field>
+          </block>
+        </value>
+      </block>        
       <block type="LLL_transaction"></block>
       <block type="LLL_block"></block>
       <block type="LLL_seq"></block>

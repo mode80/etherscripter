@@ -112,10 +112,10 @@ Blockly.Blocks['LLL_currency'] = {
       ['Uether','Uether'],
       ];
     this.setColour(190);
+    this.appendValueInput('AMT')
+    		.setCheck('Number')
     this.appendDummyInput()
-      .appendField(new Blockly.FieldTextInput('0',
-	    Blockly.FieldTextInput.nonnegativeIntegerValidator), 'AMT')
-   	  .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
+   	    .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
     this.setInputsInline(true);
     this.setOutput(true);
   }

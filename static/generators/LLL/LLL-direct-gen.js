@@ -118,7 +118,7 @@ Blockly.LLL['LLL_stop'] = function(block) {
 Blockly.LLL['LLL_currency'] = function(block) {
   // currency value 
   var order = Blockly.LLL.ORDER_NONE;
-  var amt = block.getFieldValue('AMT')
+  var amt = Blockly.LLL.valueToCode(block,'AMT', order) || 0 
   var denom = block.getFieldValue('DENOM')
   var code = amt + '' + denom 
   return [code, Blockly.LLL.ORDER_ATOMIC] 
@@ -127,7 +127,7 @@ Blockly.LLL['LLL_currency'] = function(block) {
 Blockly.LLL['LLL_mktx'] = function(block) {
   // mktx statement
   var order = Blockly.LLL.ORDER_NONE;
-  var to = Blockly.LLL.valueToCode(block,'TO', order) || 0 
+  var to = Blockly.LLL.valueToCode(block,'TO', order) || 0  
   var money = Blockly.LLL.valueToCode(block,'MONEY', order) || '0wei' 
   var code = '(mktx ' + to + ' ' + money + ' 0)\n' 
   return code
@@ -144,7 +144,7 @@ Blockly.LLL['LLL_suicide'] = function(block) {
 Blockly.LLL['LLL_load'] = function(block) {
   // mload sload txdata value functions 
   var order = Blockly.LLL.ORDER_NONE;
-  var place = Blockly.LLL.valueToCode(block,'PLACE', order) || 'mload' 
+  var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   code = '('+ place + ' ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
@@ -153,7 +153,7 @@ Blockly.LLL['LLL_load'] = function(block) {
 Blockly.LLL['LLL_store'] = function(block) {
   // mstore sstore statements
   var order = Blockly.LLL.ORDER_NONE;
-  var place = Blockly.LLL.valueToCode(block,'PLACE', order) || 'mstore' 
+  var place = block.getFieldValue('PLACE')  
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
   code = '('+ place + ' ' + slot + ' ' + val + ')\n'
