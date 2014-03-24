@@ -101,9 +101,12 @@ Blockly.LLL['LLL_val'] = function(block) {
   // takes user input and uses it as a number or string val 
   var order = Blockly.LLL.ORDER_NONE;
   var val = block.getFieldValue('VAL') || 0 
-  var code 
+  var code = '' 
   if ( isNaN(val) ) {
- 		code = '"' + val + '"' // quote strings
+  	if (val.substr(0,1) === ";") // semicolon leading stings are comments
+  		code = val
+  	else 
+ 			code = '"' + val + '"' // quote normal strings
  	} else { // is a number
  		code = (val<0) ? '(neg ' + -val + ')' : val + '' 
  	}
@@ -112,7 +115,7 @@ Blockly.LLL['LLL_val'] = function(block) {
 
 Blockly.LLL['LLL_stop'] = function(block) {
   // stop statement
-  return "(stop)\n" 
+  return '(stop)\n' 
 };
 
 Blockly.LLL['LLL_currency'] = function(block) {
