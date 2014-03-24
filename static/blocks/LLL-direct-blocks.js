@@ -141,20 +141,18 @@ Blockly.Blocks['LLL_math'] = {
   /** add,mul,sub,div,sdiv,mod,smod,exp */
   init: function() {
     var OPERATORS =
-      [['increase', 'add'],
-      ['multiply', 'mul'],
-      ['reduce', 'sub'],
-      ['divide', 'sdiv'],
-      ['raise', 'exp'],
-      ['remainder of', 'smod']];
+      [[Blockly.Msg.MATH_ADDITION_SYMBOL, 'add'],
+      [Blockly.Msg.MATH_MULTIPLICATION_SYMBOL, 'mul'],
+      [Blockly.Msg.MATH_SUBTRACTION_SYMBOL, 'sub'],
+      [Blockly.Msg.MATH_DIVISION_SYMBOL, 'sdiv'],
+      ['raised to', 'exp'],
+      ['modulo', 'smod']];
     this.setColour(190);
     this.setOutput(true, 'Number');
-    this.appendDummyInput()
-   	  .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.appendValueInput('A')
       .setCheck('Number')
     this.appendDummyInput()
-      .appendField("by")
+   	  .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.appendValueInput('B')
       .setCheck('Number')
     this.setInputsInline(true);
@@ -176,8 +174,8 @@ Blockly.Blocks['LLL_neg'] = {
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
-	  [["memory", "mload"],
-	  ["storage", "sload"],
+	  [["storage", "sload"],
+	  ["memory", "mload"],
 	  ["transaction data", "txdata"]]
     this.setColour(190);
     this.appendDummyInput()
@@ -235,7 +233,7 @@ Blockly.Blocks['LLL_mktx'] = {
     this.appendValueInput('MONEY')
       .setCheck('Number')
     this.appendDummyInput()
-      .appendField("to")
+      .appendField('to')
     this.appendValueInput('TO')
     this.setInputsInline(true);
     this.setPreviousStatement(true);
@@ -246,13 +244,13 @@ Blockly.Blocks['LLL_mktx'] = {
 Blockly.Blocks['LLL_store'] = {
   init: function() {
     var PLACES = 
-	  [["memory", "mstore"],
-	  ["storage", "sstore"]]
+	  [["storage", "sstore"],
+	  ["memory", "mstore"]]
     this.setColour(190);
     this.appendDummyInput().appendField("put")
     this.appendValueInput('VAL')
     this.appendDummyInput()
-      .appendField("to")
+      .appendField('in')
     this.appendDummyInput()
    	  .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE');
     this.appendDummyInput()
