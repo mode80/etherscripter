@@ -49,7 +49,7 @@ Blockly.Blocks['LLL_block'] = {
          ['nonce', 'nonce'],
          ['basefee', 'basefee']];
     this.setColour(190);
-    this.setOutput(true, 'Number');
+    this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
         .appendField('block');
@@ -65,7 +65,7 @@ Blockly.Blocks['LLL_transaction'] = {
          ['sender', 'sender'],
          ['data count', "data_count"]];
     this.setColour(190);
-    this.setOutput(true, 'Number');
+    this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
         .appendField('transaction')
@@ -79,7 +79,7 @@ Blockly.Blocks['LLL_contract'] = {
         [['address', 'address'],
          ['balance', 'balance']];
     this.setColour(190);
-    this.setOutput(true, 'Number');
+    this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
         .appendField('contract')
@@ -117,7 +117,7 @@ Blockly.Blocks['LLL_currency'] = {
 	    Blockly.FieldTextInput.nonnegativeIntegerValidator), 'AMT')
    	  .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
     this.setInputsInline(true);
-    this.setOutput(true, 'Number');
+    this.setOutput(true);
   }
 };
 
@@ -154,7 +154,7 @@ Blockly.Blocks['LLL_math'] = {
       ['and', 'and'],
       ['or', 'or'] ];
     this.setColour(190);
-    this.setOutput(true, 'Number');
+    this.setOutput(true);
     this.appendValueInput('A')
       .setCheck('Number')
     this.appendDummyInput()
@@ -168,7 +168,7 @@ Blockly.Blocks['LLL_math'] = {
 Blockly.Blocks['LLL_neg'] = {
   init: function() {
     this.setColour(190);
-    this.setOutput(true, 'Number');
+    this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
       .appendField("negative")

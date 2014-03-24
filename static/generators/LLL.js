@@ -121,10 +121,13 @@ Blockly.LLL.init = function() {
 Blockly.LLL.finish = function(code) {
   // Convert the definitions dictionary into a list.
   var definitions = [];
+  var retval
   for (var name in Blockly.LLL.definitions_) {
     definitions.push(Blockly.LLL.definitions_[name]);
   }
-  return definitions.join('\n\n') + '\n\n\n' + code;
+  retval = definitions.join('\n\n') + '\n\n' + code;
+  retval = "seq(\n" + code + "\n)\n"
+  return retval
 };
 
 /**
