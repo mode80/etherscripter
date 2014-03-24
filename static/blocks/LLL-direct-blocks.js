@@ -35,7 +35,7 @@ Blockly.Blocks['LLL_val'] = {
 	// validating input block for LLL-legal values
   init: function() {
 		var validator = function(given) {
-			var retval = given
+			var retval = given ? given : ''
 			if ( isNaN(retval) ) { 
 				var commafree = retval.replace(/,/g, '')	
 				if ( !isNaN(commafree) ) retval = commafree 
