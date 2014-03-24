@@ -76,7 +76,7 @@ Blockly.Blocks['LLL_transaction'] = {
     var VALS =
         [['value', 'value'],
          ['sender', 'sender'],
-         ['data count', "data_count"]];
+         ['data count', "datan"]];
     this.setColour(VALUE_COLOR);
     this.setOutput(true);
     this.appendDummyInput()
@@ -173,10 +173,10 @@ Blockly.Blocks['LLL_for'] = {
         [['while', 'WHILE'],
         ['until', 'UNTIL']];
     this.setColour(LOOP_COLOR);
-    this.appendValueInput('BOOL')
+    this.appendValueInput('COND')
         .setCheck('Boolean')
         .appendField('repeat')
-        .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'WORD');
     this.appendStatementInput('DO')
         .appendField('do');
     this.setPreviousStatement(true);

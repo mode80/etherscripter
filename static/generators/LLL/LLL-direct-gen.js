@@ -30,12 +30,7 @@ Blockly.LLL['LLL_transaction'] = function(block) {
   // transaction related values 
   var code
   var val = block.getFieldValue('PROP');
-  if (val == "value")
-  	code = "(txvalue)"
-  else if (val == "sender")
-  	code = "(txsender)"
-  else if (val == "data_count")
-  	code = "(txdatan)"
+  code = '(tx' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
@@ -50,19 +45,12 @@ Blockly.LLL['LLL_contract'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
-Blockly.LLL['LLL_seq'] = function(block) {
-	// a sequence block
-  var branch = Blockly.LLL.statementToCode(block, 'DO');
-  var code = '(seq \n' + branch + ')\n';
-  return code;
-};
-
 Blockly.LLL['LLL_if'] = function(block) {
 	// if statement
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
-  var thendo = Blockly.LLL.statementToCode(block, 'THEN');
-  var elsedo = Blockly.LLL.statementToCode(block, 'ELSE');
-  var code = '(if ' + cond + '\n(seq \n' + thendo + ')\n(seq \n' + elsedo + ')\n';
+  var then_do = Blockly.LLL.statementToCode(block, 'THEN');
+  var else_do = Blockly.LLL.statementToCode(block, 'ELSE');
+  var code = '(if ' + cond + '\n(seq \n' + then_do + ')\n(seq \n' + else_do + ')\n';
   return code;
 };
 
@@ -70,22 +58,22 @@ Blockly.LLL['LLL_when'] = function(block) {
 	// when statement
 	var word = block.getFieldValue('WORD') 
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
-  var thendo = Blockly.LLL.statementToCode(block, 'THEN');
-  var code = '(' + word + ' '+ cond + '\n(seq \n' + thendo + ')\n';
+  var then_do = Blockly.LLL.statementToCode(block, 'THEN');
+  var code = '(' + word + ' '+ cond + '\n(seq \n' + then_do + ')\n';
   return code;
 };
 
 Blockly.LLL['LLL_for'] = function(block) {
   // LLL for loop is really a while / until loop.
-  var until = block.getFieldValue('MODE') == 'UNTIL';
-  var argument0 = Blockly.LLL.valueToCode(block, 'BOOL',
-      until ? Blockly.LLL.ORDER_LOGICAL_NOT :
+  var is_until = (block.getFieldValue('WORD') == 'UNTIL')
+  var cond = Blockly.LLL.valueToCode(block, 'COND',
+      is_until ? Blockly.LLL.ORDER_LOGICAL_NOT :
       Blockly.LLL.ORDER_NONE) || 'false';
   var branch = Blockly.LLL.statementToCode(block, 'DO');
-  if (until) {
-    argument0 = '(! ' + argument0 + ' )';
+  if (is_until) {
+    cond = '(! ' + cond + ' )';
   }
-  return '(for ' + argument0 + '\n (seq \n' + branch + ' ) \n)\n';
+  return '(for ' + cond + '\n (seq \n' + branch + ' ) \n)\n';
 };
 
 Blockly.LLL['LLL_math'] = function(block) {

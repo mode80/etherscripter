@@ -3,8 +3,8 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* generate blocks from XML 
 * review XML vals
+* add (balance) op
 * create samples taken from community LLL
   - eg (gavin samples, vitalik samples, i want half etc.)
 * DEMO ready
