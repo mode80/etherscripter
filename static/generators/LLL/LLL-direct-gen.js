@@ -73,6 +73,18 @@ Blockly.LLL['LLL_neg'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
+Blockly.LLL['LLL_val'] = function(block) {
+  // takes user input and uses it as a number or string val 
+  var order = Blockly.LLL.ORDER_NONE;
+  var val = block.getFieldValue('VAL') 
+  if ( isNaN(val) ) {
+ 		code = '"' + val + '"' // quote strings
+ 	} else { // is a number
+ 		code = val + ''	
+ 	}
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
 Blockly.LLL['LLL_stop'] = function(block) {
   // stop statement
   return "(stop)\n" 
@@ -122,3 +134,4 @@ Blockly.LLL['LLL_store'] = function(block) {
   code = '('+ place + ' ' + slot + ' ' + val + ')\n'
   return code
 };
+

@@ -20,6 +20,24 @@ goog.require('Blockly.Blocks');
 // Value blocks 
 //
 
+Blockly.Blocks['LLL_val'] = {
+  init: function() {
+		var validator = function(given) {
+			var retval = given
+			if ( isNaN(retval) ) { 
+				var commafree = retval.replace(/,/g, '')	
+				if ( !isNaN(commafree) ) retval = commafree 
+			}
+			if ( retval && !isNaN(retval) ) retval = parseInt(retval) // strip decimals
+		  return String(retval) 
+		}
+    this.setColour(190);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput('', validator ), 'VAL');
+    this.setOutput(true);
+  }
+};
+
 Blockly.Blocks['LLL_block'] = {
   init: function() {
     var VALS =
@@ -117,6 +135,8 @@ Blockly.Blocks['LLL_currency'] = {
 // Function value blocks 
 //
 
+
+
 Blockly.Blocks['LLL_math'] = {
   /** add,mul,sub,div,sdiv,mod,smod,exp */
   init: function() {
@@ -163,7 +183,7 @@ Blockly.Blocks['LLL_load'] = {
     this.appendDummyInput()
    	  .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE');
     this.appendDummyInput()
-      .appendField("slot #")
+      .appendField("slot")
     this.appendValueInput('SLOT')
       .setCheck('Number')
     this.setOutput(true);
@@ -229,14 +249,14 @@ Blockly.Blocks['LLL_store'] = {
 	  [["memory", "mstore"],
 	  ["storage", "sstore"]]
     this.setColour(190);
-    this.appendDummyInput().appendField("store")
+    this.appendDummyInput().appendField("put")
     this.appendValueInput('VAL')
     this.appendDummyInput()
       .appendField("to")
     this.appendDummyInput()
    	  .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE');
     this.appendDummyInput()
-      .appendField("slot #")
+      .appendField("slot")
     this.appendValueInput('SLOT')
       .setCheck('Number')
     this.setInputsInline(true);
