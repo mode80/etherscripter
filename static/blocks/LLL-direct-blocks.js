@@ -160,6 +160,22 @@ Blockly.Blocks['LLL_when'] = {
   }
 };
 
+Blockly.Blocks['LLL_for'] = {
+  init: function() {
+    var OPERATORS =
+        [['while', 'WHILE'],
+        ['until', 'UNTIL']];
+    this.setColour(190);
+    this.appendValueInput('BOOL')
+        .setCheck('Boolean')
+        .appendField('repeat')
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
+    this.appendStatementInput('DO')
+        .appendField('do');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
 
 // TODO ethereum specific if block (,when, unless) 
 

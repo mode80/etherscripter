@@ -16,7 +16,7 @@ goog.require('Blockly.LLL');
 
 
 Blockly.LLL['LLL_block'] = function(block) {
-  // Boolean values true and false.
+  // block related values 
   var code
   var val = block.getFieldValue('PROP');
   if (val == 'basefee')
@@ -27,7 +27,7 @@ Blockly.LLL['LLL_block'] = function(block) {
 };
 
 Blockly.LLL['LLL_transaction'] = function(block) {
-  // Boolean values true and false.
+  // transaction related values 
   var code
   var val = block.getFieldValue('PROP');
   if (val == "value")
@@ -40,7 +40,7 @@ Blockly.LLL['LLL_transaction'] = function(block) {
 };
 
 Blockly.LLL['LLL_contract'] = function(block) {
-  // Boolean values true and false.
+	// contract related values
   var code
   var val = block.getFieldValue('PROP');
   if (val == "address")
@@ -51,12 +51,14 @@ Blockly.LLL['LLL_contract'] = function(block) {
 };
 
 Blockly.LLL['LLL_seq'] = function(block) {
+	// a sequence block
   var branch = Blockly.LLL.statementToCode(block, 'DO');
   var code = '(seq \n' + branch + ')\n';
   return code;
 };
 
 Blockly.LLL['LLL_if'] = function(block) {
+	// if statement
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var thendo = Blockly.LLL.statementToCode(block, 'THEN');
   var elsedo = Blockly.LLL.statementToCode(block, 'ELSE');
@@ -65,6 +67,7 @@ Blockly.LLL['LLL_if'] = function(block) {
 };
 
 Blockly.LLL['LLL_when'] = function(block) {
+	// when statement
 	var word = block.getFieldValue('WORD') 
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var thendo = Blockly.LLL.statementToCode(block, 'THEN');
@@ -72,21 +75,27 @@ Blockly.LLL['LLL_when'] = function(block) {
   return code;
 };
 
+Blockly.LLL['LLL_for'] = function(block) {
+  // LLL for loop is really a while / until loop.
+  var until = block.getFieldValue('MODE') == 'UNTIL';
+  var argument0 = Blockly.LLL.valueToCode(block, 'BOOL',
+      until ? Blockly.LLL.ORDER_LOGICAL_NOT :
+      Blockly.LLL.ORDER_NONE) || 'false';
+  var branch = Blockly.LLL.statementToCode(block, 'DO');
+  if (until) {
+    argument0 = '(! ' + argument0 + ' )';
+  }
+  return '(for ' + argument0 + '\n (seq \n' + branch + ' ) \n)\n';
+};
+
 Blockly.LLL['LLL_math'] = function(block) {
+	// math functions, and other 2-argument forms 
   var op = block.getFieldValue('OP')
   var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
   var b = Blockly.LLL.valueToCode(block, 'B', Blockly.LLL.ORDER_NONE)
   var code = '(' + op + ' ' + a + ' ' + b + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
-
-Blockly.LLL['LLL_neg'] = function(block) {
-  // Negative.
-  var order = Blockly.LLL.ORDER_NONE;
-  var num = Blockly.LLL.valueToCode(block, 'NUM', order) || '0';
-  var code = '(neg ' + num + ')';
-  return [code, Blockly.LLL.ORDER_ATOMIC];
-};
 
 Blockly.LLL['LLL_val'] = function(block) {
   // takes user input and uses it as a number or string val 
