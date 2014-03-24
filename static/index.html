@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>EtherScripter - Smart Contract Visual Editor for Ethereum</title>
+  <title>EtherScripter - Visual Smart Contract Builder for Ethereum</title>
 
   <link href="flatly_bootstrap.min.css" rel="stylesheet" >
 
@@ -100,41 +100,27 @@
   </div>
 
   <xml id="toolbox" style="display: none">
-      <block type="LLL_val"></block>
-      <block type="LLL_currency">
-        <field name="DENOM">ether</field>
-        <value name="AMT">
-          <block type="LLL_val">
-            <field name="VAL">0</field>
-          </block>
-        </value>
-      </block>        
-      <block type="LLL_transaction"></block>
-      <block type="LLL_contract"></block>
-      <block type="LLL_block"></block>
-      <block type="LLL_math"></block>
-      <block type="LLL_store"></block>
-      <block type="LLL_load"></block>
-      <block type="LLL_stop"></block>
-      <block type="LLL_mktx"></block>
-      <block type="LLL_suicide"></block>
-      <block type="LLL_if"></block>
-      <block type="LLL_when"></block>
-      <block type="LLL_for"></block>
-      <!--
-      <block type="LLL_seq"></block>
-      <block type="LLL_neg"></block>
-      <block type="logic_boolean"></block>
-      <block type="math_modulo"></block>
-      <block type="variables_get"></block>
-      <block type="variables_set"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_compare"></block>
-      <block type="logic_negate"></block>
-      <block type="math_arithmetic"></block>
-      <block type="math_number"></block>
-      <block type="text"></block>
-      -->
+    <block type="LLL_val"></block>
+    <block type="LLL_currency">
+      <field name="DENOM">ether</field>
+      <value name="AMT">
+        <block type="LLL_val">
+          <field name="VAL">0</field>
+        </block>
+      </value>
+    </block>        
+    <block type="LLL_transaction"></block>
+    <block type="LLL_contract"></block>
+    <block type="LLL_block"></block>
+    <block type="LLL_math"></block>
+    <block type="LLL_store"></block>
+    <block type="LLL_load"></block>
+    <block type="LLL_stop"></block>
+    <block type="LLL_mktx"></block>
+    <block type="LLL_suicide"></block>
+    <block type="LLL_if"></block>
+    <block type="LLL_when"></block>
+    <block type="LLL_for"></block>
   </xml>
 
   <script>

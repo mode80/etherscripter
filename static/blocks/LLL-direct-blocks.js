@@ -188,7 +188,6 @@ Blockly.Blocks['LLL_for'] = {
   }
 };
 
-// TODO ethereum specific if block (,when, unless) 
 
 //
 // Function value blocks 
@@ -310,19 +309,8 @@ Blockly.Blocks['LLL_store'] = {
     ',extro (deprecated), return(undocumented) ' +
 
 
-// crypto
+// TODO crypto (deprecated)
     'sha256,ripemd160,ecmul,ecadd,ecsign,ecrecover,ecvalid,sha3,' +
 
-// TODO LLL-specific expression operators
-//   'lt,le,gt,ge,eq,' +
-
-// TODO LLL-specific loop 
-// for 
-
-// TODO LLL-specific 1-input flow contro
-// not
-
-// 2-input logic 
-// 'and', 'or'.
 
 */
