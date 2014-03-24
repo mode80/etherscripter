@@ -7,6 +7,8 @@ Visual smart contract builder for Ethereum
 * make samples
 * fit screen, color categories, test on ipad
 * DEMO ready
+* make "else" of if block responsive and remove when/then block
+* smart insert seq() only when needed
 * add data array input to mktx block
 * make LLL-specific value blocks that convert -1 to (neg 1) and restrict strings to max (.setCheck)
 * restrict use of "text" block in wrong places (ie mktx addy)

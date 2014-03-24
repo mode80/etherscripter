@@ -16,11 +16,23 @@ goog.provide('Blockly.Blocks.LLL');
 
 goog.require('Blockly.Blocks');
 
+
+var VALUE_COLOR = 190
+var LIST_COLOR = 260
+var FLOW_COLOR = 210 
+var LOOP_COLOR = 160
+var MATH_COLOR = 230 
+var PROCEDURE_COLOR = 290
+var TEXT_COLOR = 160
+var STATEMENT_COLOR = 330
+var COLOUR_COLOR = 20
+
 //
 // Value blocks 
 //
 
 Blockly.Blocks['LLL_val'] = {
+	// validating input block for LLL-legal values
   init: function() {
 		var validator = function(given) {
 			var retval = given
@@ -28,10 +40,13 @@ Blockly.Blocks['LLL_val'] = {
 				var commafree = retval.replace(/,/g, '')	
 				if ( !isNaN(commafree) ) retval = commafree 
 			}
-			if ( retval && !isNaN(retval) ) retval = parseInt(retval) // strip decimals
+			if ( retval && !isNaN(retval) ) 
+				retval = parseInt(retval) // strip decimals
+			else if ( retval && isNaN(retval) )
+				retval = retval.substr(0,32) // truncate string 
 		  return String(retval) 
 		}
-    this.setColour(190);
+    this.setColour(VALUE_COLOR);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('', validator ), 'VAL');
     this.setOutput(true);
@@ -41,14 +56,14 @@ Blockly.Blocks['LLL_val'] = {
 Blockly.Blocks['LLL_block'] = {
   init: function() {
     var VALS =
-        [['number', 'number'],
+        [['timestamp', 'timestamp'],
+         ['number', 'number'],
+         ['basefee', 'basefee'],
          ['prevhash', 'prevhash'],
          ['coinbase', 'coinbase'],
-         ['timestamp', 'timestamp'],
          ['difficulty', 'difficulty'],
-         ['nonce', 'nonce'],
-         ['basefee', 'basefee']];
-    this.setColour(190);
+         ['nonce', 'nonce'] ];
+    this.setColour(VALUE_COLOR);
     this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -64,7 +79,7 @@ Blockly.Blocks['LLL_transaction'] = {
         [['value', 'value'],
          ['sender', 'sender'],
          ['data count', "data_count"]];
-    this.setColour(190);
+    this.setColour(VALUE_COLOR);
     this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -76,9 +91,9 @@ Blockly.Blocks['LLL_transaction'] = {
 Blockly.Blocks['LLL_contract'] = {
   init: function() {
     var VALS =
-        [['address', 'address'],
-         ['balance', 'balance']];
-    this.setColour(190);
+        [['balance', 'balance'],
+        ['address', 'address']];
+    this.setColour(VALUE_COLOR);
     this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -111,7 +126,7 @@ Blockly.Blocks['LLL_currency'] = {
       ['Vether','Vether'],
       ['Uether','Uether'],
       ];
-    this.setColour(190);
+    this.setColour(VALUE_COLOR);
     this.appendValueInput('AMT')
     		.setCheck('Number')
     this.appendDummyInput()
@@ -121,17 +136,13 @@ Blockly.Blocks['LLL_currency'] = {
   }
 };
 
-// TODO validated LLL text block 
-
-// TODO validated LLL number 
-
 //
 // Flow control blocks
 //
 
 Blockly.Blocks['LLL_if'] = {
   init: function() {
-    this.setColour(190);
+    this.setColour(FLOW_COLOR);
     this.appendValueInput('COND')
     		.setCheck('Boolean')
         .appendField("if")
@@ -149,7 +160,7 @@ Blockly.Blocks['LLL_when'] = {
     var WORDS =
       [['when','when'],
       ['unless','unless']];
-    this.setColour(190);
+    this.setColour(FLOW_COLOR);
     this.appendValueInput('COND')
     		.setCheck('Boolean')
    			.appendField(new Blockly.FieldDropdown(WORDS), 'WORD');
@@ -165,7 +176,7 @@ Blockly.Blocks['LLL_for'] = {
     var OPERATORS =
         [['while', 'WHILE'],
         ['until', 'UNTIL']];
-    this.setColour(190);
+    this.setColour(LOOP_COLOR);
     this.appendValueInput('BOOL')
         .setCheck('Boolean')
         .appendField('repeat')
@@ -201,7 +212,7 @@ Blockly.Blocks['LLL_math'] = {
       ['\u2265', '>='],
       ['and', 'and'],
       ['or', 'or'] ];
-    this.setColour(190);
+    this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
       .setCheck('Number')
@@ -213,25 +224,13 @@ Blockly.Blocks['LLL_math'] = {
   }
 };
 
-Blockly.Blocks['LLL_neg'] = {
-  init: function() {
-    this.setColour(190);
-    this.setOutput(true);
-    this.setInputsInline(true);
-    this.appendDummyInput()
-      .appendField("negative")
-    this.appendValueInput('NUM')
-      .setCheck('Number')
-  }
-};
-
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
 	  [["storage", "sload"],
 	  ["memory", "mload"],
 	  ["transaction data", "txdata"]]
-    this.setColour(190);
+    this.setColour(LIST_COLOR);
     this.appendDummyInput()
    	  .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE');
     this.appendDummyInput()
@@ -247,21 +246,9 @@ Blockly.Blocks['LLL_load'] = {
 // Statements
 // 
 
-Blockly.Blocks['LLL_seq'] = {
-  init: function() {
-    this.setColour(190);
-    this.appendDummyInput()
-        .appendField("in sequence")
-    this.appendStatementInput('DO')
-        .appendField("do");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-  }
-};
-
 Blockly.Blocks['LLL_stop'] = {
   init: function() {
-    this.setColour(190);
+    this.setColour(STATEMENT_COLOR);
     this.appendDummyInput()
       .appendField("stop")
     this.setPreviousStatement(true);
@@ -270,7 +257,7 @@ Blockly.Blocks['LLL_stop'] = {
 
 Blockly.Blocks['LLL_suicide'] = {
   init: function() {
-    this.setColour(190);
+    this.setColour(STATEMENT_COLOR);
     this.appendDummyInput()
       .appendField("self-destruct to")
     this.appendValueInput('TO')
@@ -282,7 +269,7 @@ Blockly.Blocks['LLL_suicide'] = {
 
 Blockly.Blocks['LLL_mktx'] = {
   init: function() {
-    this.setColour(190);
+    this.setColour(STATEMENT_COLOR);
     this.appendDummyInput().appendField("spend")
     this.appendValueInput('MONEY')
       .setCheck('Number')
@@ -300,7 +287,7 @@ Blockly.Blocks['LLL_store'] = {
     var PLACES = 
 	  [["storage", "sstore"],
 	  ["memory", "mstore"]]
-    this.setColour(190);
+    this.setColour(LIST_COLOR);
     this.appendDummyInput().appendField("put")
     this.appendValueInput('VAL')
     this.appendDummyInput()
