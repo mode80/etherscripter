@@ -76,11 +76,12 @@ Blockly.LLL['LLL_neg'] = function(block) {
 Blockly.LLL['LLL_val'] = function(block) {
   // takes user input and uses it as a number or string val 
   var order = Blockly.LLL.ORDER_NONE;
-  var val = block.getFieldValue('VAL') 
+  var val = block.getFieldValue('VAL') || 0 
+  var code 
   if ( isNaN(val) ) {
  		code = '"' + val + '"' // quote strings
  	} else { // is a number
- 		code = val + ''	
+ 		code = (val<0) ? '(neg ' + -val + ')' : val + '' 
  	}
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
@@ -91,7 +92,7 @@ Blockly.LLL['LLL_stop'] = function(block) {
 };
 
 Blockly.LLL['LLL_currency'] = function(block) {
-  // stop statement
+  // currency value 
   var order = Blockly.LLL.ORDER_NONE;
   var amt = block.getFieldValue('AMT')
   var denom = block.getFieldValue('DENOM')
