@@ -3,8 +3,6 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* review XML vals
-* add (balance) op
 * create samples taken from community LLL
   - eg (gavin samples, vitalik samples, i want half etc.)
 * DEMO ready
@@ -28,6 +26,7 @@ Visual smart contract builder for Ethereum
 * integrate EVM compiler
 * library block functions for common functionality
   - stop if insufficient fee
+  - stop if overwriting code
   - author backdoor
     * update code
     * withdraw contract funds

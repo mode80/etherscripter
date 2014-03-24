@@ -221,9 +221,9 @@ Blockly.Blocks['LLL_math'] = {
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
-	  [["storage", "sload"],
-	  ["memory", "mload"],
-	  ["transaction data", "txdata"]]
+    [["storage", "sload"],
+    ["memory", "mload"],
+    ["transaction data", "txdata"]]
     this.setColour(LIST_COLOR);
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
@@ -232,6 +232,16 @@ Blockly.Blocks['LLL_load'] = {
       .appendField("slot")
     this.setOutput(true);
     this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks['LLL_balance'] = {
+  init: function() {
+    this.setColour(MATH_COLOR);
+    this.appendValueInput('ADDR')
+      .appendField("balance of")
+    this.setInputsInline(true);
+    this.setOutput(true);
   }
 };
 

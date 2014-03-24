@@ -141,6 +141,14 @@ Blockly.LLL['LLL_load'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
 
+Blockly.LLL['LLL_balance'] = function(block) {
+  // balance of address 
+  var order = Blockly.LLL.ORDER_NONE;
+  var addr = block.getFieldValue('ADDR') 
+  code = '(balance '+ addr + ')'
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
 Blockly.LLL['LLL_store'] = function(block) {
   // mstore sstore statements
   var order = Blockly.LLL.ORDER_NONE;
