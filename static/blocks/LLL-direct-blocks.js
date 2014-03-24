@@ -135,8 +135,6 @@ Blockly.Blocks['LLL_currency'] = {
 // Function value blocks 
 //
 
-
-
 Blockly.Blocks['LLL_math'] = {
   /** add,mul,sub,div,sdiv,mod,smod,exp */
   init: function() {
@@ -146,7 +144,15 @@ Blockly.Blocks['LLL_math'] = {
       [Blockly.Msg.MATH_SUBTRACTION_SYMBOL, 'sub'],
       [Blockly.Msg.MATH_DIVISION_SYMBOL, 'sdiv'],
       ['raised to', 'exp'],
-      ['modulo', 'smod']];
+      ['modulo', 'smod'],
+      ['=', '='],
+      ['\u2260', '!='],
+      ['<', 'LT'],
+      ['\u2264', '<='],
+      ['>', 'GT'],
+      ['\u2265', '>='],
+      ['and', 'and'],
+      ['or', 'or'] ];
     this.setColour(190);
     this.setOutput(true, 'Number');
     this.appendValueInput('A')
@@ -229,7 +235,7 @@ Blockly.Blocks['LLL_suicide'] = {
 Blockly.Blocks['LLL_mktx'] = {
   init: function() {
     this.setColour(190);
-    this.appendDummyInput().appendField("send")
+    this.appendDummyInput().appendField("spend")
     this.appendValueInput('MONEY')
       .setCheck('Number')
     this.appendDummyInput()
