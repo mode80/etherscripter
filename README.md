@@ -3,6 +3,8 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
+* generate blocks from XML 
+* review XML vals
 * create samples taken from community LLL
   - eg (gavin samples, vitalik samples, i want half etc.)
 * DEMO ready
@@ -12,7 +14,6 @@ Visual smart contract builder for Ethereum
 * phase out remnant non-LLL-direct LLL generator code
 * smart insert seq() only when needed
 * add tooltips and help urls
-* generate blocks from XML 
 * generate blockly XML from LLL
 * undo would be nice, eg when accidentally deleteing by all to toolbox 
 * mechanism for creating a contract with mktx

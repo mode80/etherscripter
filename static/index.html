@@ -83,7 +83,7 @@
 
   <div id="content_BLL" 
     style="width:100%; height:92vh"></div>
-  <div><textarea id="content_XML" disabled wrap="off" class="code" 
+  <div><textarea id="content_XML" wrap="off" class="code" 
     style="display:none; width:100%; height:92vh"></textarea></div>
   <div><textarea id="content_HLL"  disabled wrap="off" class="code" 
     style="display:none; width:100%; height:92vh">Not yet implemented...</textarea></div>
@@ -91,7 +91,7 @@
     style="display:none; width:100%; height:92vh"></textarea></div>
   <div><textarea id="content_EVM" disabled wrap="off" class="code" 
     style="display:none; width:100%; height:92vh">Not yet implemented...</textarea></div>
-  <div class="btn-group-vertical" style="position:absolute; top:75px; right:15px ; z-index:10">
+  <div class="btn-group-vertical" style="position:fixed; top:75px; right:15px ; z-index:10">
     <li id="btn_BLL" class="btn btn-default active" onclick="showBLL()" ontouchstart="showBLL()">Show Blocks</li>
     <li id="btn_XML" class="btn btn-default " onclick="showXML()" ontouchstart="showXML()">Show XML</li>
     <li id="btn_HLL" class="btn btn-default " onclick="showHLL()" ontouchstart="showHLL()">Show HLL</li>
@@ -144,9 +144,20 @@
     function showBLL() {
       // Show Blockly workspace 
       var content_BLL = doc.el("content_BLL")
+      var xmlText = doc.el("content_XML").value
+      var xmlDom = null
+      try {
+        xmlDom = Blockly.Xml.textToDom(xmlText);
+      } catch (e) {
+        msg = "ERROR PARSING XML\n\nSelect 'OK' to abandon your changes.\nSelect 'Cancel' to further edit the XML."
+        var q = window.confirm(msg.replace('%1', e));
+        if (!q) return ; else return showXML() 
+      }
       hideOthers()
       addclass(doc.el("btn_BLL"),"active")
       content_BLL.style.display = "block"
+      Blockly.mainWorkspace.clear()
+      Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xmlDom)
     } 
 
     function showXML() {
@@ -156,7 +167,7 @@
       hideOthers()
       addclass(doc.el("btn_XML"),"active")
       content_XML.style.display = "block"
-      content_XML.innerHTML = xmlText
+      content_XML.value = xmlText
     }
 
     function showHLL() {
