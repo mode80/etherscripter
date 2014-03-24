@@ -51,9 +51,24 @@ Blockly.LLL['LLL_contract'] = function(block) {
 };
 
 Blockly.LLL['LLL_seq'] = function(block) {
-  var repeats = Number(block.getFieldValue('TIMES'));
   var branch = Blockly.LLL.statementToCode(block, 'DO');
   var code = '(seq \n' + branch + ')\n';
+  return code;
+};
+
+Blockly.LLL['LLL_if'] = function(block) {
+  var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
+  var thendo = Blockly.LLL.statementToCode(block, 'THEN');
+  var elsedo = Blockly.LLL.statementToCode(block, 'ELSE');
+  var code = '(if ' + cond + '\n(seq \n' + thendo + ')\n(seq \n' + elsedo + ')\n';
+  return code;
+};
+
+Blockly.LLL['LLL_when'] = function(block) {
+	var word = block.getFieldValue('WORD') 
+  var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
+  var thendo = Blockly.LLL.statementToCode(block, 'THEN');
+  var code = '(' + word + ' '+ cond + '\n(seq \n' + thendo + ')\n';
   return code;
 };
 

@@ -129,6 +129,38 @@ Blockly.Blocks['LLL_currency'] = {
 // Flow control blocks
 //
 
+Blockly.Blocks['LLL_if'] = {
+  init: function() {
+    this.setColour(190);
+    this.appendValueInput('COND')
+    		.setCheck('Boolean')
+        .appendField("if")
+    this.appendStatementInput('THEN')
+        .appendField("then");
+    this.appendStatementInput('ELSE')
+        .appendField("else");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_when'] = {
+  init: function() {
+    var WORDS =
+      [['when','when'],
+      ['unless','unless']];
+    this.setColour(190);
+    this.appendValueInput('COND')
+    		.setCheck('Boolean')
+   			.appendField(new Blockly.FieldDropdown(WORDS), 'WORD');
+    this.appendStatementInput('THEN')
+        .appendField("then");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+
 // TODO ethereum specific if block (,when, unless) 
 
 //
