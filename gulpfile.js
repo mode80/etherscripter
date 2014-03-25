@@ -13,16 +13,27 @@ var htmlreplace = require('gulp-html-replace');
 //         .pipe(jshint.reporter('default'));
 // });
 
-// Concatenate 
-gulp.task('concatmin', function() {
+// Minify my 
+gulp.task('min', function() {
     var stream = gulp.src([
     			'dev/LLL*.js',
     			'dev/storage.js',
     			'dev/messages.js',
     			'dev/etherscripter.js',
     			])
-        .pipe(concat('all.min.js'))
+        .pipe(concat('my.min.js'))
         .pipe(uglify())
+        .pipe(gulp.dest('0/'))
+    return stream
+});
+
+// Concat libraries
+gulp.task('concat', ['min'], function() {
+    var stream = gulp.src([
+    			'dev/blockly_compressed.js',
+    			'0/my.min.js',
+    			])
+        .pipe(concat('all.min.js'))
         .pipe(gulp.dest('0/'))
     return stream
 });
@@ -31,7 +42,6 @@ gulp.task('concatmin', function() {
 gulp.task('stage', function() {
     var stream = gulp.src([
     			'dev/*.css',
-    			'dev/blockly_compressed.js',
     			])
         .pipe(gulp.dest('0'))
     return stream
@@ -52,4 +62,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', [/* 'lint',*/ 'concatmin', 'stage', 'fixrefs']);
+gulp.task('default', [/* 'lint',*/ 'min', 'concat', 'stage', 'fixrefs']);
