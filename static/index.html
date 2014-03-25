@@ -3,53 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>EtherScripter - Visual Smart Contract Builder for Ethereum</title>
-
   <link href="flatly_bootstrap.min.css" rel="stylesheet" >
-
   <script src="blockly_uncompressed.js"></script>
-
-  <script src="blocks/colour.js"></script>
-  <script src="blocks/lists.js"></script>
-  <script src="blocks/logic.js"></script>
-  <script src="blocks/loops.js"></script>
-  <script src="blocks/math.js"></script>
-  <script src="blocks/procedures.js"></script>
-  <script src="blocks/text.js"></script>
-  <script src="blocks/variables.js"></script>
-
-  <script src="generators/javascript.js"></script>
-  <script src="generators/javascript/lists.js"></script>
-  <script src="generators/javascript/logic.js"></script>
-  <script src="generators/javascript/loops.js"></script>
-  <script src="generators/javascript/math.js"></script>
-  <script src="generators/javascript/procedures.js"></script>
-  <script src="generators/javascript/text.js"></script>
-  <script src="generators/javascript/variables.js"></script>
-
-  <script src="generators/python.js"></script>
-  <script src="generators/python/lists.js"></script>
-  <script src="generators/python/logic.js"></script>
-  <script src="generators/python/loops.js"></script>
-  <script src="generators/python/math.js"></script>
-  <script src="generators/python/procedures.js"></script>
-  <script src="generators/python/text.js"></script>
-  <script src="generators/python/variables.js"></script>
-
-  <script src="generators/LLL.js"></script>
-  <script src="generators/LLL/lists.js"></script>
-  <script src="generators/LLL/logic.js"></script>
-  <script src="generators/LLL/loops.js"></script>
-  <script src="generators/LLL/math.js"></script>
-  <script src="generators/LLL/procedures.js"></script>
-  <script src="generators/LLL/text.js"></script>
-  <script src="generators/LLL/variables.js"></script>
-
-  <script src="blocks/LLL-direct-blocks.js"></script>
-  <script src="generators/LLL/LLL-direct-gen.js"></script>
-
-  <script src="msg/messages.js"></script>
-  <script src="appengine/storage.js"></script>
-
+  <script src="LLL.js"></script>
+  <script src="LLL_blocks.js"></script>
+  <script src="LLL_generator.js"></script>
+  <script src="messages.js"></script>
+  <script src="storage.js"></script>
   <style>
     body { padding-top: 60px; }
     .code { font-family: monospace; font-size: 18px }
@@ -60,7 +20,7 @@
 </head>
 <body>
 
-  <div class="navbar navbar-default navbar-fixed-top pull-left" role="navigation">
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <a class="navbar-brand" href="#">EtherScripter</a>
     <div class="container " >
       <div class="navbar-header">
@@ -123,92 +83,6 @@
     <block type="LLL_for"></block>
   </xml>
 
-  <script>
-    // DOM manipulation abbreviations 
-      var doc = document ; doc.el = doc.getElementById
-      var unclass = goog.dom.classes.remove
-      var addclass = goog.dom.classes.add
-
-
-    Blockly.inject(doc.el('content_BLL'),
-        {path: '../../',
-         toolbox:  doc.el('toolbox'),
-         scrollbars: true,
-         trashcan: true 
-        });
-
-    // wire up local storage save/restore
-      window.setTimeout(BlocklyStorage.restoreBlocks, 0);
-      BlocklyStorage.backupOnUnload();
-
-    function showBLL() {
-      // Show Blockly workspace 
-      var content_BLL = doc.el("content_BLL")
-      var xmlText = doc.el("content_XML").value
-      var xmlDom = null
-      try {
-        xmlDom = Blockly.Xml.textToDom(xmlText);
-      } catch (e) {
-        msg = "ERROR PARSING XML\n\nSelect 'OK' to abandon your changes.\nSelect 'Cancel' to further edit the XML."
-        var q = window.confirm(msg.replace('%1', e));
-        if (!q) return ; else return showXML() 
-      }
-      hideOthers()
-      addclass(doc.el("btn_BLL"),"active")
-      content_BLL.style.display = "block"
-      Blockly.mainWorkspace.clear()
-      Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xmlDom)
-    } 
-
-    function showXML() {
-      var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-      var xmlText = Blockly.Xml.domToPrettyText(xmlDom)
-      var content_XML = doc.el("content_XML")
-      hideOthers()
-      addclass(doc.el("btn_XML"),"active")
-      content_XML.style.display = "block"
-      content_XML.value = xmlText
-    }
-
-    function showHLL() {
-      // Generate HLL code and display it.
-      hideOthers()
-      doc.el("content_HLL").style.display = "block"
-      addclass(doc.el("btn_HLL"),"active")
-    }
-
-    function showLLL() {
-      // Generate LLL code and display it.
-      var code = Blockly.LLL.workspaceToCode();
-      var content_LLL = doc.el("content_LLL")
-      hideOthers()
-      addclass(doc.el("btn_LLL"),"active")
-      content_LLL.style.display = "block"
-      content_LLL.innerHTML = code
-    }
-
-    function showEVM() {
-      // Generate HLL code and display it.
-      hideOthers()
-      doc.el("content_EVM").style.display = "block"
-      addclass(doc.el("btn_EVM"),"active")
-    }
-
-
-    function hideOthers() {
-      doc.el("content_BLL").style.display = "none"
-      unclass(doc.el("btn_BLL"), "active")
-      doc.el("content_XML").style.display = "none"
-      unclass(doc.el("btn_XML"), "active")
-      doc.el("content_HLL").style.display = "none"
-      unclass(doc.el("btn_HLL"), "active")
-      doc.el("content_LLL").style.display = "none"
-      unclass(doc.el("btn_LLL"), "active")
-      doc.el("content_EVM").style.display = "none"
-      unclass(doc.el("btn_EVM"), "active")
-    }
-
-  </script>
-
+  <script src="etherscripter.js"></script>
 </body>
 </html>
