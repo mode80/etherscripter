@@ -193,10 +193,10 @@ Blockly.Blocks['LLL_math'] = {
   /** add,mul,sub,div,sdiv,mod,smod,exp */
   init: function() {
     var OPERATORS =
-      [[Blockly.Msg.MATH_ADDITION_SYMBOL, 'add'],
-      [Blockly.Msg.MATH_MULTIPLICATION_SYMBOL, 'mul'],
-      [Blockly.Msg.MATH_SUBTRACTION_SYMBOL, 'sub'],
-      [Blockly.Msg.MATH_DIVISION_SYMBOL, 'sdiv'],
+      [['+', 'add'],
+      ['*', 'mul'],
+      ['-', 'sub'],
+      ['÷', 'sdiv'],
       ['raised to', 'exp'],
       ['modulo', 'smod'],
       ['=', '='],

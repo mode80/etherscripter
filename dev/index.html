@@ -5,11 +5,6 @@
   <title>EtherScripter - Visual smart-contract builder for Ethereum</title>
   <link href="flatly_bootstrap.min.css" rel="stylesheet" >
   <script src="blockly_compressed.js"></script>
-  <script src="LLL.js"></script>
-  <script src="LLL_blocks.js"></script>
-  <script src="LLL_generator.js"></script>
-  <script src="messages.js"></script>
-  <script src="storage.js"></script>
   <style>
     body { padding-top: 60px; }
     .code { font-family: monospace; font-size: 18px }
@@ -46,17 +41,17 @@
   <div><textarea id="content_XML" wrap="off" class="code" 
     style="display:none; width:100%; height:92vh"></textarea></div>
   <div><textarea id="content_HLL"  disabled wrap="off" class="code" 
-    style="display:none; width:100%; height:92vh">Not yet implemented...</textarea></div>
+    style="display:none; width:100%; height:92vh">Still working on this...</textarea></div>
   <div><textarea id="content_LLL" disabled wrap="off" class="code" 
     style="display:none; width:100%; height:92vh"></textarea></div>
   <div><textarea id="content_EVM" disabled wrap="off" class="code" 
-    style="display:none; width:100%; height:92vh">Not yet implemented...</textarea></div>
+    style="display:none; width:100%; height:92vh">Still working on this...</textarea></div>
   <div class="btn-group-vertical" style="position:fixed; top:75px; right:15px ; z-index:10">
     <li id="btn_BLL" class="btn btn-default active" onclick="showBLL()" ontouchstart="showBLL()">Show Blocks</li>
     <li id="btn_XML" class="btn btn-default " onclick="showXML()" ontouchstart="showXML()">Show XML</li>
-    <li id="btn_HLL" class="btn btn-default " onclick="showHLL()" ontouchstart="showHLL()">Show HLL</li>
+    <li id="btn_HLL" class="btn btn-default hidden" onclick="showHLL()" ontouchstart="showHLL()">Show HLL</li>
     <li id="btn_LLL" class="btn btn-default " onclick="showLLL()" ontouchstart="showLLL()">Show LLL</li>
-    <li id="btn_EVM" class="btn btn-default " onclick="showEVM()" ontouchstart="showEVM()">Show EVM</li>
+    <li id="btn_EVM" class="btn btn-default hidden" onclick="showEVM()" ontouchstart="showEVM()">Show EVM</li>
   </div>
 
   <xml id="toolbox" style="display: none">
@@ -83,6 +78,12 @@
     <block type="LLL_for"></block>
   </xml>
 
+<!-- build:js -->
+  <script src="LLL.js"></script>
+  <script src="LLL_blocks.js"></script>
+  <script src="LLL_generator.js"></script>
+  <script src="storage.js"></script>
   <script src="etherscripter.js"></script>
+<!-- endbuild -->
 </body>
 </html>
