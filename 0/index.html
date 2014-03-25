@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>EtherScripter - Visual smart-contract builder for Ethereum</title>
+  <link href="flatly_bootstrap.min.css" rel="stylesheet" >
+  <style>
+    body { padding-top: 60px; }
+    .code { font-family: monospace; font-size: 18px }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <a class="navbar-brand" href="#">EtherScripter</a>
+    <div class="container " >
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Editor</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+
+  <div id="content_BLL" 
+    style="width:100%; height:92vh"></div>
+  <div><textarea id="content_XML" wrap="off" class="code" 
+    style="display:none; width:100%; height:92vh"></textarea></div>
+  <div><textarea id="content_HLL"  disabled wrap="off" class="code" 
+    style="display:none; width:100%; height:92vh">Still working on this...</textarea></div>
+  <div><textarea id="content_LLL" disabled wrap="off" class="code" 
+    style="display:none; width:100%; height:92vh"></textarea></div>
+  <div><textarea id="content_EVM" disabled wrap="off" class="code" 
+    style="display:none; width:100%; height:92vh">Still working on this...</textarea></div>
+  <div class="btn-group-vertical" style="position:fixed; top:75px; right:15px ; z-index:10">
+    <li id="btn_BLL" class="btn btn-default active" onclick="showBLL()" ontouchstart="showBLL()">Show Blocks</li>
+    <li id="btn_XML" class="btn btn-default " onclick="showXML()" ontouchstart="showXML()">Show XML</li>
+    <li id="btn_HLL" class="btn btn-default hidden" onclick="showHLL()" ontouchstart="showHLL()">Show HLL</li>
+    <li id="btn_LLL" class="btn btn-default " onclick="showLLL()" ontouchstart="showLLL()">Show LLL</li>
+    <li id="btn_EVM" class="btn btn-default hidden" onclick="showEVM()" ontouchstart="showEVM()">Show EVM</li>
+  </div>
+
+  <xml id="toolbox" style="display: none">
+    <block type="LLL_val"></block>
+    <block type="LLL_currency">
+      <field name="DENOM">ether</field>
+      <value name="AMT">
+        <block type="LLL_val">
+          <field name="VAL">0</field>
+        </block>
+      </value>
+    </block>        
+    <block type="LLL_transaction"></block>
+    <block type="LLL_contract"></block>
+    <block type="LLL_block"></block>
+    <block type="LLL_math"></block>
+    <block type="LLL_store"></block>
+    <block type="LLL_load"></block>
+    <block type="LLL_stop"></block>
+    <block type="LLL_mktx"></block>
+    <block type="LLL_suicide"></block>
+    <block type="LLL_if"></block>
+    <block type="LLL_when"></block>
+    <block type="LLL_for"></block>
+  </xml>
+
+<script src="all.min.js"></script>
+</body>
+</html>
