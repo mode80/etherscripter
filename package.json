@@ -1,0 +1,13 @@
+{
+  "name": "EtherScripter",
+  "description": "Visual smart-contract builder for Ethereum",
+  "author": "mode80",
+  "version": "0.8.0",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "3.5.x",
+    "gulp-rename": "~1.2.0",
+    "gulp-concat": "~2.2.0",
+    "gulp-uglify": "~0.2.1"
+  }
+}
