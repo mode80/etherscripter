@@ -20,18 +20,21 @@
       var content_BLL = doc.el('content_BLL')
       var xmlText = doc.el('content_XML').value
       var xmlDom = null
-      try {
-        xmlDom = Blockly.Xml.textToDom(xmlText);
-      } catch (e) {
-        var msg = 'ERROR PARSING XML\n\nSelect OK to abandon your changes.\nSelect Cancel to further edit the XML.'
-        var q = window.confirm(msg.replace('%1', e));
-        if (!q) return ; else return showXML() 
+      if (window.xml_dirty) {
+        try {
+          xmlDom = Blockly.Xml.textToDom(xmlText);
+        } catch (e) {
+          var msg = 'ERROR PARSING XML\n\nSelect OK to abandon your changes.\nSelect Cancel to further edit the XML.'
+          var q = window.confirm(msg.replace('%1', e));
+          if (!q) return ; else return showXML() 
+        }
+        Blockly.mainWorkspace.clear()
+        Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xmlDom)
+        window.xml_dirty = false
       }
       hideOthers()
       addclass(doc.el('btn_BLL'),'active')
       content_BLL.style.display = 'block'
-      Blockly.mainWorkspace.clear()
-      Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xmlDom)
     } 
 
     function showXML() {

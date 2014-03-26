@@ -7,6 +7,7 @@ Visual smart contract builder for Ethereum
   - eg (gavin samples, vitalik samples, i want half etc.)
 * DEMO ready
 * enable right click functionality on ipad
+* new EVM3 opcodes
 * make "else" of if block responsive and remove when/then block
 * make a comment block
 * phase out remnant non-LLL-direct LLL generator code

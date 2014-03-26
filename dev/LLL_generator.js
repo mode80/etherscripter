@@ -88,7 +88,7 @@ Blockly.LLL['LLL_math'] = function(block) {
 Blockly.LLL['LLL_val'] = function(block) {
   // takes user input and uses it as a number or string val 
   var order = Blockly.LLL.ORDER_NONE;
-  var val = block.getFieldValue('VAL') || 0 
+  var val = block.getFieldValue('VAL') || 0  
   var code = '' 
   if ( isNaN(val) ) {
     if (val.substr(0,1) === ';') // semicolon leading stings are comments
@@ -99,6 +99,11 @@ Blockly.LLL['LLL_val'] = function(block) {
     code = (val<0) ? '(neg ' + -val + ')' : val + '' 
   }
   return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
+Blockly.LLL['LLL_comment'] = function(block) {
+  // a LLL comment  
+  return ';; ' + block.getFieldValue('NOTE') + '\n' 
 };
 
 Blockly.LLL['LLL_stop'] = function(block) {

@@ -25,7 +25,7 @@ var MATH_COLOR = 230
 var PROCEDURE_COLOR = 290
 var TEXT_COLOR = 160
 var STATEMENT_COLOR = 330
-var COLOUR_COLOR = 20
+var COLOUR_COLOR = 58 
 
 //
 // Value blocks 
@@ -249,6 +249,17 @@ Blockly.Blocks['LLL_balance'] = {
 // Statements
 // 
 
+Blockly.Blocks['LLL_comment'] = {
+  init: function() {
+    this.setColour(COLOUR_COLOR);
+    this.appendDummyInput()
+      .appendField('note:')
+      .appendField(new Blockly.FieldTextInput(''), 'NOTE')
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
 Blockly.Blocks['LLL_stop'] = {
   init: function() {
     this.setColour(STATEMENT_COLOR);
@@ -306,7 +317,6 @@ Blockly.Blocks['LLL_store'] = {
 /*
 // TODO other statements 
     ',extro (deprecated), return(undocumented) ' +
-
 
 // TODO crypto (deprecated)
     'sha256,ripemd160,ecmul,ecadd,ecsign,ecrecover,ecvalid,sha3,' +
