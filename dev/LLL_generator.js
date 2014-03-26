@@ -20,9 +20,9 @@ Blockly.LLL['LLL_block'] = function(block) {
   var code
   var val = block.getFieldValue('PROP');
   if (val == 'basefee')
-  	code = '(basefee)'
+    code = '(basefee)'
   else
-  	code = '(blk_' + val + ')' 
+    code = '(blk_' + val + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
@@ -35,18 +35,18 @@ Blockly.LLL['LLL_transaction'] = function(block) {
 };
 
 Blockly.LLL['LLL_contract'] = function(block) {
-	// contract related values
+  // contract related values
   var code
   var val = block.getFieldValue('PROP');
-  if (val == "address")
-  	code = "(myaddress)"
-  else if (val == "balance")
-  	code = "(balance myaddress)"
+  if (val == 'address')
+    code = '(myaddress)'
+  else if (val == 'balance')
+    code =  '(balance myaddress)'
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
 Blockly.LLL['LLL_if'] = function(block) {
-	// if statement
+  // if statement
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
   var else_do = Blockly.LLL.statementToCode(block, 'ELSE');
@@ -55,8 +55,8 @@ Blockly.LLL['LLL_if'] = function(block) {
 };
 
 Blockly.LLL['LLL_when'] = function(block) {
-	// when statement
-	var word = block.getFieldValue('WORD') 
+  // when statement
+  var word = block.getFieldValue('WORD') 
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
   var code = '(' + word + ' '+ cond + '\n(seq \n' + then_do + ')\n';
@@ -77,7 +77,7 @@ Blockly.LLL['LLL_for'] = function(block) {
 };
 
 Blockly.LLL['LLL_math'] = function(block) {
-	// math functions, and other 2-argument forms 
+  // math functions, and other 2-argument forms 
   var op = block.getFieldValue('OP')
   var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
   var b = Blockly.LLL.valueToCode(block, 'B', Blockly.LLL.ORDER_NONE)
@@ -91,13 +91,13 @@ Blockly.LLL['LLL_val'] = function(block) {
   var val = block.getFieldValue('VAL') || 0 
   var code = '' 
   if ( isNaN(val) ) {
-  	if (val.substr(0,1) === ";") // semicolon leading stings are comments
-  		code = val
-  	else 
- 			code = '"' + val + '"' // quote normal strings
- 	} else { // is a number
- 		code = (val<0) ? '(neg ' + -val + ')' : val + '' 
- 	}
+    if (val.substr(0,1) === ';') // semicolon leading stings are comments
+      code = val
+    else 
+      code = '"' + val + '"' // quote normal strings
+  } else { // is a number
+    code = (val<0) ? '(neg ' + -val + ')' : val + '' 
+  }
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
 
@@ -137,7 +137,7 @@ Blockly.LLL['LLL_load'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
-  code = '('+ place + ' ' + slot + ')'
+  var code = '('+ place + ' ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
 
@@ -145,7 +145,7 @@ Blockly.LLL['LLL_balance'] = function(block) {
   // balance of address 
   var order = Blockly.LLL.ORDER_NONE;
   var addr = block.getFieldValue('ADDR') 
-  code = '(balance '+ addr + ')'
+  var code = '(balance '+ addr + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
 
@@ -155,7 +155,7 @@ Blockly.LLL['LLL_store'] = function(block) {
   var place = block.getFieldValue('PLACE')  
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  code = '('+ place + ' ' + slot + ' ' + val + ')\n'
+  var code = '('+ place + ' ' + slot + ' ' + val + ')\n'
   return code
 };
 

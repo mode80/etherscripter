@@ -20,7 +20,6 @@ gulp.task('min', function() {
     			'dev/storage.js',
     			'dev/messages.js',
     			'dev/etherscripter.js',
-					'dev/samples.js',
     			])
         .pipe(concat('my.min.js'))
         .pipe(uglify())
@@ -35,6 +34,7 @@ gulp.task('concat', ['min'], function() {
     			'0/my.min.js',
 					'dev/jquery.min.js',
 					'dev/bootstrap.min.js',
+					'dev/samples.js',
    			])
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest('0/'))

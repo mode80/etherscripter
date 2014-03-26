@@ -76,7 +76,7 @@ Blockly.Blocks['LLL_transaction'] = {
     var VALS =
         [['value', 'value'],
          ['sender', 'sender'],
-         ['data count', "datan"]];
+         ['data count', 'datan']];
     this.setColour(VALUE_COLOR);
     this.setOutput(true);
     this.appendDummyInput()
@@ -126,7 +126,7 @@ Blockly.Blocks['LLL_currency'] = {
     this.appendValueInput('AMT')
         .setCheck('Number')
     this.appendDummyInput()
-   	    .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
+      .appendField(new Blockly.FieldDropdown(DENOMS), 'DENOM');
     this.setInputsInline(true);
     this.setOutput(true);
   }
@@ -140,12 +140,12 @@ Blockly.Blocks['LLL_if'] = {
   init: function() {
     this.setColour(FLOW_COLOR);
     this.appendValueInput('COND')
-    		.setCheck('Boolean')
-        .appendField("if")
+        .setCheck('Boolean')
+        .appendField('if')
     this.appendStatementInput('THEN')
-        .appendField("then");
+        .appendField('then');
     this.appendStatementInput('ELSE')
-        .appendField("else");
+        .appendField('else');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -158,10 +158,10 @@ Blockly.Blocks['LLL_when'] = {
       ['unless','unless']];
     this.setColour(FLOW_COLOR);
     this.appendValueInput('COND')
-    		.setCheck('Boolean')
-   			.appendField(new Blockly.FieldDropdown(WORDS), 'WORD');
+        .setCheck('Boolean')
+        .appendField(new Blockly.FieldDropdown(WORDS), 'WORD');
     this.appendStatementInput('THEN')
-        .appendField("then");
+        .appendField('then');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -194,7 +194,7 @@ Blockly.Blocks['LLL_math'] = {
   init: function() {
     var OPERATORS =
       [['+', 'add'],
-      ['x', 'mul'],
+      ['×', 'mul'],
       ['-', 'sub'],
       ['÷', 'sdiv'],
       ['raised to', 'exp'],
@@ -221,15 +221,15 @@ Blockly.Blocks['LLL_math'] = {
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
-    [["storage", "sload"],
-    ["memory", "mload"],
-    ["transaction data", "txdata"]]
+    [['storage', 'sload'],
+    ['memory', 'mload'],
+    ['transaction data', 'txdata']]
     this.setColour(LIST_COLOR);
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
     this.appendValueInput('SLOT')
       .setCheck('Number')
-      .appendField("slot")
+      .appendField('slot')
     this.setOutput(true);
     this.setInputsInline(true);
   }
@@ -239,7 +239,7 @@ Blockly.Blocks['LLL_balance'] = {
   init: function() {
     this.setColour(MATH_COLOR);
     this.appendValueInput('ADDR')
-      .appendField("balance of")
+      .appendField('balance of')
     this.setInputsInline(true);
     this.setOutput(true);
   }
@@ -253,7 +253,7 @@ Blockly.Blocks['LLL_stop'] = {
   init: function() {
     this.setColour(STATEMENT_COLOR);
     this.appendDummyInput()
-      .appendField("stop")
+      .appendField('stop')
     this.setPreviousStatement(true);
   }
 };
@@ -262,10 +262,10 @@ Blockly.Blocks['LLL_suicide'] = {
   init: function() {
     this.setColour(STATEMENT_COLOR);
     this.appendValueInput('TO')
-      .appendField("self-destruct to")
+      .appendField('self-destruct to')
     this.setPreviousStatement(true);
     this.setInputsInline(true);
-    this.setTooltip("contract sends full balance to specified address, then self-destructs");
+    this.setTooltip('contract sends full balance to specified address, then self-destructs');
   }
 };
 
@@ -273,7 +273,7 @@ Blockly.Blocks['LLL_mktx'] = {
   init: function() {
     this.setColour(STATEMENT_COLOR);
     this.appendValueInput('MONEY')
-      .appendField("spend")
+      .appendField('spend')
       .setCheck('Number')
     this.appendValueInput('TO')
       .appendField('to')
@@ -286,15 +286,15 @@ Blockly.Blocks['LLL_mktx'] = {
 Blockly.Blocks['LLL_store'] = {
   init: function() {
     var PLACES = 
-	  [["storage", "sstore"],
-	  ["memory", "mstore"]]
+	  [['storage', 'sstore'],
+	  ['memory', 'mstore']]
     this.setColour(LIST_COLOR);
     this.appendValueInput('VAL')
-      .appendField("put")
+      .appendField('put')
     this.appendValueInput('SLOT')
       .appendField('in')
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
-      .appendField("slot")
+      .appendField('slot')
       .setCheck('Number')
     this.setInputsInline(true);
     this.setPreviousStatement(true);
