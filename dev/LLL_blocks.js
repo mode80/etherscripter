@@ -194,7 +194,7 @@ Blockly.Blocks['LLL_math'] = {
   init: function() {
     var OPERATORS =
       [['+', 'add'],
-      ['*', 'mul'],
+      ['x', 'mul'],
       ['-', 'sub'],
       ['÷', 'sdiv'],
       ['raised to', 'exp'],
