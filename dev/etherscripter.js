@@ -15,11 +15,15 @@
       window.setTimeout(BlocklyStorage.restoreBlocks, 0);
       BlocklyStorage.backupOnUnload();
 
+
     function showBLL() {
       // Show Blockly workspace 
-      var content_BLL = doc.el('content_BLL')
+      hideOthers()
+      addclass(doc.el('btn_BLL'),'active')
+      doc.el('content_BLL').style.display = 'block'
       var xmlText = doc.el('content_XML').value
       var xmlDom = null
+      Blockly.fireUiEvent(window,"resize")
       if (window.xml_dirty) {
         try {
           xmlDom = Blockly.Xml.textToDom(xmlText);
@@ -32,9 +36,7 @@
         Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xmlDom)
         window.xml_dirty = false
       }
-      hideOthers()
-      addclass(doc.el('btn_BLL'),'active')
-      content_BLL.style.display = 'block'
+      Blockly.fireUiEvent(window,"resize")
     } 
 
     function showXML() {
@@ -49,6 +51,7 @@
 
     function showHLL() {
       // Generate HLL code and display it.
+      contentXMLToBLL() 
       hideOthers()
       doc.el('content_HLL').style.display = 'block'
       addclass(doc.el('btn_HLL'),'active')
@@ -56,6 +59,7 @@
 
     function showLLL() {
       // Generate LLL code and display it.
+      showBLL() // this must be visible to get the code out 
       var code = Blockly.LLL.workspaceToCode();
       var content_LLL = doc.el('content_LLL')
       hideOthers()
@@ -69,6 +73,7 @@
       hideOthers()
       doc.el('content_EVM').style.display = 'block'
       addclass(doc.el('btn_EVM'),'active')
+      contentXMLToBLL() 
     }
 
 

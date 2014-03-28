@@ -3,6 +3,7 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
+* save xml on any button click not just showblocks
 * create samples taken from community LLL
   - eg (gavin samples, vitalik samples, i want half etc.)
 * DEMO ready

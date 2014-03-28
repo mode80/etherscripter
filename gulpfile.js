@@ -45,6 +45,7 @@ gulp.task('concat', ['min'], function() {
 gulp.task('stage', function() {
     var stream = gulp.src([
     			'dev/*.css',
+                'dev/*.map',
     			])
         .pipe(gulp.dest('0'))
     return stream

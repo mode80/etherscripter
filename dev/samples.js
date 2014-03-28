@@ -2,6 +2,7 @@ function loadSample(event) {
   var sample_id = event.target.id
   document.getElementById('content_XML')
     .value = samples[sample_id]
+  window.xml_dirty = true
   showBLL()
 }
 
