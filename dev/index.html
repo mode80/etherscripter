@@ -14,28 +14,34 @@
 </head>
 <body>
 
-  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="navbar navbar-default navbar-fixed-top navbar-left" role="navigation">
     <a class="navbar-brand" href="#">EtherScripter</a>
-    <div class="container" >
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Samples<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#" onclick="loadSample(event)" id="namecoin">Name Registry</a></li>
-              <li><a href="#" onclick="loadSample(event)" id="lastwill">Last Will</a></li>
-              <li><a href="#" onclick="loadSample(event)" id="iwanthalf">Marriage Contract</a></li>
-            </ul>
-          </li>
-      </div><!--/.nav-collapse -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href=".">Editor</a></li>
+        <li><a href="what_is_ethereum.html">About</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" style="padding-right:50px" data-toggle="dropdown">
+            Samples<b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" >
+            <li><a href="#" onclick="loadSample(event)" id="namecoin">Name Registry</a></li>
+            <li><a href="#" onclick="loadSample(event)" id="website_sale">Sales Contract</a></li>
+            <li><a href="#" onclick="loadSample(event)" id="last_will">Last Will</a></li>
+            <li><a href="#" onclick="loadSample(event)" id="i_want_half">Marriage Contract</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 
