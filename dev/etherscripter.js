@@ -5,10 +5,10 @@
 
 
     Blockly.inject(doc.el('content_BLL'),
-        {path: '../../',
+        {path: './',
          toolbox:  doc.el('toolbox'),
          scrollbars: true,
-         trashcan: true 
+         trashcan: false 
         });
 
     // wire up local storage save/restore

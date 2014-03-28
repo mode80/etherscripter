@@ -24,7 +24,7 @@ namecoin: fnCommentToString(function(){/*!
       <block type="LLL_if" id="230" inline="false">
         <value name="COND">
           <block type="LLL_math" id="231" inline="true">
-            <field name="OP">LT</field>
+            <field name="OP">&lt;</field>
             <value name="A">
               <block type="LLL_transaction" id="232">
                 <field name="PROP">value</field>
@@ -89,13 +89,13 @@ namecoin: fnCommentToString(function(){/*!
 iwanthalf: fnCommentToString(function(){/*!
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="LLL_comment" id="31" x="29" y="21">
-    <field name="NOTE">"I WANT HALF!" Marriage Smart Contract [based on the idea by @mids106]</field>
+    <field name="NOTE">"I WANT HALF!" Marriage Smart Contract [based on the idea by @mids106 et al]</field>
     <next>
       <block type="LLL_when" id="32" inline="false">
         <field name="WORD">when</field>
         <value name="COND">
           <block type="LLL_math" id="33" inline="true">
-            <field name="OP">LT</field>
+            <field name="OP">&lt;</field>
             <value name="A">
               <block type="LLL_transaction" id="34">
                 <field name="PROP">value</field>

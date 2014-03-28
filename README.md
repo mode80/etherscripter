@@ -3,26 +3,23 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* save xml on any button click not just showblocks
 * create samples taken from community LLL
   - eg (gavin samples, vitalik samples, i want half etc.)
-* DEMO ready
-* enable right click functionality on ipad
+* RELEASE
+* fix for the no-scrolling problem in no-category mode
+* smart insert seq() only when needed
 * new EVM3 opcodes
 * make "else" of if block responsive and remove when/then block
-* make a comment block
-* phase out remnant non-LLL-direct LLL generator code
-* smart insert seq() only when needed
 * add tooltips and help urls
-* generate blockly XML from LLL
+* reverse generate blockly XML from LLL
 * undo would be nice, eg when accidentally deleteing by all to toolbox 
 * mechanism for creating a contract with mktx
+* enable right click functionality on ipad
 * save functionality using appengine cloud storage
+* make context menu appear on ipad dblclick event
 * intro.js or similar guided tour
 * make workspace height exactly the window height - navbar
-* jslint my code
 * style the builder UI
-* RELEASE
 * create generator targeting HLL, based on python.js?
   - then integrate vitalik's compiler for free LLL?
 * integrate EVM compiler

@@ -32,9 +32,9 @@ gulp.task('concat', ['min'], function() {
     var stream = gulp.src([
     			'dev/blockly_compressed.js',
     			'0/my.min.js',
-					'dev/jquery.min.js',
-					'dev/bootstrap.min.js',
-					'dev/samples.js',
+				'dev/jquery.min.js',
+				'dev/bootstrap.min.js',
+				'dev/samples.js',
    			])
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest('0/'))
@@ -45,7 +45,6 @@ gulp.task('concat', ['min'], function() {
 gulp.task('stage', function() {
     var stream = gulp.src([
     			'dev/*.css',
-                'dev/*.map',
     			])
         .pipe(gulp.dest('0'))
     return stream
