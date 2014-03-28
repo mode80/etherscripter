@@ -3,6 +3,7 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
+* make work of Firefox
 * RELEASE
 * save functionality using appengine cloud storage
 * fix for the limited workspace problem in no-category mode

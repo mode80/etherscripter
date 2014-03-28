@@ -43,6 +43,8 @@ gulp.task('concat', ['min'], function() {
 gulp.task('stage', function() {
     return gulp.src([
     			'dev/*.css',
+                'dev/*.html',
+                'dev/*.png',
                 'dev/media/**/*.*',
     			],
                 {base: 'dev/'}
@@ -51,7 +53,7 @@ gulp.task('stage', function() {
 });
 
 // Fix Refs
-gulp.task('fixrefs', function() {
+gulp.task('fixrefs', ['stage'], function() {
   gulp.src('dev/index.html')
     .pipe(htmlreplace({
         'js': 'all.min.js'
