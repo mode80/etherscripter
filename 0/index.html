@@ -30,7 +30,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Samples<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="#" onclick="loadSample(event)" id="namecoin">Namecoin</a></li>
+              <li><a href="#" onclick="loadSample(event)" id="namecoin">Name registry</a></li>
               <li><a href="#" onclick="loadSample(event)" id="iwanthalf">Marriage Contract</a></li>
             </ul>
           </li>
@@ -39,7 +39,7 @@
   </div>
 
   <div id="content_BLL" 
-    style="width:100%; height:92vh"></div>
+    style="width:100%; height:200vh" ondblclick="doc.el('content_BLL').height *= 2"></div>
   <div><textarea id="content_XML" wrap="off" class="code" onkeydown="window.xml_dirty=true" 
     style="display:none; width:100%; height:92vh"></textarea></div>
   <div><textarea id="content_HLL"  disabled wrap="off" class="code" 

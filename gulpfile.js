@@ -15,7 +15,7 @@ var htmlreplace = require('gulp-html-replace');
 
 // Minify my 
 gulp.task('min', function() {
-    var stream = gulp.src([
+    return gulp.src([
     			'dev/LLL*.js',
     			'dev/storage.js',
     			'dev/messages.js',
@@ -24,12 +24,11 @@ gulp.task('min', function() {
         .pipe(concat('my.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('0/'))
-    return stream
 });
 
 // Concat libraries
 gulp.task('concat', ['min'], function() {
-    var stream = gulp.src([
+    return gulp.src([
     			'dev/blockly_compressed.js',
     			'0/my.min.js',
 				'dev/jquery.min.js',
@@ -38,16 +37,17 @@ gulp.task('concat', ['min'], function() {
    			])
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest('0/'))
-    return stream
 });
 
 // Stage others 
 gulp.task('stage', function() {
-    var stream = gulp.src([
+    return gulp.src([
     			'dev/*.css',
-    			])
+                'dev/media/**/*.*',
+    			],
+                {base: 'dev/'}
+                )
         .pipe(gulp.dest('0'))
-    return stream
 });
 
 // Fix Refs
