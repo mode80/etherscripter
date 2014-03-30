@@ -80,7 +80,7 @@ Blockly.Blocks['LLL_transaction'] = {
     this.setColour(VALUE_COLOR);
     this.setOutput(true);
     this.appendDummyInput()
-        .appendField('transaction')
+        .appendField('tx')
         .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
   }
 };
@@ -223,7 +223,7 @@ Blockly.Blocks['LLL_load'] = {
     var PLACES = 
     [['storage', 'sload'],
     ['memory', 'mload'],
-    ['transaction data', 'txdata']]
+    ['tx data', 'txdata']]
     this.setColour(LIST_COLOR);
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
