@@ -36,6 +36,7 @@ Blockly.Blocks['LLL_val'] = {
   init: function() {
 		var validator = function(given) {
 			var retval = given ? given : ''
+      if (/0x[^0-9a-f]/i.exec(given)===null) return given // hexy strings ok 
 			if ( isNaN(retval) ) { 
 				var commafree = retval.replace(/,/g, '')	
 				if ( !isNaN(commafree) ) retval = commafree 

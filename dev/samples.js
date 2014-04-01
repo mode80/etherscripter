@@ -18,78 +18,78 @@ var samples = {
 
 website_sale: fnCommentToString(function(){/*!
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="LLL_comment" id="78" x="43" y="78">
+  <block type="LLL_comment" id="50" x="43" y="78">
     <field name="NOTE">*** An Ethereum smart contract to sell a website for "5000 by March"</field>
     <next>
-      <block type="LLL_comment" id="79">
+      <block type="LLL_comment" id="51">
         <field name="NOTE">First, store buyer's ethereum address:</field>
         <next>
-          <block type="LLL_store" id="80" inline="true">
+          <block type="LLL_store" id="52" inline="true">
             <field name="PLACE">sstore</field>
             <value name="VAL">
-              <block type="LLL_val" id="81">
-                <field name="VAL">6af26739b9ffef8aa2985252e5357fde</field>
+              <block type="LLL_val" id="53">
+                <field name="VAL">0x6af26739b9ffef8aa2985252e5357fde</field>
               </block>
             </value>
             <value name="SLOT">
-              <block type="LLL_val" id="82">
+              <block type="LLL_val" id="54">
                 <field name="VAL">BUYER</field>
               </block>
             </value>
             <next>
-              <block type="LLL_comment" id="83">
+              <block type="LLL_comment" id="55">
                 <field name="NOTE">Then, store seller's ethereum address:</field>
                 <next>
-                  <block type="LLL_store" id="84" inline="true">
+                  <block type="LLL_store" id="56" inline="true">
                     <field name="PLACE">sstore</field>
                     <value name="VAL">
-                      <block type="LLL_val" id="85">
-                        <field name="VAL">feab802c014588f08bfee2741086c375</field>
+                      <block type="LLL_val" id="57">
+                        <field name="VAL">0xfeab802c014588f08bfee2741086c375</field>
                       </block>
                     </value>
                     <value name="SLOT">
-                      <block type="LLL_val" id="86">
+                      <block type="LLL_val" id="58">
                         <field name="VAL">SELLER</field>
                       </block>
                     </value>
                     <next>
-                      <block type="LLL_comment" id="87">
+                      <block type="LLL_comment" id="59">
                         <field name="NOTE">April 1, 2014 is 1396310400 in "computer time"</field>
                         <next>
-                          <block type="LLL_store" id="88" inline="true">
+                          <block type="LLL_store" id="60" inline="true">
                             <field name="PLACE">sstore</field>
                             <value name="VAL">
-                              <block type="LLL_val" id="89">
+                              <block type="LLL_val" id="61">
                                 <field name="VAL">1396310400</field>
                               </block>
                             </value>
                             <value name="SLOT">
-                              <block type="LLL_val" id="90">
+                              <block type="LLL_val" id="62">
                                 <field name="VAL">DEADLINE</field>
                               </block>
                             </value>
                             <next>
-                              <block type="LLL_comment" id="91">
+                              <block type="LLL_comment" id="63">
                                 <field name="NOTE">If the agreed amount is received on time...</field>
                                 <next>
-                                  <block type="LLL_when" id="92" inline="false">
+                                  <block type="LLL_when" id="64" inline="false">
                                     <field name="WORD">when</field>
                                     <value name="COND">
-                                      <block type="LLL_math" id="93" inline="false">
+                                      <block type="LLL_math" id="65" inline="false">
                                         <field name="OP">and</field>
                                         <value name="A">
-                                          <block type="LLL_math" id="94" inline="true">
+                                          <block type="LLL_math" id="66" inline="true">
                                             <field name="OP">&gt;=</field>
                                             <value name="A">
-                                              <block type="LLL_transaction" id="95">
+                                              <block type="LLL_transaction" id="67">
                                                 <field name="PROP">value</field>
                                               </block>
                                             </value>
                                             <value name="B">
-                                              <block type="LLL_currency" id="96" inline="true">
+                                              <block type="LLL_currency" id="68" inline="true">
                                                 <field name="DENOM">ether</field>
                                                 <value name="AMT">
-                                                  <block type="LLL_val" id="97">
+                                                  <block type="LLL_val" id="69">
                                                     <field name="VAL">5000</field>
                                                   </block>
                                                 </value>
@@ -98,18 +98,18 @@ website_sale: fnCommentToString(function(){/*!
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="LLL_math" id="98" inline="true">
+                                          <block type="LLL_math" id="70" inline="true">
                                             <field name="OP">&lt;=</field>
                                             <value name="A">
-                                              <block type="LLL_block" id="99">
+                                              <block type="LLL_block" id="71">
                                                 <field name="PROP">timestamp</field>
                                               </block>
                                             </value>
                                             <value name="B">
-                                              <block type="LLL_load" id="100" inline="true">
+                                              <block type="LLL_load" id="72" inline="true">
                                                 <field name="PLACE">sload</field>
                                                 <value name="SLOT">
-                                                  <block type="LLL_val" id="101">
+                                                  <block type="LLL_val" id="73">
                                                     <field name="VAL">DEADLINE</field>
                                                   </block>
                                                 </value>
@@ -120,38 +120,38 @@ website_sale: fnCommentToString(function(){/*!
                                       </block>
                                     </value>
                                     <statement name="THEN">
-                                      <block type="LLL_comment" id="102">
+                                      <block type="LLL_comment" id="74">
                                         <field name="NOTE">... then designate the buyer as the new website admin and pay the seller</field>
                                         <next>
-                                          <block type="LLL_store" id="103" inline="true">
+                                          <block type="LLL_store" id="75" inline="true">
                                             <field name="PLACE">sstore</field>
                                             <value name="VAL">
-                                              <block type="LLL_load" id="104" inline="true">
+                                              <block type="LLL_load" id="76" inline="true">
                                                 <field name="PLACE">sload</field>
                                                 <value name="SLOT">
-                                                  <block type="LLL_val" id="105">
+                                                  <block type="LLL_val" id="77">
                                                     <field name="VAL">BUYER</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
                                             <value name="SLOT">
-                                              <block type="LLL_val" id="106">
+                                              <block type="LLL_val" id="78">
                                                 <field name="VAL">WEBSITE_ADMIN</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="LLL_mktx" id="107" inline="true">
+                                              <block type="LLL_mktx" id="79" inline="true">
                                                 <value name="MONEY">
-                                                  <block type="LLL_contract" id="108">
+                                                  <block type="LLL_contract" id="80">
                                                     <field name="PROP">balance</field>
                                                   </block>
                                                 </value>
                                                 <value name="TO">
-                                                  <block type="LLL_load" id="109" inline="true">
+                                                  <block type="LLL_load" id="81" inline="true">
                                                     <field name="PLACE">sload</field>
                                                     <value name="SLOT">
-                                                      <block type="LLL_val" id="110">
+                                                      <block type="LLL_val" id="82">
                                                         <field name="VAL">SELLER</field>
                                                       </block>
                                                     </value>
@@ -180,8 +180,8 @@ website_sale: fnCommentToString(function(){/*!
       </block>
     </next>
   </block>
-</xml>
-*/}),
+</xml>*/
+}),
 
 namecoin: fnCommentToString(function(){/*!
 <xml xmlns="http://www.w3.org/1999/xhtml">

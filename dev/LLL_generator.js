@@ -50,7 +50,7 @@ Blockly.LLL['LLL_if'] = function(block) {
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
   var else_do = Blockly.LLL.statementToCode(block, 'ELSE');
-  var code = '(if ' + cond + '\n(seq \n' + then_do + ')\n(seq \n' + else_do + ')\n';
+  var code = '(if ' + cond + '\n (seq \n' + then_do + ' )\n (seq \n' + else_do + ' )\n)\n';
   return code;
 };
 
@@ -59,7 +59,7 @@ Blockly.LLL['LLL_when'] = function(block) {
   var word = block.getFieldValue('WORD') 
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
-  var code = '(' + word + ' '+ cond + '\n(seq \n' + then_do + ')\n';
+  var code = '(' + word + ' '+ cond + '\n (seq \n' + then_do + ' )\n)\n';
   return code;
 };
 
@@ -91,7 +91,7 @@ Blockly.LLL['LLL_val'] = function(block) {
   var val = block.getFieldValue('VAL') || 0  
   var code = '' 
   if ( isNaN(val) ) {
-    if (val.substr(0,1) === ';') // semicolon leading stings are comments
+    if (/0x[^0-9a-f]/i.exec(val)===null) // don't quote hexy strings 
       code = val
     else 
       code = '"' + val + '"' // quote normal strings
