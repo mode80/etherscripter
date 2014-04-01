@@ -219,6 +219,64 @@ Blockly.Blocks['LLL_math'] = {
   }
 };
 
+Blockly.Blocks['LLL_compare'] = {
+  init: function() {
+    var OPERATORS =
+      [['>', '>'],
+      ['<', '<'],
+      ['=', '='],
+      ['\u2260', '!='],
+      ['\u2264', '<='],
+      ['\u2265', '>='] ];
+    this.setColour(MATH_COLOR);
+    this.setOutput(true);
+    this.appendValueInput('A')
+      .setCheck('Number')
+    this.appendValueInput('B')
+      .setCheck('Number')
+      .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks['LLL_logic'] = {
+  init: function() {
+    var OPERATORS =
+      [['and', 'and'],
+      ['or', 'or'] ];
+    this.setColour(MATH_COLOR);
+    this.setOutput(true);
+    this.appendValueInput('A')
+      .setCheck('Number')
+    this.appendValueInput('B')
+      .setCheck('Number')
+      .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.setInputsInline(false);
+  }
+};
+
+Blockly.Blocks['LLL_justmath'] = {
+  init: function() {
+    var OPERATORS =
+      [['+', 'add'],
+      ['×', 'mul'],
+      ['-', 'sub'],
+      ['÷', 'sdiv'],
+      ['raised to', 'exp'],
+      ['modulo', 'smod'],
+      ['signless mod', 'mod'],
+      ['signless ÷ ', 'div']]
+    this.setColour(MATH_COLOR);
+    this.setOutput(true);
+    this.appendValueInput('A')
+      .setCheck('Number')
+    this.appendValueInput('B')
+      .setCheck('Number')
+      .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.setInputsInline(true);
+  }
+};
+
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
@@ -231,6 +289,8 @@ Blockly.Blocks['LLL_load'] = {
     this.appendValueInput('SLOT')
       .setCheck('Number')
       .appendField('slot')
+    this.appendDummyInput()
+      .appendField('content')
     this.setOutput(true);
     this.setInputsInline(true);
   }

@@ -61,9 +61,9 @@ Blockly.Msg.ADD_COMMENT = 'Add Comment';
 /// context menu - Remove the descriptive comment from the selected block.
 Blockly.Msg.REMOVE_COMMENT = 'Remove Comment';
 /// context menu - Change from 'external' to 'inline' mode for displaying blocks used as inputs to the selected block.  See [[Translating:Blockly#context_menus]].
-Blockly.Msg.EXTERNAL_INPUTS = 'External Inputs';
+Blockly.Msg.EXTERNAL_INPUTS = 'Show Multiple Lines';
 /// context menu - Change from 'internal' to 'external' mode for displaying blocks used as inputs to the selected block.  See [[Translating:Blockly#context_menus]].
-Blockly.Msg.INLINE_INPUTS = 'Inline Inputs';
+Blockly.Msg.INLINE_INPUTS = 'Show Single Line';
 /// context menu - Permanently delete the selected block.
 Blockly.Msg.DELETE_BLOCK = 'Delete Block';
 /// context menu - Permanently delete the %1 selected blocks.\n\nParameters:\n* %1 - an integer greater than 1.
