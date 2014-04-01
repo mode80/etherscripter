@@ -190,35 +190,6 @@ Blockly.Blocks['LLL_for'] = {
 // Function value blocks 
 //
 
-Blockly.Blocks['LLL_math'] = {
-  /** add,mul,sub,div,sdiv,mod,smod,exp */
-  init: function() {
-    var OPERATORS =
-      [['+', 'add'],
-      ['×', 'mul'],
-      ['-', 'sub'],
-      ['÷', 'sdiv'],
-      ['raised to', 'exp'],
-      ['modulo', 'smod'],
-      ['=', '='],
-      ['\u2260', '!='],
-      ['<', '<'],
-      ['\u2264', '<='],
-      ['>', '>'],
-      ['\u2265', '>='],
-      ['and', 'and'],
-      ['or', 'or'] ];
-    this.setColour(MATH_COLOR);
-    this.setOutput(true);
-    this.appendValueInput('A')
-      .setCheck('Number')
-    this.appendValueInput('B')
-      .setCheck('Number')
-      .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
-    this.setInputsInline(true);
-  }
-};
-
 Blockly.Blocks['LLL_compare'] = {
   init: function() {
     var OPERATORS =
@@ -255,7 +226,7 @@ Blockly.Blocks['LLL_logic'] = {
   }
 };
 
-Blockly.Blocks['LLL_justmath'] = {
+Blockly.Blocks['LLL_math'] = {
   init: function() {
     var OPERATORS =
       [['+', 'add'],
