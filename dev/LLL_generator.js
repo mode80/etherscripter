@@ -76,7 +76,7 @@ Blockly.LLL['LLL_for'] = function(block) {
   return '(for ' + cond + '\n (seq \n' + branch + ' ) \n)\n';
 };
 
-twoArgForms = function(block) {
+Blockly.LLL.twoArgForms = function(block) {
   // math functions, and other 2-argument forms 
   var op = block.getFieldValue('OP')
   var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
@@ -85,13 +85,9 @@ twoArgForms = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
-Blockly.LLL['LLL_math'] = twoArgForms
-
-Blockly.LLL['LLL_justmath'] = twoArgForms
-
-Blockly.LLL['LLL_logic'] = twoArgForms
-
-Blockly.LLL['LLL_compare'] = twoArgForms
+Blockly.LLL['LLL_math'] = Blockly.LLL.twoArgForms 
+Blockly.LLL['LLL_logic'] = Blockly.LLL.twoArgForms 
+Blockly.LLL['LLL_compare'] = Blockly.LLL.twoArgForms 
 
 Blockly.LLL['LLL_val'] = function(block) {
   // takes user input and uses it as a number or string val 
