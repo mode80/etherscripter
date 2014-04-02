@@ -16,70 +16,72 @@ function fnCommentToString(f) {
 
 var samples = {
 
-namecoin: fnCommentToString(function(){/*!
+coinflip: fnCommentToString(function(){/*!
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="LLL_comment" id="151" x="37" y="177">
-    <field name="NOTE">A simple name registry for Ethereum addresses</field>
+  <block type="LLL_comment" id="111" x="37" y="186">
+    <field name="NOTE">Coin flipping smart contract</field>
     <next>
-      <block type="LLL_if" id="152" inline="false">
-        <value name="COND">
-          <block type="LLL_compare" id="153" inline="true">
-            <field name="OP">&lt;</field>
-            <value name="A">
-              <block type="LLL_transaction" id="154">
-                <field name="PROP">value</field>
-              </block>
-            </value>
-            <value name="B">
-              <block type="LLL_math" id="155" inline="true">
-                <field name="OP">mul</field>
+      <block type="LLL_comment" id="123">
+        <field name="NOTE">When the time in seconds is even, consider it a winning flip</field>
+        <next>
+          <block type="LLL_when" id="112" inline="false">
+            <field name="WORD">when</field>
+            <value name="COND">
+              <block type="LLL_compare" id="113" inline="true">
+                <field name="OP">=</field>
                 <value name="A">
-                  <block type="LLL_block" id="156">
-                    <field name="PROP">basefee</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="LLL_val" id="157">
-                    <field name="VAL">100</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-          </block>
-        </value>
-        <statement name="THEN">
-          <block type="LLL_comment" id="158">
-            <field name="NOTE">stop when fee is insufficient</field>
-            <next>
-              <block type="LLL_stop" id="159"></block>
-            </next>
-          </block>
-        </statement>
-        <statement name="ELSE">
-          <block type="LLL_comment" id="160">
-            <field name="NOTE">store the name, given as the first data item, into a storage slot for the sender address</field>
-            <next>
-              <block type="LLL_store" id="161" inline="true">
-                <field name="PLACE">sstore</field>
-                <value name="VAL">
-                  <block type="LLL_load" id="162" inline="true">
-                    <field name="PLACE">txdata</field>
-                    <value name="SLOT">
-                      <block type="LLL_val" id="163">
-                        <field name="VAL">0</field>
+                  <block type="LLL_math" id="114" inline="true">
+                    <field name="OP">smod</field>
+                    <value name="A">
+                      <block type="LLL_block" id="115">
+                        <field name="PROP">timestamp</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_val" id="116">
+                        <field name="VAL">2</field>
                       </block>
                     </value>
                   </block>
                 </value>
-                <value name="SLOT">
-                  <block type="LLL_transaction" id="164">
-                    <field name="PROP">sender</field>
+                <value name="B">
+                  <block type="LLL_val" id="117">
+                    <field name="VAL">0</field>
                   </block>
                 </value>
               </block>
-            </next>
+            </value>
+            <statement name="THEN">
+              <block type="LLL_comment" id="124">
+                <field name="NOTE">On a winning flip, the sender gets double their money back</field>
+                <next>
+                  <block type="LLL_mktx" id="118" inline="true">
+                    <value name="MONEY">
+                      <block type="LLL_math" id="119" inline="true">
+                        <field name="OP">mul</field>
+                        <value name="A">
+                          <block type="LLL_transaction" id="120">
+                            <field name="PROP">value</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_val" id="121">
+                            <field name="VAL">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="TO">
+                      <block type="LLL_transaction" id="122">
+                        <field name="PROP">sender</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
           </block>
-        </statement>
+        </next>
       </block>
     </next>
   </block>
