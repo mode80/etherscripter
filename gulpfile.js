@@ -1,3 +1,5 @@
+var deploy_dir = '0/'
+
 var gulp = require('gulp'); 
 
 //var jshint = require('gulp-jshint');
@@ -23,20 +25,20 @@ gulp.task('min', function() {
     			])
         .pipe(concat('my.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('0/'))
+        .pipe(gulp.dest(deploy_dir))
 });
 
 // Concat libraries
 gulp.task('concat', ['min'], function() {
     return gulp.src([
     			'dev/blockly_compressed.js',
-    			'0/my.min.js',
+    			deploy_dir + 'my.min.js',
 				'dev/jquery.min.js',
 				'dev/bootstrap.min.js',
 				'dev/samples.js',
    			])
         .pipe(concat('all.min.js'))
-        .pipe(gulp.dest('0/'))
+        .pipe(gulp.dest(deploy_dir))
 });
 
 // Stage others 
@@ -45,11 +47,12 @@ gulp.task('stage', function() {
     			'dev/*.css',
                 'dev/*.html',
                 'dev/*.png',
+                'dev/*.ico',
                 'dev/media/**/*.*',
     			],
                 {base: 'dev/'}
                 )
-        .pipe(gulp.dest('0'))
+        .pipe(gulp.dest(deploy_dir))
 });
 
 // Fix Refs
@@ -58,7 +61,7 @@ gulp.task('fixrefs', ['stage'], function() {
     .pipe(htmlreplace({
         'js': 'all.min.js'
     }))
-    .pipe(gulp.dest('0/'));
+    .pipe(gulp.dest(deploy_dir));
 });
 
 // Watch Files For Changes

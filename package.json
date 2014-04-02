@@ -2,13 +2,23 @@
   "name": "EtherScripter",
   "description": "Visual smart-contract builder for Ethereum",
   "author": "mode80",
-  "version": "0.8.0",
-  "dependencies": {},
+  "version": "0.1.0-3",
+  "dependencies": {
+    "http-server": "^0.6.1",
+    "connect": "2.14.x"
+  },
   "devDependencies": {
     "gulp": "3.5.x",
     "gulp-rename": "~1.2.0",
     "gulp-concat": "~2.2.0",
     "gulp-uglify": "~0.2.1",
     "gulp-html-replace": "~1.0.0"
+  },
+  "subdomain": "etherscripter",
+  "scripts": {
+    "start": "server.js"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
