@@ -4,7 +4,7 @@ Visual smart contract builder for Ethereum
 
 ### TODO
 * RELEASE
-* refactor math block
+* erase canvas button
 * save functionality using appengine cloud storage
 * clean repo
 * what is etherscripter page
