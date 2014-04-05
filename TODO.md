@@ -25,6 +25,7 @@ Visual smart contract builder for Ethereum
 * make context menu appear on ipad dblclick event
 * intro.js or similar guided tour
 * style the builder UI
+* a runtime simulator, debugger
 * forum?
 * directory 
 * library block functions for common functionality

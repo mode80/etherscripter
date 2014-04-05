@@ -1,12 +1,10 @@
 /**
  * @license
- * Ethereum LLL generator for Blockly
- *
  * Copyright 2014 mode80
  */
 
 /**
- * @fileoverview Helper functions for generating LLL for blocks.
+ * @fileoverview Helper functions for generating LLL from blocks.
  * @author mode80@users.noreply.github.com
  */
 'use strict';

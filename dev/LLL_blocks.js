@@ -1,12 +1,12 @@
 /**
  * @license
- * Ethereum LLL generator for Blockly
+ * Ethereum LLL3 generator for Blockly
  *
  * Copyright 2014 mode80
  */
 
 /**
- * @fileoverview block definitions for LLL-direct functions
+ * @fileoverview block definitions for LLL3-blocks
  * @author mode80@users.noreply.github.com
  */
 

@@ -18,7 +18,9 @@ var htmlreplace = require('gulp-html-replace');
 // Minify my 
 gulp.task('min', function() {
     return gulp.src([
-    			'dev/LLL*.js',
+    			'dev/LLL.js',
+                'dev/LLL_blocks.js',
+                'dev/LLL_from_LLL_blocks.js',
     			'dev/storage.js',
     			'dev/messages.js',
     			'dev/etherscripter.js',
@@ -35,7 +37,7 @@ gulp.task('concat', ['min'], function() {
     			deploy_dir + 'my.min.js',
 				'dev/jquery.min.js',
 				'dev/bootstrap.min.js',
-				'dev/samples.js',
+				'dev/samples.js', // these don't min well so concat unminned
    			])
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest(deploy_dir))
