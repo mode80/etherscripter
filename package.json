@@ -14,6 +14,10 @@
     "gulp-uglify": "~0.2.1",
     "gulp-html-replace": "~1.0.0"
   },
+  "domains": [
+    "etherscripter.com",
+    "www.etherscripter.com"
+  ],
   "subdomain": "etherscripter",
   "scripts": {
     "start": "server.js"
