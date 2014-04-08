@@ -11,8 +11,8 @@ connect()
 
 
 function redirVersion(req,res,next) {
-  if (req.url == '/') { 
-    res.writeHead(302, {'Location': '/3'} )
+  if (req.url == '/3') { 
+    res.writeHead(302, {'Location': '/0'} )
     return res.end()
   }
   next()
