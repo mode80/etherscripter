@@ -94,7 +94,7 @@ Blockly.LLL['LLL_val'] = function(block) {
   var code = '' 
   if ( isNaN(val) ) {
     var is_hexprefixed = ((val+'').substr(0,2).toUpperCase()=='0X') 
-    var is_allhexchars = (/[^0-9a-f]/i.exec(val)===null) 
+    var is_allhexchars = (/[^0-9a-fx]/i.exec(val)===null) 
     if (is_hexprefixed && is_allhexchars)  // don't quote hexy strings 
       code = val
     else 

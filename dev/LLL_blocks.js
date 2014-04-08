@@ -32,21 +32,25 @@ var COLOUR_COLOR = 58
 //
 
 Blockly.Blocks['LLL_val'] = {
-	// validating input block for LLL-legal values
+  // validating input block for LLL-legal values
   init: function() {
-		var validator = function(given) {
-			var retval = given ? given : ''
-      if (/0x[^0-9a-f]/i.exec(given)===null) return given // hexy strings ok 
-			if ( isNaN(retval) ) { 
-				var commafree = retval.replace(/,/g, '')	
-				if ( !isNaN(commafree) ) retval = commafree 
-			}
-			if ( retval && !isNaN(retval) ) 
-				retval = parseInt(retval) // strip decimals
-			else if ( retval && isNaN(retval) )
-				retval = retval.substr(0,32) // truncate string 
-		  return String(retval) 
-		}
+    var validator = function(given) {
+      var retval = given ? given : ''
+      var is_hexprefixed = ((retval+'').substr(0,2).toUpperCase()=='0X') 
+      var is_allhexchars = (/[^0-9A-FX]/i.exec(retval)===null) 
+      if (is_hexprefixed && is_allhexchars) return String(given) // hexy strings ok 
+      if ( isNaN(retval) ) { 
+        var commafree = retval.replace(/,/g, '')	
+        if ( !isNaN(commafree) ) retval = commafree 
+      }
+      if ( retval && !isNaN(retval) ) {
+        retval = parseInt(retval) // strip decimals
+        retval = Math.abs(retval) // disallow negative vals 
+      }
+      else if ( retval && isNaN(retval) )
+        retval = retval.substr(0,32) // truncate string 
+      return String(retval) 
+    }
     this.setColour(VALUE_COLOR);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('', validator ), 'VAL');
@@ -232,11 +236,11 @@ Blockly.Blocks['LLL_math'] = {
       [['+', 'add'],
       ['×', 'mul'],
       ['-', 'sub'],
-      ['÷', 'sdiv'],
+      ['÷', 'div'],
       ['raised to', 'exp'],
-      ['modulo', 'smod'],
-      ['signless mod', 'mod'],
-      ['signless ÷ ', 'div']]
+      ['modulo', 'mod'],
+      ['(signed mod)', 'smod'],
+      ['(signed ÷)', 'sdiv']]
     this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
