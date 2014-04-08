@@ -1,4 +1,4 @@
-var deploy_dir = '0/'
+var deploy_dir = '3/'
 
 var gulp = require('gulp'); 
 
