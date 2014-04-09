@@ -205,16 +205,16 @@ Blockly.Blocks['LLL_call'] = {
 
 Blockly.Blocks['LLL_init'] = {
   init: function() {
-    this.setColour(FLOW_COLOR);
+    this.setColour(LOOP_COLOR);
     this.appendDummyInput()
-      .appendField('create contract')
+      .appendField('contract')
     this.appendStatementInput('INIT')
-        .appendField('initialize with');
+        .appendField('at birth');
     this.appendStatementInput('BODY')
-        .appendField('thereafter run');
+        .appendField('on call');
     this.setInputsInline(false)
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
   }
 };
 
