@@ -124,7 +124,7 @@ Blockly.LLL.finish = function(code) {
     definitions.push(Blockly.LLL.definitions_[name]);
   }
   retval = definitions.join('\n\n') + '\n\n' + code;
-  retval = '(seq \n\n' + code + '\n)\n'
+  retval = code 
   return retval
 };
 

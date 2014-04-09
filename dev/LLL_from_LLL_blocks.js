@@ -13,6 +13,151 @@ goog.provide('Blockly.LLL.LLLblocks_generator');
 goog.require('Blockly.LLL');
 
 
+// New POC-4 blocks
+
+// update val to accomodate var names unquoted
+// update blocks to enforce data types since string-as-num no longer works 
+// rewrite _while loop to use (for) syntax
+// blockly set/get variables?
+// find missing from POC-4? items
+// rearrange toolbox
+// implement samples PoC4 samples to test
+
+
+Blockly.LLL['LLL_spend'] = function(block) {
+  // spend statement (a stripped version of call that just spends)
+  var order = Blockly.LLL.ORDER_NONE;
+  var address = Blockly.LLL.valueToCode(block,'TO', order) || 0  
+  var money = Blockly.LLL.valueToCode(block,'MONEY', order) || '0wei' 
+  var op = 'call'
+  var gas = '0'
+  var send_start_i = '0'
+  var send_bytes = '0'
+  var reply_start_i = '0'
+  var reply_bytes = '0'
+  var code = '(call' + address + ' ' + money + ' 0)\n' 
+  var code = '(' 
+    + op + ' ' 
+    + address + ' ' 
+    + money + ' ' 
+    + gas + ' ' 
+    + send_start_i + ' ' 
+    + send_bytes + ' ' 
+    + reply_start_i + ' ' 
+    + reply_bytes
+    + ')\n' 
+  return code
+};
+
+Blockly.LLL['LLL_singleop'] = function(block) {
+  // neg, not  and other 1-argument forms 
+  var op = block.getFieldValue('OP')
+  var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
+  var code = '(' + op + ' ' + a + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
+Blockly.LLL['LLL_hash'] = function(block) {
+  // hash  
+  var op = 'sha3' 
+  var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE)
+  var b = Blockly.LLL.valueToCode(block, 'DATA_END', Blockly.LLL.ORDER_NONE)
+  var code = '(' + op + ' ' + a + ' ' + b + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
+Blockly.LLL['LLL_call'] = function(block) {
+  // call 
+  var op = 'call' 
+  var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE)
+  var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE)
+  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE)
+  var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE)
+  var send_end_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_END', Blockly.LLL.ORDER_NONE)
+  var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE)
+  var reply_bytes = Blockly.LLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.LLL.ORDER_NONE)
+  var send_bytes = (send_end_i - send_start_i) * 32
+  var code = '(' 
+    + op + ' ' 
+    + address + ' ' 
+    + money + ' ' 
+    + gas + ' ' 
+    + send_start_i + ' ' 
+    + send_bytes + ' ' 
+    + reply_start_i + ' ' 
+    + reply_bytes
+    + ')\n' 
+  return code
+};
+
+Blockly.LLL['LLL_return'] = function(block) {
+  // return 
+  var op = 'return' 
+  var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE)
+  var b = Blockly.LLL.valueToCode(block, 'DATA_END', Blockly.LLL.ORDER_NONE)
+  var code = '(' + op + ' ' + a + ' ' + b + ')\n' 
+  return code
+};
+
+Blockly.LLL['LLL_blockinfo'] = function(block) {
+  // block related values 
+  var code
+  var val = block.getFieldValue('PROP');
+  code = '(' + val + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC];
+};
+
+Blockly.LLL['LLL_tx'] = function(block) {
+  // tx related values 
+  var code
+  var val = block.getFieldValue('PROP');
+  code = '(' + val + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC];
+};
+
+Blockly.LLL['LLL_contract'] = function(block) {
+  // so called "closure" (contract) related values 
+  var code
+  var val = block.getFieldValue('PROP');
+  if (val == 'balance')
+    code = '(balance (address))' 
+  else 
+    code = '(' + val + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC];
+};
+
+Blockly.LLL['LLL_forloop'] = function(block) {
+  // LLL for loop in POC-4+ is like javascript for loop.
+  var cond = Blockly.LLL.valueToCode(block, 'COND',
+      Blockly.LLL.ORDER_NONE) || 'false'
+  var first = Blockly.LLL.statementToCode(block, 'FIRST')
+  var after_each = Blockly.LLL.statementToCode(block, 'AFTER_EACH')
+  var loop = Blockly.LLL.statementToCode(block, 'LOOP')
+  return '(for\n' + first + '  ' + cond + '\n' + after_each + '  (seq \n' + loop + '  )  \n)\n'
+};
+
+Blockly.LLL['LLL_init'] = function(block) {
+  // wrapper for contract init and body 
+  var init = Blockly.LLL.statementToCode(block, 'INIT');
+  var body = Blockly.LLL.statementToCode(block, 'BODY');
+  return '(seq\n\n' + init + '\n)\n\n(seq\n\n' + body + '\n)'
+};
+
+Blockly.LLL['LLL_whileloop'] = function(block) {
+  // LLL while loop in POC-4+ is implemented as a stubbed for loop.
+  var is_until = (block.getFieldValue('WORD') == 'UNTIL')
+  var cond = Blockly.LLL.valueToCode(block, 'COND',
+      is_until ? Blockly.LLL.ORDER_LOGICAL_NOT :
+      Blockly.LLL.ORDER_NONE) || 'false';
+  var loop = Blockly.LLL.statementToCode(block, 'DO');
+  if (is_until) {
+    cond = '(not ' + cond + ' )';
+  }
+  return '(for ' + '()' + ' ' + cond + '\n (seq \n' + loop + ' )\n)\n'
+};
+
+//////// 
+
 Blockly.LLL['LLL_block'] = function(block) {
   // block related values 
   var code

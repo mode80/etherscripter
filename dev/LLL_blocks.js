@@ -1,4 +1,4 @@
-/**
+/*
  * @license
  * Ethereum LLL3 generator for Blockly
  *
@@ -28,6 +28,199 @@ var STATEMENT_COLOR = 330
 var COLOUR_COLOR = 58 
 
 //
+// New POC-4 blocks 
+//
+// don't implment: XOR, BYTE just yet 
+
+Blockly.Blocks['LLL_spend'] = {
+  init: function() {
+    this.setColour(STATEMENT_COLOR);
+    this.appendValueInput('MONEY')
+      .appendField('spend')
+      .setCheck('Number')
+    this.appendValueInput('TO')
+      .appendField('to')
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_blockinfo'] = {
+  init: function() {
+    var VALS =
+        [
+         ['prevhash', 'prevhash'],
+         ['coinbase', 'coinbase'],
+         ['timestamp', 'timestamp'],
+         ['number', 'number'],
+         ['difficulty', 'difficulty'],
+         ['total gas', 'gaslimit'],
+        ]
+    this.setColour(VALUE_COLOR);
+    this.setOutput(true);
+    this.appendDummyInput()
+        .appendField('block')
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP')
+  }
+}
+
+Blockly.Blocks['LLL_tx'] = {
+  init: function() {
+    var VALS =
+        [
+         ['value', 'callvalue'],
+         //['origin', 'origin'], // missing from POC-4 ? 
+         ['caller', 'caller'],
+         ['data byte count', 'calldatasize'], // update to unpack this in 32-byte chunks as familiar tx.data 
+         //['data bytes', 'calldataload'],// missing from POC-4 ?  
+         //['gas price', 'gasprice'],// missing from POC-4 ?  
+         ['gas left', 'gas'] 
+        ]
+    this.setColour(VALUE_COLOR)
+    this.setOutput(true)
+    this.appendDummyInput()
+        .appendField('tx')
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP')
+  }
+}
+
+Blockly.Blocks['LLL_contract'] = {
+  init: function() {
+    var VALS =
+        [
+         ['address', 'address'],
+         ['balance', 'balance'] 
+        ]
+    this.setColour(VALUE_COLOR)
+    this.setOutput(true)
+    this.appendDummyInput()
+        .appendField('contract')
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP')
+  }
+}
+
+Blockly.Blocks['LLL_hash'] = {
+  init: function() {
+    this.setColour(MATH_COLOR);
+    this.setOutput(true)
+    this.appendDummyInput()
+      .appendField('ID for data')
+    this.appendValueInput('DATA_START')
+      .appendField('from start slot');
+    this.appendValueInput('DATA_END')
+      .appendField('thru end slot');
+    this.setInputsInline(false);
+  }
+};
+
+Blockly.Blocks['LLL_return'] = {
+  init: function() {
+    this.setColour(STATEMENT_COLOR);
+    this.appendDummyInput()
+      .appendField('reply with data')
+    this.appendValueInput('DATA_START')
+      .appendField('from start slot');
+    this.appendValueInput('DATA_END')
+      .appendField('thru end slot');
+    this.setPreviousStatement(true);
+    this.setInputsInline(false);
+  }
+};
+
+Blockly.Blocks['LLL_singleop'] = {
+  init: function() {
+    var OPERATORS =
+      [['not', 'not'],
+      ['negative', 'neg']]
+    this.setColour(MATH_COLOR);
+    this.setOutput(true);
+    this.appendValueInput('A')
+      .setCheck('Number')
+      .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks['LLL_forloop'] = {
+  init: function() {
+    this.setColour(LOOP_COLOR);
+    this.appendStatementInput('FIRST')
+        .appendField('one time do');
+    this.appendValueInput('COND')
+        .setCheck('Boolean')
+        .appendField('then as long as');
+    this.appendStatementInput('LOOP')
+        .appendField('repeatedly do');
+    this.appendStatementInput('AFTER_EACH')
+        .appendField('& each loop do');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_whileloop'] = {
+  init: function() {
+    var OPERATORS =
+        [['while', 'WHILE'],
+        ['until', 'UNTIL']];
+    this.setColour(LOOP_COLOR);
+    this.appendValueInput('COND')
+        .setCheck('Boolean')
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'WORD');
+    this.appendStatementInput('DO')
+        .appendField('repeat')
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_call'] = {
+  init: function() {
+    this.setColour(PROCEDURE_COLOR)
+    this.appendValueInput('ADDRESS')
+      .appendField('call address')
+    this.appendValueInput('MONEY')
+      .appendField('   sending amount')
+    this.appendValueInput('GAS')
+      .appendField('   with fee budget')
+    this.appendDummyInput()
+      .appendField('and data from')
+    this.appendValueInput('SEND_DATA_START')
+      .appendField('   start slot')
+    this.appendValueInput('SEND_DATA_END')
+      .appendField('   thru end slot')
+    this.appendDummyInput()
+      .appendField('getting reply into')
+    this.appendValueInput('REPLY_DATA_START')
+      .appendField('   start slot')
+    this.appendValueInput('REPLY_DATA_BYTES')
+      .appendField('   with byte length')
+    // this.setOutput(true) // technically returns true when successful?
+    this.setInputsInline(false)
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_init'] = {
+  init: function() {
+    this.setColour(FLOW_COLOR);
+    this.appendDummyInput()
+      .appendField('create contract')
+    this.appendStatementInput('INIT')
+        .appendField('initialize with');
+    this.appendStatementInput('BODY')
+        .appendField('thereafter run');
+    this.setInputsInline(false)
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+
+
+//
 // Value blocks 
 //
 
@@ -39,16 +232,16 @@ Blockly.Blocks['LLL_val'] = {
       var is_hexprefixed = ((retval+'').substr(0,2).toUpperCase()=='0X') 
       var is_allhexchars = (/[^0-9A-FX]/i.exec(retval)===null) 
       if (is_hexprefixed && is_allhexchars) return String(given) // hexy strings ok 
-      if ( isNaN(retval) ) { 
-        var commafree = retval.replace(/,/g, '')	
+      if ( isNaN(retval) ) { // if a string 
+        var commafree = retval.replace(/,/g, '')  // strip commas where otherwise numeric 
         if ( !isNaN(commafree) ) retval = commafree 
       }
-      if ( retval && !isNaN(retval) ) {
+      if ( retval && !isNaN(retval) ) { // if a number now
         retval = parseInt("0" + retval) // strip decimals
         retval = Math.abs(retval) // disallow negative vals 
       }
-      else if ( retval && isNaN(retval) )
-        retval = retval.substr(0,32) // truncate string 
+      else if ( retval && isNaN(retval) ) // if a string now
+        retval = retval.substr(0,32) // truncate string to 32-byte Ethereum max
       return String(retval) 
     }
     this.setColour(VALUE_COLOR);
@@ -236,11 +429,9 @@ Blockly.Blocks['LLL_math'] = {
       [['+', 'add'],
       ['×', 'mul'],
       ['-', 'sub'],
-      ['÷', 'div'],
+      ['÷', 'sdiv'],// unsigned 'div' is also available but only leads to value ambiguity in contracts
       ['raised to', 'exp'],
-      ['modulo', 'mod'],
-      ['(signed mod)', 'smod'],
-      ['(signed ÷)', 'sdiv']]
+      ['modulo', 'smod']] // ditto above for 'mod' 
     this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
@@ -348,14 +539,3 @@ Blockly.Blocks['LLL_store'] = {
     this.setNextStatement(true);
   }
 };
-
-
-/*
-// TODO other statements 
-    ',extro (deprecated), return(undocumented) ' +
-
-// TODO crypto (deprecated)
-    'sha256,ripemd160,ecmul,ecadd,ecsign,ecrecover,ecvalid,sha3,' +
-
-
-*/
