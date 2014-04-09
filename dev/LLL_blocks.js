@@ -44,7 +44,7 @@ Blockly.Blocks['LLL_val'] = {
         if ( !isNaN(commafree) ) retval = commafree 
       }
       if ( retval && !isNaN(retval) ) {
-        retval = parseInt(retval) // strip decimals
+        retval = parseInt("0" + retval) // strip decimals
         retval = Math.abs(retval) // disallow negative vals 
       }
       else if ( retval && isNaN(retval) )
