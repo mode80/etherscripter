@@ -34,7 +34,7 @@ gulp.task('min', function() {
 gulp.task('concat', ['min'], function() {
     return gulp.src([
     			'dev/blockly_compressed.js',
-    			deploy_dir + 'my.min.js',
+    			deploy_dir + '/my.min.js',
 				'dev/jquery.min.js',
 				'dev/bootstrap.min.js',
 				'dev/samples.js', // these don't min well so concat unminned
