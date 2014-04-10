@@ -12,7 +12,7 @@ connect()
 
 function redirVersion(req,res,next) {
   if (req.url == '/') { 
-    res.writeHead(302, {'Location': '/0-4-0'} )
+    res.writeHead(302, {'Location': '/0'} )
     return res.end()
   }
   next()

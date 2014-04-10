@@ -38,21 +38,16 @@
         </li>
         <li><a href="what_is_ethereum.html">About</a></li>
       </ul>
-      <!--
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" style="padding-right:50px" data-toggle="dropdown">
             Samples<b class="caret"></b>
           </a>
           <ul class="dropdown-menu" >
-            <li><a href="#" onclick="loadSample(event)" id="coinflip">Coin Flip</a></li>
-            <li><a href="#" onclick="loadSample(event)" id="website_sale">Sales Contract</a></li>
-            <li><a href="#" onclick="loadSample(event)" id="last_will">Last Will</a></li>
-            <li><a href="#" onclick="loadSample(event)" id="i_want_half">Marriage Contract</a></li>
+            <li><a href="#" onclick="loadSample(event)" id="key_value_publisher">Key Value Publisher</a></li>
           </ul>
         </li>
       </ul>
-      -->
     </div>
   </div>
 
@@ -104,12 +99,12 @@
     <block type="LLL_if"></block>
     <block type="LLL_whileloop"></block>
     <block type="LLL_init"></block>
-    <!--<block type="LLL_forloop"></block>-->
     <block type="LLL_singleop"></block>
     <block type="LLL_balance"></block>
     <block type="LLL_hash"></block>
     <block type="LLL_call"></block>
     <block type="LLL_return"></block>
+    <block type="LLL_forloop"></block>
   </xml>
 
 <!-- build:js -->
@@ -121,6 +116,7 @@
   <script src="storage.js"></script>
   <script src="etherscripter.js"></script>
   <script src="samples.js"></script>
+  <script src="samples-poc4.js"></script>
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
 <!-- endbuild -->

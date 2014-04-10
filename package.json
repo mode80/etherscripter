@@ -2,7 +2,7 @@
   "name": "EtherScripter",
   "description": "Visual smart-contract builder for Ethereum",
   "author": "mode80",
-  "version": "0.4.0-2",
+  "version": "0.4.0-3",
   "dependencies": {
     "http-server": "^0.6.1",
     "connect": "2.14.x"

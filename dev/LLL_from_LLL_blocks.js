@@ -126,18 +126,21 @@ Blockly.LLL['LLL_contract'] = function(block) {
 Blockly.LLL['LLL_forloop'] = function(block) {
   // LLL for loop in POC-4+ is like javascript for loop.
   var cond = Blockly.LLL.valueToCode(block, 'COND',
-      Blockly.LLL.ORDER_NONE) || 'false'
-  var first = Blockly.LLL.statementToCode(block, 'FIRST')
-  var after_each = Blockly.LLL.statementToCode(block, 'AFTER_EACH')
-  var loop = Blockly.LLL.statementToCode(block, 'LOOP')
-  return '(for\n' + first + '  ' + cond + '\n' + after_each + '  (seq \n' + loop + '  )  \n)\n'
+      Blockly.LLL.ORDER_NONE) || '(1)' 
+  var first = Blockly.LLL.statementToCode(block, 'FIRST') || '()'
+  var loop = Blockly.LLL.statementToCode(block, 'LOOP') || '()'
+  var after_each = Blockly.LLL.statementToCode(block, 'AFTER_EACH') || '()'
+  first = first.trim()
+  cond = cond.trim()
+  after_each = after_each.trim()
+  return '(for ' + first + ' ' + cond + ' ' + after_each + '\n { \n' + loop + ' }  \n)\n'
 };
 
 Blockly.LLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.LLL.statementToCode(block, 'INIT');
   var body = Blockly.LLL.statementToCode(block, 'BODY');
-  return '(seq\n\n' + init + '\n)\n\n(seq\n\n' + body + '\n)'
+  return '{\n\n' + init + '\n}\n\n{\n\n' + body + '\n}'
 };
 
 Blockly.LLL['LLL_whileloop'] = function(block) {
@@ -150,7 +153,7 @@ Blockly.LLL['LLL_whileloop'] = function(block) {
   if (is_until) {
     cond = '(not ' + cond + ' )';
   }
-  return '(for ' + '()' + ' ' + cond + '\n (seq \n' + loop + ' )\n)\n'
+  return '(for ' + '()' + ' ' + cond + '\n { \n' + loop + ' }\n)\n'
 };
 
 //////// 
@@ -162,7 +165,7 @@ Blockly.LLL['LLL_if'] = function(block) {
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
   var else_do = Blockly.LLL.statementToCode(block, 'ELSE');
-  var code = '(if ' + cond + '\n (seq \n' + then_do + ' )\n (seq \n' + else_do + ' )\n)\n';
+  var code = '(if ' + cond + '\n { \n' + then_do + ' }\n { \n' + else_do + ' }\n)\n';
   return code;
 };
 
@@ -171,7 +174,7 @@ Blockly.LLL['LLL_when'] = function(block) {
   var word = block.getFieldValue('WORD') 
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
-  var code = '(' + word + ' '+ cond + '\n (seq \n' + then_do + ' )\n)\n';
+  var code = '(' + word + ' '+ cond + '\n { \n' + then_do + ' }\n)\n';
   return code;
 };
 
@@ -238,7 +241,10 @@ Blockly.LLL['LLL_load'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
-  var code = '('+ place + ' ' + slot + ')'
+  //var code = 
+  if (place=='sload') code = '@@' + slot
+  if (place=='mload') code = '@' + slot
+  if (place=='calldataload') code = '('+ place + ' ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
 
@@ -248,8 +254,10 @@ Blockly.LLL['LLL_store'] = function(block) {
   var place = block.getFieldValue('PLACE')  
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  var code = '('+ place + ' ' + slot + ' ' + val + ')\n'
-  return code
+  // var code = '('+ place + ' ' + slot + ' ' + val + ')\n'
+  if (place=='sstore') code = '[[' + slot + ']] ' + val
+  if (place=='mstore') code = '[' + slot + '] ' + val
+  return code + '\n'
 };
 
 Blockly.LLL['LLL_balance'] = function(block) {
@@ -304,7 +312,7 @@ Blockly.LLL['LLL_for'] = function(block) {
   if (is_until) {
     cond = '(! ' + cond + ' )';
   }
-  return '(for ' + cond + '\n (seq \n' + branch + ' ) \n)\n';
+  return '(for ' + cond + '\n seq( \n' + branch + ' ) \n)\n';
 };
 
 Blockly.LLL['LLL_mktx'] = function(block) {

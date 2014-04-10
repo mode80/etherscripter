@@ -3,7 +3,8 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* test updates for POC-4 
+* implement some more elegant form of mstore & mload blocks 
+* enter gav's POC-4 samples to test LLL output
 * save functionality using appengine(?) cloud storage
 * what is etherscripter page
 * create generator and block-set targeting HLL

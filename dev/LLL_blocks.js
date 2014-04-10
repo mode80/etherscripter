@@ -426,9 +426,9 @@ Blockly.Blocks['LLL_logic'] = {
 Blockly.Blocks['LLL_math'] = {
   init: function() {
     var OPERATORS =
-      [['+', 'add'],
-      ['×', 'mul'],
-      ['-', 'sub'],
+      [['+', '+'],
+      ['×', '*'],
+      ['-', '-'],
       ['÷', 'sdiv'],// unsigned 'div' is also available but only leads to value ambiguity in contracts
       ['raised to', 'exp'],
       ['modulo', 'smod']] // ditto above for 'mod' 
