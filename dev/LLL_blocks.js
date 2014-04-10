@@ -1,12 +1,12 @@
 /*
  * @license
- * Ethereum LLL3 generator for Blockly
+ * Ethereum LLL generator for Blockly
  *
  * Copyright 2014 mode80
  */
 
 /**
- * @fileoverview block definitions for LLL3-blocks
+ * @fileoverview block definitions for LLL-blocks
  * @author mode80@users.noreply.github.com
  */
 
@@ -30,7 +30,7 @@ var COLOUR_COLOR = 58
 //
 // New POC-4 blocks 
 //
-// don't implment: XOR, BYTE just yet 
+// not implmenting: XOR, BYTE just yet 
 
 Blockly.Blocks['LLL_spend'] = {
   init: function() {
@@ -72,8 +72,8 @@ Blockly.Blocks['LLL_tx'] = {
          ['value', 'callvalue'],
          //['origin', 'origin'], // missing from POC-4 ? 
          ['caller', 'caller'],
-         ['data byte count', 'calldatasize'], // update to unpack this in 32-byte chunks as familiar tx.data 
-         //['data bytes', 'calldataload'],// missing from POC-4 ?  
+         ['datasize', 'calldatasize'], // update to unpack this in 32-byte chunks as familiar tx.data 
+         ['data', 'calldataload'],
          //['gas price', 'gasprice'],// missing from POC-4 ?  
          ['gas left', 'gas'] 
         ]
@@ -448,7 +448,7 @@ Blockly.Blocks['LLL_load'] = {
     var PLACES = 
     [['storage', 'sload'],
     ['memory', 'mload'],
-    ['tx data', 'txdata']]
+    ['tx data', 'calldataload']]
     this.setColour(LIST_COLOR);
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')

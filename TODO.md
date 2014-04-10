@@ -3,8 +3,8 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
+* test updates for POC-4 
 * save functionality using appengine(?) cloud storage
-* update for POC-4 
 * what is etherscripter page
 * create generator and block-set targeting HLL
 * integrate or port EVM compiler

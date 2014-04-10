@@ -16,10 +16,9 @@ goog.require('Blockly.LLL');
 // New POC-4 blocks
 /////
 
-// blockly set/get variables instead of quoted strings hack?
 // find missing from POC-4? items
-// rearrange toolbox
 // implement samples PoC4 samples to test
+// blockly set/get variables instead of quoted strings hack?
 
 
 Blockly.LLL['LLL_spend'] = function(block) {
