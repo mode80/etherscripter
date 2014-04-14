@@ -6,6 +6,7 @@ Visual smart contract builder for Ethereum
 * enter gav's POC-4 samples to test LLL output
 * implement block selector menu for toolbox to leave yucky blocks out by default
 * implement (but hide by default XOR, BYTE) 
+* release 0.4
 * save functionality using appengine(?) cloud storage
 * what is etherscripter page
 * create generator and block-set targeting HLL

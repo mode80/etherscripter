@@ -1,12 +1,17 @@
 var connect = require('connect')
 var http = require('http')
-var port = 80
 
-if (process.env.NODE_ENV=='development') port = 8080 
+if (process.env.NODE_ENV=='development') {
+	var port = 8080
+	var dir = __dirname 
+} else {  // production settings
+	var port = 80
+	var dir = __dirname + '/deploy' 
+}
 
 connect()
   .use(redirVersion)
-  .use(connect.static(__dirname))
+  .use(connect.static(dir))
   .listen(port)
 
 
