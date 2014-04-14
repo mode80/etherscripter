@@ -98,10 +98,11 @@ var COLOUR_COLOR = 58
 //   }
 // }
 
-//
+///////
 // New POC-4 blocks 
-//
-// not implmenting: XOR, BYTE just yet 
+///////
+
+// not implmented just yet : XOR, BYTE 
 
 Blockly.Blocks['LLL_spend'] = {
   init: function() {
@@ -315,10 +316,11 @@ Blockly.Blocks['LLL_init'] = {
 };
 
 
+//////
+// POC-3 & POC-4 compatible blocks
+//////
 
-//
 // Value blocks 
-//
 
 Blockly.Blocks['LLL_val'] = {
   // validating input block for LLL-legal values
@@ -426,9 +428,7 @@ Blockly.Blocks['LLL_currency'] = {
   }
 };
 
-//
 // Flow control blocks
-//
 
 Blockly.Blocks['LLL_if'] = {
   init: function() {
@@ -461,27 +461,7 @@ Blockly.Blocks['LLL_when'] = {
   }
 };
 
-Blockly.Blocks['LLL_for'] = {
-  init: function() {
-    var OPERATORS =
-        [['while', 'WHILE'],
-        ['until', 'UNTIL']];
-    this.setColour(LOOP_COLOR);
-    this.appendValueInput('COND')
-        .setCheck('Boolean')
-        .appendField('repeat')
-        .appendField(new Blockly.FieldDropdown(OPERATORS), 'WORD');
-    this.appendStatementInput('DO')
-        .appendField('do');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-  }
-};
-
-
-//
 // Function value blocks 
-//
 
 Blockly.Blocks['LLL_compare'] = {
   init: function() {
@@ -542,8 +522,8 @@ Blockly.Blocks['LLL_math'] = {
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
-    [['data @ fixed slot', 'sload'],
-    ['data @ temp slot', 'mload'],
+    [['data @ temp slot', 'mload'],
+    ['data @ fixed slot', 'sload'],
     ['data @ input slot', '_input_load_slots'],
     ['data @ input byte', '_input_load_bytes']]
     this.setColour(LIST_COLOR);
@@ -566,9 +546,7 @@ Blockly.Blocks['LLL_balance'] = {
   }
 };
 
-// 
 // Statements
-// 
 
 Blockly.Blocks['LLL_comment'] = {
   init: function() {
@@ -601,6 +579,46 @@ Blockly.Blocks['LLL_suicide'] = {
   }
 };
 
+Blockly.Blocks['LLL_store'] = {
+  init: function() {
+    var PLACES = 
+	  [['temp slot', 'mstore'],
+    ['fixed slot', 'sstore']]
+    this.setColour(LIST_COLOR);
+    this.appendValueInput('VAL')
+      .appendField('put')
+    this.appendValueInput('SLOT')
+      .appendField('in')
+      .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
+      .setCheck('Number')
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+
+/////////
+// deprecated POC-3 blocks
+/////////
+
+Blockly.Blocks['LLL_for'] = {
+  init: function() {
+    var OPERATORS =
+        [['while', 'WHILE'],
+        ['until', 'UNTIL']];
+    this.setColour(LOOP_COLOR);
+    this.appendValueInput('COND')
+        .setCheck('Boolean')
+        .appendField('repeat')
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'WORD');
+    this.appendStatementInput('DO')
+        .appendField('do');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
 Blockly.Blocks['LLL_mktx'] = {
   init: function() {
     this.setColour(STATEMENT_COLOR);
@@ -615,20 +633,3 @@ Blockly.Blocks['LLL_mktx'] = {
   }
 };
 
-Blockly.Blocks['LLL_store'] = {
-  init: function() {
-    var PLACES = 
-	  [['fixed slot', 'sstore'],
-	  ['temp slot', 'mstore']]
-    this.setColour(LIST_COLOR);
-    this.appendValueInput('VAL')
-      .appendField('put')
-    this.appendValueInput('SLOT')
-      .appendField('in')
-      .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
-      .setCheck('Number')
-    this.setInputsInline(true);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-  }
-};
