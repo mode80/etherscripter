@@ -70,10 +70,34 @@ Blockly.LLL['LLL_call'] = function(block) {
   var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE)
   var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE)
   var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE)
-  var send_end_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_END', Blockly.LLL.ORDER_NONE)
+  var send_bytes = Blockly.LLL.valueToCode(block, 'SEND_DATA_BYTES', Blockly.LLL.ORDER_NONE)
   var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE)
   var reply_bytes = Blockly.LLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.LLL.ORDER_NONE)
+  var code = '(' 
+    + op + ' ' 
+    + address + ' ' 
+    + money + ' ' 
+    + gas + ' ' 
+    + send_start_i + ' ' 
+    + send_bytes + ' ' 
+    + reply_start_i + ' ' 
+    + reply_bytes
+    + ')\n' 
+  return code
+};
+
+Blockly.LLL['LLL_msg'] = function(block) {
+  // call 
+  var op = 'call' 
+  var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE)
+  var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE)
+  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE)
+  var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE)
+  var send_end_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_END', Blockly.LLL.ORDER_NONE)
+  var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE)
+  var reply_end_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_END', Blockly.LLL.ORDER_NONE)
   var send_bytes = (send_end_i - send_start_i) * 32
+  var reply_bytes = (reply_end_i - reply_start_i) * 32
   var code = '(' 
     + op + ' ' 
     + address + ' ' 
@@ -108,7 +132,12 @@ Blockly.LLL['LLL_tx'] = function(block) {
   // tx related values 
   var code
   var val = block.getFieldValue('PROP');
-  code = '(' + val + ')' 
+  if (val == "_input_slot_count") // count of 32-byte slots isn't supported naitevly but we can have it calculated
+    code = '(add (div (calldatasize) 32) 1)' 
+  else if (val == "_input_byte_count")
+    code = '(calldatasize)' 
+  else 
+    code = '(' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
@@ -244,7 +273,8 @@ Blockly.LLL['LLL_load'] = function(block) {
   //var code = 
   if (place=='sload') code = '@@' + slot
   if (place=='mload') code = '@' + slot
-  if (place=='calldataload') code = '('+ place + ' ' + slot + ')'
+  if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
+  if (place=='_input_load_bytes') code = '(calldataload ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
 

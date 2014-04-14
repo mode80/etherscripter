@@ -18,34 +18,34 @@ var samples = {
 
 key_value_publisher: fnCommentToString(function(){/*!
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="LLL_store" id="54" inline="true" x="25" y="171">
+  <block type="LLL_store" id="81" inline="true" x="25" y="171">
     <field name="PLACE">sstore</field>
     <value name="VAL">
-      <block type="LLL_tx" id="55">
+      <block type="LLL_tx" id="82">
         <field name="PROP">caller</field>
       </block>
     </value>
     <value name="SLOT">
-      <block type="LLL_val" id="56">
+      <block type="LLL_val" id="83">
         <field name="VAL">69</field>
       </block>
     </value>
     <next>
-      <block type="LLL_when" id="57" inline="false">
+      <block type="LLL_when" id="84" inline="false">
         <field name="WORD">when</field>
         <value name="COND">
-          <block type="LLL_compare" id="58" inline="true">
+          <block type="LLL_compare" id="85" inline="true">
             <field name="OP">=</field>
             <value name="A">
-              <block type="LLL_tx" id="59">
+              <block type="LLL_tx" id="86">
                 <field name="PROP">caller</field>
               </block>
             </value>
             <value name="B">
-              <block type="LLL_load" id="60" inline="true">
+              <block type="LLL_load" id="87" inline="true">
                 <field name="PLACE">sload</field>
                 <value name="SLOT">
-                  <block type="LLL_val" id="61">
+                  <block type="LLL_val" id="88">
                     <field name="VAL">69</field>
                   </block>
                 </value>
@@ -54,48 +54,48 @@ key_value_publisher: fnCommentToString(function(){/*!
           </block>
         </value>
         <statement name="THEN">
-          <block type="LLL_forloop" id="62" inline="false">
+          <block type="LLL_forloop" id="89" inline="false">
             <value name="COND">
-              <block type="LLL_compare" id="63" inline="true">
+              <block type="LLL_compare" id="90" inline="true">
                 <field name="OP">&lt;</field>
                 <value name="A">
-                  <block type="LLL_load" id="64" inline="true">
+                  <block type="LLL_load" id="91" inline="true">
                     <field name="PLACE">mload</field>
                     <value name="SLOT">
-                      <block type="LLL_val" id="65">
+                      <block type="LLL_val" id="92">
                         <field name="VAL">i</field>
                       </block>
                     </value>
                   </block>
                 </value>
                 <value name="B">
-                  <block type="LLL_tx" id="66">
-                    <field name="PROP">calldatasize</field>
+                  <block type="LLL_tx" id="93">
+                    <field name="PROP">_input_byte_count</field>
                   </block>
                 </value>
               </block>
             </value>
             <statement name="LOOP">
-              <block type="LLL_store" id="67" inline="true">
+              <block type="LLL_store" id="94" inline="true">
                 <field name="PLACE">sstore</field>
                 <value name="VAL">
-                  <block type="LLL_load" id="68" inline="true">
-                    <field name="PLACE">calldataload</field>
+                  <block type="LLL_load" id="95" inline="true">
+                    <field name="PLACE">_input_load_bytes</field>
                     <value name="SLOT">
-                      <block type="LLL_math" id="69" inline="true">
+                      <block type="LLL_math" id="96" inline="true">
                         <field name="OP">+</field>
                         <value name="A">
-                          <block type="LLL_load" id="70" inline="true">
+                          <block type="LLL_load" id="97" inline="true">
                             <field name="PLACE">mload</field>
                             <value name="SLOT">
-                              <block type="LLL_val" id="71">
+                              <block type="LLL_val" id="98">
                                 <field name="VAL">i</field>
                               </block>
                             </value>
                           </block>
                         </value>
                         <value name="B">
-                          <block type="LLL_val" id="72">
+                          <block type="LLL_val" id="99">
                             <field name="VAL">32</field>
                           </block>
                         </value>
@@ -104,13 +104,13 @@ key_value_publisher: fnCommentToString(function(){/*!
                   </block>
                 </value>
                 <value name="SLOT">
-                  <block type="LLL_load" id="73" inline="true">
-                    <field name="PLACE">calldataload</field>
+                  <block type="LLL_load" id="100" inline="true">
+                    <field name="PLACE">_input_load_bytes</field>
                     <value name="SLOT">
-                      <block type="LLL_load" id="74" inline="true">
+                      <block type="LLL_load" id="101" inline="true">
                         <field name="PLACE">mload</field>
                         <value name="SLOT">
-                          <block type="LLL_val" id="75">
+                          <block type="LLL_val" id="102">
                             <field name="VAL">i</field>
                           </block>
                         </value>
@@ -121,30 +121,30 @@ key_value_publisher: fnCommentToString(function(){/*!
               </block>
             </statement>
             <statement name="AFTER_EACH">
-              <block type="LLL_store" id="76" inline="true">
+              <block type="LLL_store" id="103" inline="true">
                 <field name="PLACE">mstore</field>
                 <value name="VAL">
-                  <block type="LLL_math" id="77" inline="true">
+                  <block type="LLL_math" id="104" inline="true">
                     <field name="OP">+</field>
                     <value name="A">
-                      <block type="LLL_load" id="78" inline="true">
+                      <block type="LLL_load" id="105" inline="true">
                         <field name="PLACE">mload</field>
                         <value name="SLOT">
-                          <block type="LLL_val" id="79">
+                          <block type="LLL_val" id="106">
                             <field name="VAL">i</field>
                           </block>
                         </value>
                       </block>
                     </value>
                     <value name="B">
-                      <block type="LLL_val" id="80">
+                      <block type="LLL_val" id="107">
                         <field name="VAL">64</field>
                       </block>
                     </value>
                   </block>
                 </value>
                 <value name="SLOT">
-                  <block type="LLL_val" id="81">
+                  <block type="LLL_val" id="108">
                     <field name="VAL">i</field>
                   </block>
                 </value>
@@ -155,8 +155,8 @@ key_value_publisher: fnCommentToString(function(){/*!
       </block>
     </next>
   </block>
-</xml>
-*/}),
+</xml>*/
+}),
 
 
 }

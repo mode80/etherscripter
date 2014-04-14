@@ -27,7 +27,14 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="active dropdown" >
-          <a href="." class="dropdown-toggle" data-toggle="dropdown">Editor<b class="caret"></b></a>
+          <a href="." class="dropdown-toggle" data-toggle="dropdown">Editor</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown" >
+          <a href="." class="dropdown-toggle" data-toggle="dropdown">
+            View<b class="caret"></b>
+          </a>
           <ul class="dropdown-menu" >
             <li><a href="#" onclick="showBLL()" ontouchstart="showBLL()">Show Blocks</a></li>
             <li><a href="#" onclick="showXML()" ontouchstart="showXML()">Show XML</a></li>
@@ -36,17 +43,17 @@
             <li><a href="#" onclick="clearCanvas()" ontouchstart="clearCanvas()">Clear Canvas</a></li>
           </ul>
         </li>
-        <li><a href="what_is_ethereum.html">About</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" style="padding-right:50px" data-toggle="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             Samples<b class="caret"></b>
           </a>
           <ul class="dropdown-menu" >
             <li><a href="#" onclick="loadSample(event)" id="key_value_publisher">Key Value Publisher</a></li>
           </ul>
         </li>
+        <li><a href="what_is_ethereum.html">About</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="padding-right:20px">
       </ul>
     </div>
   </div>
@@ -72,9 +79,28 @@
   </div>
 
   <xml id="toolbox" style="display: none">
+<!--
     <block type="LLL_comment"></block>
+    <block type="LLL_mstore">
+      <value name="SLOT">
+        <block type="LLL_val">
+          <field name="VAL"></field>
+        </block>
+      </value>
+    </block>
+    <block type="LLL_sstore">
+      <value name="SLOT">
+        <block type="LLL_val">
+          <field name="VAL"></field>
+        </block>
+      </value>
+    </block>
+    <block type="LLL_memval"></block>
+    <block type="LLL_storeval"></block>
+    <block type="LLL_textval"></block>
+-->
     <block type="LLL_val">
-      <field name="VAL">0</field>
+      <field name="VAL"></field>
     </block>
     <block type="LLL_currency">
       <field name="DENOM">ether</field>
@@ -103,6 +129,7 @@
     <block type="LLL_balance"></block>
     <block type="LLL_hash"></block>
     <block type="LLL_call"></block>
+    <block type="LLL_msg"></block>
     <block type="LLL_return"></block>
     <block type="LLL_forloop"></block>
   </xml>
