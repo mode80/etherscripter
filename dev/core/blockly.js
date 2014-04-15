@@ -191,7 +191,7 @@ Blockly.DRAG_RADIUS = 5;
  * Maximum misalignment between connections for them to snap together.
  * @const
  */
-Blockly.SNAP_RADIUS = 15;
+Blockly.SNAP_RADIUS = 20;
 
 /**
  * Delay in ms between trigger and bumping unconnected block out of alignment.
@@ -228,8 +228,8 @@ Blockly.svgSize = function() {
 };
 
 /**
- * Size the SVG image to completely fill its container.  Record both
- * the height/width and the absolute position of the SVG image.
+ * Size the SVG image to completely fill its container.
+ * Record the height/width of the SVG image.
  */
 Blockly.svgResize = function() {
   var svg = Blockly.svg;
@@ -265,9 +265,9 @@ Blockly.onMouseDown_ = function(e) {
     // Clicking on the document clears the selection.
     Blockly.selected.unselect();
   }
-  if (Blockly.isRightButton(e)) {
+  if (e.target == Blockly.svg && Blockly.isRightButton(e)) {
     // Right-click.
-    Blockly.showContextMenu_(Blockly.mouseToSvg(e));
+    Blockly.showContextMenu_(e);
   } else if ((Blockly.readOnly || isTargetSvg) &&
              Blockly.mainWorkspace.scrollbar) {
     // If the workspace is editable, only allow dragging when gripping empty
@@ -284,7 +284,7 @@ Blockly.onMouseDown_ = function(e) {
 };
 
 /**
- * Handle a mouse-up on SVG drawing surface.
+ * Handle a mouse-up anywhere on the page.
  * @param {!Event} e Mouse up event.
  * @private
  */
@@ -394,10 +394,10 @@ Blockly.copy_ = function(block) {
 
 /**
  * Show the context menu for the workspace.
- * @param {!Object} xy Coordinates of mouse click, contains x and y properties.
+ * @param {!Event} e Mouse event.
  * @private
  */
-Blockly.showContextMenu_ = function(xy) {
+Blockly.showContextMenu_ = function(e) {
   if (Blockly.readOnly) {
     return;
   }
@@ -436,13 +436,7 @@ Blockly.showContextMenu_ = function(xy) {
     options.push(expandOption);
   }
 
-  // Option to get help.
-  var helpOption = {enabled: false};
-  helpOption.text = Blockly.Msg.HELP;
-  helpOption.callback = function() {};
-  options.push(helpOption);
-
-  Blockly.ContextMenu.show(xy, options);
+  Blockly.ContextMenu.show(e, options);
 };
 
 /**
@@ -463,8 +457,6 @@ Blockly.onContextMenu_ = function(e) {
  */
 Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.Tooltip.hide();
-  Blockly.ContextMenu.hide();
-  Blockly.FieldDropdown.hide();
   Blockly.WidgetDiv.hide();
   if (!opt_allowToolbox &&
       Blockly.Toolbox.flyout_ && Blockly.Toolbox.flyout_.autoClose) {
@@ -483,7 +475,11 @@ Blockly.removeAllRanges = function() {
     if (sel && sel.removeAllRanges) {
       sel.removeAllRanges();
       window.setTimeout(function() {
-          window.getSelection().removeAllRanges();
+          try {
+            window.getSelection().removeAllRanges();
+          } catch (e) {
+            // MSIE throws 'error 800a025e' here.
+          }
         }, 0);
     }
   }
@@ -523,11 +519,21 @@ Blockly.loadAudio_ = function(filenames, name) {
       break;
     }
   }
-  // To force the browser to load the sound, play it, but at nearly zero volume.
   if (sound && sound.play) {
-    sound.volume = 0.01;
-    sound.play();
     Blockly.SOUNDS_[name] = sound;
+  }
+};
+
+/**
+ * Preload all the audio files so that they play quickly when asked for.
+ * @private
+ */
+Blockly.preloadAudio_ = function() {
+  for (var name in Blockly.SOUNDS_) {
+    var sound = Blockly.SOUNDS_[name];
+    sound.volume = .01;
+    sound.play();
+    sound.pause();
   }
 };
 

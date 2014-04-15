@@ -36,7 +36,10 @@ goog.provide('Blockly.Xml');
  * @return {!Element} XML document.
  */
 Blockly.Xml.workspaceToDom = function(workspace) {
-  var width = Blockly.svgSize().width;
+  var width;
+  if (Blockly.RTL) {
+    width = workspace.getMetrics().viewWidth;
+  }
   var xml = goog.dom.createDom('xml');
   var blocks = workspace.getTopBlocks(true);
   for (var i = 0, block; block = blocks[i]; i++) {
@@ -211,7 +214,10 @@ Blockly.Xml.textToDom = function(text) {
  * @param {!Element} xml XML DOM.
  */
 Blockly.Xml.domToWorkspace = function(workspace, xml) {
-  var width = Blockly.svgSize().width;
+  var width
+  if (Blockly.RTL) {
+    width = workspace.getMetrics().viewWidth;
+  }
   for (var x = 0, xmlChild; xmlChild = xml.childNodes[x]; x++) {
     if (xmlChild.nodeName.toLowerCase() == 'block') {
       var block = Blockly.Xml.domToBlock(workspace, xmlChild);
@@ -315,7 +321,11 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
         block.setCommentText(xmlChild.textContent);
         var visible = xmlChild.getAttribute('pinned');
         if (visible) {
-          block.comment.setVisible(visible == 'true');
+          // Give the renderer a millisecond to render and position the block
+          // before positioning the comment bubble.
+          setTimeout(function() {
+            block.comment.setVisible(visible == 'true');
+          }, 1);
         }
         var bubbleW = parseInt(xmlChild.getAttribute('w'), 10);
         var bubbleH = parseInt(xmlChild.getAttribute('h'), 10);
@@ -370,6 +380,10 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
     }
   }
 
+  var collapsed = xmlBlock.getAttribute('collapsed');
+  if (collapsed) {
+    block.setCollapsed(collapsed == 'true');
+  }
   var next = block.nextConnection && block.nextConnection.targetBlock();
   if (next) {
     // Next block in a stack needs to square off its corners.
@@ -377,10 +391,6 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
     next.render();
   } else {
     block.render();
-  }
-  var collapsed = xmlBlock.getAttribute('collapsed');
-  if (collapsed) {
-    block.setCollapsed(collapsed == 'true');
   }
   return block;
 };

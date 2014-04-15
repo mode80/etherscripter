@@ -362,6 +362,11 @@ Blockly.Block.prototype.dispose = function(healStack, animate,
     Blockly.terminateDrag_();
   }
 
+  // If this block has a context menu open, close it.
+  if (Blockly.ContextMenu.currentBlock == this) {
+    Blockly.ContextMenu.hide();
+  }
+
   // First, dispose of all my children.
   for (var x = this.childBlocks_.length - 1; x >= 0; x--) {
     this.childBlocks_[x].dispose(false);
@@ -472,32 +477,21 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
 };
 
 /**
- * Returns a bounding box describing the dimensions of this block.
+ * Returns a bounding box describing the dimensions of this block
+ * and any blocks stacked below it.
  * @return {!Object} Object with height and width properties.
  */
 Blockly.Block.prototype.getHeightWidth = function() {
-  try {
-    var bBox = this.getSvgRoot().getBBox();
-    var height = bBox.height;
-  } catch (e) {
-    // Firefox has trouble with hidden elements (Bug 528969).
-    return {height: 0, width: 0};
+  var height = this.svg_.height;
+  var width = this.svg_.width;
+  // Recursively add size of subsequent blocks.
+  var nextBlock = this.nextConnection && this.nextConnection.targetBlock();
+  if (nextBlock) {
+    var nextHeightWidth = nextBlock.getHeightWidth();
+    height += nextHeightWidth.height - 4;  // Height of tab.
+    width = Math.max(width, nextHeightWidth.width);
   }
-  if (Blockly.BROKEN_CONTROL_POINTS) {
-    /* HACK:
-     WebKit bug 67298 causes control points to be included in the reported
-     bounding box.  The render functions (below) add two 5px spacer control
-     points that we need to subtract.
-    */
-    height -= 10;
-    if (this.nextConnection) {
-      // Bottom control point partially masked by lower tab.
-      height += 4;
-    }
-  }
-  // Subtract one from the height due to the shadow.
-  height -= 1;
-  return {height: height, width: bBox.width};
+  return {height: height, width: width};
 };
 
 /**
@@ -516,7 +510,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   Blockly.hideChaff();
   if (Blockly.isRightButton(e)) {
     // Right-click.
-    this.showContextMenu_(Blockly.mouseToSvg(e));
+    this.showContextMenu_(e);
   } else if (!this.isMovable()) {
     // Allow unmovable blocks to be selected and context menued, but not
     // dragged.  Let this event bubble up to document, so the workspace may be
@@ -636,10 +630,10 @@ Blockly.Block.prototype.duplicate_ = function() {
 
 /**
  * Show the context menu for this block.
- * @param {!Object} xy Coordinates of mouse click, contains x and y properties.
+ * @param {!Event} e Mouse event.
  * @private
  */
-Blockly.Block.prototype.showContextMenu_ = function(xy) {
+Blockly.Block.prototype.showContextMenu_ = function(e) {
   if (Blockly.readOnly || !this.contextMenu) {
     return;
   }
@@ -758,7 +752,8 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
     this.customContextMenu(options);
   }
 
-  Blockly.ContextMenu.show(xy, options);
+  Blockly.ContextMenu.show(e, options);
+  Blockly.ContextMenu.currentBlock = this;
 };
 
 /**
@@ -1088,7 +1083,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
 Blockly.Block.prototype.getDescendants = function() {
   var blocks = [this];
   for (var child, x = 0; child = this.childBlocks_[x]; x++) {
-    blocks = blocks.concat(child.getDescendants());
+    blocks.push.apply(child.getDescendants());
   }
   return blocks;
 };
@@ -1428,7 +1423,7 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
   var renderList = [];
   // Show/hide the inputs.
   for (var x = 0, input; input = this.inputList[x]; x++) {
-    renderList = renderList.concat(input.setVisible(!collapsed));
+    renderList.push.apply(input.setVisible(!collapsed));
   }
 
   var COLLAPSED_INPUT_NAME = '_TEMP_COLLAPSED_INPUT';
