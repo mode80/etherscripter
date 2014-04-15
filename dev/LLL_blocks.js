@@ -31,72 +31,72 @@ var COLOUR_COLOR = 58
 // Experimental POC-4 blocks 
 //
 
-// Blockly.Blocks['LLL_mstore'] = {
-//   init: function() {
-//     this.setColour(LIST_COLOR)
-//     this.appendValueInput('SLOT')
-//         .appendField('set @')
-//     this.appendValueInput('VAL')
-//       .appendField('=')
-//     this.setInputsInline(true)
-//     this.setPreviousStatement(true)
-//     this.setNextStatement(true)
-//   }
-// }
+Blockly.Blocks['LLL_mstore'] = {
+  init: function() {
+    this.setColour(LIST_COLOR)
+    this.appendValueInput('SLOT')
+        .appendField('set @')
+    this.appendValueInput('VAL')
+      .appendField('=')
+    this.setInputsInline(true)
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
+  }
+}
 
-// Blockly.Blocks['LLL_sstore'] = {
-//   init: function() {
-//     this.setColour(LIST_COLOR)
-//     this.appendValueInput('SLOT')
-//         .appendField('store @@')
-//     this.appendValueInput('VAL')
-//       .appendField('=')
-//     this.setInputsInline(true)
-//     this.setPreviousStatement(true)
-//     this.setNextStatement(true)
-//   }
-// }
+Blockly.Blocks['LLL_sstore'] = {
+  init: function() {
+    this.setColour(LIST_COLOR)
+    this.appendValueInput('SLOT')
+        .appendField('store @@')
+    this.appendValueInput('VAL')
+      .appendField('=')
+    this.setInputsInline(true)
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
+  }
+}
 
 
 
-// Blockly.Blocks['LLL_memval'] = {
-//   // validating input block for LLL-legal values
-//   init: function() {
-//     var validator = function(given) {return String(given) }
-//     this.setColour(VALUE_COLOR)
-//     this.appendDummyInput()
-//         .appendField('@')
-//         .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
-//     this.setOutput(true)
-//   }
-// }
+Blockly.Blocks['LLL_memval'] = {
+  // validating input block for LLL-legal values
+  init: function() {
+    var validator = function(given) {return String(given) }
+    this.setColour(VALUE_COLOR)
+    this.appendDummyInput()
+        .appendField('@')
+        .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
+    this.setOutput(true)
+  }
+}
 
-// Blockly.Blocks['LLL_storeval'] = {
-//   // validating input block for LLL-legal values
-//   init: function() {
-//     var validator = function(given) {return String(given) }
-//     this.setColour(VALUE_COLOR)
-//     this.appendDummyInput()
-//         .appendField('@@')
-//         .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
-//     this.setOutput(true)
-//   }
-// }
+Blockly.Blocks['LLL_storeval'] = {
+  // validating input block for LLL-legal values
+  init: function() {
+    var validator = function(given) {return String(given) }
+    this.setColour(VALUE_COLOR)
+    this.appendDummyInput()
+        .appendField('@@')
+        .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
+    this.setOutput(true)
+  }
+}
 
-// Blockly.Blocks['LLL_textval'] = {
-//   // validating input block for LLL-legal values
-//   init: function() {
-//     var validator = function(given) {
-//       return String(given) 
-//     }
-//     this.setColour(VALUE_COLOR)
-//     this.appendDummyInput()
-//         .appendField('"')
-//         .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
-//         .appendField('"')
-//     this.setOutput(true)
-//   }
-// }
+Blockly.Blocks['LLL_textval'] = {
+  // validating input block for LLL-legal values
+  init: function() {
+    var validator = function(given) {
+      return String(given) 
+    }
+    this.setColour(VALUE_COLOR)
+    this.appendDummyInput()
+        .appendField('"')
+        .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
+        .appendField('"')
+    this.setOutput(true)
+  }
+}
 
 ///////
 // New POC-4 blocks 
@@ -218,14 +218,14 @@ Blockly.Blocks['LLL_forloop'] = {
   init: function() {
     this.setColour(LOOP_COLOR);
     this.appendStatementInput('FIRST')
-        .appendField('one time do')
+        .appendField('once do')
     this.appendValueInput('COND')
         .setCheck('Boolean')
-        .appendField('then as long as')
+        .appendField('then while')
     this.appendStatementInput('LOOP')
-        .appendField('repeatedly do')
+        .appendField('repeatedly')
     this.appendStatementInput('AFTER_EACH')
-        .appendField('& each loop do')
+        .appendField('& each time')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
   }

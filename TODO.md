@@ -3,8 +3,8 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* enter gav's POC-4 samples to test LLL output
 * implement block selector menu for toolbox to leave yucky blocks out by default
+* enter gav's POC-4 samples to test LLL output
 * implement (but hide by default XOR, BYTE) 
 * release 0.4
 * save functionality using appengine(?) cloud storage

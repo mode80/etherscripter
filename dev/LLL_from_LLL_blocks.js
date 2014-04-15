@@ -169,7 +169,7 @@ Blockly.LLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.LLL.statementToCode(block, 'INIT');
   var body = Blockly.LLL.statementToCode(block, 'BODY');
-  return '{\n\n' + init + '\n}\n\n{\n\n' + body + '\n}'
+  return '{ ;; INIT\n\n' + init + '\n}\n\n{ ;; BODY\n\n' + body + '\n}'
 };
 
 Blockly.LLL['LLL_whileloop'] = function(block) {
@@ -285,7 +285,7 @@ Blockly.LLL['LLL_store'] = function(block) {
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
   slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
-  var code = '('+ place + ' ' + slot + ' ' + val + ')\n'
+  var code = '('+ place + ' ' + slot + ' ' + val + ')'
   // if (place=='sstore') code = '[[' + slot + ']] ' + val
   // if (place=='mstore') code = '[' + slot + '] ' + val
   return code + '\n'
