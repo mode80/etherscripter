@@ -16,7 +16,7 @@
 
 <!-- Menu Bar -->
   <div class="navbar navbar-default navbar-fixed-top navbar-left" role="navigation">
-    <a class="navbar-brand" href="#">EtherScripter</a>
+    <a class="navbar-brand" href="#" style="margin-right:100px">EtherScripter</a>
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -25,10 +25,11 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav"> 
-        <!-- Editor -->
+    <div class="collapse navbar-collapse" >
+      <ul class="nav navbar-nav "> 
+        <!-- Editor
         <li class="active dropdown"><a href="." class="dropdown-toggle" data-toggle="dropdown">Editor</a></li>
+        -->
         <!-- View -->
         <li class="dropdown" > 
           <a href="." class="dropdown-toggle" data-toggle="dropdown">View<b class="caret"></b> </a>
@@ -44,9 +45,36 @@
         <li class="dropdown" > 
           <a href="." class="dropdown-toggle" data-toggle="dropdown">Toolbox<b class="caret"></b> </a>
           <ul class="dropdown-menu" >
-            <li onclick="toggleTool(event)"><a href="#">Block 1</a></li>
-            <li onclick="toggleTool(event)"><a href="#">Block 2</a></li>
-            <li onclick="toggleTool(event)"><a href="#">Block 3</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">mstore</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">sstore</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">mval</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">sval</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">textval</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">comment</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">val</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">currency</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">tx</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">contract</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">blockinfo</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">math</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">compare</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">logic</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">store</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">load</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">spend</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">stop</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">suicide</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">when</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">if</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">whileloop</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">init</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">singleop</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">balance</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">hash</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">call</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">msg</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">return</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">forloop</a></li>
           </ul>
         </li>
         <!-- Samples -->
@@ -104,14 +132,12 @@
         </block>
       </value>
     </block>
-    <block type="LLL_memval" active="true"></block>
-    <block type="LLL_storeval" active="true"></block>
-    <block type="LLL_textval" active="false"></block>
+    <block type="LLL_mval" active="true"></block>
+    <block type="LLL_sval" active="true"></block>
+    <block type="LLL_textval" active="true"></block>
 
     <block type="LLL_comment" active="true"></block>
-    <block type="LLL_val" active="true">
-      <field name="VAL"></field>
-    </block>
+    <block type="LLL_val" active="true"></block>
     <block type="LLL_currency" active="true">
       <field name="DENOM">ether</field>
       <value name="AMT">

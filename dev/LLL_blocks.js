@@ -18,14 +18,14 @@ goog.require('Blockly.Blocks')
 
 
 var VALUE_COLOR = 190
-var LIST_COLOR = 260
+var VAR_COLOR = 260
 var FLOW_COLOR = 210 
 var LOOP_COLOR = 160
 var MATH_COLOR = 230 
 var PROCEDURE_COLOR = 290
-var TEXT_COLOR = 160
 var STATEMENT_COLOR = 330
-var COLOUR_COLOR = 58 
+var OTHER_COLOR = 58 
+var UNUSED_COLOR = 160
 
 //
 // Experimental POC-4 blocks 
@@ -33,7 +33,7 @@ var COLOUR_COLOR = 58
 
 Blockly.Blocks['LLL_mstore'] = {
   init: function() {
-    this.setColour(LIST_COLOR)
+    this.setColour(VAR_COLOR)
     this.appendValueInput('SLOT')
         .appendField('set @')
     this.appendValueInput('VAL')
@@ -46,7 +46,7 @@ Blockly.Blocks['LLL_mstore'] = {
 
 Blockly.Blocks['LLL_sstore'] = {
   init: function() {
-    this.setColour(LIST_COLOR)
+    this.setColour(VAR_COLOR)
     this.appendValueInput('SLOT')
         .appendField('store @@')
     this.appendValueInput('VAL')
@@ -57,28 +57,24 @@ Blockly.Blocks['LLL_sstore'] = {
   }
 }
 
+var valValidator = function(given) {return given.replace(/[^a-z0-9_]/gi,'')}
 
-
-Blockly.Blocks['LLL_memval'] = {
-  // validating input block for LLL-legal values
+Blockly.Blocks['LLL_mval'] = {
   init: function() {
-    var validator = function(given) {return String(given) }
-    this.setColour(VALUE_COLOR)
+    this.setColour(VAR_COLOR)
     this.appendDummyInput()
         .appendField('@')
-        .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
+        .appendField(new Blockly.FieldTextInput('', valValidator ), 'VAL')
     this.setOutput(true)
   }
 }
 
-Blockly.Blocks['LLL_storeval'] = {
-  // validating input block for LLL-legal values
+Blockly.Blocks['LLL_sval'] = {
   init: function() {
-    var validator = function(given) {return String(given) }
-    this.setColour(VALUE_COLOR)
+    this.setColour(VAR_COLOR)
     this.appendDummyInput()
         .appendField('@@')
-        .appendField(new Blockly.FieldTextInput('', validator ), 'VAL')
+        .appendField(new Blockly.FieldTextInput('', valValidator ), 'VAL')
     this.setOutput(true)
   }
 }
@@ -86,9 +82,7 @@ Blockly.Blocks['LLL_storeval'] = {
 Blockly.Blocks['LLL_textval'] = {
   // validating input block for LLL-legal values
   init: function() {
-    var validator = function(given) {
-      return String(given) 
-    }
+    var validator = function(given) {return given.substr(0,32)}
     this.setColour(VALUE_COLOR)
     this.appendDummyInput()
         .appendField('"')
@@ -177,7 +171,7 @@ Blockly.Blocks['LLL_hash'] = {
     this.setColour(MATH_COLOR);
     this.setOutput(true)
     this.appendDummyInput()
-      .appendField('ID for data')
+      .appendField('fingerprint for data')
     this.appendValueInput('DATA_START')
       .appendField('from start slot');
     this.appendValueInput('DATA_END')
@@ -526,7 +520,7 @@ Blockly.Blocks['LLL_load'] = {
     ['data @ fixed slot', 'sload'],
     ['data @ input slot', '_input_load_slots'],
     ['data @ input byte', '_input_load_bytes']]
-    this.setColour(LIST_COLOR);
+    this.setColour(VAR_COLOR);
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
     this.appendValueInput('SLOT')
@@ -550,7 +544,7 @@ Blockly.Blocks['LLL_balance'] = {
 
 Blockly.Blocks['LLL_comment'] = {
   init: function() {
-    this.setColour(COLOUR_COLOR);
+    this.setColour(OTHER_COLOR);
     this.appendDummyInput()
       .appendField('note:')
       .appendField(new Blockly.FieldTextInput(''), 'NOTE')
@@ -584,7 +578,7 @@ Blockly.Blocks['LLL_store'] = {
     var PLACES = 
 	  [['temp slot', 'mstore'],
     ['fixed slot', 'sstore']]
-    this.setColour(LIST_COLOR);
+    this.setColour(VAR_COLOR);
     this.appendValueInput('VAL')
       .appendField('put')
     this.appendValueInput('SLOT')

@@ -20,6 +20,56 @@ goog.require('Blockly.LLL');
 // implement samples PoC4 samples to test
 // blockly set/get variables instead of quoted strings hack?
 
+Blockly.LLL['LLL_mstore'] = function(block) {
+  // mstore statement
+  var order = Blockly.LLL.ORDER_NONE;
+  var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
+  var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
+  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
+  code = '[' + slot + ']:' + val
+  return code + '\n'
+};
+
+Blockly.LLL['LLL_sstore'] = function(block) {
+  // sstore statement
+  var order = Blockly.LLL.ORDER_NONE;
+  var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
+  var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
+  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
+  code = '[[' + slot + ']]:' + val
+  return code + '\n'
+};
+
+Blockly.LLL['LLL_mval'] = function(block) {
+  // gets value from a memory slot 
+  var order = Blockly.LLL.ORDER_NONE;
+  var val = block.getFieldValue('VAL') || 0  
+  var code = '@' + val
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
+Blockly.LLL['LLL_sval'] = function(block) {
+  // gets value from a storage slot 
+  var order = Blockly.LLL.ORDER_NONE;
+  var val = block.getFieldValue('VAL') || 0  
+  var code = '@@' + val
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
+Blockly.LLL['LLL_textval'] = function(block) {
+  // gets value from a memory slot 
+  var order = Blockly.LLL.ORDER_NONE;
+  var val = block.getFieldValue('VAL') || 0  
+  var code = '"' + val + '"'
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
+
+Blockly.LLL['LLL_comment'] = function(block) {
+  // a LLL comment  
+  return ';; ' + block.getFieldValue('NOTE') + '\n' 
+};
+
 
 Blockly.LLL['LLL_spend'] = function(block) {
   // spend statement (a stripped version of call that just spends)

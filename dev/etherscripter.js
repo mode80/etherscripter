@@ -109,6 +109,7 @@ function activeToolboxString(){
 function toggleTool(e) {
   var menuitem = $(e.currentTarget) 
   menuitem.toggleClass('active')  
-  $('#toolbox block').attr('active',menuitem.hasClass('active'))
-  //Blockly.updateToobox(activeToolboxString())
+  $('#toolbox block[type="LLL_' +menuitem.text()+ '"]')
+    .attr('active',menuitem.hasClass('active'))
+  Blockly.updateToolbox(activeToolboxString())
 }
