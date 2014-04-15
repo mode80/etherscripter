@@ -270,7 +270,7 @@ Blockly.LLL['LLL_load'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
-  //var code = 
+  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   if (place=='sload') code = '@@' + slot
   if (place=='mload') code = '@' + slot
   if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
@@ -284,6 +284,7 @@ Blockly.LLL['LLL_store'] = function(block) {
   var place = block.getFieldValue('PLACE')  
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
+  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   var code = '('+ place + ' ' + slot + ' ' + val + ')\n'
   // if (place=='sstore') code = '[[' + slot + ']] ' + val
   // if (place=='mstore') code = '[' + slot + '] ' + val
