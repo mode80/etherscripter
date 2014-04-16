@@ -44,37 +44,41 @@
         <!-- Toolbox -->
         <li class="dropdown" > 
           <a href="." class="dropdown-toggle" data-toggle="dropdown">Toolbox<b class="caret"></b> </a>
-          <ul class="dropdown-menu" >
-            <li onclick="toggleTool(event)" class="active"><a href="#">comment</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">val</a></li>
-            <li onclick="toggleTool(event)" class=""><a href="#">textval</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">currency</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">tx</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">contract</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">blockinfo</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">math</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">compare</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">logic</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">store</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">load</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">mstore</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">mval</a></li>
-            <li onclick="toggleTool(event)" class=""><a href="#">sstore</a></li>
-            <li onclick="toggleTool(event)" class=""><a href="#">sval</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">spend</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">stop</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">suicide</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">when</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">if</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">whileloop</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">init</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">singleop</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">balance</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">hash</a></li>
-            <li onclick="toggleTool(event)" class=""><a href="#">call</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">msg</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">return</a></li>
-            <li onclick="toggleTool(event)" class=""><a href="#">forloop</a></li>
+          <ul class="dropdown-menu" id="toolboxmenu" >
+            <li onclick="defaultToolsOn()" id="defaultson"><a href="#">Enable Defaults</a></li>
+            <li onclick="allToolsOn()" id="allon"><a href="#">Enable All</a></li>
+            <li class="divider"></li> 
+            <li onclick="toggleTool(event)" id="comment"><a href="#">comment</a></li>
+            <li onclick="toggleTool(event)" id="val"><a href="#">value</a></li>
+            <li onclick="toggleTool(event)" id="textval"><a href="#">text value</a></li>
+            <li onclick="toggleTool(event)" id="currency"><a href="#">currency</a></li>
+            <li onclick="toggleTool(event)" id="tx"><a href="#">tx info</a></li>
+            <li onclick="toggleTool(event)" id="contract"><a href="#">contract info</a></li>
+            <li onclick="toggleTool(event)" id="blockinfo"><a href="#">block info</a></li>
+            <li onclick="toggleTool(event)" id="math"><a href="#">math</a></li>
+            <li onclick="toggleTool(event)" id="compare"><a href="#">compare</a></li>
+            <li onclick="toggleTool(event)" id="logic"><a href="#">logic</a></li>
+            <li onclick="toggleTool(event)" id="store"><a href="#">store</a></li>
+            <li onclick="toggleTool(event)" id="load"><a href="#">load</a></li>
+            <li onclick="toggleTool(event)" id="mstore"><a href="#">memory store</a></li>
+            <li onclick="toggleTool(event)" id="mval"><a href="#">memory value</a></li>
+            <li onclick="toggleTool(event)" id="sstore"><a href="#">storage store</a></li>
+            <li onclick="toggleTool(event)" id="sval"><a href="#">storage value</a></li>
+            <li onclick="toggleTool(event)" id="spend"><a href="#">spend</a></li>
+            <li onclick="toggleTool(event)" id="stop"><a href="#">stop</a></li>
+            <li onclick="toggleTool(event)" id="suicide"><a href="#">self destruct</a></li>
+            <li onclick="toggleTool(event)" id="when"><a href="#">when</a></li>
+            <li onclick="toggleTool(event)" id="if"><a href="#">if</a></li>
+            <li onclick="toggleTool(event)" id="whileloop"><a href="#">while loop</a></li>
+            <li onclick="toggleTool(event)" id="init"><a href="#">init</a></li>
+            <li onclick="toggleTool(event)" id="prefixop"><a href="#">prefix</a></li>
+            <li onclick="toggleTool(event)" id="byte"><a href="#">byte</a></li>
+            <li onclick="toggleTool(event)" id="balance"><a href="#">balance</a></li>
+            <li onclick="toggleTool(event)" id="call"><a href="#">call</a></li>
+            <li onclick="toggleTool(event)" id="msg"><a href="#">message</a></li>
+            <li onclick="toggleTool(event)" id="return"><a href="#">reply</a></li>
+            <li onclick="toggleTool(event)" id="hash"><a href="#">hash</a></li>
+            <li onclick="toggleTool(event)" id="forloop"><a href="#">for loop</a></li>
           </ul>
         </li>
         <!-- Samples -->
@@ -117,37 +121,38 @@
   </div>
 
 <!-- Toolbox --> 
-  <xml id="toolbox" style="display: none">
-    <block type="LLL_comment" active="true"></block>
-    <block type="LLL_val" active="true"></block>
-    <block type="LLL_textval" active="false"></block>
-    <block type="LLL_currency" active="true"> <field name="DENOM">ether</field> <value name="AMT"> <block type="LLL_val"> <field name="VAL">0</field> </block> </value> </block>
-    <block type="LLL_tx" active="true"></block>
-    <block type="LLL_contract" active="true"></block>
-    <block type="LLL_blockinfo" active="true"></block>
-    <block type="LLL_math" active="true"></block>
-    <block type="LLL_compare" active="true"></block>
-    <block type="LLL_logic" active="true"></block>
-    <block type="LLL_store" active="true"></block>
-    <block type="LLL_load" active="true"></block>
-    <block type="LLL_mstore" active="true"></block>
-    <block type="LLL_mval" active="true"></block>
-    <block type="LLL_sstore" active="false"></block>
-    <block type="LLL_sval" active="false"></block>
-    <block type="LLL_spend" active="true"></block>
-    <block type="LLL_stop" active="true"></block>
-    <block type="LLL_suicide" active="true"></block>
-    <block type="LLL_when" active="true"></block>
-    <block type="LLL_if" active="true"></block>
-    <block type="LLL_whileloop" active="true"></block>
-    <block type="LLL_init" active="true"></block>
-    <block type="LLL_singleop" active="true"></block>
-    <block type="LLL_balance" active="true"></block>
-    <block type="LLL_hash" active="true"></block>
-    <block type="LLL_call" active="false"></block>
-    <block type="LLL_msg" active="true"></block>
-    <block type="LLL_return" active="true"></block>
-    <block type="LLL_forloop" active="false"></block>
+  <xml id="toolbox" style="display:none">
+    <block type="LLL_comment"></block>
+    <block type="LLL_val"></block>
+    <block type="LLL_textval"></block>
+    <block type="LLL_currency"> <field name="DENOM">ether</field> <value name="AMT"> <block type="LLL_val"> <field name="VAL">0</field> </block> </value> </block>
+    <block type="LLL_tx"></block>
+    <block type="LLL_contract"></block>
+    <block type="LLL_blockinfo"></block>
+    <block type="LLL_math"></block>
+    <block type="LLL_compare"></block>
+    <block type="LLL_logic"></block>
+    <block type="LLL_store"></block>
+    <block type="LLL_load"></block>
+    <block type="LLL_mstore"></block>
+    <block type="LLL_mval"></block>
+    <block type="LLL_sstore"></block>
+    <block type="LLL_sval"></block>
+    <block type="LLL_spend"></block>
+    <block type="LLL_stop"></block>
+    <block type="LLL_suicide"></block>
+    <block type="LLL_when"></block>
+    <block type="LLL_if"></block>
+    <block type="LLL_whileloop"></block>
+    <block type="LLL_init"></block>
+    <block type="LLL_prefixop"></block>
+    <block type="LLL_byte"></block>
+    <block type="LLL_balance"></block>
+    <block type="LLL_call"></block>
+    <block type="LLL_msg"></block>
+    <block type="LLL_return"></block>
+    <block type="LLL_hash"></block>
+    <block type="LLL_forloop"></block>
   </xml>
 
 <!-- build:js -->

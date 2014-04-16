@@ -3,13 +3,14 @@
   var unclass = goog.dom.classes.remove
   var addclass = goog.dom.classes.add
 
-
-Blockly.inject(doc.el('content_BLL'),
-  {path: './',
-   toolbox:  activeToolboxString(), //doc.el('toolbox'),
-   scrollbars: true,
-   trashcan: false 
-  });
+// init block canvas
+  Blockly.inject(doc.el('content_BLL'),
+    {path: './',
+     toolbox: doc.el('toolbox'),
+     scrollbars: true,
+     trashcan: false 
+    });
+  defaultToolsOn()
 
 // wire up local storage save/restore
   window.setTimeout(BlocklyStorage.restoreBlocks, 0);
@@ -106,10 +107,52 @@ function activeToolboxString(){
   return '<xml>' + window._toolbox_string + '</xml>'
 }
 
-function toggleTool(e) {
-  var menuitem = $(e.currentTarget) 
+function toggleTool(event) {
+  var menuitem = $(event.currentTarget) 
   menuitem.toggleClass('active')  
-  $('#toolbox block[type="LLL_' +menuitem.text()+ '"]')
+  $('#toolbox block[type="LLL_' +menuitem.attr('id')+ '"]')
     .attr('active',menuitem.hasClass('active'))
   Blockly.updateToolbox(activeToolboxString())
+  event.stopPropagation() // stop menu vanish 
+}
+
+function allToolsOn(){
+  $('#toolboxmenu>li').addClass('active')  
+  $('#toolbox block').attr('active','true')
+  Blockly.updateToolbox(activeToolboxString())
+  $('#allon, #defaultson').removeClass('active')
+  event.stopPropagation() // stop menu vanish 
+}
+
+function defaultToolsOn(){
+  //define defaults
+    defaults = [
+      "comment",
+      "val",
+      "tx",
+      "contract",
+      "blockinfo",
+      "math",
+      "compare",
+      "logic",
+      "store",
+      "load",
+      "spend",
+      "stop",
+      "when",
+      "whileloop"
+    ]
+  //reset all to off
+    $('#toolboxmenu>li').removeClass('active')  
+    $('#toolbox block').attr('active','false')
+  // turn on defaults
+    var i = defaults.length
+    while (i--){
+      var id = defaults[i]
+      $('#'+id).addClass('active')  
+      $('#toolbox block[type="LLL_'+id+'"]').attr('active','true')
+    }
+  // render result
+    Blockly.updateToolbox(activeToolboxString())
+    event.stopPropagation() // stop menu vanish 
 }

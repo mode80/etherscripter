@@ -197,7 +197,7 @@ Blockly.Blocks['LLL_return'] = {
   }
 }
 
-Blockly.Blocks['LLL_singleop'] = {
+Blockly.Blocks['LLL_prefixop'] = {
   init: function() {
     var OPERATORS =
       [['not', 'not'],
@@ -484,7 +484,9 @@ Blockly.Blocks['LLL_logic'] = {
   init: function() {
     var OPERATORS =
       [['and', 'and'],
-      ['or', 'or'] ];
+      ['or', 'or'] ,
+      ['(xor)', 'xor'] ,
+      ];
     this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
@@ -531,6 +533,18 @@ Blockly.Blocks['LLL_load'] = {
       .setCheck('Number')
     this.setOutput(true);
     this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks['LLL_byte'] = {
+  init: function() {
+    this.setColour(MATH_COLOR);
+    this.appendValueInput('BYTE_I')
+      .appendField('byte at')
+    this.appendValueInput('DATA')
+      .appendField('in')
+    this.setInputsInline(true);
+    this.setOutput(true);
   }
 };
 

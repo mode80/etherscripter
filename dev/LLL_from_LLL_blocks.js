@@ -19,6 +19,15 @@ goog.require('Blockly.LLL');
 // find missing from POC-4? items
 // implement samples PoC4 samples to test
 
+Blockly.LLL['LLL_byte'] = function(block) {
+  // returns the byte at postion BYTE in DATA 
+  var order = Blockly.LLL.ORDER_NONE;
+  var byte_i = Blockly.LLL.valueToCode(block,'BYTE_I', order) || 0 
+  var data = Blockly.LLL.valueToCode(block,'DATA', order) || 0 
+  var code = '(byte '+ byte_i + ' ' + data + ')'
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+};
+
 Blockly.LLL['LLL_mstore'] = function(block) {
   // mstore statement
   var order = Blockly.LLL.ORDER_NONE;
@@ -95,7 +104,7 @@ Blockly.LLL['LLL_spend'] = function(block) {
   return code
 };
 
-Blockly.LLL['LLL_singleop'] = function(block) {
+Blockly.LLL['LLL_prefixop'] = function(block) {
   // neg, not  and other 1-argument forms 
   var op = block.getFieldValue('OP')
   var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
