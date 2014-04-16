@@ -31,13 +31,16 @@ var UNUSED_COLOR = 160
 // Experimental POC-4 blocks 
 //
 
+var valValidator = function(given) {return given.replace(/[^a-z0-9_]/gi,'')}
+
 Blockly.Blocks['LLL_mstore'] = {
   init: function() {
     this.setColour(VAR_COLOR)
-    this.appendValueInput('SLOT')
-        .appendField('set @')
+    this.appendDummyInput()
+      .appendField('set @')
+      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SLOT')
     this.appendValueInput('VAL')
-      .appendField('=')
+      .appendField(':')
     this.setInputsInline(true)
     this.setPreviousStatement(true)
     this.setNextStatement(true)
@@ -47,17 +50,17 @@ Blockly.Blocks['LLL_mstore'] = {
 Blockly.Blocks['LLL_sstore'] = {
   init: function() {
     this.setColour(VAR_COLOR)
-    this.appendValueInput('SLOT')
-        .appendField('store @@')
+    this.appendDummyInput()
+      .appendField('store @@')
+      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SLOT')
     this.appendValueInput('VAL')
-      .appendField('=')
+      .appendField(':')
     this.setInputsInline(true)
     this.setPreviousStatement(true)
     this.setNextStatement(true)
   }
 }
 
-var valValidator = function(given) {return given.replace(/[^a-z0-9_]/gi,'')}
 
 Blockly.Blocks['LLL_mval'] = {
   init: function() {
@@ -121,7 +124,7 @@ Blockly.Blocks['LLL_blockinfo'] = {
          ['timestamp', 'timestamp'],
          ['number', 'number'],
          ['difficulty', 'difficulty'],
-         ['total gas', 'gaslimit'],
+         ['total fee budget', 'gaslimit'],
         ]
     this.setColour(VALUE_COLOR);
     this.setOutput(true);
@@ -135,10 +138,10 @@ Blockly.Blocks['LLL_tx'] = {
   init: function() {
     var VALS =
         [
-         ['value', 'callvalue'], // monetary value
+         ['amount', 'callvalue'], // monetary value
          //['origin', 'origin'], // missing from POC-4 ? 
          ['caller', 'caller'],
-         ['gas left', 'gas'],
+         ['fee budget left', 'gas'],
          ['input slot count', '_input_slot_count'],// to be derived from (calldatasize)
          ['input byte count', '_input_byte_count'],// as per (calldatasize) 
          //['gas price', 'gasprice'],// missing from POC-4 ?  
@@ -182,7 +185,7 @@ Blockly.Blocks['LLL_hash'] = {
 
 Blockly.Blocks['LLL_return'] = {
   init: function() {
-    this.setColour(STATEMENT_COLOR);
+    this.setColour(PROCEDURE_COLOR);
     this.appendDummyInput()
       .appendField('reply with data')
     this.appendValueInput('DATA_START')
@@ -516,12 +519,13 @@ Blockly.Blocks['LLL_math'] = {
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
-    [['data @ temp slot', 'mload'],
-    ['data @ fixed slot', 'sload'],
-    ['data @ input slot', '_input_load_slots'],
-    ['data @ input byte', '_input_load_bytes']]
+    [['temp slot', 'mload'],
+    ['fixed slot', 'sload'],
+    ['input slot', '_input_load_slots'],
+    ['input byte', '_input_load_bytes']]
     this.setColour(VAR_COLOR);
     this.appendDummyInput()
+      .appendField('data at')
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
     this.appendValueInput('SLOT')
       .setCheck('Number')

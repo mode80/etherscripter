@@ -45,13 +45,9 @@
         <li class="dropdown" > 
           <a href="." class="dropdown-toggle" data-toggle="dropdown">Toolbox<b class="caret"></b> </a>
           <ul class="dropdown-menu" >
-            <li onclick="toggleTool(event)" class="active"><a href="#">mstore</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">sstore</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">mval</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">sval</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">textval</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">comment</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">val</a></li>
+            <li onclick="toggleTool(event)" class=""><a href="#">textval</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">currency</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">tx</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">contract</a></li>
@@ -61,6 +57,10 @@
             <li onclick="toggleTool(event)" class="active"><a href="#">logic</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">store</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">load</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">mstore</a></li>
+            <li onclick="toggleTool(event)" class="active"><a href="#">mval</a></li>
+            <li onclick="toggleTool(event)" class=""><a href="#">sstore</a></li>
+            <li onclick="toggleTool(event)" class=""><a href="#">sval</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">spend</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">stop</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">suicide</a></li>
@@ -71,10 +71,10 @@
             <li onclick="toggleTool(event)" class="active"><a href="#">singleop</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">balance</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">hash</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">call</a></li>
+            <li onclick="toggleTool(event)" class=""><a href="#">call</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">msg</a></li>
             <li onclick="toggleTool(event)" class="active"><a href="#">return</a></li>
-            <li onclick="toggleTool(event)" class="active"><a href="#">forloop</a></li>
+            <li onclick="toggleTool(event)" class=""><a href="#">forloop</a></li>
           </ul>
         </li>
         <!-- Samples -->
@@ -83,7 +83,8 @@
             Samples<b class="caret"></b>
           </a>
           <ul class="dropdown-menu" >
-            <li><a href="#" onclick="loadSample(event)" id="key_value_publisher">Key Value Publisher</a></li>
+            <li><a href="#" onclick="loadSample(event)" id="data_feed">Data Feed</a></li>
+            <li><a href="#" onclick="loadSample(event)" id="data_feed_concise">Data Feed (concise)</a></li>
           </ul>
         </li>
         <!-- About -->
@@ -96,7 +97,7 @@
   <div style="padding-right:16px; padding-top:60px">
     <!-- Content -->
     <div id="content_BLL" 
-      style="width:100%; height:200vh" ></div>
+      style="width:100%; height:1000vh" ></div>
     <textarea id="content_XML" wrap="off" class="code" onkeydown="window.xml_dirty=true" 
       style="display:none; width:100%; height:92vh"></textarea>
     <textarea id="content_HLL"  disabled wrap="off" class="code" 
@@ -117,35 +118,10 @@
 
 <!-- Toolbox --> 
   <xml id="toolbox" style="display: none">
-
-    <block type="LLL_mstore" active="true">
-      <value name="SLOT">
-        <block type="LLL_val">
-          <field name="VAL"></field>
-        </block>
-      </value>
-    </block>
-    <block type="LLL_sstore" active="true">
-      <value name="SLOT">
-        <block type="LLL_val">
-          <field name="VAL"></field>
-        </block>
-      </value>
-    </block>
-    <block type="LLL_mval" active="true"></block>
-    <block type="LLL_sval" active="true"></block>
-    <block type="LLL_textval" active="true"></block>
-
     <block type="LLL_comment" active="true"></block>
     <block type="LLL_val" active="true"></block>
-    <block type="LLL_currency" active="true">
-      <field name="DENOM">ether</field>
-      <value name="AMT">
-        <block type="LLL_val">
-          <field name="VAL">0</field>
-        </block>
-      </value>
-    </block>        
+    <block type="LLL_textval" active="false"></block>
+    <block type="LLL_currency" active="true"> <field name="DENOM">ether</field> <value name="AMT"> <block type="LLL_val"> <field name="VAL">0</field> </block> </value> </block>
     <block type="LLL_tx" active="true"></block>
     <block type="LLL_contract" active="true"></block>
     <block type="LLL_blockinfo" active="true"></block>
@@ -154,6 +130,10 @@
     <block type="LLL_logic" active="true"></block>
     <block type="LLL_store" active="true"></block>
     <block type="LLL_load" active="true"></block>
+    <block type="LLL_mstore" active="true"></block>
+    <block type="LLL_mval" active="true"></block>
+    <block type="LLL_sstore" active="false"></block>
+    <block type="LLL_sval" active="false"></block>
     <block type="LLL_spend" active="true"></block>
     <block type="LLL_stop" active="true"></block>
     <block type="LLL_suicide" active="true"></block>
@@ -164,10 +144,10 @@
     <block type="LLL_singleop" active="true"></block>
     <block type="LLL_balance" active="true"></block>
     <block type="LLL_hash" active="true"></block>
-    <block type="LLL_call" active="true"></block>
+    <block type="LLL_call" active="false"></block>
     <block type="LLL_msg" active="true"></block>
     <block type="LLL_return" active="true"></block>
-    <block type="LLL_forloop" active="true"></block>
+    <block type="LLL_forloop" active="false"></block>
   </xml>
 
 <!-- build:js -->

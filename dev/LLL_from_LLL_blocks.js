@@ -18,14 +18,13 @@ goog.require('Blockly.LLL');
 
 // find missing from POC-4? items
 // implement samples PoC4 samples to test
-// blockly set/get variables instead of quoted strings hack?
 
 Blockly.LLL['LLL_mstore'] = function(block) {
   // mstore statement
   var order = Blockly.LLL.ORDER_NONE;
-  var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
+  var slot = block.getFieldValue('SLOT') || 0
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
+  slot = (slot+'').replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   code = '[' + slot + ']:' + val
   return code + '\n'
 };
@@ -33,9 +32,9 @@ Blockly.LLL['LLL_mstore'] = function(block) {
 Blockly.LLL['LLL_sstore'] = function(block) {
   // sstore statement
   var order = Blockly.LLL.ORDER_NONE;
-  var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
+  var slot = block.getFieldValue('SLOT') || 0
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
+  slot = (slot+'').replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   code = '[[' + slot + ']]:' + val
   return code + '\n'
 };
