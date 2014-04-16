@@ -121,12 +121,11 @@ function allToolsOn(){
   $('#toolbox block').attr('active','true')
   Blockly.updateToolbox(activeToolboxString())
   $('#allon, #defaultson').removeClass('active')
-  event.stopPropagation() // stop menu vanish 
 }
 
 function defaultToolsOn(){
   //define defaults
-    defaults = [
+    var defaults = [
       "comment",
       "val",
       "tx",
@@ -154,5 +153,4 @@ function defaultToolsOn(){
     }
   // render result
     Blockly.updateToolbox(activeToolboxString())
-    event.stopPropagation() // stop menu vanish 
 }
