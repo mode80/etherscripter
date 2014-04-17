@@ -349,5 +349,291 @@ data_feed_concise: fnCommentToString(function(){/*!
 </xml>
 */}),
 
+name_registrar: fnCommentToString(function(){/*!
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_comment" id="47" x="18" y="12">
+    <field name="NOTE">Name Registrar</field>
+  </block>
+  <block type="LLL_init" id="48" x="18" y="37">
+    <statement name="INIT">
+      <block type="LLL_store" id="49" inline="true">
+        <field name="PLACE">sstore</field>
+        <value name="SLOT">
+          <block type="LLL_contract" id="51">
+            <field name="PROP">address</field>
+          </block>
+        </value>
+        <value name="VAL">
+          <block type="LLL_val" id="50">
+            <field name="VAL">"NameReg"</field>
+          </block>
+        </value>
+        <next>
+          <block type="LLL_store" id="52" inline="true">
+            <field name="PLACE">sstore</field>
+            <value name="SLOT">
+              <block type="LLL_val" id="54">
+                <field name="VAL">"NameReg"</field>
+              </block>
+            </value>
+            <value name="VAL">
+              <block type="LLL_contract" id="53">
+                <field name="PROP">address</field>
+              </block>
+            </value>
+            <next>
+              <block type="LLL_store" id="55" inline="true">
+                <field name="PLACE">sstore</field>
+                <value name="SLOT">
+                  <block type="LLL_val" id="57">
+                    <field name="VAL">69</field>
+                  </block>
+                </value>
+                <value name="VAL">
+                  <block type="LLL_contract" id="56">
+                    <field name="PROP">caller</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="58">
+        <field name="NOTE">If there's at least one argument</field>
+        <next>
+          <block type="LLL_if" id="59" inline="false">
+            <value name="COND">
+              <block type="LLL_tx" id="60">
+                <field name="PROP">_input_byte_count</field>
+              </block>
+            </value>
+            <statement name="THEN">
+              <block type="LLL_comment" id="61">
+                <field name="NOTE">Stop if the first arg (name) has already been registered.</field>
+                <next>
+                  <block type="LLL_when" id="62" inline="false">
+                    <field name="WORD">when</field>
+                    <value name="COND">
+                      <block type="LLL_load" id="63" inline="true">
+                        <field name="PLACE">sload</field>
+                        <value name="SLOT">
+                          <block type="LLL_load" id="64" inline="true">
+                            <field name="PLACE">_input_load_slots</field>
+                            <value name="SLOT">
+                              <block type="LLL_val" id="65">
+                                <field name="VAL">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="THEN">
+                      <block type="LLL_stop" id="66"></block>
+                    </statement>
+                    <next>
+                      <block type="LLL_comment" id="67">
+                        <field name="NOTE">Zero out any existing name registered to this sender</field>
+                        <next>
+                          <block type="LLL_when" id="68" inline="false">
+                            <field name="WORD">when</field>
+                            <value name="COND">
+                              <block type="LLL_load" id="69" inline="true">
+                                <field name="PLACE">sload</field>
+                                <value name="SLOT">
+                                  <block type="LLL_contract" id="70">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="THEN">
+                              <block type="LLL_store" id="71" inline="true">
+                                <field name="PLACE">sstore</field>
+                                <value name="SLOT">
+                                  <block type="LLL_load" id="73" inline="true">
+                                    <field name="PLACE">sload</field>
+                                    <value name="SLOT">
+                                      <block type="LLL_contract" id="74">
+                                        <field name="PROP">caller</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="VAL">
+                                  <block type="LLL_val" id="72">
+                                    <field name="VAL">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="LLL_comment" id="75">
+                                <field name="NOTE">Store sender at name, and name at sender</field>
+                                <next>
+                                  <block type="LLL_store" id="76" inline="true">
+                                    <field name="PLACE">sstore</field>
+                                    <value name="SLOT">
+                                      <block type="LLL_load" id="78" inline="true">
+                                        <field name="PLACE">_input_load_slots</field>
+                                        <value name="SLOT">
+                                          <block type="LLL_val" id="79">
+                                            <field name="VAL">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="VAL">
+                                      <block type="LLL_contract" id="77">
+                                        <field name="PROP">caller</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="LLL_store" id="80" inline="true">
+                                        <field name="PLACE">sstore</field>
+                                        <value name="SLOT">
+                                          <block type="LLL_contract" id="83">
+                                            <field name="PROP">caller</field>
+                                          </block>
+                                        </value>
+                                        <value name="VAL">
+                                          <block type="LLL_load" id="81" inline="true">
+                                            <field name="PLACE">_input_load_slots</field>
+                                            <value name="SLOT">
+                                              <block type="LLL_val" id="82">
+                                                <field name="VAL">0</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="LLL_stop" id="84"></block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="LLL_comment" id="85">
+                <field name="NOTE">No arguments - either deregister or suicide (if it's from owner's adderss).</field>
+                <next>
+                  <block type="LLL_when" id="86" inline="false">
+                    <field name="WORD">when</field>
+                    <value name="COND">
+                      <block type="LLL_compare" id="87" inline="true">
+                        <field name="OP">=</field>
+                        <value name="A">
+                          <block type="LLL_contract" id="88">
+                            <field name="PROP">caller</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_load" id="89" inline="true">
+                            <field name="PLACE">sload</field>
+                            <value name="SLOT">
+                              <block type="LLL_val" id="90">
+                                <field name="VAL">69</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="THEN">
+                      <block type="LLL_comment" id="91">
+                        <field name="NOTE">Suicide if it's from owner's address.</field>
+                        <next>
+                          <block type="LLL_suicide" id="92" inline="true">
+                            <value name="TO">
+                              <block type="LLL_contract" id="93">
+                                <field name="PROP">caller</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="LLL_comment" id="94">
+                        <field name="NOTE">Otherwise, just deregister any name sender has, if they are registered.</field>
+                        <next>
+                          <block type="LLL_when" id="95" inline="false">
+                            <field name="WORD">when</field>
+                            <value name="COND">
+                              <block type="LLL_load" id="96" inline="true">
+                                <field name="PLACE">sload</field>
+                                <value name="SLOT">
+                                  <block type="LLL_contract" id="97">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="THEN">
+                              <block type="LLL_store" id="98" inline="true">
+                                <field name="PLACE">sstore</field>
+                                <value name="SLOT">
+                                  <block type="LLL_load" id="100" inline="true">
+                                    <field name="PLACE">sload</field>
+                                    <value name="SLOT">
+                                      <block type="LLL_contract" id="101">
+                                        <field name="PROP">caller</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="VAL">
+                                  <block type="LLL_val" id="99">
+                                    <field name="VAL">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="LLL_store" id="102" inline="true">
+                                    <field name="PLACE">sstore</field>
+                                    <value name="SLOT">
+                                      <block type="LLL_contract" id="104">
+                                        <field name="PROP">caller</field>
+                                      </block>
+                                    </value>
+                                    <value name="VAL">
+                                      <block type="LLL_val" id="103">
+                                        <field name="VAL">0</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="LLL_stop" id="105"></block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
 
 }

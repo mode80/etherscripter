@@ -3,6 +3,7 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
+* move tx.caller to contract.caller
 * enter gav's POC-4 samples to test LLL output
 * implement (but hide by default XOR, BYTE) 
 * release 0.4

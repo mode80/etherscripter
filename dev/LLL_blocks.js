@@ -37,10 +37,10 @@ Blockly.Blocks['LLL_mstore'] = {
   init: function() {
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
-      .appendField('set @')
+      .appendField('@')
       .appendField(new Blockly.FieldTextInput('', valValidator ), 'SLOT')
     this.appendValueInput('VAL')
-      .appendField(':')
+      .appendField('=')
     this.setInputsInline(true)
     this.setPreviousStatement(true)
     this.setNextStatement(true)
@@ -54,7 +54,7 @@ Blockly.Blocks['LLL_sstore'] = {
       .appendField('store @@')
       .appendField(new Blockly.FieldTextInput('', valValidator ), 'SLOT')
     this.appendValueInput('VAL')
-      .appendField(':')
+      .appendField('=')
     this.setInputsInline(true)
     this.setPreviousStatement(true)
     this.setNextStatement(true)
@@ -99,8 +99,6 @@ Blockly.Blocks['LLL_textval'] = {
 // New POC-4 blocks 
 ///////
 
-// not implmented just yet : XOR, BYTE 
-
 Blockly.Blocks['LLL_spend'] = {
   init: function() {
     this.setColour(STATEMENT_COLOR);
@@ -119,10 +117,10 @@ Blockly.Blocks['LLL_blockinfo'] = {
   init: function() {
     var VALS =
         [
+         ['number', 'number'],
          ['prevhash', 'prevhash'],
          ['coinbase', 'coinbase'],
          ['timestamp', 'timestamp'],
-         ['number', 'number'],
          ['difficulty', 'difficulty'],
          ['total fee budget', 'gaslimit'],
         ]
@@ -140,7 +138,6 @@ Blockly.Blocks['LLL_tx'] = {
         [
          ['amount', 'callvalue'], // monetary value
          //['origin', 'origin'], // missing from POC-4 ? 
-         ['caller', 'caller'],
          ['fee budget left', 'gas'],
          ['input slot count', '_input_slot_count'],// to be derived from (calldatasize)
          ['input byte count', '_input_byte_count'],// as per (calldatasize) 
@@ -157,10 +154,9 @@ Blockly.Blocks['LLL_tx'] = {
 Blockly.Blocks['LLL_contract'] = {
   init: function() {
     var VALS =
-        [
-         ['address', 'address'],
-         ['balance', 'balance'] 
-        ]
+      [['caller', 'caller'],
+       ['address', 'address'],
+       ['balance', 'balance']]
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
     this.appendDummyInput()
@@ -300,12 +296,10 @@ Blockly.Blocks['LLL_call'] = {
 Blockly.Blocks['LLL_init'] = {
   init: function() {
     this.setColour(LOOP_COLOR)
-    this.appendDummyInput()
-      .appendField('on call')
     this.appendStatementInput('INIT')
-        .appendField('first')
+      .appendField('init')
     this.appendStatementInput('BODY')
-        .appendField('thereafter')
+      .appendField('body')
     this.setInputsInline(false)
     this.setPreviousStatement(false)
     this.setNextStatement(false)
@@ -332,8 +326,8 @@ Blockly.Blocks['LLL_val'] = {
         if ( !isNaN(commafree) ) retval = commafree 
       }
       if ( retval && !isNaN(retval) ) { // if a number now
-        retval = parseInt("0" + retval) // strip decimals
-        retval = Math.abs(retval) // disallow negative vals 
+        retval = parseInt(retval) // strip decimals
+        // retval = Math.abs(retval) // negative vals converted to (neg -val) in generator 
       }
       else if ( retval && isNaN(retval) ) // if a string now
         retval = retval.substr(0,32) // truncate string to 32-byte Ethereum max
@@ -343,51 +337,6 @@ Blockly.Blocks['LLL_val'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('', validator ), 'VAL');
     this.setOutput(true);
-  }
-};
-
-Blockly.Blocks['LLL_block'] = {
-  init: function() {
-    var VALS =
-        [['timestamp', 'timestamp'],
-         ['number', 'number'],
-         ['basefee', 'basefee'],
-         ['prevhash', 'prevhash'],
-         ['coinbase', 'coinbase'],
-         ['difficulty', 'difficulty'],
-         ['nonce', 'nonce'] ];
-    this.setColour(VALUE_COLOR);
-    this.setOutput(true);
-    this.appendDummyInput()
-        .appendField('block')
-        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
-  }
-};
-
-Blockly.Blocks['LLL_transaction'] = {
-  init: function() {
-    var VALS =
-        [['value', 'value'],
-         ['sender', 'sender'],
-         ['data count', 'datan']];
-    this.setColour(VALUE_COLOR);
-    this.setOutput(true);
-    this.appendDummyInput()
-        .appendField('tx')
-        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
-  }
-};
-
-Blockly.Blocks['LLL_contract'] = {
-  init: function() {
-    var VALS =
-        [['balance', 'balance'],
-        ['address', 'address']];
-    this.setColour(VALUE_COLOR);
-    this.setOutput(true);
-    this.appendDummyInput()
-        .appendField('contract')
-        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
   }
 };
 
@@ -446,7 +395,7 @@ Blockly.Blocks['LLL_when'] = {
   init: function() {
     var WORDS =
       [['when','when'],
-      ['unless','unless']];
+      ['unless','unless']]
     this.setColour(FLOW_COLOR);
     this.appendValueInput('COND')
         .setCheck('Boolean')
@@ -463,12 +412,12 @@ Blockly.Blocks['LLL_when'] = {
 Blockly.Blocks['LLL_compare'] = {
   init: function() {
     var OPERATORS =
-      [['>', '>'],
+      [['=', '='],
+      ['>', '>'],
       ['<', '<'],
-      ['=', '='],
       ['\u2260', '!='],
       ['\u2264', '<='],
-      ['\u2265', '>='] ];
+      ['\u2265', '>=']]
     this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
@@ -521,8 +470,8 @@ Blockly.Blocks['LLL_math'] = {
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
-    [['temp slot', 'mload'],
-    ['fixed slot', 'sload'],
+    [['fixed slot', 'sload'],
+    ['temp slot', 'mload'],
     ['input slot', '_input_load_slots'],
     ['input byte', '_input_load_bytes']]
     this.setColour(VAR_COLOR);
@@ -594,15 +543,15 @@ Blockly.Blocks['LLL_suicide'] = {
 Blockly.Blocks['LLL_store'] = {
   init: function() {
     var PLACES = 
-	  [['temp slot', 'mstore'],
-    ['fixed slot', 'sstore']]
+	  [['fixed slot', 'sstore'],
+    ['temp slot', 'mstore']]
     this.setColour(VAR_COLOR);
-    this.appendValueInput('VAL')
-      .appendField('put')
     this.appendValueInput('SLOT')
       .appendField('in')
       .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
       .setCheck('Number')
+    this.appendValueInput('VAL')
+      .appendField('put')
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -642,6 +591,38 @@ Blockly.Blocks['LLL_mktx'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_block'] = {
+  init: function() {
+    var VALS =
+        [['timestamp', 'timestamp'],
+         ['number', 'number'],
+         ['basefee', 'basefee'],
+         ['prevhash', 'prevhash'],
+         ['coinbase', 'coinbase'],
+         ['difficulty', 'difficulty'],
+         ['nonce', 'nonce'] ];
+    this.setColour(VALUE_COLOR);
+    this.setOutput(true);
+    this.appendDummyInput()
+        .appendField('block')
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
+  }
+};
+
+Blockly.Blocks['LLL_transaction'] = {
+  init: function() {
+    var VALS =
+        [['value', 'value'],
+         ['sender', 'sender'],
+         ['data count', 'datan']];
+    this.setColour(VALUE_COLOR);
+    this.setOutput(true);
+    this.appendDummyInput()
+        .appendField('tx')
+        .appendField(new Blockly.FieldDropdown(VALS), 'PROP');
   }
 };
 

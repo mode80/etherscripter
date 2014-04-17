@@ -37,22 +37,20 @@
             <li><a href="#" onclick="showBLL()">Show Blocks</a></li>
             <li><a href="#" onclick="showXML()">Show XML</a></li>
             <li><a href="#" onclick="showLLL()">Show LLL</a></li>
-            <li class="divider"></li> 
-            <li><a href="#" onclick="clearCanvas()" ontouchstart="clearCanvas()">Clear Canvas</a></li>
           </ul>
         </li>
         <!-- Toolbox -->
         <li class="dropdown" > 
           <a href="." class="dropdown-toggle" data-toggle="dropdown">Toolbox<b class="caret"></b> </a>
           <ul class="dropdown-menu" id="toolboxmenu" >
-            <li onclick="defaultToolsOn()" id="defaultson"><a href="#">Enable Defaults</a></li>
-            <li onclick="allToolsOn()" id="allon"><a href="#">Enable All</a></li>
+            <li onclick="allToolsOn()" id="allon"><a href="#">All</a></li>
+            <li onclick="defaultToolsOn()" id="defaultson"><a href="#">Defaults</a></li>
             <li class="divider"></li> 
             <li onclick="toggleTool(event)" id="comment"><a href="#">comment</a></li>
             <li onclick="toggleTool(event)" id="val"><a href="#">value</a></li>
             <li onclick="toggleTool(event)" id="textval"><a href="#">text value</a></li>
             <li onclick="toggleTool(event)" id="currency"><a href="#">currency</a></li>
-            <li onclick="toggleTool(event)" id="tx"><a href="#">tx info</a></li>
+            <li onclick="toggleTool(event)" id="tx"><a href="#">transaction info</a></li>
             <li onclick="toggleTool(event)" id="contract"><a href="#">contract info</a></li>
             <li onclick="toggleTool(event)" id="blockinfo"><a href="#">block info</a></li>
             <li onclick="toggleTool(event)" id="math"><a href="#">math</a></li>
@@ -81,6 +79,13 @@
             <li onclick="toggleTool(event)" id="forloop"><a href="#">for loop</a></li>
           </ul>
         </li>
+        <!-- Canvas -->
+        <li class="dropdown" > 
+          <a href="." class="dropdown-toggle" data-toggle="dropdown">Canvas<b class="caret"></b> </a>
+          <ul class="dropdown-menu" >
+            <li><a href="#" onclick="clearCanvas()" ontouchstart="clearCanvas()">Clear Canvas</a></li>
+          </ul>
+        </li>
         <!-- Samples -->
         <li class="dropdown"> 
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -89,6 +94,7 @@
           <ul class="dropdown-menu" >
             <li><a href="#" onclick="loadSample(event)" id="data_feed">Data Feed</a></li>
             <li><a href="#" onclick="loadSample(event)" id="data_feed_concise">Data Feed (concise)</a></li>
+            <li><a href="#" onclick="loadSample(event)" id="name_registrar">Name Registrar</a></li>
           </ul>
         </li>
         <!-- About -->

@@ -33,7 +33,6 @@ Blockly.LLL['LLL_mstore'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var slot = block.getFieldValue('SLOT') || 0
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  slot = (slot+'').replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   code = '[' + slot + ']:' + val
   return code + '\n'
 };
@@ -43,7 +42,6 @@ Blockly.LLL['LLL_sstore'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var slot = block.getFieldValue('SLOT') || 0
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  slot = (slot+'').replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   code = '[[' + slot + ']]:' + val
   return code + '\n'
 };
@@ -191,7 +189,7 @@ Blockly.LLL['LLL_tx'] = function(block) {
   var code
   var val = block.getFieldValue('PROP');
   if (val == "_input_slot_count") // count of 32-byte slots isn't supported naitevly but we can have it calculated
-    code = '(add (div (calldatasize) 32) 1)' 
+    code = '(add (div (calldatasize) 32) (if (mod calldatasize 32) 1 0) )' 
   else if (val == "_input_byte_count")
     code = '(calldatasize)' 
   else 
@@ -283,16 +281,15 @@ Blockly.LLL['LLL_val'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var val = block.getFieldValue('VAL') || 0  
   var code = '' 
-  if ( isNaN(val) ) {
-    var is_hexprefixed = ((val+'').substr(0,2).toUpperCase()=='0X') 
-    var is_allhexchars = (/[^0-9a-fx]/i.exec(val)===null) 
-    if (is_hexprefixed && is_allhexchars)  // don't quote hexy strings 
-      code = val
-    else 
-      code = '"' + val + '"' // quote normal strings
-  } else { // is a number
+  // if ( isNaN(val) ) { // quote non-hexy string-like values
+  //   var is_hexprefixed = ((val+'').substr(0,2).toUpperCase()=='0X') 
+  //   var is_allhexchars = (/[^0-9a-fx]/i.exec(val)===null) 
+  //   if (is_hexprefixed && is_allhexchars)  // don't quote hexy strings 
+  //     code = val
+  //   else 
+  //     code = '"' + val + '"' // quote normal strings
+  // } else  // is a number
     code = (val<0) ? '(neg ' + -val + ')' : val + '' 
-  }
   return [code, Blockly.LLL.ORDER_ATOMIC]
 };
 
@@ -328,7 +325,6 @@ Blockly.LLL['LLL_load'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
-  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   if (place=='sload') code = '@@' + slot
   if (place=='mload') code = '@' + slot
   if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
@@ -342,7 +338,6 @@ Blockly.LLL['LLL_store'] = function(block) {
   var place = block.getFieldValue('PLACE')  
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  slot = slot.replace(/"/g,'') // remove quotes from string-like slots for more efficient handling by LLL 
   var code = '('+ place + ' ' + slot + ' ' + val + ')'
   // if (place=='sstore') code = '[[' + slot + ']] ' + val
   // if (place=='mstore') code = '[' + slot + '] ' + val
@@ -384,10 +379,10 @@ Blockly.LLL['LLL_contract'] = function(block) {
   // contract related values
   var code
   var val = block.getFieldValue('PROP');
-  if (val == 'address')
-    code = '(myaddress)'
-  else if (val == 'balance')
-    code =  '(balance myaddress)'
+  if (val == 'balance')
+    code = '(balance myaddress)'
+  else 
+    code = '(' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
 };
 
