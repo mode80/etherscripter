@@ -26,7 +26,7 @@ Blockly.LLL['LLL_byte'] = function(block) {
   var data = Blockly.LLL.valueToCode(block,'DATA', order) || 0 
   var code = '(byte '+ byte_i + ' ' + data + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 Blockly.LLL['LLL_mstore'] = function(block) {
   // mstore statement
@@ -35,7 +35,7 @@ Blockly.LLL['LLL_mstore'] = function(block) {
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
   code = '[' + slot + ']:' + val
   return code + '\n'
-};
+}
 
 Blockly.LLL['LLL_sstore'] = function(block) {
   // sstore statement
@@ -44,7 +44,7 @@ Blockly.LLL['LLL_sstore'] = function(block) {
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
   code = '[[' + slot + ']]:' + val
   return code + '\n'
-};
+}
 
 Blockly.LLL['LLL_mval'] = function(block) {
   // gets value from a memory slot 
@@ -52,7 +52,7 @@ Blockly.LLL['LLL_mval'] = function(block) {
   var val = block.getFieldValue('VAL') || 0  
   var code = '@' + val
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 Blockly.LLL['LLL_sval'] = function(block) {
   // gets value from a storage slot 
@@ -60,7 +60,7 @@ Blockly.LLL['LLL_sval'] = function(block) {
   var val = block.getFieldValue('VAL') || 0  
   var code = '@@' + val
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 Blockly.LLL['LLL_textval'] = function(block) {
   // gets value from a memory slot 
@@ -68,13 +68,13 @@ Blockly.LLL['LLL_textval'] = function(block) {
   var val = block.getFieldValue('VAL') || 0  
   var code = '"' + val + '"'
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 
 Blockly.LLL['LLL_comment'] = function(block) {
   // a LLL comment  
   return ';; ' + block.getFieldValue('NOTE') + '\n' 
-};
+}
 
 
 Blockly.LLL['LLL_spend'] = function(block) {
@@ -100,7 +100,7 @@ Blockly.LLL['LLL_spend'] = function(block) {
     + reply_bytes
     + ')\n' 
   return code
-};
+}
 
 Blockly.LLL['LLL_prefixop'] = function(block) {
   // neg, not  and other 1-argument forms 
@@ -108,27 +108,27 @@ Blockly.LLL['LLL_prefixop'] = function(block) {
   var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
   var code = '(' + op + ' ' + a + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 Blockly.LLL['LLL_hash'] = function(block) {
   // hash  
   var op = 'sha3' 
-  var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE)
-  var b = Blockly.LLL.valueToCode(block, 'DATA_END', Blockly.LLL.ORDER_NONE)
+  var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE) || 0
+  var b = Blockly.LLL.valueToCode(block, 'DATA_END', Blockly.LLL.ORDER_NONE) || 0
   var code = '(' + op + ' ' + a + ' ' + b + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 Blockly.LLL['LLL_call'] = function(block) {
   // call 
   var op = 'call' 
-  var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE)
-  var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE)
-  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE)
-  var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE)
-  var send_bytes = Blockly.LLL.valueToCode(block, 'SEND_DATA_BYTES', Blockly.LLL.ORDER_NONE)
-  var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE)
-  var reply_bytes = Blockly.LLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.LLL.ORDER_NONE)
+  var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE) || '0x0' 
+  var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE) || 0
+  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE) || 0
+  var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE) || 0
+  var send_bytes = Blockly.LLL.valueToCode(block, 'SEND_DATA_BYTES', Blockly.LLL.ORDER_NONE) || 0
+  var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE) || 0
+  var reply_bytes = Blockly.LLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.LLL.ORDER_NONE) || 0
   var code = '(' 
     + op + ' ' 
     + address + ' ' 
@@ -140,20 +140,20 @@ Blockly.LLL['LLL_call'] = function(block) {
     + reply_bytes
     + ')\n' 
   return code
-};
+}
 
 Blockly.LLL['LLL_send'] = function(block) {
   // call 
   var op = 'call' 
-  var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE)
-  var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE)
-  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE)
-  var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE)
-  var send_end_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_END', Blockly.LLL.ORDER_NONE)
-  var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE)
-  var reply_end_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_END', Blockly.LLL.ORDER_NONE)
-  var send_bytes = (send_end_i - send_start_i) * 32
-  var reply_bytes = (reply_end_i - reply_start_i) * 32
+  var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE) || '0x0' 
+  var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE) || 0
+  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE) || 0
+  var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE) || 0
+  var send_end_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_END', Blockly.LLL.ORDER_NONE) || 0
+  var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE) || 0
+  var reply_end_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_END', Blockly.LLL.ORDER_NONE) || 0
+  var send_bytes = (send_end_i - send_start_i) * 32 
+  var reply_bytes = (reply_end_i - reply_start_i) * 32 
   var code = '(' 
     + op + ' ' 
     + address + ' ' 
@@ -165,24 +165,24 @@ Blockly.LLL['LLL_send'] = function(block) {
     + reply_bytes
     + ')\n' 
   return code
-};
+}
 
 Blockly.LLL['LLL_return'] = function(block) {
   // return 
   var op = 'return' 
-  var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE)
-  var b = Blockly.LLL.valueToCode(block, 'DATA_END', Blockly.LLL.ORDER_NONE)
+  var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE) || 0
+  var b = Blockly.LLL.valueToCode(block, 'DATA_END', Blockly.LLL.ORDER_NONE) || 0
   var code = '(' + op + ' ' + a + ' ' + b + ')\n' 
   return code
-};
+}
 
 Blockly.LLL['LLL_blockinfo'] = function(block) {
   // block related values 
   var code
-  var val = block.getFieldValue('PROP');
+  var val = block.getFieldValue('PROP')
   code = '(' + val + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC];
-};
+}
 
 Blockly.LLL['LLL_tx'] = function(block) {
   // tx related values 
@@ -195,7 +195,7 @@ Blockly.LLL['LLL_tx'] = function(block) {
   else 
     code = '(' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
-};
+}
 
 Blockly.LLL['LLL_contract'] = function(block) {
   // so called "closure" (contract) related values 
@@ -206,7 +206,7 @@ Blockly.LLL['LLL_contract'] = function(block) {
   else 
     code = '(' + val + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC];
-};
+}
 
 Blockly.LLL['LLL_forloop'] = function(block) {
   // LLL for loop in POC-4+ is like javascript for loop.
@@ -219,14 +219,14 @@ Blockly.LLL['LLL_forloop'] = function(block) {
   cond = cond.trim()
   after_each = after_each.trim()
   return '(for ' + first + ' ' + cond + ' ' + after_each + '\n { \n' + loop + ' }  \n)\n'
-};
+}
 
 Blockly.LLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.LLL.statementToCode(block, 'INIT');
   var body = Blockly.LLL.statementToCode(block, 'BODY');
   return '{ ;; INIT\n\n' + init + '\n}\n\n{ ;; BODY\n\n' + body + '\n}'
-};
+}
 
 Blockly.LLL['LLL_whileloop'] = function(block) {
   // LLL while loop in POC-4+ is implemented as a stubbed for loop.
@@ -239,7 +239,7 @@ Blockly.LLL['LLL_whileloop'] = function(block) {
     cond = '(not ' + cond + ' )';
   }
   return '(for ' + '()' + ' ' + cond + '\n { \n' + loop + ' }\n)\n'
-};
+}
 
 //////// 
 // valid in POC-3 & POC-4 blocks
@@ -247,27 +247,27 @@ Blockly.LLL['LLL_whileloop'] = function(block) {
 
 Blockly.LLL['LLL_if'] = function(block) {
   // if statement
-  var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
+  var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE) || 1
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
   var else_do = Blockly.LLL.statementToCode(block, 'ELSE');
   var code = '(if ' + cond + '\n { \n' + then_do + ' }\n { \n' + else_do + ' }\n)\n';
   return code;
-};
+}
 
 Blockly.LLL['LLL_when'] = function(block) {
   // when statement
   var word = block.getFieldValue('WORD') 
-  var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE);
+  var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE) || 1
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
   var code = '(' + word + ' '+ cond + '\n { \n' + then_do + ' }\n)\n';
   return code;
-};
+}
 
 Blockly.LLL.twoArgForms = function(block) {
   // math functions, and other 2-argument forms 
   var op = block.getFieldValue('OP')
-  var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE)
-  var b = Blockly.LLL.valueToCode(block, 'B', Blockly.LLL.ORDER_NONE)
+  var a = Blockly.LLL.valueToCode(block, 'A', Blockly.LLL.ORDER_NONE) || 0
+  var b = Blockly.LLL.valueToCode(block, 'B', Blockly.LLL.ORDER_NONE) || 0
   var code = '(' + op + ' ' + a + ' ' + b + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
@@ -291,17 +291,17 @@ Blockly.LLL['LLL_val'] = function(block) {
   // } else  // is a number
     code = (val<0) ? '(neg ' + -val + ')' : val + '' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 Blockly.LLL['LLL_comment'] = function(block) {
   // a LLL comment  
   return ';; ' + block.getFieldValue('NOTE') + '\n' 
-};
+}
 
 Blockly.LLL['LLL_stop'] = function(block) {
   // stop statement
   return '(stop)\n' 
-};
+}
 
 Blockly.LLL['LLL_currency'] = function(block) {
   // currency value 
@@ -310,7 +310,7 @@ Blockly.LLL['LLL_currency'] = function(block) {
   var denom = block.getFieldValue('DENOM')
   var code = amt + '' + denom 
   return [code, Blockly.LLL.ORDER_ATOMIC] 
-};
+}
 
 Blockly.LLL['LLL_suicide'] = function(block) {
   // suicide statement
@@ -318,7 +318,7 @@ Blockly.LLL['LLL_suicide'] = function(block) {
   var to = Blockly.LLL.valueToCode(block,'TO', order) || 0 
   var code = '(suicide ' + to + ')\n' 
   return code
-};
+}
 
 Blockly.LLL['LLL_load'] = function(block) {
   // mload sload txdata value functions 
@@ -330,7 +330,7 @@ Blockly.LLL['LLL_load'] = function(block) {
   if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
   if (place=='_input_load_bytes') code = '(calldataload ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 Blockly.LLL['LLL_store'] = function(block) {
   // mstore sstore statements
@@ -342,15 +342,15 @@ Blockly.LLL['LLL_store'] = function(block) {
   // if (place=='sstore') code = '[[' + slot + ']] ' + val
   // if (place=='mstore') code = '[' + slot + '] ' + val
   return code + '\n'
-};
+}
 
 Blockly.LLL['LLL_balance'] = function(block) {
   // balance of address 
   var order = Blockly.LLL.ORDER_NONE;
-  var addr = block.getFieldValue('ADDR') 
+  var addr = block.getFieldValue('ADDR') || '0x0' 
   var code = '(balance '+ addr + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
-};
+}
 
 ///////
 // legacy POC-3 blocks
@@ -365,15 +365,15 @@ Blockly.LLL['LLL_block'] = function(block) {
   else
     code = '(blk_' + val + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC];
-};
+}
 
 Blockly.LLL['LLL_transaction'] = function(block) {
   // transaction related values 
   var code
-  var val = block.getFieldValue('PROP');
+  var val = block.getFieldValue('PROP')
   code = '(tx' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
-};
+}
 
 Blockly.LLL['LLL_contract'] = function(block) {
   // contract related values
@@ -384,20 +384,20 @@ Blockly.LLL['LLL_contract'] = function(block) {
   else 
     code = '(' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
-};
+}
 
 Blockly.LLL['LLL_for'] = function(block) {
-  // LLL for loop is really a while / until loop.
+  // LLL POC-3 for loop is really a while / until loop.
   var is_until = (block.getFieldValue('WORD') == 'UNTIL')
   var cond = Blockly.LLL.valueToCode(block, 'COND',
       is_until ? Blockly.LLL.ORDER_LOGICAL_NOT :
-      Blockly.LLL.ORDER_NONE) || 'false';
+      Blockly.LLL.ORDER_NONE) || '1';
   var branch = Blockly.LLL.statementToCode(block, 'DO');
   if (is_until) {
     cond = '(! ' + cond + ' )';
   }
   return '(for ' + cond + '\n seq( \n' + branch + ' ) \n)\n';
-};
+}
 
 Blockly.LLL['LLL_mktx'] = function(block) {
   // mktx statement
@@ -406,5 +406,4 @@ Blockly.LLL['LLL_mktx'] = function(block) {
   var money = Blockly.LLL.valueToCode(block,'MONEY', order) || '0wei' 
   var code = '(mktx ' + to + ' ' + money + ' 0)\n' 
   return code
-};
-
+}

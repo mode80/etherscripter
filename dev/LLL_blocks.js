@@ -455,9 +455,12 @@ Blockly.Blocks['LLL_math'] = {
       [['+', '+'],
       ['×', '*'],
       ['-', '-'],
-      ['÷', 'sdiv'],// unsigned 'div' is also available but only leads to value ambiguity in contracts
+      ['÷', 'div'],
       ['raised to', 'exp'],
-      ['modulo', 'smod']] // ditto above for 'mod' 
+      ['modulo', 'mod'],
+      ['(signed ÷)', 'sdiv'], // assumes top of the number range represents negative numbers 
+      ['(signed mod)', 'smod'] // "
+      ] // ditto above for 'mod' 
     this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
