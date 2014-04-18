@@ -475,7 +475,7 @@ Blockly.Blocks['LLL_math'] = {
 Blockly.Blocks['LLL_load'] = {
   init: function() {
     var PLACES = 
-    [['fixed slot', 'sload'],
+    [['save slot', 'sload'],
     ['temp slot', 'mload'],
     ['input slot', '_input_load_slots'],
     ['input byte', '_input_load_bytes']]
@@ -548,7 +548,7 @@ Blockly.Blocks['LLL_suicide'] = {
 Blockly.Blocks['LLL_store'] = {
   init: function() {
     var PLACES = 
-	  [['fixed slot', 'sstore'],
+	  [['save slot', 'sstore'],
     ['temp slot', 'mstore']]
     this.setColour(VAR_COLOR);
     this.appendValueInput('SLOT')
@@ -557,7 +557,7 @@ Blockly.Blocks['LLL_store'] = {
       .setCheck('Number')
     this.appendValueInput('VAL')
       .appendField('put')
-    this.setInputsInline(true);
+    this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   }

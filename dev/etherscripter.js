@@ -128,6 +128,7 @@ function defaultToolsOn(){
     var defaults = [
       "comment",
       "val",
+      "currency",
       "tx",
       "contract",
       "blockinfo",
@@ -135,11 +136,14 @@ function defaultToolsOn(){
       "compare",
       "logic",
       "store",
+      "mstore",
+      "mval",
       "load",
       "spend",
       "stop",
       "when",
-      "whileloop"
+      "whileloop",
+      "init"
     ]
   //reset all to off
     $('#toolboxmenu>li').removeClass('active')  
