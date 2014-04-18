@@ -240,13 +240,13 @@ Blockly.Blocks['LLL_whileloop'] = {
   }
 }
 
-Blockly.Blocks['LLL_msg'] = {
+Blockly.Blocks['LLL_send'] = {
   init: function() {
     this.setColour(PROCEDURE_COLOR)
     this.appendValueInput('ADDRESS')
-      .appendField('msg address')
+      .appendField('send to address')
     this.appendValueInput('MONEY')
-      .appendField('   sending amount')
+      .appendField('   amount')
     this.appendValueInput('GAS')
       .appendField('   with fee budget')
     this.appendDummyInput()
@@ -288,7 +288,9 @@ Blockly.Blocks['LLL_call'] = {
       .appendField('   start slot')
     this.appendValueInput('REPLY_DATA_BYTES')
       .appendField('   with byte length')
-    this.setOutput(true) // technically returns true when successful?
+    this.setOutput(false) // technically returns true when successful?
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
     this.setInputsInline(false)
   }
 }

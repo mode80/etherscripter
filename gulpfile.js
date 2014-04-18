@@ -1,6 +1,7 @@
-var deploy_dir = '/deploy/0-4-0'
+var deploy_dir = 'deploy/0-4-0'
 
-var gulp = require('gulp'); 
+var gulp = require('gulp');
+var es = require('event-stream'); 
 
 //var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
@@ -46,16 +47,19 @@ gulp.task('concat', ['min'], function() {
 
 // Stage others 
 gulp.task('stage', function() {
-    return gulp.src([
+    return es.merge(
+        gulp.src(['dev/*.ico'])
+            .pipe(gulp.dest('deploy/')),
+        gulp.src([
     			'dev/*.css',
                 'dev/*.html',
                 'dev/*.png',
-                'dev/*.ico',
                 'dev/media/**/*.*',
     			],
                 {base: 'dev/'}
                 )
-        .pipe(gulp.dest(deploy_dir))
+            .pipe(gulp.dest(deploy_dir))
+    )
 });
 
 // Fix Refs

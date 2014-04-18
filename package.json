@@ -12,7 +12,8 @@
     "gulp-rename": "~1.2.0",
     "gulp-concat": "~2.2.0",
     "gulp-uglify": "~0.2.1",
-    "gulp-html-replace": "~1.0.0"
+    "gulp-html-replace": "~1.0.0",
+    "event-stream": "^3.1.2"
   },
   "domains": [
     "etherscripter.com",

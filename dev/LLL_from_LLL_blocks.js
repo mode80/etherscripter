@@ -142,7 +142,7 @@ Blockly.LLL['LLL_call'] = function(block) {
   return code
 };
 
-Blockly.LLL['LLL_msg'] = function(block) {
+Blockly.LLL['LLL_send'] = function(block) {
   // call 
   var op = 'call' 
   var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE)
@@ -188,7 +188,7 @@ Blockly.LLL['LLL_tx'] = function(block) {
   // tx related values 
   var code
   var val = block.getFieldValue('PROP');
-  if (val == "_input_slot_count") // count of 32-byte slots isn't supported naitevly but we can have it calculated
+  if (val == "_input_slot_count") // count of 32-byte slots isn't supported natively but we can have it calculated
     code = '(add (div (calldatasize) 32) (if (mod calldatasize 32) 1 0) )' 
   else if (val == "_input_byte_count")
     code = '(calldatasize)' 
