@@ -629,6 +629,168 @@ bank: fnCommentToString(function(){/*!
 </xml>
 */}),
 
+splitter: fnCommentToString(function(){/*! 
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_comment" id="85" x="34" y="45">
+    <field name="NOTE">Cash splitter; splits the value sent amongst each of the addresses given as inputs.</field>
+  </block>
+  <block type="LLL_init" id="86" x="33" y="71">
+    <statement name="INIT">
+      <block type="LLL_mstore" id="87" inline="true">
+        <field name="SLOT">0</field>
+        <value name="VAL">
+          <block type="LLL_textval" id="88">
+            <field name="VAL">Splitter</field>
+          </block>
+        </value>
+        <next>
+          <block type="LLL_comment" id="89">
+            <field name="NOTE">Missing pieces default to 0 here</field>
+            <next>
+              <block type="LLL_call" id="90" inline="false">
+                <value name="ADDRESS">
+                  <block type="LLL_val" id="91">
+                    <field name="VAL">0x929b11b8eeea00966e873a241d4b67f7540d1f38</field>
+                  </block>
+                </value>
+                <value name="SEND_DATA_START">
+                  <block type="LLL_val" id="92">
+                    <field name="VAL">0</field>
+                  </block>
+                </value>
+                <value name="SEND_DATA_BYTES">
+                  <block type="LLL_val" id="93">
+                    <field name="VAL">8</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="94">
+        <field name="NOTE">The contract takes input as 20-byte addresses in a blob of bytes (yuck)</field>
+        <next>
+          <block type="LLL_mstore" id="95" inline="true">
+            <field name="SLOT">count</field>
+            <value name="VAL">
+              <block type="LLL_math" id="96" inline="true">
+                <field name="OP">div</field>
+                <value name="A">
+                  <block type="LLL_tx" id="97">
+                    <field name="PROP">_input_byte_count</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="LLL_val" id="98">
+                    <field name="VAL">20</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="LLL_mstore" id="99" inline="true">
+                <field name="SLOT">pay</field>
+                <value name="VAL">
+                  <block type="LLL_math" id="100" inline="true">
+                    <field name="OP">div</field>
+                    <value name="A">
+                      <block type="LLL_tx" id="101">
+                        <field name="PROP">callvalue</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_mval" id="102">
+                        <field name="VAL">count</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="LLL_forloop" id="103" inline="false">
+                    <statement name="FIRST">
+                      <block type="LLL_comment" id="104" disabled="true">
+                        <field name="NOTE">nothing. (A while loop would be prettier here)</field>
+                      </block>
+                    </statement>
+                    <value name="COND">
+                      <block type="LLL_compare" id="105" inline="true">
+                        <field name="OP">&lt;</field>
+                        <value name="A">
+                          <block type="LLL_mval" id="106">
+                            <field name="VAL">i</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_mval" id="107">
+                            <field name="VAL">count</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="LOOP">
+                      <block type="LLL_spend" id="108" inline="true">
+                        <value name="MONEY">
+                          <block type="LLL_mval" id="109">
+                            <field name="VAL">pay</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="LLL_load" id="110" inline="true">
+                            <field name="PLACE">_input_load_bytes</field>
+                            <value name="SLOT">
+                              <block type="LLL_math" id="111" inline="true">
+                                <field name="OP">*</field>
+                                <value name="A">
+                                  <block type="LLL_mval" id="112">
+                                    <field name="VAL">i</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="LLL_val" id="113">
+                                    <field name="VAL">20</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="AFTER_EACH">
+                      <block type="LLL_mstore" id="114" inline="true">
+                        <field name="SLOT">i</field>
+                        <value name="VAL">
+                          <block type="LLL_math" id="115" inline="true">
+                            <field name="OP">+</field>
+                            <value name="A">
+                              <block type="LLL_mval" id="116">
+                                <field name="VAL">i</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="LLL_val" id="117">
+                                <field name="VAL">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
+
 sub_currency: fnCommentToString(function(){/*! 
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="LLL_comment" id="84" x="28" y="11">
