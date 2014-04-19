@@ -459,43 +459,63 @@ name_registrar: fnCommentToString(function(){/*!
 
 bank: fnCommentToString(function(){/*!
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="LLL_comment" id="47" x="55" y="75">
-    <field name="NOTE">Cash splitter; splits the value sent amongst each of the addresses in the inputs</field>
+  <block type="LLL_comment" id="208" x="33" y="18">
+    <field name="NOTE">A very simple bank</field>
   </block>
-  <block type="LLL_init" id="48" x="54" y="99">
+  <block type="LLL_init" id="209" x="34" y="44">
     <statement name="INIT">
-      <block type="LLL_comment" id="49">
-        <field name="NOTE">Register with the name registrar</field>
+      <block type="LLL_comment" id="210">
+        <field name="NOTE">Register "Bank" with the name registration service</field>
         <next>
-          <block type="LLL_mstore" id="50" inline="true">
-            <field name="SLOT">0</field>
+          <block type="LLL_store" id="211" inline="true">
+            <field name="PLACE">mstore</field>
+            <value name="SLOT">
+              <block type="LLL_val" id="212">
+                <field name="VAL">0</field>
+              </block>
+            </value>
             <value name="VAL">
-              <block type="LLL_textval" id="51">
-                <field name="VAL">Splitter</field>
+              <block type="LLL_val" id="213">
+                <field name="VAL">"Bank"</field>
               </block>
             </value>
             <next>
-              <block type="LLL_comment" id="52">
-                <field name="NOTE">unsupplied values default to 0 here</field>
-                <next>
-                  <block type="LLL_call" id="53" inline="false">
-                    <value name="ADDRESS">
-                      <block type="LLL_val" id="54">
-                        <field name="VAL">0x929b11b8eeea00966e873a241d4b67f7540d1f38</field>
-                      </block>
-                    </value>
-                    <value name="SEND_DATA_START">
-                      <block type="LLL_val" id="55">
-                        <field name="VAL">0</field>
-                      </block>
-                    </value>
-                    <value name="SEND_DATA_BYTES">
-                      <block type="LLL_val" id="56">
-                        <field name="VAL">8</field>
-                      </block>
-                    </value>
+              <block type="LLL_call" id="214" inline="false">
+                <value name="ADDRESS">
+                  <block type="LLL_val" id="215">
+                    <field name="VAL">0x929b11b8eeea00966e873a241d4b67f7540d1f38</field>
                   </block>
-                </next>
+                </value>
+                <value name="MONEY">
+                  <block type="LLL_val" id="216">
+                    <field name="VAL">0</field>
+                  </block>
+                </value>
+                <value name="GAS">
+                  <block type="LLL_val" id="217">
+                    <field name="VAL">0</field>
+                  </block>
+                </value>
+                <value name="SEND_DATA_START">
+                  <block type="LLL_val" id="218">
+                    <field name="VAL">0</field>
+                  </block>
+                </value>
+                <value name="SEND_DATA_BYTES">
+                  <block type="LLL_val" id="219">
+                    <field name="VAL">4</field>
+                  </block>
+                </value>
+                <value name="REPLY_DATA_START">
+                  <block type="LLL_val" id="220">
+                    <field name="VAL">0</field>
+                  </block>
+                </value>
+                <value name="REPLY_DATA_BYTES">
+                  <block type="LLL_val" id="221">
+                    <field name="VAL">0</field>
+                  </block>
+                </value>
               </block>
             </next>
           </block>
@@ -503,124 +523,187 @@ bank: fnCommentToString(function(){/*!
       </block>
     </statement>
     <statement name="BODY">
-      <block type="LLL_comment" id="57">
-        <field name="NOTE">Apparently we're expecting a byte blob of 20-byte addresses as input (yuck)</field>
+      <block type="LLL_comment" id="222">
+        <field name="NOTE">Either withdraw or deposit</field>
         <next>
-          <block type="LLL_mstore" id="58" inline="true">
-            <field name="SLOT">count</field>
-            <value name="VAL">
-              <block type="LLL_math" id="59" inline="true">
-                <field name="OP">div</field>
+          <block type="LLL_if" id="223" inline="false">
+            <value name="COND">
+              <block type="LLL_compare" id="224" inline="false">
+                <field name="OP">&gt;=</field>
                 <value name="A">
-                  <block type="LLL_tx" id="60">
-                    <field name="PROP">_input_byte_count</field>
+                  <block type="LLL_load" id="225" inline="true">
+                    <field name="PLACE">sload</field>
+                    <value name="SLOT">
+                      <block type="LLL_contract" id="226">
+                        <field name="PROP">caller</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
                 <value name="B">
-                  <block type="LLL_val" id="61">
-                    <field name="VAL">20</field>
+                  <block type="LLL_load" id="227" inline="true">
+                    <field name="PLACE">_input_load_slots</field>
+                    <value name="SLOT">
+                      <block type="LLL_val" id="228">
+                        <field name="VAL">0</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
               </block>
             </value>
-            <next>
-              <block type="LLL_mstore" id="62" inline="true">
-                <field name="SLOT">pay</field>
-                <value name="VAL">
-                  <block type="LLL_math" id="63" inline="true">
-                    <field name="OP">div</field>
-                    <value name="A">
-                      <block type="LLL_tx" id="64">
-                        <field name="PROP">callvalue</field>
-                      </block>
-                    </value>
-                    <value name="B">
-                      <block type="LLL_mval" id="65">
-                        <field name="VAL">count</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
+            <statement name="THEN">
+              <block type="LLL_comment" id="229">
+                <field name="NOTE">Withdraw when the first input is given and doesn't exceed the account balance</field>
                 <next>
-                  <block type="LLL_comment" id="66">
-                    <field name="NOTE">Cycle through each address</field>
+                  <block type="LLL_comment" id="241">
+                    <field name="NOTE">Record the new (post-withdrawal) account balance</field>
                     <next>
-                      <block type="LLL_forloop" id="67" inline="false">
-                        <statement name="FIRST">
-                          <block type="LLL_comment" id="68" disabled="true">
-                            <field name="NOTE">nothing. (Using a while loop would look prettier here)</field>
+                      <block type="LLL_store" id="230" inline="false">
+                        <field name="PLACE">sstore</field>
+                        <value name="SLOT">
+                          <block type="LLL_contract" id="231">
+                            <field name="PROP">caller</field>
                           </block>
-                        </statement>
-                        <value name="COND">
-                          <block type="LLL_compare" id="69" inline="true">
-                            <field name="OP">&lt;</field>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_math" id="232" inline="false">
+                            <field name="OP">-</field>
                             <value name="A">
-                              <block type="LLL_mval" id="70">
-                                <field name="VAL">i</field>
+                              <block type="LLL_load" id="233" inline="true">
+                                <field name="PLACE">sload</field>
+                                <value name="SLOT">
+                                  <block type="LLL_contract" id="234">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
                               </block>
                             </value>
                             <value name="B">
-                              <block type="LLL_mval" id="71">
-                                <field name="VAL">count</field>
+                              <block type="LLL_load" id="235" inline="true">
+                                <field name="PLACE">_input_load_slots</field>
+                                <value name="SLOT">
+                                  <block type="LLL_val" id="236">
+                                    <field name="VAL">0</field>
+                                  </block>
+                                </value>
                               </block>
                             </value>
                           </block>
                         </value>
-                        <statement name="LOOP">
-                          <block type="LLL_spend" id="72" inline="true">
-                            <value name="MONEY">
-                              <block type="LLL_mval" id="73">
-                                <field name="VAL">pay</field>
-                              </block>
-                            </value>
-                            <value name="TO">
-                              <block type="LLL_load" id="74" inline="true">
-                                <field name="PLACE">_input_load_bytes</field>
-                                <value name="SLOT">
-                                  <block type="LLL_math" id="75" inline="true">
-                                    <field name="OP">*</field>
+                        <next>
+                          <block type="LLL_comment" id="242">
+                            <field name="NOTE">Send the withdrawal to the second input, if given, or else the caller</field>
+                            <next>
+                              <block type="LLL_if" id="237" inline="false">
+                                <value name="COND">
+                                  <block type="LLL_compare" id="239" inline="true">
+                                    <field name="OP">&lt;=</field>
                                     <value name="A">
-                                      <block type="LLL_mval" id="76">
-                                        <field name="VAL">i</field>
+                                      <block type="LLL_tx" id="238">
+                                        <field name="PROP">_input_byte_count</field>
                                       </block>
                                     </value>
                                     <value name="B">
-                                      <block type="LLL_val" id="77">
-                                        <field name="VAL">20</field>
+                                      <block type="LLL_val" id="240">
+                                        <field name="VAL">32</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
-                              </block>
-                            </value>
-                          </block>
-                        </statement>
-                        <statement name="AFTER_EACH">
-                          <block type="LLL_mstore" id="78" inline="true">
-                            <field name="SLOT">i</field>
-                            <value name="VAL">
-                              <block type="LLL_math" id="79" inline="true">
-                                <field name="OP">+</field>
-                                <value name="A">
-                                  <block type="LLL_mval" id="80">
-                                    <field name="VAL">i</field>
+                                <statement name="THEN">
+                                  <block type="LLL_spend" id="243" inline="true">
+                                    <value name="MONEY">
+                                      <block type="LLL_load" id="245" inline="true">
+                                        <field name="PLACE">_input_load_slots</field>
+                                        <value name="SLOT">
+                                          <block type="LLL_val" id="246">
+                                            <field name="VAL">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="TO">
+                                      <block type="LLL_contract" id="244">
+                                        <field name="PROP">caller</field>
+                                      </block>
+                                    </value>
                                   </block>
-                                </value>
-                                <value name="B">
-                                  <block type="LLL_val" id="81">
-                                    <field name="VAL">1</field>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="LLL_spend" id="247" inline="true">
+                                    <value name="MONEY">
+                                      <block type="LLL_load" id="251" inline="true">
+                                        <field name="PLACE">_input_load_slots</field>
+                                        <value name="SLOT">
+                                          <block type="LLL_val" id="252">
+                                            <field name="VAL">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="TO">
+                                      <block type="LLL_load" id="248" inline="true">
+                                        <field name="PLACE">_input_load_slots</field>
+                                        <value name="SLOT">
+                                          <block type="LLL_val" id="249">
+                                            <field name="VAL">1</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
                                   </block>
-                                </value>
+                                </statement>
                               </block>
-                            </value>
+                            </next>
                           </block>
-                        </statement>
+                        </next>
                       </block>
                     </next>
                   </block>
                 </next>
               </block>
-            </next>
+            </statement>
+            <statement name="ELSE">
+              <block type="LLL_comment" id="253">
+                <field name="NOTE">Deposit; just increase the account balance by that amount.</field>
+                <next>
+                  <block type="LLL_comment" id="254">
+                    <field name="NOTE">TODO: Shouldn't this happen outside the if block? (always credit them for sent funds)</field>
+                    <next>
+                      <block type="LLL_store" id="255" inline="false">
+                        <field name="PLACE">sstore</field>
+                        <value name="SLOT">
+                          <block type="LLL_contract" id="256">
+                            <field name="PROP">caller</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_math" id="259" inline="false">
+                            <field name="OP">+</field>
+                            <value name="A">
+                              <block type="LLL_load" id="257" inline="true">
+                                <field name="PLACE">sload</field>
+                                <value name="SLOT">
+                                  <block type="LLL_contract" id="258">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="LLL_tx" id="260">
+                                <field name="PROP">callvalue</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
           </block>
         </next>
       </block>
