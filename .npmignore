@@ -1,0 +1,5 @@
+.DS_Store
+notes/
+dev/
+clojure-library-read-only/
+bower_components/
