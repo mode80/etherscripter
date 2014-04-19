@@ -10,7 +10,7 @@
  * @author mode80@users.noreply.github.com
  */
 
-'use strict'
+'use strict';
 
 goog.provide('Blockly.Blocks.LLL')
 

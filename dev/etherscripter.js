@@ -18,7 +18,7 @@
 
 
 function clearCanvas() {
-  doc.el('content_XML').value = "<xml></xml>"
+  doc.el('content_XML').value = '<xml></xml>'
   window.xml_dirty = true 
   showBLL()
 }
@@ -30,7 +30,7 @@ function showBLL() {
   doc.el('content_BLL').style.display = 'block'
   var xmlText = doc.el('content_XML').value
   var xmlDom = null
-  Blockly.fireUiEvent(window,"resize")
+  Blockly.fireUiEvent(window,'resize')
   if (window.xml_dirty) {
     try {
       xmlDom = Blockly.Xml.textToDom(xmlText);
@@ -43,7 +43,7 @@ function showBLL() {
     Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xmlDom)
     window.xml_dirty = false
   }
-  Blockly.fireUiEvent(window,"resize")
+  Blockly.fireUiEvent(window,'resize')
 } 
 
 function showXML() {
@@ -99,7 +99,7 @@ function hideOthers() {
 
 function activeToolboxString(){
   // returns the active <block> items from the #toolbox XML as a string
-  window._toolbox_string = ""
+  window._toolbox_string = '' 
   var xmls = new XMLSerializer()
   $('#toolbox>block[active="true"]').each(function() { 
     window._toolbox_string += ( xmls.serializeToString( this ) + '\n') 
@@ -126,24 +126,24 @@ function allToolsOn(){
 function defaultToolsOn(){
   //define defaults
     var defaults = [
-      "comment",
-      "val",
-      "currency",
-      "tx",
-      "contract",
-      "blockinfo",
-      "math",
-      "compare",
-      "logic",
-      "store",
-      "mstore",
-      "mval",
-      "load",
-      "spend",
-      "stop",
-      "when",
-      "whileloop",
-      "init"
+      'comment',
+      'val',
+      'currency',
+      'tx',
+      'contract',
+      'blockinfo',
+      'math',
+      'compare',
+      'logic',
+      'store',
+      'mstore',
+      'mval',
+      'load',
+      'spend',
+      'stop',
+      'when',
+      'whileloop',
+      'init'
     ]
   //reset all to off
     $('#toolboxmenu>li').removeClass('active')  

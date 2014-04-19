@@ -3,8 +3,7 @@ var http = require('http')
 
 if (process.env.NODE_ENV=='development') {
 	var port = 8080
-	//var dir = __dirname 
-  var dir = __dirname + '/deploy' 
+	var dir = __dirname 
 } else {  // production settings
 	var port = 80
 	var dir = __dirname + '/deploy' 

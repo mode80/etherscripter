@@ -33,7 +33,7 @@ Blockly.LLL['LLL_mstore'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var slot = block.getFieldValue('SLOT') || 0
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  code = '[' + slot + ']:' + val
+  var code = '[' + slot + ']:' + val
   return code + '\n'
 }
 
@@ -42,7 +42,7 @@ Blockly.LLL['LLL_sstore'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var slot = block.getFieldValue('SLOT') || 0
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  code = '[[' + slot + ']]:' + val
+  var code = '[[' + slot + ']]:' + val
   return code + '\n'
 }
 
@@ -88,17 +88,15 @@ Blockly.LLL['LLL_spend'] = function(block) {
   var send_bytes = '0'
   var reply_start_i = '0'
   var reply_bytes = '0'
-  var code = '(call' + address + ' ' + money + ' 0)\n' 
-  var code = '(' 
-    + op + ' ' 
-    + address + ' ' 
-    + money + ' ' 
-    + gas + ' ' 
-    + send_start_i + ' ' 
-    + send_bytes + ' ' 
-    + reply_start_i + ' ' 
-    + reply_bytes
-    + ')\n' 
+  var code = '('+ 
+    op +' '+ 
+    address +' '+ 
+    money +' '+ 
+    gas +' '+ 
+    send_start_i +' '+ 
+    send_bytes +' '+ 
+    reply_start_i +' '+ 
+    reply_bytes + ')\n'
   return code
 }
 
@@ -129,16 +127,15 @@ Blockly.LLL['LLL_call'] = function(block) {
   var send_bytes = Blockly.LLL.valueToCode(block, 'SEND_DATA_BYTES', Blockly.LLL.ORDER_NONE) || 0
   var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE) || 0
   var reply_bytes = Blockly.LLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.LLL.ORDER_NONE) || 0
-  var code = '(' 
-    + op + ' ' 
-    + address + ' ' 
-    + money + ' ' 
-    + gas + ' ' 
-    + send_start_i + ' ' 
-    + send_bytes + ' ' 
-    + reply_start_i + ' ' 
-    + reply_bytes
-    + ')\n' 
+  var code = '('+ 
+    op +' '+ 
+    address +' '+ 
+    money +' '+ 
+    gas +' '+ 
+    send_start_i +' '+ 
+    send_bytes +' '+ 
+    reply_start_i +' '+ 
+    reply_bytes + ')\n'
   return code
 }
 
@@ -154,16 +151,15 @@ Blockly.LLL['LLL_send'] = function(block) {
   var reply_end_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_END', Blockly.LLL.ORDER_NONE) || 0
   var send_bytes = (send_end_i - send_start_i) * 32 
   var reply_bytes = (reply_end_i - reply_start_i) * 32 
-  var code = '(' 
-    + op + ' ' 
-    + address + ' ' 
-    + money + ' ' 
-    + gas + ' ' 
-    + send_start_i + ' ' 
-    + send_bytes + ' ' 
-    + reply_start_i + ' ' 
-    + reply_bytes
-    + ')\n' 
+  var code = '('+ 
+    op + ' '+ 
+    address + ' '+ 
+    money + ' '+ 
+    gas + ' '+ 
+    send_start_i + ' '+ 
+    send_bytes + ' '+ 
+    reply_start_i + ' '+ 
+    reply_bytes + ')\n'
   return code
 }
 
@@ -188,9 +184,9 @@ Blockly.LLL['LLL_tx'] = function(block) {
   // tx related values 
   var code
   var val = block.getFieldValue('PROP');
-  if (val == "_input_slot_count") // count of 32-byte slots isn't supported natively but we can have it calculated
+  if (val == '_input_slot_count') // count of 32-byte slots isn't supported natively but we can have it calculated
     code = '(add (div (calldatasize) 32) (if (mod calldatasize 32) 1 0) )' 
-  else if (val == "_input_byte_count")
+  else if (val == '_input_byte_count')
     code = '(calldatasize)' 
   else 
     code = '(' + val + ')'
@@ -325,6 +321,7 @@ Blockly.LLL['LLL_load'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
+  var code
   if (place=='sload') code = '@@' + slot
   if (place=='mload') code = '@' + slot
   if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
