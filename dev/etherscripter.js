@@ -17,7 +17,7 @@
   BlocklyStorage.backupOnUnload();
 
 
-function clearCanvas() {
+function clearWorkspace() {
   doc.el('content_XML').value = '<xml></xml>'
   window.xml_dirty = true 
   showBLL()
