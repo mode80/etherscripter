@@ -1,34 +1,46 @@
-// DOM manipulation abbreviations 
-  var doc = document ; doc.el = doc.getElementById
-  var unclass = goog.dom.classes.remove
-  var addclass = goog.dom.classes.add
+/*global Blockly,BlocklyStorage */
 
 // init block canvas
-  Blockly.inject(doc.el('content_BLL'),
+  Blockly.inject(document.getElementById('content_BLL'),
     {path: './',
-     toolbox: doc.el('toolbox'),
+     toolbox: document.getElementById('toolbox'),
      scrollbars: true,
      trashcan: false 
     });
+
   defaultToolsOn()
 
 // wire up local storage save/restore
   window.setTimeout(BlocklyStorage.restoreBlocks, 0);
   BlocklyStorage.backupOnUnload();
 
+// wire events 
+  Blockly.addChangeListener(onChange);
 
-function clearWorkspace() {
-  doc.el('content_XML').value = '<xml></xml>'
-  window.xml_dirty = true 
-  showBLL()
+// init other stuff
+  singlePane()
+
+function onChange() {
+  if (window.panes==2) showLLL(window.panes)
 }
 
-function showBLL() {
+function clearWorkspace() {
+  $('#content_XML').val('<xml></xml>')
+  window.xml_dirty = true 
+  showBLL(1)
+}
+
+function showBLL(pane) {
   // Show Blockly workspace 
-  hideOthers()
-  addclass(doc.el('btn_BLL'),'active')
-  doc.el('content_BLL').style.display = 'block'
-  var xmlText = doc.el('content_XML').value
+  pane = pane || 1
+  var content_BLL = $('#content_BLL')
+  content_BLL.prependTo($('#pane'+pane))
+  deactivateOthers(pane)
+  content_BLL.css('z-index',9)
+  $('#btn_BLL'+pane).addClass('active')
+  $('#content_BLL').show()
+  // Paint blocks 
+  var xmlText = $('#content_XML').val()
   var xmlDom = null
   Blockly.fireUiEvent(window,'resize')
   if (window.xml_dirty) {
@@ -46,55 +58,61 @@ function showBLL() {
   Blockly.fireUiEvent(window,'resize')
 } 
 
-function showXML() {
+function showXML(pane) {
+  pane = pane || 1
+  var content_XML = $('#content_XML')
+  content_XML.prependTo($('#pane'+pane))
   var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom)
-  var content_XML = doc.el('content_XML')
-  hideOthers()
-  addclass(doc.el('btn_XML'),'active')
-  content_XML.style.display = 'block'
-  content_XML.value = xmlText
+  deactivateOthers(pane)
+  content_XML.css('z-index',9)
+  $('#btn_XML'+pane).addClass('active')
+  $('#content_BLL').hide()
+  content_XML.val(xmlText)
 }
 
-function showHLL() {
-  // Generate HLL code and display it.
-  contentXMLToBLL() 
-  hideOthers()
-  doc.el('content_HLL').style.display = 'block'
-  addclass(doc.el('btn_HLL'),'active')
-}
-
-function showLLL() {
+function showLLL(pane) {
+  pane = pane || 1
+  var content_LLL = $('#content_LLL')
+  content_LLL.prependTo($('#pane'+pane))
   // Generate LLL code and display it.
-  showBLL() // this must be visible to get the code out 
+  //showBLL() // this must be visible to get the code out 
   var code = Blockly.LLL.workspaceToCode();
-  var content_LLL = doc.el('content_LLL')
-  hideOthers()
-  addclass(doc.el('btn_LLL'),'active')
-  content_LLL.style.display = 'block'
-  content_LLL.innerHTML = code
+  deactivateOthers(pane)
+  content_LLL.css('z-index',9)
+  $('#btn_LLL'+pane).addClass('active')
+  content_LLL.html(code)
 }
 
-function showEVM() {
-  // Generate HLL code and display it.
-  hideOthers()
-  doc.el('content_EVM').style.display = 'block'
-  addclass(doc.el('btn_EVM'),'active')
-  contentXMLToBLL() 
+function deactivateOthers(pane){
+  pane = pane || 1
+  $('#content_BLL').css('z-index', 3)
+  $('#content_LLL').css('z-index', 2)
+  $('#content_XML').css('z-index', 1)
+  $('#pane'+pane+' .btn-show').removeClass('active')
 }
 
+function singlePane(){
+  $('.pane2-item').hide()
+  $('#pane1').css('width','100%')
+  $('.1pane-only').show()
+  Blockly.fireUiEvent(window,'resize')
+  $('#mnuSinglePane').addClass('active')
+  $('#mnuSplitPane').removeClass('active')
+  window.panes = 1 
+}
 
-function hideOthers() {
-  doc.el('content_BLL').style.display = 'none'
-  unclass(doc.el('btn_BLL'), 'active')
-  doc.el('content_XML').style.display = 'none'
-  unclass(doc.el('btn_XML'), 'active')
-  doc.el('content_HLL').style.display = 'none'
-  unclass(doc.el('btn_HLL'), 'active')
-  doc.el('content_LLL').style.display = 'none'
-  unclass(doc.el('btn_LLL'), 'active')
-  doc.el('content_EVM').style.display = 'none'
-  unclass(doc.el('btn_EVM'), 'active')
+function splitPane(){
+  $('.pane2-item').show()
+  $('.1pane-only').hide()
+  $('#pane1').css('width','50%') 
+  $('#pane2').css('width','50%') 
+  $('#pane2').css('left','50%') 
+  Blockly.fireUiEvent(window,'resize')
+  $('#mnuSinglePane').removeClass('active')
+  $('#mnuSplitPane').addClass('active')
+  window.panes = 2 
+  onChange() // kick 2nd pane refresh as if on edit 
 }
 
 function activeToolboxString(){
