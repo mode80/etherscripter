@@ -5,7 +5,9 @@
   "version": "0.4.0-12",
   "dependencies": {
     "http-server": "^0.6.1",
-    "connect": "2.14.x"
+    "connect": "2.14.x",
+    "connect-fonts": "^1.0.0",
+    "connect-fonts-lato": "0.0.1"
   },
   "devDependencies": {
     "gulp": "3.5.x",

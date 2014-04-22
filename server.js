@@ -1,5 +1,7 @@
 var connect = require('connect')
 var http = require('http')
+var font_middleware = require("connect-fonts");
+var lato = require("connect-fonts-lato");
 
 if (process.env.NODE_ENV=='development') {
 	var port = 8080
@@ -11,9 +13,13 @@ if (process.env.NODE_ENV=='development') {
 
 connect()
   .use(redirVersion)
+  .use(font_middleware.setup({
+    fonts: [ lato ],
+    maxage: 15552000000, // 180 days
+    compress: true
+  }))
   .use(connect.static(dir))
   .listen(port)
-
 
 function redirVersion(req,res,next) {
   if (req.url == '/') { 
