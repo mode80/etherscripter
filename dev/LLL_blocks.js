@@ -118,7 +118,7 @@ Blockly.Blocks['LLL_blockinfo'] = {
     var VALS =
         [
          ['number', 'number'],
-         ['prevhash', 'prevhash'],
+         ['previous hash', 'prevhash'],
          ['coinbase', 'coinbase'],
          ['timestamp', 'timestamp'],
          ['difficulty', 'difficulty'],

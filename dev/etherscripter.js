@@ -14,11 +14,31 @@
   window.setTimeout(BlocklyStorage.restoreBlocks, 0);
   BlocklyStorage.backupOnUnload();
 
-// wire events 
-  Blockly.addChangeListener(onChange);
+// wire splitter events
+    $('#splitter').mousedown(function(){ 
+      window.split_dragging = true 
+    })
+    $(document).mousemove(function(event){
+      if (window.split_dragging) {
+        $('#pane1').css('width',(event.pageX))
+        Blockly.fireUiEvent(window,'resize')
+      }
+    })
+    $('#splitter').mouseup(function(event){
+      if (window.split_dragging) {
+        window.split_dragging = false
+        Blockly.fireUiEvent(window,'resize')
+      }
+    })
 
 // init other stuff
-  singlePane()
+  $(function(){ // onready
+
+    Blockly.addChangeListener(onChange);
+
+    singlePane()
+
+  })
 
 function onChange() {
   if (window.panes==2) showLLL(window.panes)
@@ -106,8 +126,6 @@ function splitPane(){
   $('.pane2-item').show()
   $('.1pane-only').hide()
   $('#pane1').css('width','50%') 
-  $('#pane2').css('width','50%') 
-  $('#pane2').css('left','50%') 
   Blockly.fireUiEvent(window,'resize')
   $('#mnuSinglePane').removeClass('active')
   $('#mnuSplitPane').addClass('active')
