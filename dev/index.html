@@ -16,7 +16,7 @@
 
 <!-- Menu Bar -->
   <div class="navbar navbar-default navbar-fixed-top navbar-left" role="navigation">
-    <a class="navbar-brand" href="#" style="margin-right:100px">EtherScripter</a>
+    <a class="navbar-brand" style="margin-right:100px">EtherScripter</a>
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -31,72 +31,73 @@
         <li class="dropdown" > 
           <a href="." class="dropdown-toggle" data-toggle="dropdown">View<b class="caret"></b> </a>
           <ul class="dropdown-menu" >
-            <li id="mnuSinglePane" class="active"><a href="#" onclick="singlePane()">Single Pane</a></li>
-            <li id="mnuSplitPane"><a href="#" onclick="splitPane()">Split Pane</a></li>
+            <li id="single-menu" class="active"><a onclick="singlePane()">Single Pane</a></li>
+            <li id="split-menu"><a onclick="splitPane()">Split Pane</a></li>
             <li class="divider"></li> 
-            <li><a href="#" onclick="showBLL(1)">Show Blocks</a></li>
-            <li><a href="#" onclick="showXML(1)">Show XML</a></li>
-            <li><a href="#" onclick="showLLL(panes)">Show LLL</a></li>
+            <li><a onclick="showBLL(1)">Show Blocks</a></li>
+            <li><a onclick="showXML(1)">Show XML</a></li>
+            <li><a onclick="showLLL(panes)">Show LLL</a></li>
           </ul>
         </li>
         <!-- Toolbox -->
         <li class="dropdown"> 
           <a href="." class="dropdown-toggle" data-toggle="dropdown">Toolbox<b class="caret"></b> </a>
           <ul class="dropdown-menu" id="toolboxmenu" >
-            <li onclick="allToolsOn()" id="allon"><a href="#">All</a></li>
-            <li onclick="defaultToolsOn()" id="defaultson"><a href="#">Defaults</a></li>
+            <li onclick="allToolsOn(event)" id="all-on"><a class='all'>All</a></li>
+            <li onclick="someToolsOn(event)" id="minimal-on"><a class="minimal">Minimal</a></li>
+            <li onclick="someToolsOn(event)" id="typical-on"><a class="typical">Typical</a></li>
             <li class="divider"></li> 
-            <li onclick="toggleTool(event)" id="comment"><a href="#">comment</a></li>
-            <li onclick="toggleTool(event)" id="val"><a href="#">value</a></li>
-            <li onclick="toggleTool(event)" id="textval"><a href="#">text value</a></li>
-            <li onclick="toggleTool(event)" id="currency"><a href="#">currency</a></li>
-            <li onclick="toggleTool(event)" id="tx"><a href="#">transaction info</a></li>
-            <li onclick="toggleTool(event)" id="contract"><a href="#">contract info</a></li>
-            <li onclick="toggleTool(event)" id="blockinfo"><a href="#">block info</a></li>
-            <li onclick="toggleTool(event)" id="math"><a href="#">math</a></li>
-            <li onclick="toggleTool(event)" id="compare"><a href="#">compare</a></li>
-            <li onclick="toggleTool(event)" id="logic"><a href="#">logic</a></li>
-            <li onclick="toggleTool(event)" id="store"><a href="#">store</a></li>
-            <li onclick="toggleTool(event)" id="load"><a href="#">load</a></li>
-            <li onclick="toggleTool(event)" id="mstore"><a href="#">memory store</a></li>
-            <li onclick="toggleTool(event)" id="mval"><a href="#">memory value</a></li>
-            <li onclick="toggleTool(event)" id="sstore"><a href="#">storage store</a></li>
-            <li onclick="toggleTool(event)" id="sval"><a href="#">storage value</a></li>
-            <li onclick="toggleTool(event)" id="spend"><a href="#">spend</a></li>
-            <li onclick="toggleTool(event)" id="stop"><a href="#">stop</a></li>
-            <li onclick="toggleTool(event)" id="suicide"><a href="#">self destruct</a></li>
-            <li onclick="toggleTool(event)" id="when"><a href="#">when</a></li>
-            <li onclick="toggleTool(event)" id="if"><a href="#">if</a></li>
-            <li onclick="toggleTool(event)" id="whileloop"><a href="#">while loop</a></li>
-            <li onclick="toggleTool(event)" id="init"><a href="#">init</a></li>
-            <li onclick="toggleTool(event)" id="prefixop"><a href="#">prefix</a></li>
-            <li onclick="toggleTool(event)" id="byte"><a href="#">byte</a></li>
-            <li onclick="toggleTool(event)" id="balance"><a href="#">balance</a></li>
-            <li onclick="toggleTool(event)" id="call"><a href="#">call</a></li>
-            <li onclick="toggleTool(event)" id="send"><a href="#">send</a></li>
-            <li onclick="toggleTool(event)" id="return"><a href="#">reply</a></li>
-            <li onclick="toggleTool(event)" id="hash"><a href="#">hash</a></li>
-            <li onclick="toggleTool(event)" id="forloop"><a href="#">for loop</a></li>
+            <li onclick="toggleTool(event)" id="comment"><a>comment</a></li>
+            <li onclick="toggleTool(event)" id="val"><a>value</a></li>
+            <li onclick="toggleTool(event)" id="textval"><a>text value</a></li>
+            <li onclick="toggleTool(event)" id="currency"><a>currency</a></li>
+            <li onclick="toggleTool(event)" id="tx"><a>transaction info</a></li>
+            <li onclick="toggleTool(event)" id="contract"><a>contract info</a></li>
+            <li onclick="toggleTool(event)" id="blockinfo"><a>block info</a></li>
+            <li onclick="toggleTool(event)" id="math"><a>math</a></li>
+            <li onclick="toggleTool(event)" id="compare"><a>compare</a></li>
+            <li onclick="toggleTool(event)" id="logic"><a>logic</a></li>
+            <li onclick="toggleTool(event)" id="store"><a>store</a></li>
+            <li onclick="toggleTool(event)" id="load"><a>load</a></li>
+            <li onclick="toggleTool(event)" id="mstore"><a>memory store</a></li>
+            <li onclick="toggleTool(event)" id="mval"><a>memory value</a></li>
+            <li onclick="toggleTool(event)" id="sstore"><a>storage store</a></li>
+            <li onclick="toggleTool(event)" id="sval"><a>storage value</a></li>
+            <li onclick="toggleTool(event)" id="spend"><a>spend</a></li>
+            <li onclick="toggleTool(event)" id="stop"><a>stop</a></li>
+            <li onclick="toggleTool(event)" id="suicide"><a>self destruct</a></li>
+            <li onclick="toggleTool(event)" id="when"><a>when</a></li>
+            <li onclick="toggleTool(event)" id="if"><a>if</a></li>
+            <li onclick="toggleTool(event)" id="whileloop"><a>while loop</a></li>
+            <li onclick="toggleTool(event)" id="init"><a>init</a></li>
+            <li onclick="toggleTool(event)" id="prefixop"><a>prefix</a></li>
+            <li onclick="toggleTool(event)" id="byte"><a>byte</a></li>
+            <li onclick="toggleTool(event)" id="balance"><a>balance</a></li>
+            <li onclick="toggleTool(event)" id="call"><a>call</a></li>
+            <li onclick="toggleTool(event)" id="send"><a>send</a></li>
+            <li onclick="toggleTool(event)" id="return"><a>reply</a></li>
+            <li onclick="toggleTool(event)" id="hash"><a>hash</a></li>
+            <li onclick="toggleTool(event)" id="forloop"><a>for loop</a></li>
           </ul>
         </li>
         <!-- Workspace -->
         <li class="dropdown" > 
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Workspace<b class="caret"></b> </a>
+          <a class="dropdown-toggle" data-toggle="dropdown">Workspace<b class="caret"></b> </a>
           <ul class="dropdown-menu" >
-            <li><a href="#" onclick="clearWorkspace()">Clear All</a></li>
+            <li><a onclick="clearWorkspace()">Clear All</a></li>
           </ul>
         </li>
         <!-- Samples -->
         <li class="dropdown"> 
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">
             Samples<b class="caret"></b>
           </a>
           <ul class="dropdown-menu" >
-            <li><a href="#" onclick="loadSample(event)" id="data_feed">Data Feed</a></li>
-            <li><a href="#" onclick="loadSample(event)" id="name_registrar">Name Registrar</a></li>
-            <li><a href="#" onclick="loadSample(event)" id="bank">Simple Bank</a></li>
-            <li><a href="#" onclick="loadSample(event)" >Splitter</a></li>
-            <li><a href="#" onclick="loadSample(event)" id="sub_currency">Sub Currency</a></li>
+            <li><a onclick="loadSample(event)" id="data_feed">Data Feed</a></li>
+            <li><a onclick="loadSample(event)" id="name_registrar">Name Registrar</a></li>
+            <li><a onclick="loadSample(event)" id="bank">Simple Bank</a></li>
+            <li><a onclick="loadSample(event)" id="splitter_contract">Splitter</a></li>
+            <li><a onclick="loadSample(event)" id="sub_currency">Sub Currency</a></li>
           </ul>
         </li>
         <!-- About -->
@@ -110,16 +111,16 @@
     <div style="clear:both;"></div>
     <!-- Pane 1 -->
     <div id="pane1"style="position:relative; float:left; width:100%; height:10000px">
-      <div id="content_BLL" 
+      <div id="content-BLL" 
         style="z-index:3; position:absolute; width:100%; height:10000px" ></div>
-      <textarea id="content_XML" wrap="off" class="code" onkeydown="window.xml_dirty=true" 
+      <textarea id="content-XML" wrap="off" class="code" onkeydown="window.xml_dirty=true" 
         style="z-index:2; position:absolute; width:100%; height:10000px"></textarea>
-      <textarea id="content_LLL" disabled wrap="off" class="code" 
+      <textarea id="content-LLL" disabled wrap="off" class="code" 
         style="z-index:1; position:absolute; width:100%; height:10000px;"></textarea>
       <div class="btn-group-vertical" style="position:absolute; top:10px; right:10px ; z-index:10">
-        <li id="btn_BLL1" class="btn btn-default btn-show active" onclick="showBLL(1)" ontouchstart="showBLL(1)">Show Blocks</li>
-        <li id="btn_XML1" class="btn btn-default btn-show" onclick="showXML(1)" ontouchstart="showXML(1)">Show XML</li>
-        <li id="btn_LLL1" class="btn btn-default btn-show 1pane-only" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
+        <li id="btn-BLL1" class="btn btn-default btn-show active" onclick="showBLL(1)" ontouchstart="showBLL(1)">Show Blocks</li>
+        <li id="btn-XML1" class="btn btn-default btn-show" onclick="showXML(1)" ontouchstart="showXML(1)">Show XML</li>
+        <li id="btn-LLL1" class="btn btn-default btn-show 1pane-only" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
       </div>
     </div>
     <!-- Splitter -->
@@ -130,7 +131,7 @@
     <div id="pane2" class="pane2-item" 
       style="position:relative; overflow:hidden; height:10000px; display:none;" >
       <div class="btn-group-vertical pane2-item" style="position:absolute; top:10px; right:10px ; z-index:10">
-        <li id="btn_LLL2" class="btn btn-default btn-show" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
+        <li id="btn-LLL2" class="btn btn-default btn-show" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
       </div>
     </div>
   </div>

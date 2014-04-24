@@ -1,14 +1,15 @@
 /*global Blockly,BlocklyStorage */
 
 // init block canvas
-  Blockly.inject(document.getElementById('content_BLL'),
+  Blockly.inject(document.getElementById('content-BLL'),
     {path: './',
      toolbox: document.getElementById('toolbox'),
      scrollbars: true,
      trashcan: false 
     });
 
-  defaultToolsOn()
+// simulate menu click for typical tools
+  someToolsOn({target:{className:'minimal'}}) 
 
 // wire up local storage save/restore
   window.setTimeout(BlocklyStorage.restoreBlocks, 0);
@@ -45,7 +46,7 @@ function onChange() {
 }
 
 function clearWorkspace() {
-  $('#content_XML').val('<xml></xml>')
+  $('#content-XML').val('<xml></xml>')
   window.xml_dirty = true 
   showBLL(1)
 }
@@ -53,14 +54,14 @@ function clearWorkspace() {
 function showBLL(pane) {
   // Show Blockly workspace 
   pane = pane || 1
-  var content_BLL = $('#content_BLL')
+  var content_BLL = $('#content-BLL')
   content_BLL.prependTo($('#pane'+pane))
   deactivateOthers(pane)
   content_BLL.css('z-index',9)
-  $('#btn_BLL'+pane).addClass('active')
-  $('#content_BLL').show()
+  $('#btn-BLL'+pane).addClass('active')
+  $('#content-BLL').show()
   // Paint blocks 
-  var xmlText = $('#content_XML').val()
+  var xmlText = $('#content-XML').val()
   var xmlDom = null
   Blockly.fireUiEvent(window,'resize')
   if (window.xml_dirty) {
@@ -80,35 +81,35 @@ function showBLL(pane) {
 
 function showXML(pane) {
   pane = pane || 1
-  var content_XML = $('#content_XML')
+  var content_XML = $('#content-XML')
   content_XML.prependTo($('#pane'+pane))
   var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom)
   deactivateOthers(pane)
   content_XML.css('z-index',9)
-  $('#btn_XML'+pane).addClass('active')
-  $('#content_BLL').hide()
+  $('#btn-XML'+pane).addClass('active')
+  $('#content-BLL').hide()
   content_XML.val(xmlText)
 }
 
 function showLLL(pane) {
   pane = pane || 1
-  var content_LLL = $('#content_LLL')
+  var content_LLL = $('#content-LLL')
   content_LLL.prependTo($('#pane'+pane))
   // Generate LLL code and display it.
   //showBLL() // this must be visible to get the code out 
   var code = Blockly.LLL.workspaceToCode();
   deactivateOthers(pane)
   content_LLL.css('z-index',9)
-  $('#btn_LLL'+pane).addClass('active')
+  $('#btn-LLL'+pane).addClass('active')
   content_LLL.html(code)
 }
 
 function deactivateOthers(pane){
   pane = pane || 1
-  $('#content_BLL').css('z-index', 3)
-  $('#content_LLL').css('z-index', 2)
-  $('#content_XML').css('z-index', 1)
+  $('#content-BLL').css('z-index', 3)
+  $('#content-LLL').css('z-index', 2)
+  $('#content-XML').css('z-index', 1)
   $('#pane'+pane+' .btn-show').removeClass('active')
 }
 
@@ -117,8 +118,8 @@ function singlePane(){
   $('#pane1').css('width','100%')
   $('.1pane-only').show()
   Blockly.fireUiEvent(window,'resize')
-  $('#mnuSinglePane').addClass('active')
-  $('#mnuSplitPane').removeClass('active')
+  $('#single-menu').addClass('active')
+  $('#split-menu').removeClass('active')
   window.panes = 1 
 }
 
@@ -127,8 +128,8 @@ function splitPane(){
   $('.1pane-only').hide()
   $('#pane1').css('width','50%') 
   Blockly.fireUiEvent(window,'resize')
-  $('#mnuSinglePane').removeClass('active')
-  $('#mnuSplitPane').addClass('active')
+  $('#single-menu').removeClass('active')
+  $('#split-menu').addClass('active')
   window.panes = 2 
   onChange() // kick 2nd pane refresh as if on edit 
 }
@@ -152,19 +153,19 @@ function toggleTool(event) {
   event.stopPropagation() // stop menu vanish 
 }
 
-function allToolsOn(){
+function allToolsOn(event){
   $('#toolboxmenu>li').addClass('active')  
   $('#toolbox block').attr('active','true')
   Blockly.updateToolbox(activeToolboxString())
-  $('#allon, #defaultson').removeClass('active')
+  $('#all-on, #typical-on, #minimal-on').removeClass('active')
+  $('#' + event.target.className + '-on').addClass('active')
 }
 
-function defaultToolsOn(){
+function someToolsOn(event){
   //define defaults
-    var defaults = [
+    var minimal = [
       'comment',
       'val',
-      'currency',
       'tx',
       'contract',
       'blockinfo',
@@ -172,25 +173,36 @@ function defaultToolsOn(){
       'compare',
       'logic',
       'store',
-      'mstore',
-      'mval',
       'load',
       'spend',
       'stop',
       'when',
       'whileloop',
-      'init'
     ]
-  //reset all to off
+    var typical = minimal.concat([
+      'currency',
+      'mstore',
+      'mval',
+      'init',
+      'if',
+    ])
+  // which set was picked?
+    var toolset
+    if (event.target.className == 'minimal')
+      toolset = minimal
+    else
+      toolset = typical
+  // first reset all to off
     $('#toolboxmenu>li').removeClass('active')  
     $('#toolbox block').attr('active','false')
-  // turn on defaults
-    var i = defaults.length
+  // turn on picked set 
+    var i = toolset.length
     while (i--){
-      var id = defaults[i]
+      var id = toolset[i]
       $('#'+id).addClass('active')  
       $('#toolbox block[type="LLL_'+id+'"]').attr('active','true')
     }
+    $('#' + event.target.className + '-on').addClass('active')
   // render result
     Blockly.updateToolbox(activeToolboxString())
 }

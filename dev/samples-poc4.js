@@ -1,6 +1,6 @@
 function loadSample(event) {
   var sample_id = event.target.id
-  document.getElementById('content_XML')
+  document.getElementById('content-XML')
     .value = samples[sample_id]
   window.xml_dirty = true
   showBLL()
@@ -712,7 +712,7 @@ bank: fnCommentToString(function(){/*!
 </xml>
 */}),
 
-splitter: fnCommentToString(function(){/*! 
+splitter_contract: fnCommentToString(function(){/*! 
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="LLL_comment" id="85" x="34" y="45">
     <field name="NOTE">Cash splitter; splits the value sent amongst each of the addresses given as inputs.</field>
