@@ -126,7 +126,7 @@ function singlePane(){
 function splitPane(){
   $('.pane2-item').show()
   $('.1pane-only').hide()
-  $('#pane1').css('width','50%') 
+  $('#pane1').css('width','60%') 
   Blockly.fireUiEvent(window,'resize')
   $('#single-menu').removeClass('active')
   $('#split-menu').addClass('active')
