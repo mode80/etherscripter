@@ -16,6 +16,527 @@ function fnCommentToString(f) {
 
 var samples = {
 
+toothfairy: fnCommentToString(function(){/*! 
+<xml>
+  <block type="LLL_comment" id="757" x="60" y="84">
+    <field name="NOTE">Toothfairy smart contract</field>
+  </block>
+  <block type="LLL_init" id="758" x="59" y="110">
+    <statement name="INIT">
+      <block type="LLL_store" id="759" inline="true">
+        <field name="PLACE">sstore</field>
+        <value name="SLOT">
+          <block type="LLL_val" id="760">
+            <field name="VAL">CHILD</field>
+          </block>
+        </value>
+        <value name="VAL">
+          <block type="LLL_val" id="761">
+            <field name="VAL">0xb7b2e5e12992267f85455ffee1435f02760402f0</field>
+          </block>
+        </value>
+        <next>
+          <block type="LLL_store" id="762" inline="true">
+            <field name="PLACE">sstore</field>
+            <value name="SLOT">
+              <block type="LLL_val" id="763">
+                <field name="VAL">TOOTHFAIRY</field>
+              </block>
+            </value>
+            <value name="VAL">
+              <block type="LLL_val" id="764">
+                <field name="VAL">0xc61185cffa955bd1a6b914a6c616b3cdd5206aa1</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="786">
+        <field name="NOTE">Child calling... with proof of lost tooth given as the contract input</field>
+        <next>
+          <block type="LLL_when" id="765" inline="false">
+            <field name="WORD">when</field>
+            <value name="COND">
+              <block type="LLL_compare" id="766" inline="true">
+                <field name="OP">=</field>
+                <value name="A">
+                  <block type="LLL_contract" id="767">
+                    <field name="PROP">caller</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="LLL_load" id="768" inline="true">
+                    <field name="PLACE">sload</field>
+                    <value name="SLOT">
+                      <block type="LLL_val" id="769">
+                        <field name="VAL">CHILD</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="THEN">
+              <block type="LLL_store" id="770" inline="false">
+                <field name="PLACE">sstore</field>
+                <value name="SLOT">
+                  <block type="LLL_val" id="771">
+                    <field name="VAL">PROOF_OF_TOOTH</field>
+                  </block>
+                </value>
+                <value name="VAL">
+                  <block type="LLL_load" id="772" inline="true">
+                    <field name="PLACE">_input_load_slots</field>
+                    <value name="SLOT">
+                      <block type="LLL_val" id="773">
+                        <field name="VAL">0</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="LLL_comment" id="787">
+                <field name="NOTE">Toothfairy calling... to release contract funds to child</field>
+                <next>
+                  <block type="LLL_if" id="774" inline="false">
+                    <value name="COND">
+                      <block type="LLL_compare" id="775" inline="true">
+                        <field name="OP">=</field>
+                        <value name="A">
+                          <block type="LLL_contract" id="776">
+                            <field name="PROP">caller</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_load" id="777" inline="true">
+                            <field name="PLACE">sload</field>
+                            <value name="SLOT">
+                              <block type="LLL_val" id="778">
+                                <field name="VAL">TOOTHFAIRY</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="THEN">
+                      <block type="LLL_spend" id="779" inline="true">
+                        <value name="MONEY">
+                          <block type="LLL_contract" id="780">
+                            <field name="PROP">balance</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="LLL_load" id="781" inline="true">
+                            <field name="PLACE">sload</field>
+                            <value name="SLOT">
+                              <block type="LLL_val" id="782">
+                                <field name="VAL">CHILD</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="LLL_comment" id="788">
+                        <field name="NOTE">Anyone else calling just gets their funds back</field>
+                        <next>
+                          <block type="LLL_spend" id="783" inline="true">
+                            <value name="MONEY">
+                              <block type="LLL_tx" id="784">
+                                <field name="PROP">callvalue</field>
+                              </block>
+                            </value>
+                            <value name="TO">
+                              <block type="LLL_contract" id="785">
+                                <field name="PROP">caller</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>*/
+}),
+
+
+insurance: fnCommentToString(function(){/*! 
+<xml>
+  <block type="LLL_comment" id="608" x="17" y="18">
+    <field name="NOTE">Insurance Policy</field>
+  </block>
+  <block type="LLL_init" id="609" x="18" y="43">
+    <statement name="INIT">
+      <block type="LLL_store" id="610" inline="true">
+        <field name="PLACE">sstore</field>
+        <value name="SLOT">
+          <block type="LLL_val" id="611">
+            <field name="VAL">CUSTOMER</field>
+          </block>
+        </value>
+        <value name="VAL">
+          <block type="LLL_val" id="612">
+            <field name="VAL">0xb7b2e5e12992267f85455ffee1435f02760402f0</field>
+          </block>
+        </value>
+        <next>
+          <block type="LLL_store" id="613" inline="true">
+            <field name="PLACE">sstore</field>
+            <value name="SLOT">
+              <block type="LLL_val" id="614">
+                <field name="VAL">CLAIM_ADJUSTER</field>
+              </block>
+            </value>
+            <value name="VAL">
+              <block type="LLL_val" id="615">
+                <field name="VAL">0xc61185cffa955bd1a6b914a6c616b3cdd5206aa1</field>
+              </block>
+            </value>
+            <next>
+              <block type="LLL_store" id="639" inline="true">
+                <field name="PLACE">sstore</field>
+                <value name="SLOT">
+                  <block type="LLL_val" id="642">
+                    <field name="VAL">MONTHLY_PREMIUM</field>
+                  </block>
+                </value>
+                <value name="VAL">
+                  <block type="LLL_currency" id="640" inline="true">
+                    <field name="DENOM">ether</field>
+                    <value name="AMT">
+                      <block type="LLL_val" id="641">
+                        <field name="VAL">100</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="LLL_comment" id="646">
+                    <field name="NOTE">Seconds in a month: 2628000, Seconds since 1970 on 1/1/2014: 1387584000</field>
+                    <next>
+                      <block type="LLL_store" id="643" inline="true">
+                        <field name="PLACE">sstore</field>
+                        <value name="SLOT">
+                          <block type="LLL_val" id="645">
+                            <field name="VAL">START_DATE</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_val" id="644">
+                            <field name="VAL">1387584000</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="LLL_store" id="671" inline="true">
+                            <field name="PLACE">sstore</field>
+                            <value name="SLOT">
+                              <block type="LLL_val" id="672">
+                                <field name="VAL">ARBITRATOR</field>
+                              </block>
+                            </value>
+                            <value name="VAL">
+                              <block type="LLL_val" id="673">
+                                <field name="VAL">0x38155ef3698a43b24b054d816a8a5f79fc148623</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="637">
+        <field name="NOTE">Customer calling... with claim evidence provided as the contract input</field>
+        <next>
+          <block type="LLL_when" id="616" inline="false">
+            <field name="WORD">when</field>
+            <value name="COND">
+              <block type="LLL_compare" id="617" inline="true">
+                <field name="OP">=</field>
+                <value name="A">
+                  <block type="LLL_contract" id="618">
+                    <field name="PROP">caller</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="LLL_load" id="619" inline="true">
+                    <field name="PLACE">sload</field>
+                    <value name="SLOT">
+                      <block type="LLL_val" id="620">
+                        <field name="VAL">CUSTOMER</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="THEN">
+              <block type="LLL_comment" id="683">
+                <field name="NOTE">Increment customer's balance with the amount he's sending in</field>
+                <next>
+                  <block type="LLL_store" id="647" inline="true">
+                    <field name="PLACE">sstore</field>
+                    <value name="SLOT">
+                      <block type="LLL_val" id="648">
+                        <field name="VAL">CUSTOMER_BALANCE</field>
+                      </block>
+                    </value>
+                    <value name="VAL">
+                      <block type="LLL_math" id="650" inline="true">
+                        <field name="OP">+</field>
+                        <value name="A">
+                          <block type="LLL_val" id="651">
+                            <field name="VAL">CUSTOMER_BALANCE</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_tx" id="649">
+                            <field name="PROP">callvalue</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="LLL_store" id="621" inline="true">
+                        <field name="PLACE">sstore</field>
+                        <value name="SLOT">
+                          <block type="LLL_val" id="622">
+                            <field name="VAL">PROOF_OF_GOOF</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_load" id="623" inline="true">
+                            <field name="PLACE">_input_load_slots</field>
+                            <value name="SLOT">
+                              <block type="LLL_val" id="624">
+                                <field name="VAL">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="LLL_comment" id="638">
+                <field name="NOTE">Adjuster calling... with the payout amount as the contract input</field>
+                <next>
+                  <block type="LLL_comment" id="681">
+                    <field name="NOTE">(Or it's the arbitrator calling... in the event there was a dispute)</field>
+                    <next>
+                      <block type="LLL_if" id="625" inline="false">
+                        <value name="COND">
+                          <block type="LLL_logic" id="674" inline="false">
+                            <field name="OP">or</field>
+                            <value name="A">
+                              <block type="LLL_compare" id="626" inline="true">
+                                <field name="OP">=</field>
+                                <value name="A">
+                                  <block type="LLL_contract" id="627">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="LLL_load" id="628" inline="true">
+                                    <field name="PLACE">sload</field>
+                                    <value name="SLOT">
+                                      <block type="LLL_val" id="629">
+                                        <field name="VAL">ARBITRATOR</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="LLL_compare" id="675" inline="true">
+                                <field name="OP">=</field>
+                                <value name="A">
+                                  <block type="LLL_contract" id="676">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="LLL_load" id="677" inline="true">
+                                    <field name="PLACE">sload</field>
+                                    <value name="SLOT">
+                                      <block type="LLL_val" id="678">
+                                        <field name="VAL">CLAIM_ADJUSTER</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="THEN">
+                          <block type="LLL_comment" id="679">
+                            <field name="NOTE">label the calculation for elapsed policy months</field>
+                            <next>
+                              <block type="LLL_mstore" id="655" inline="true">
+                                <field name="SLOT">POLICY_MONTHS</field>
+                                <value name="VAL">
+                                  <block type="LLL_math" id="661" inline="true">
+                                    <field name="OP">div</field>
+                                    <value name="A">
+                                      <block type="LLL_math" id="657" inline="true">
+                                        <field name="OP">-</field>
+                                        <value name="A">
+                                          <block type="LLL_blockinfo" id="658">
+                                            <field name="PROP">timestamp</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="LLL_load" id="660" inline="true">
+                                            <field name="PLACE">sload</field>
+                                            <value name="SLOT">
+                                              <block type="LLL_val" id="659">
+                                                <field name="VAL">START_DATE</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="LLL_val" id="662">
+                                        <field name="VAL">2628000</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="LLL_comment" id="680">
+                                    <field name="NOTE">when the received premiums have equaled the required premium, the policy is paid up, and claim paid</field>
+                                    <next>
+                                      <block type="LLL_when" id="663" inline="false">
+                                        <field name="WORD">when</field>
+                                        <value name="COND">
+                                          <block type="LLL_compare" id="656" inline="false">
+                                            <field name="OP">&gt;=</field>
+                                            <value name="A">
+                                              <block type="LLL_math" id="668" inline="true">
+                                                <field name="OP">div</field>
+                                                <value name="A">
+                                                  <block type="LLL_load" id="664" inline="true">
+                                                    <field name="PLACE">sload</field>
+                                                    <value name="SLOT">
+                                                      <block type="LLL_val" id="665">
+                                                        <field name="VAL">CUSTOMER_BALANCE</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="LLL_mval" id="666">
+                                                    <field name="VAL">POLICY_MONTHS</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="LLL_load" id="667" inline="true">
+                                                <field name="PLACE">sload</field>
+                                                <value name="SLOT">
+                                                  <block type="LLL_val" id="670">
+                                                    <field name="VAL">MONTHLY_PREMIUM</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="THEN">
+                                          <block type="LLL_spend" id="630" inline="true">
+                                            <value name="MONEY">
+                                              <block type="LLL_load" id="653" inline="true">
+                                                <field name="PLACE">_input_load_slots</field>
+                                                <value name="SLOT">
+                                                  <block type="LLL_val" id="654">
+                                                    <field name="VAL">0</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="TO">
+                                              <block type="LLL_load" id="632" inline="true">
+                                                <field name="PLACE">sload</field>
+                                                <value name="SLOT">
+                                                  <block type="LLL_val" id="633">
+                                                    <field name="VAL">CUSTOMER</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="LLL_comment" id="682">
+                            <field name="NOTE">Unrelated parties sending in funds should just get their funds back</field>
+                            <next>
+                              <block type="LLL_spend" id="634" inline="true">
+                                <value name="MONEY">
+                                  <block type="LLL_tx" id="635">
+                                    <field name="PROP">callvalue</field>
+                                  </block>
+                                </value>
+                                <value name="TO">
+                                  <block type="LLL_contract" id="636">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
+
+
 data_feed: fnCommentToString(function(){/*! 
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="LLL_comment" id="321" x="26" y="158">
