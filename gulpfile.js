@@ -38,8 +38,7 @@ gulp.task('concat', ['min'], function() {
                 'dev/jquery.min.js',
     			deploy_dir + '/my.min.js',
 				'dev/bootstrap.min.js',
-                //'dev/samples.js', // these don't min well so concat unminned
-                'dev/samples-poc4.js', 
+                'dev/samples.js', // these don't min well so concat unminned
    			])
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest(deploy_dir))
