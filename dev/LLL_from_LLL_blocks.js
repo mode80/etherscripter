@@ -199,6 +199,8 @@ Blockly.LLL['LLL_contract'] = function(block) {
   var val = block.getFieldValue('PROP');
   if (val == 'balance')
     code = '(balance (address))' 
+  else if (val == 'input')
+    code = '(calldataload 0)' 
   else 
     code = '(' + val + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC];
@@ -322,8 +324,8 @@ Blockly.LLL['LLL_load'] = function(block) {
   var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var code
-  if (place=='sload') code = '@@' + slot
-  if (place=='mload') code = '@' + slot
+  if (place=='sload') code = 'sload(' + slot + ')'
+  if (place=='mload') code = 'mload(' + slot + ')'
   if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
   if (place=='_input_load_bytes') code = '(calldataload ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]

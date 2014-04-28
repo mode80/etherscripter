@@ -156,6 +156,7 @@ Blockly.Blocks['LLL_contract'] = {
     var VALS =
       [['caller', 'caller'],
        ['address', 'address'],
+       ['input', 'input'],
        ['balance', 'balance']]
     this.setColour(VALUE_COLOR)
     this.setOutput(true)

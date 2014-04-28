@@ -517,6 +517,164 @@ insurance: fnCommentToString(function(){/*!
   </block>
 </xml>*/}),
 
+vote_registry: fnCommentToString(function(){/*! 
+<xml>
+  <block type="LLL_comment" id="47" x="51" y="92">
+    <field name="NOTE">A basic vote registration contract</field>
+  </block>
+  <block type="LLL_init" id="48" x="51" y="115">
+    <statement name="INIT">
+      <block type="LLL_comment" id="49">
+        <field name="NOTE">Designate the "admin", who will receive any collected funds at the end</field>
+        <next>
+          <block type="LLL_comment" id="50">
+            <field name="NOTE">(Donations are optional and don't affect the voting but we like a way to get received funds out.)</field>
+            <next>
+              <block type="LLL_sstore" id="51" inline="true">
+                <field name="SLOT">ADMIN</field>
+                <value name="VAL">
+                  <block type="LLL_contract" id="52">
+                    <field name="PROP">caller</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="53">
+        <field name="NOTE">The user supplies what they're voting for as the contract input (e.g. "COKE" or "PEPSI") </field>
+        <next>
+          <block type="LLL_comment" id="54">
+            <field name="NOTE">The contract records a vote by incrementing the number of votes associated with the provided input</field>
+            <next>
+              <block type="LLL_mstore" id="55" inline="true">
+                <field name="SLOT">VOTED_ITEM</field>
+                <value name="VAL">
+                  <block type="LLL_contract" id="56">
+                    <field name="PROP">input</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="LLL_store" id="57" inline="false">
+                    <field name="PLACE">sstore</field>
+                    <value name="SLOT">
+                      <block type="LLL_mval" id="58">
+                        <field name="VAL">VOTED_ITEM</field>
+                      </block>
+                    </value>
+                    <value name="VAL">
+                      <block type="LLL_math" id="59" inline="true">
+                        <field name="OP">+</field>
+                        <value name="A">
+                          <block type="LLL_load" id="60" inline="true">
+                            <field name="PLACE">sload</field>
+                            <value name="SLOT">
+                              <block type="LLL_mval" id="61">
+                                <field name="VAL">VOTED_ITEM</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_val" id="62">
+                            <field name="VAL">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="LLL_comment" id="63">
+                        <field name="NOTE">It also records the address of the caller and what they voted for, so this is public record</field>
+                        <next>
+                          <block type="LLL_comment" id="64">
+                            <field name="NOTE">(leave this out for confidential voting)</field>
+                            <next>
+                              <block type="LLL_store" id="112" inline="true">
+                                <field name="PLACE">sstore</field>
+                                <value name="SLOT">
+                                  <block type="LLL_contract" id="114">
+                                    <field name="PROP">caller</field>
+                                  </block>
+                                </value>
+                                <value name="VAL">
+                                  <block type="LLL_mval" id="113">
+                                    <field name="VAL">VOTED_ITEM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="LLL_comment" id="65">
+                                    <field name="NOTE">Release all funds to the admin when they call in without a vote</field>
+                                    <next>
+                                      <block type="LLL_when" id="66" inline="false">
+                                        <field name="WORD">when</field>
+                                        <value name="COND">
+                                          <block type="LLL_logic" id="67" inline="false">
+                                            <field name="OP">and</field>
+                                            <value name="A">
+                                              <block type="LLL_compare" id="68" inline="true">
+                                                <field name="OP">=</field>
+                                                <value name="A">
+                                                  <block type="LLL_contract" id="69">
+                                                    <field name="PROP">caller</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="LLL_sval" id="70">
+                                                    <field name="VAL">ADMIN</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="LLL_prefixop" id="71" inline="true">
+                                                <field name="OP">not</field>
+                                                <value name="A">
+                                                  <block type="LLL_mval" id="111">
+                                                    <field name="VAL">VOTED_ITEM</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="THEN">
+                                          <block type="LLL_spend" id="74" inline="true">
+                                            <value name="MONEY">
+                                              <block type="LLL_contract" id="75">
+                                                <field name="PROP">balance</field>
+                                              </block>
+                                            </value>
+                                            <value name="TO">
+                                              <block type="LLL_sval" id="76">
+                                                <field name="VAL">ADMIN</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
 
 data_feed: fnCommentToString(function(){/*! 
 <xml xmlns="http://www.w3.org/1999/xhtml">
