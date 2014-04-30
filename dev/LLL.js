@@ -123,8 +123,8 @@ Blockly.LLL.finish = function(code) {
   for (var name in Blockly.LLL.definitions_) {
     definitions.push(Blockly.LLL.definitions_[name]);
   }
-  retval = definitions.join('\n\n') + '\n\n' + code;
-  retval = code 
+  retval = definitions.join('\n') + '\n\n' + code;
+  retval = '{\n' + code + '\n}'
   return retval
 };
 

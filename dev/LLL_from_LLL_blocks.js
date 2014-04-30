@@ -223,7 +223,8 @@ Blockly.LLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.LLL.statementToCode(block, 'INIT');
   var body = Blockly.LLL.statementToCode(block, 'BODY');
-  return '{ ;; INIT\n\n' + init + '\n}\n\n{ ;; BODY\n\n' + body + '\n}'
+  //return '{ ;; INIT\n\n' + init + '\n}\n\n{ ;; BODY\n\n' + body + '\n}'
+  return init + '\n} ;; INIT ^^^ \n\n{ ;; BODY\n\n' + body 
 }
 
 Blockly.LLL['LLL_whileloop'] = function(block) {
@@ -324,8 +325,8 @@ Blockly.LLL['LLL_load'] = function(block) {
   var place = block.getFieldValue('PLACE') 
   var slot = Blockly.LLL.valueToCode(block,'SLOT', order) || 0 
   var code
-  if (place=='sload') code = 'sload(' + slot + ')'
-  if (place=='mload') code = 'mload(' + slot + ')'
+  if (place=='sload') code = '(sload ' + slot + ')'
+  if (place=='mload') code = '(mload ' + slot + ')'
   if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
   if (place=='_input_load_bytes') code = '(calldataload ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]

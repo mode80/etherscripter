@@ -180,10 +180,10 @@ function someToolsOn(event){
       'whileloop',
     ]
     var typical = minimal.concat([
+      'init',
       'currency',
       'mstore',
       'mval',
-      'init',
       'if',
     ])
   // which set was picked?
