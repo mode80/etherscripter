@@ -224,7 +224,7 @@ Blockly.LLL['LLL_init'] = function(block) {
   var init = Blockly.LLL.statementToCode(block, 'INIT');
   var body = Blockly.LLL.statementToCode(block, 'BODY');
   //return '{ ;; INIT\n\n' + init + '\n}\n\n{ ;; BODY\n\n' + body + '\n}'
-  return init + '\n} ;; INIT ^^^ \n\n{ ;; BODY\n\n' + body 
+  return init + '\n}\n\n{\n\n' + body 
 }
 
 Blockly.LLL['LLL_whileloop'] = function(block) {
