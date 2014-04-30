@@ -236,7 +236,7 @@ Blockly.LLL['LLL_whileloop'] = function(block) {
   if (is_until) {
     cond = '(not ' + cond + ' )';
   }
-  return '(for ' + '()' + ' ' + cond + '\n { \n' + loop + ' }\n)\n'
+  return '(for ' + '()' + ' ' + cond + ' ()\n { \n' + loop + ' }\n)\n'
 }
 
 //////// 
