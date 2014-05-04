@@ -176,80 +176,80 @@ toothfairy: fnCommentToString(function(){/*!
 
 insurance: fnCommentToString(function(){/*! 
 <xml>
-  <block type="LLL_comment" id="284" x="14" y="6">
+  <block type="LLL_comment" id="116" x="14" y="6">
     <field name="NOTE">Insurance Policy</field>
   </block>
-  <block type="LLL_init" id="285" x="14" y="32">
+  <block type="LLL_init" id="117" x="14" y="32">
     <statement name="INIT">
-      <block type="LLL_store" id="286" inline="true">
+      <block type="LLL_store" id="118" inline="true">
         <field name="PLACE">sstore</field>
         <value name="SLOT">
-          <block type="LLL_val" id="287">
+          <block type="LLL_val" id="119">
             <field name="VAL">CUSTOMER</field>
           </block>
         </value>
         <value name="VAL">
-          <block type="LLL_val" id="288">
+          <block type="LLL_val" id="120">
             <field name="VAL">0xb7b2e5e12992267f85455ffee1435f02760402f0</field>
           </block>
         </value>
         <next>
-          <block type="LLL_store" id="289" inline="true">
+          <block type="LLL_store" id="121" inline="true">
             <field name="PLACE">sstore</field>
             <value name="SLOT">
-              <block type="LLL_val" id="290">
+              <block type="LLL_val" id="122">
                 <field name="VAL">CLAIM_ADJUSTER</field>
               </block>
             </value>
             <value name="VAL">
-              <block type="LLL_val" id="291">
+              <block type="LLL_val" id="123">
                 <field name="VAL">0xc61185cffa955bd1a6b914a6c616b3cdd5206aa1</field>
               </block>
             </value>
             <next>
-              <block type="LLL_store" id="292" inline="true">
+              <block type="LLL_store" id="124" inline="true">
                 <field name="PLACE">sstore</field>
                 <value name="SLOT">
-                  <block type="LLL_val" id="293">
+                  <block type="LLL_val" id="125">
                     <field name="VAL">MONTHLY_PREMIUM</field>
                   </block>
                 </value>
                 <value name="VAL">
-                  <block type="LLL_currency" id="294" inline="true">
+                  <block type="LLL_currency" id="126" inline="true">
                     <field name="DENOM">ether</field>
                     <value name="AMT">
-                      <block type="LLL_val" id="295">
+                      <block type="LLL_val" id="127">
                         <field name="VAL">100</field>
                       </block>
                     </value>
                   </block>
                 </value>
                 <next>
-                  <block type="LLL_comment" id="296">
+                  <block type="LLL_comment" id="128">
                     <field name="NOTE">Seconds in a month: 2628000, Seconds since 1970 on 1/1/2014: 1387584000</field>
                     <next>
-                      <block type="LLL_store" id="297" inline="true">
+                      <block type="LLL_store" id="129" inline="true">
                         <field name="PLACE">sstore</field>
                         <value name="SLOT">
-                          <block type="LLL_val" id="298">
+                          <block type="LLL_val" id="130">
                             <field name="VAL">START_DATE</field>
                           </block>
                         </value>
                         <value name="VAL">
-                          <block type="LLL_val" id="299">
+                          <block type="LLL_val" id="131">
                             <field name="VAL">1387584000</field>
                           </block>
                         </value>
                         <next>
-                          <block type="LLL_store" id="300" inline="true">
+                          <block type="LLL_store" id="132" inline="true">
                             <field name="PLACE">sstore</field>
                             <value name="SLOT">
-                              <block type="LLL_val" id="301">
+                              <block type="LLL_val" id="133">
                                 <field name="VAL">ARBITRATOR</field>
                               </block>
                             </value>
                             <value name="VAL">
-                              <block type="LLL_val" id="302">
+                              <block type="LLL_val" id="134">
                                 <field name="VAL">0x38155ef3698a43b24b054d816a8a5f79fc148623</field>
                               </block>
                             </value>
@@ -266,24 +266,24 @@ insurance: fnCommentToString(function(){/*!
       </block>
     </statement>
     <statement name="BODY">
-      <block type="LLL_comment" id="303">
+      <block type="LLL_comment" id="135">
         <field name="NOTE">Customer calling... with claim evidence provided as the contract input</field>
         <next>
-          <block type="LLL_when" id="304" inline="false">
+          <block type="LLL_when" id="136" inline="false">
             <field name="WORD">when</field>
             <value name="COND">
-              <block type="LLL_compare" id="305" inline="true">
+              <block type="LLL_compare" id="137" inline="true">
                 <field name="OP">=</field>
                 <value name="A">
-                  <block type="LLL_contract" id="306">
+                  <block type="LLL_contract" id="138">
                     <field name="PROP">caller</field>
                   </block>
                 </value>
                 <value name="B">
-                  <block type="LLL_load" id="307" inline="true">
+                  <block type="LLL_load" id="139" inline="true">
                     <field name="PLACE">sload</field>
                     <value name="SLOT">
-                      <block type="LLL_val" id="308">
+                      <block type="LLL_val" id="140">
                         <field name="VAL">CUSTOMER</field>
                       </block>
                     </value>
@@ -292,44 +292,49 @@ insurance: fnCommentToString(function(){/*!
               </block>
             </value>
             <statement name="THEN">
-              <block type="LLL_comment" id="309">
+              <block type="LLL_comment" id="141">
                 <field name="NOTE">Increment customer's balance with the amount he's sending in</field>
                 <next>
-                  <block type="LLL_store" id="310" inline="true">
+                  <block type="LLL_store" id="142" inline="false">
                     <field name="PLACE">sstore</field>
                     <value name="SLOT">
-                      <block type="LLL_val" id="311">
+                      <block type="LLL_val" id="143">
                         <field name="VAL">CUSTOMER_BALANCE</field>
                       </block>
                     </value>
                     <value name="VAL">
-                      <block type="LLL_math" id="312" inline="true">
+                      <block type="LLL_math" id="144" inline="true">
                         <field name="OP">+</field>
                         <value name="A">
-                          <block type="LLL_val" id="313">
-                            <field name="VAL">CUSTOMER_BALANCE</field>
+                          <block type="LLL_load" id="186" inline="true">
+                            <field name="PLACE">sload</field>
+                            <value name="SLOT">
+                              <block type="LLL_val" id="187">
+                                <field name="VAL">CUSTOMER_BALANCE</field>
+                              </block>
+                            </value>
                           </block>
                         </value>
                         <value name="B">
-                          <block type="LLL_tx" id="314">
+                          <block type="LLL_tx" id="146">
                             <field name="PROP">callvalue</field>
                           </block>
                         </value>
                       </block>
                     </value>
                     <next>
-                      <block type="LLL_store" id="315" inline="true">
+                      <block type="LLL_store" id="147" inline="true">
                         <field name="PLACE">sstore</field>
                         <value name="SLOT">
-                          <block type="LLL_val" id="316">
+                          <block type="LLL_val" id="148">
                             <field name="VAL">PROOF_OF_GOOF</field>
                           </block>
                         </value>
                         <value name="VAL">
-                          <block type="LLL_load" id="317" inline="true">
+                          <block type="LLL_load" id="149" inline="true">
                             <field name="PLACE">_input_load_slots</field>
                             <value name="SLOT">
-                              <block type="LLL_val" id="318">
+                              <block type="LLL_val" id="150">
                                 <field name="VAL">0</field>
                               </block>
                             </value>
@@ -342,30 +347,30 @@ insurance: fnCommentToString(function(){/*!
               </block>
             </statement>
             <next>
-              <block type="LLL_comment" id="319">
+              <block type="LLL_comment" id="151">
                 <field name="NOTE">Adjuster calling... with the payout amount as the contract input</field>
                 <next>
-                  <block type="LLL_comment" id="320">
+                  <block type="LLL_comment" id="152">
                     <field name="NOTE">(Or it's the arbitrator calling... in the event there was a dispute)</field>
                     <next>
-                      <block type="LLL_when" id="357" inline="false">
+                      <block type="LLL_when" id="153" inline="false">
                         <field name="WORD">when</field>
                         <value name="COND">
-                          <block type="LLL_logic" id="322" inline="false">
+                          <block type="LLL_logic" id="154" inline="false">
                             <field name="OP">or</field>
                             <value name="A">
-                              <block type="LLL_compare" id="323" inline="true">
+                              <block type="LLL_compare" id="155" inline="true">
                                 <field name="OP">=</field>
                                 <value name="A">
-                                  <block type="LLL_contract" id="324">
+                                  <block type="LLL_contract" id="156">
                                     <field name="PROP">caller</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="LLL_load" id="325" inline="true">
+                                  <block type="LLL_load" id="157" inline="true">
                                     <field name="PLACE">sload</field>
                                     <value name="SLOT">
-                                      <block type="LLL_val" id="326">
+                                      <block type="LLL_val" id="158">
                                         <field name="VAL">ARBITRATOR</field>
                                       </block>
                                     </value>
@@ -374,18 +379,18 @@ insurance: fnCommentToString(function(){/*!
                               </block>
                             </value>
                             <value name="B">
-                              <block type="LLL_compare" id="327" inline="true">
+                              <block type="LLL_compare" id="159" inline="true">
                                 <field name="OP">=</field>
                                 <value name="A">
-                                  <block type="LLL_contract" id="328">
+                                  <block type="LLL_contract" id="160">
                                     <field name="PROP">caller</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="LLL_load" id="329" inline="true">
+                                  <block type="LLL_load" id="161" inline="true">
                                     <field name="PLACE">sload</field>
                                     <value name="SLOT">
-                                      <block type="LLL_val" id="330">
+                                      <block type="LLL_val" id="162">
                                         <field name="VAL">CLAIM_ADJUSTER</field>
                                       </block>
                                     </value>
@@ -396,27 +401,27 @@ insurance: fnCommentToString(function(){/*!
                           </block>
                         </value>
                         <statement name="THEN">
-                          <block type="LLL_comment" id="331">
+                          <block type="LLL_comment" id="163">
                             <field name="NOTE">label the calculation for elapsed policy months</field>
                             <next>
-                              <block type="LLL_mstore" id="332" inline="true">
+                              <block type="LLL_mstore" id="164" inline="true">
                                 <field name="SLOT">POLICY_MONTHS</field>
                                 <value name="VAL">
-                                  <block type="LLL_math" id="333" inline="true">
+                                  <block type="LLL_math" id="165" inline="true">
                                     <field name="OP">div</field>
                                     <value name="A">
-                                      <block type="LLL_math" id="334" inline="true">
+                                      <block type="LLL_math" id="166" inline="true">
                                         <field name="OP">-</field>
                                         <value name="A">
-                                          <block type="LLL_blockinfo" id="335">
+                                          <block type="LLL_blockinfo" id="167">
                                             <field name="PROP">timestamp</field>
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="LLL_load" id="336" inline="true">
+                                          <block type="LLL_load" id="168" inline="true">
                                             <field name="PLACE">sload</field>
                                             <value name="SLOT">
-                                              <block type="LLL_val" id="337">
+                                              <block type="LLL_val" id="169">
                                                 <field name="VAL">START_DATE</field>
                                               </block>
                                             </value>
@@ -425,46 +430,46 @@ insurance: fnCommentToString(function(){/*!
                                       </block>
                                     </value>
                                     <value name="B">
-                                      <block type="LLL_val" id="338">
+                                      <block type="LLL_val" id="170">
                                         <field name="VAL">2628000</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="LLL_comment" id="339">
+                                  <block type="LLL_comment" id="171">
                                     <field name="NOTE">when the received premiums have equaled the required premium, the policy is paid up, so pay claim</field>
                                     <next>
-                                      <block type="LLL_when" id="340" inline="false">
+                                      <block type="LLL_when" id="172" inline="false">
                                         <field name="WORD">when</field>
                                         <value name="COND">
-                                          <block type="LLL_compare" id="341" inline="false">
+                                          <block type="LLL_compare" id="173" inline="false">
                                             <field name="OP">&gt;=</field>
                                             <value name="A">
-                                              <block type="LLL_math" id="342" inline="true">
+                                              <block type="LLL_math" id="174" inline="true">
                                                 <field name="OP">div</field>
                                                 <value name="A">
-                                                  <block type="LLL_load" id="343" inline="true">
+                                                  <block type="LLL_load" id="175" inline="true">
                                                     <field name="PLACE">sload</field>
                                                     <value name="SLOT">
-                                                      <block type="LLL_val" id="344">
+                                                      <block type="LLL_val" id="176">
                                                         <field name="VAL">CUSTOMER_BALANCE</field>
                                                       </block>
                                                     </value>
                                                   </block>
                                                 </value>
                                                 <value name="B">
-                                                  <block type="LLL_mval" id="345">
+                                                  <block type="LLL_mval" id="177">
                                                     <field name="VAL">POLICY_MONTHS</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
                                             <value name="B">
-                                              <block type="LLL_load" id="346" inline="true">
+                                              <block type="LLL_load" id="178" inline="true">
                                                 <field name="PLACE">sload</field>
                                                 <value name="SLOT">
-                                                  <block type="LLL_val" id="347">
+                                                  <block type="LLL_val" id="179">
                                                     <field name="VAL">MONTHLY_PREMIUM</field>
                                                   </block>
                                                 </value>
@@ -473,22 +478,22 @@ insurance: fnCommentToString(function(){/*!
                                           </block>
                                         </value>
                                         <statement name="THEN">
-                                          <block type="LLL_spend" id="348" inline="true">
+                                          <block type="LLL_spend" id="180" inline="true">
                                             <value name="MONEY">
-                                              <block type="LLL_load" id="349" inline="true">
+                                              <block type="LLL_load" id="181" inline="true">
                                                 <field name="PLACE">_input_load_slots</field>
                                                 <value name="SLOT">
-                                                  <block type="LLL_val" id="350">
+                                                  <block type="LLL_val" id="182">
                                                     <field name="VAL">0</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
                                             <value name="TO">
-                                              <block type="LLL_load" id="351" inline="true">
+                                              <block type="LLL_load" id="183" inline="true">
                                                 <field name="PLACE">sload</field>
                                                 <value name="SLOT">
-                                                  <block type="LLL_val" id="352">
+                                                  <block type="LLL_val" id="184">
                                                     <field name="VAL">CUSTOMER</field>
                                                   </block>
                                                 </value>
@@ -515,7 +520,8 @@ insurance: fnCommentToString(function(){/*!
       </block>
     </statement>
   </block>
-</xml>*/}),
+</xml>
+*/}),
 
 vote_registry: fnCommentToString(function(){/*! 
 <xml>
