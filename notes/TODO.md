@@ -3,10 +3,13 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* move tx.caller to contract.caller
-* enter gav's POC-4 samples to test LLL output
-* implement (but hide by default XOR, BYTE) 
-* release 0.4
+* alert status for old version /0 && 0-4-0
+* move about to root not in version dir
+* make LLL POC-5 compatible
+  . new init block
+  . lll block 
+  . new signature for (call)
+* add Serpent 
 * save functionality using appengine(?) cloud storage
 * what is etherscripter page
 * create generator and block-set targeting HLL

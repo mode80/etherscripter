@@ -47,13 +47,15 @@ gulp.task('concat', ['min'], function() {
 // Stage others 
 gulp.task('stage', function() {
     return es.merge(
-        gulp.src(['dev/*.ico'])
+        gulp.src([
+                'dev/*.ico',
+                ])
             .pipe(gulp.dest('deploy/')),
         gulp.src([
-    			'dev/*.css',
                 'dev/*.html',
-                'dev/*.png',
+                'dev/*.css',
                 'dev/media/**/*.*',
+                'dev/sales_contract.png',
     			],
                 {base: 'dev/'}
                 )
