@@ -16,9 +16,6 @@ goog.require('Blockly.LLL');
 // New POC-4 blocks
 /////
 
-// find missing from POC-4? items
-// implement samples PoC4 samples to test
-
 Blockly.LLL['LLL_byte'] = function(block) {
   // returns the byte at postion BYTE in DATA 
   var order = Blockly.LLL.ORDER_NONE;

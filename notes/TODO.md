@@ -9,7 +9,9 @@ Visual smart contract builder for Ethereum
   . new init block
   . lll block 
   . new signature for (call)
+  . ??
 * add Serpent 
+  . find list of reserved words
 * save functionality using appengine(?) cloud storage
 * what is etherscripter page
 * create generator and block-set targeting HLL
