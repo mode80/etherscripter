@@ -28,7 +28,57 @@ var OTHER_COLOR = 58
 var UNUSED_COLOR = 160
 
 //
-// Experimental POC-4 blocks 
+// POC-5 blocks 
+//
+
+Blockly.Blocks['LLL_compile'] = {
+  init: function() {
+    this.setTooltip('Compiles code to memory at the slot provided, and returns the compiled length, measured in bytes).')
+    this.setColour(VAR_COLOR)
+    this.appendStatementInput('CODE')
+      .appendField('compile')
+    this.appendValueInput('TO_START')
+      .appendField('to temp slot')
+    this.setInputsInline(false)
+    this.setPreviousStatement(false)
+    this.setNextStatement(false)
+    this.setOutput(true)
+  }
+};
+
+Blockly.Blocks['LLL_compile_thru'] = {
+  init: function() {
+    this.setTooltip('Compiles code to memory at the slot provided, and returns the compiled length, measured in bytes. Compiled code will be truncated if necessary so as not to exceed the supplied end slot in memory.')
+    this.setColour(VAR_COLOR)
+    this.appendStatementInput('CODE')
+      .appendField('compile')
+    this.appendValueInput('TO_START')
+      .appendField('to temp slot')
+    this.appendValueInput('TO_END')
+      .appendField('thru end slot')
+    this.setInputsInline(false)
+    this.setPreviousStatement(false)
+    this.setNextStatement(false)
+    this.setOutput(true)
+  }
+};
+
+// Blockly.Blocks['LLL_init'] = {
+//   init: function() {
+//     this.setColour(LOOP_COLOR)
+//     this.appendStatementInput('INIT')
+//       .appendField('init')
+//     this.appendStatementInput('BODY')
+//       .appendField('body')
+//     this.setInputsInline(false)
+//     this.setPreviousStatement(false)
+//     this.setNextStatement(false)
+//   }
+// };
+
+
+//
+// Kept POC-4 blocks 
 //
 
 var valValidator = function(given) {return given.replace(/[^a-z0-9_]/gi,'')}
@@ -295,19 +345,6 @@ Blockly.Blocks['LLL_call'] = {
     this.setInputsInline(false)
   }
 }
-
-Blockly.Blocks['LLL_init'] = {
-  init: function() {
-    this.setColour(LOOP_COLOR)
-    this.appendStatementInput('INIT')
-      .appendField('init')
-    this.appendStatementInput('BODY')
-      .appendField('body')
-    this.setInputsInline(false)
-    this.setPreviousStatement(false)
-    this.setNextStatement(false)
-  }
-};
 
 
 //////

@@ -1,4 +1,4 @@
-var deploy_dir = 'deploy/0-4-0'
+var deploy_dir = 'deploy/0-5-0'
 
 var gulp = require('gulp');
 var es = require('event-stream'); 
@@ -8,13 +8,6 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var htmlreplace = require('gulp-html-replace');
-
-// // Lint Task
-// gulp.task('lint', function() {
-//     return gulp.src('js/*.js')
-//         .pipe(jshint())
-//         .pipe(jshint.reporter('default'));
-// });
 
 // Minify my 
 gulp.task('min', function() {
@@ -73,9 +66,9 @@ gulp.task('fixrefs', ['stage'], function() {
 });
 
 // Watch Files For Changes
-gulp.task('watch', function() {
-    gulp.watch('dev/*.js', ['concat']);
-});
+// gulp.task('watch', function() {
+//     gulp.watch('dev/*.js', ['concat']);
+// });
 
 // Default Task
 gulp.task('default', [/* 'lint',*/ 'min', 'concat', 'stage', 'fixrefs']);

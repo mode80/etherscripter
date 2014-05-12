@@ -13,7 +13,36 @@ goog.provide('Blockly.LLL.LLLblocks_generator');
 goog.require('Blockly.LLL');
 
 /////
-// New POC-4 blocks
+// New POC-5 blocks
+/////
+
+Blockly.LLL['LLL_compile'] = function(block) {
+  var for_compiling = Blockly.LLL.statementToCode(block, 'CODE');
+  var to_start = Blockly.LLL.valueToCode(block, 'TO_START', Blockly.LLL.ORDER_NONE) || 0
+  var code = '(lll\n { \n' + for_compiling + ' }\n ' + to_start + '\n)\n' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+}
+
+Blockly.LLL['LLL_compile_thru'] = function(block) {
+  var for_compiling = Blockly.LLL.statementToCode(block, 'CODE');
+  var to_start = Blockly.LLL.valueToCode(block, 'TO_START', Blockly.LLL.ORDER_NONE) || 0
+  var to_end = Blockly.LLL.valueToCode(block, 'TO_END', Blockly.LLL.ORDER_NONE) || 0
+  var bytes_len = (to_end - to_start + 1) * 32
+  var code = '(lll\n { \n' + for_compiling + ' }\n ' + to_start + '\n ' + bytes_len + '\n)\n' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+}
+
+
+// Blockly.LLL['LLL_init'] = function(block) {
+//   // wrapper for contract init and body 
+//   var init = Blockly.LLL.statementToCode(block, 'INIT');
+//   var body = Blockly.LLL.statementToCode(block, 'BODY');
+//   return init + '\n (return 0 (lll { ;; BODY \n\n' + body + '\n } 0)) ;; END BODY\n' 
+// }
+
+
+/////
+// POC-4 blocks
 /////
 
 Blockly.LLL['LLL_byte'] = function(block) {
@@ -146,8 +175,8 @@ Blockly.LLL['LLL_send'] = function(block) {
   var send_end_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_END', Blockly.LLL.ORDER_NONE) || 0
   var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE) || 0
   var reply_end_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_END', Blockly.LLL.ORDER_NONE) || 0
-  var send_bytes = (send_end_i - send_start_i) * 32 
-  var reply_bytes = (reply_end_i - reply_start_i) * 32 
+  var send_bytes = (send_end_i - send_start_i + 1) * 32 
+  var reply_bytes = (reply_end_i - reply_start_i + 1) * 32 
   var code = '('+ 
     op + ' '+ 
     address + ' '+ 
@@ -214,14 +243,6 @@ Blockly.LLL['LLL_forloop'] = function(block) {
   cond = cond.trim()
   after_each = after_each.trim()
   return '(for ' + first + ' ' + cond + ' ' + after_each + '\n { \n' + loop + ' }  \n)\n'
-}
-
-Blockly.LLL['LLL_init'] = function(block) {
-  // wrapper for contract init and body 
-  var init = Blockly.LLL.statementToCode(block, 'INIT');
-  var body = Blockly.LLL.statementToCode(block, 'BODY');
-  //return '{ ;; INIT\n\n' + init + '\n}\n\n{ ;; BODY\n\n' + body + '\n}'
-  return init + '\n}\n\n{\n\n' + body 
 }
 
 Blockly.LLL['LLL_whileloop'] = function(block) {
