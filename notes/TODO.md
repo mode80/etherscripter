@@ -3,6 +3,7 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
+* change balance to take 0 args for POC5
 * alert status for old version /0 && 0-4-0
 * move about to root not in version dir
 * make LLL POC-5 compatible
