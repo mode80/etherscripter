@@ -140,12 +140,13 @@ Blockly.Blocks['LLL_blockinfo'] = {
 
 Blockly.Blocks['LLL_tx'] = {
   init: function() {
-    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _fee_budget_left_ is the remaining fees available for execution, measured in gas units. _input_slot_count_ is the number of input items provided. _input_byte_count_ is the length of all input(s) measured in bytes. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
+    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _input_ is the first input provided by the caller. _gas_remaining_ is the number of fee units available for execution. _input_slot_count_ is the number of input items provided. _input_byte_count_ is the length of all input(s) measured in bytes. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum fee for an execution step.)\n')
     var VALS =
         [
          ['amount', 'callvalue'], // monetary value
          //['origin', 'origin'], // missing from POC-4 ? 
-         ['fee budget left', 'gas'],
+         ['input', '_first_input'],
+         ['gas remaining', 'gas'],
          ['input slot count', '_input_slot_count'],// to be derived from (calldatasize)
          ['input byte count', '_input_byte_count'],// as per (calldatasize) 
          //['gas price', 'gasprice'],// missing from POC-4 ?  
