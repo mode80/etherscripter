@@ -185,8 +185,6 @@ Blockly.LLL['LLL_tx'] = function(block) {
     code = '(add (div (calldatasize) 32) (if (mod calldatasize 32) 1 0) )' 
   else if (val == '_input_byte_count')
     code = '(calldatasize)' 
-  else if (val == '_first_input')
-    code = '(calldataload 0)' 
   else 
     code = '(' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
@@ -326,7 +324,7 @@ Blockly.LLL['LLL_load'] = function(block) {
   var code
   if (place=='sload') code = '(sload ' + slot + ')'
   if (place=='mload') code = '(mload ' + slot + ')'
-  if (place=='_input_load_slots') code = '(calldataload (* 32 ' + slot + '))'
+  if (place=='_input_load_slots') code = '(calldataload ' + slot * 32 + ')'
   if (place=='_input_load_bytes') code = '(calldataload ' + slot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
