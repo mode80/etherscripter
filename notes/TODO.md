@@ -3,12 +3,12 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* add tooltips 
-* alert status for old version 0-4-0
 * make LLL POC-5 compatible
   x new init block
   x lll block 
   x make end slot of call block be "thru" not "up to"
+  . choose either tx.input/size(s) or contract.input
+  . change balance to take 0 args for POC5
   . new signature for (call)
     . call needs a non-zero gas limit 
     . (call (- (gas) 21) ... ) is essentially unlimited (gas cost to do the subtraction and the call)
@@ -17,7 +17,7 @@ Visual smart contract builder for Ethereum
   . fix block AND should be && not (and) == (&) 
   . revisit (balance) (only returns current contract balance now?) 
   . (origin)
-  . tx.sender as synonym for contract.caller
+  . tx.sender as synonym for contract.caller?
   . add (calldatacopy memindex calldataindex len) 
   . add (codecopy memindex codeindex) blocks
   . (codesize) -> contract.codesize
