@@ -69,13 +69,12 @@
             <li onclick="toggleTool(event)" id="when"><a>when</a></li>
             <li onclick="toggleTool(event)" id="if"><a>if</a></li>
             <li onclick="toggleTool(event)" id="whileloop"><a>while loop</a></li>
-            <li onclick="toggleTool(event)" id="init"><a>init</a></li>
             <li onclick="toggleTool(event)" id="prefixop"><a>prefix</a></li>
             <li onclick="toggleTool(event)" id="byte"><a>byte</a></li>
-            <li onclick="toggleTool(event)" id="balance"><a>balance</a></li>
-            <li onclick="toggleTool(event)" id="call"><a>call</a></li>
-            <li onclick="toggleTool(event)" id="send"><a>send</a></li>
             <li onclick="toggleTool(event)" id="return"><a>reply</a></li>
+            <li onclick="toggleTool(event)" id="compile_max"><a>compile</a></li>
+            <li onclick="toggleTool(event)" id="call"><a>call</a></li>
+            <li onclick="toggleTool(event)" id="create"><a>create</a></li>
             <li onclick="toggleTool(event)" id="hash"><a>hash</a></li>
             <li onclick="toggleTool(event)" id="forloop"><a>for loop</a></li>
           </ul>
@@ -153,22 +152,20 @@
     <block type="LLL_mval"></block>
     <block type="LLL_sstore"></block>
     <block type="LLL_sval"></block>
-    <block type="LLL_compile"></block>
-    <block type="LLL_compile_thru"></block>
     <block type="LLL_spend"></block>
     <block type="LLL_stop"></block>
     <block type="LLL_suicide"></block>
     <block type="LLL_when"></block>
     <block type="LLL_if"></block>
     <block type="LLL_whileloop"></block>
+    <block type="LLL_forloop"></block>
     <block type="LLL_prefixop"></block>
     <block type="LLL_byte"></block>
-    <block type="LLL_balance"></block>
-    <block type="LLL_call"></block>
-    <block type="LLL_send"></block>
     <block type="LLL_return"></block>
+    <block type="LLL_call"></block>
+    <block type="LLL_create"></block>
+    <block type="LLL_compile_max"></block>
     <block type="LLL_hash"></block>
-    <block type="LLL_forloop"></block>
   </xml>
 
 <!-- build:js -->

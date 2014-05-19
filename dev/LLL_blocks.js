@@ -31,14 +31,31 @@ var UNUSED_COLOR = 160
 // POC-5 blocks 
 //
 
-Blockly.Blocks['LLL_compile'] = {
+// Blockly.Blocks['LLL_compile'] = {
+//   init: function() {
+//     this.setTooltip('Compiles code to the temp location provided, and returns the compiled length, measured in bytes).')
+//     this.setColour(PROCEDURE_COLOR)
+//     this.appendStatementInput('CODE')
+//       .appendField('compile')
+//     this.appendValueInput('TO_START')
+//       .appendField('to temp spot')
+//     this.setInputsInline(false)
+//     this.setPreviousStatement(false)
+//     this.setNextStatement(false)
+//     this.setOutput(true)
+//   }
+// };
+
+Blockly.Blocks['LLL_compile_max'] = {
   init: function() {
-    this.setTooltip('Compiles code to memory at the slot provided, and returns the compiled length, measured in bytes).')
-    this.setColour(VAR_COLOR)
+    this.setTooltip('Compiles code to the temp spot provided, and returns the compiled length, measured in bytes. Compiled code will be truncated if necessary so as not to exceed the maximum length provided.')
+    this.setColour(PROCEDURE_COLOR)
     this.appendStatementInput('CODE')
       .appendField('compile')
     this.appendValueInput('TO_START')
-      .appendField('to temp slot')
+      .appendField('to temp spot')
+    this.appendValueInput('MAX_LEN')
+      .appendField('with max length')
     this.setInputsInline(false)
     this.setPreviousStatement(false)
     this.setNextStatement(false)
@@ -46,22 +63,27 @@ Blockly.Blocks['LLL_compile'] = {
   }
 };
 
-Blockly.Blocks['LLL_compile_thru'] = {
+Blockly.Blocks['LLL_create'] = {
   init: function() {
-    this.setTooltip('Compiles code to memory at the slot provided, and returns the compiled length, measured in bytes. Compiled code will be truncated if necessary so as not to exceed the supplied end slot in memory.')
-    this.setColour(VAR_COLOR)
-    this.appendStatementInput('CODE')
-      .appendField('compile')
-    this.appendValueInput('TO_START')
-      .appendField('to temp slot')
-    this.appendValueInput('TO_END')
-      .appendField('thru end slot')
-    this.setInputsInline(false)
+    this.setTooltip('Creates a new contract from the compiled code at the given temp spot, endows it with the given amount of currency, and returns the address of the new contract (or 0 if it fails).')
+    this.setColour(PROCEDURE_COLOR);
+    this.appendDummyInput()
+      .appendField('create contract')
+    this.appendDummyInput()
+      .appendField('from code')
+    this.appendValueInput('DATA_START')
+      .appendField('   at temp spot')
+    this.appendValueInput('DATA_LEN')
+      .appendField('   of length')
+    this.appendValueInput('MONEY')
+      .appendField('sending amount')
     this.setPreviousStatement(false)
     this.setNextStatement(false)
     this.setOutput(true)
+    this.setInputsInline(false)
   }
-};
+}
+
 
 // Blockly.Blocks['LLL_init'] = {
 //   init: function() {
@@ -76,6 +98,45 @@ Blockly.Blocks['LLL_compile_thru'] = {
 //   }
 // };
 
+// Blockly.Blocks['LLL_balance'] = {
+//   init: function() {
+//     this.setTooltip('Represents the currency unit balance of the provided address.')
+//     this.setColour(MATH_COLOR);
+//     this.appendValueInput('ADDR')
+//       .appendField('balance of')
+//     this.setInputsInline(true);
+//     this.setOutput(true);
+//   }
+// };
+
+// Blockly.Blocks['LLL_send'] = {
+//   init: function() {
+//     this.setTooltip('Sends data and ethereum currency to another contract, causing that contract to run and reply with data, if any. _address_ is given for the receiving contract. _amount_ is the number of ethereum currency units to send. _fee_budget_ is the maximum number of minimal-cost run steps this contract will pay for. A _start_slot_ and _end_slot_ must be given for temp data to be sent and the location of reply data to be received.')
+//     this.setColour(PROCEDURE_COLOR)
+//     this.appendValueInput('ADDRESS')
+//       .appendField('send to address')
+//     this.appendValueInput('MONEY')
+//       .appendField('   amount')
+//     this.appendValueInput('GAS')
+//       .appendField('   with fee budget')
+//     this.appendDummyInput()
+//       .appendField('and data from')
+//     this.appendValueInput('SEND_DATA_START')
+//       .appendField('   start slot')
+//     this.appendValueInput('SEND_DATA_END')
+//       .appendField('   end slot')
+//     this.appendDummyInput()
+//       .appendField('getting reply into')
+//     this.appendValueInput('REPLY_DATA_START')
+//       .appendField('   start slot')
+//     this.appendValueInput('REPLY_DATA_END')
+//       .appendField('   end slot')
+//     this.setInputsInline(false)
+//     this.setPreviousStatement(true)
+//     this.setNextStatement(true)
+//   }
+// }
+
 
 //
 // Kept POC-4 blocks 
@@ -85,11 +146,11 @@ var valValidator = function(given) {return given.replace(/[^a-z0-9_]/gi,'')}
 
 Blockly.Blocks['LLL_mstore'] = {
   init: function() {
-    this.setTooltip('Labels a temporary result. This stores the result at a temp slot identified by the @-prefixed label. This is a compact form of the [in temp slot __ put __] block. Data in temp slots last only until the contract stops running this time.')
+    this.setTooltip('Labels a temporary result. This stores the result at a temp spot identified by the @-prefixed label. This is a compact form of the [in temp spot __ put __] block. Data in a temp spot is cleared after the contract stops running this time.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
       .appendField('@')
-      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SLOT')
+      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SPOT')
     this.appendValueInput('VAL')
       .appendField('=')
     this.setInputsInline(true)
@@ -100,11 +161,11 @@ Blockly.Blocks['LLL_mstore'] = {
 
 Blockly.Blocks['LLL_sstore'] = {
   init: function() {
-    this.setTooltip('Labels a saved result. This stores the result in a save slot identified by the @@-prefixed label. This is a compact form of the [in save slot __ put __] block. Data in save slots are still available the next time this contract runs.')
+    this.setTooltip('Labels a saved result. This stores the result in a save spot identified by the @@-prefixed label. This is a compact form of the [in save spot __ put __] block. Data in save spots are still available the next time this contract runs.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
       .appendField('store @@')
-      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SLOT')
+      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SPOT')
     this.appendValueInput('VAL')
       .appendField('=')
     this.setInputsInline(true)
@@ -116,7 +177,7 @@ Blockly.Blocks['LLL_sstore'] = {
 
 Blockly.Blocks['LLL_mval'] = {
   init: function() {
-    this.setTooltip('The data in a given temp slot. It is a compact form of the [data at temp slot ___] block.')
+    this.setTooltip('The data in a given temp spot. It is a compact form of the [data at temp spot ___] block.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
         .appendField('@')
@@ -127,7 +188,7 @@ Blockly.Blocks['LLL_mval'] = {
 
 Blockly.Blocks['LLL_sval'] = {
   init: function() {
-    this.setTooltip('The data in a given save slot. It is a compact form of the [data at save slot ___] block.')
+    this.setTooltip('The data in a given save spot. It is a compact form of the [data at save spot ___] block.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
         .appendField('@@')
@@ -155,7 +216,8 @@ Blockly.Blocks['LLL_textval'] = {
 
 Blockly.Blocks['LLL_spend'] = {
   init: function() {
-    this.setTooltip('Spends the given amount of ethereum currency to the given address. The currency amount can be provided using a [__ ether] block for various denominations.')
+    this.setTooltip('Spends the given amount of ethereum currency to the given address. The currency amount can be provided as a simple number representing the amount of wei, or using a [__ ether] block for various other denominations.')
+
     this.setColour(STATEMENT_COLOR);
     this.appendValueInput('MONEY')
       .appendField('spend')
@@ -190,14 +252,14 @@ Blockly.Blocks['LLL_blockinfo'] = {
 
 Blockly.Blocks['LLL_tx'] = {
   init: function() {
-    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _fee_budget_left_ is the remaining fees available for execution, measured in gas units. _input_slot_count_ is the number of input items provided. _input_byte_count_ is the length of all input(s) measured in bytes. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
+    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _fee_budget_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
     var VALS =
         [
          ['amount', 'callvalue'], // monetary value
          //['origin', 'origin'], // missing from POC-4 ? 
          ['fee budget left', 'gas'],
-         ['input slot count', '_input_slot_count'],// to be derived from (calldatasize)
-         ['input byte count', '_input_byte_count'],// as per (calldatasize) 
+         // ['input slot count', '_input_slot_count'],// to be derived from (calldatasize)
+         ['input length', '_input_byte_count'],// as per (calldatasize) 
          //['gas price', 'gasprice'],// missing from POC-4 ?  
         ]
     this.setColour(VALUE_COLOR)
@@ -210,7 +272,7 @@ Blockly.Blocks['LLL_tx'] = {
 
 Blockly.Blocks['LLL_contract'] = {
   init: function() {
-    this.setTooltip('Provides info about this contract.\n _caller_ is the address of the account calling this contract. _address_ is this contract\'s address. _input_ is the first input provided by the caller. _balance_ is this contract\'s balance measured in wei.')
+    this.setTooltip('Provides info about this contract.\n _caller_ is the address of the account calling this contract. _address_ is this contract\'s address. _input_ is the first (32 bytes of) input provided by the caller. _balance_ is this contract\'s balance measured in wei.')
     var VALS =
       [['caller', 'caller'],
        ['address', 'address'],
@@ -226,29 +288,29 @@ Blockly.Blocks['LLL_contract'] = {
 
 Blockly.Blocks['LLL_hash'] = {
   init: function() {
-    this.setTooltip('Provides a "fingerprint" for the data in temp storage from the given start slot through the given end slot. Identical data always gives the same fingerprint.')
+    this.setTooltip('Provides a "fingerprint" for the data in temp storage from the given start spot with the given length. Identical data always gives the same fingerprint.')
     this.setColour(MATH_COLOR);
     this.setOutput(true)
     this.appendDummyInput()
       .appendField('fingerprint for data')
     this.appendValueInput('DATA_START')
-      .appendField('from start slot');
-    this.appendValueInput('DATA_END')
-      .appendField('thru end slot');
+      .appendField('at start spot');
+    this.appendValueInput('DATA_LEN')
+      .appendField('of length');
     this.setInputsInline(false);
   }
 }
 
 Blockly.Blocks['LLL_return'] = {
   init: function() {
-    this.setTooltip('Ends the contract execution and provides the temp data from the given start slot through the given end slot as a reply to this contract\'s caller.')
+    this.setTooltip('Ends the contract execution and provides the temp data from the given start spot and length as a reply to this contract\'s caller.')
     this.setColour(PROCEDURE_COLOR);
     this.appendDummyInput()
       .appendField('reply with data')
     this.appendValueInput('DATA_START')
-      .appendField('from start slot')
-    this.appendValueInput('DATA_END')
-      .appendField('thru end slot')
+      .appendField('   at temp spot')
+    this.appendValueInput('DATA_LEN')
+      .appendField('   of length')
     this.setPreviousStatement(true)
     this.setInputsInline(false)
   }
@@ -305,59 +367,33 @@ Blockly.Blocks['LLL_whileloop'] = {
   }
 }
 
-Blockly.Blocks['LLL_send'] = {
-  init: function() {
-    this.setTooltip('Sends data and ethereum currency to another contract, causing that contract to run and reply with data, if any. _address_ is given for the receiving contract. _amount_ is the number of ethereum currency units to send. _fee_budget_ is the maximum number of minimal-cost run steps this contract will pay for. A _start_slot_ and _end_slot_ must be given for temp data to be sent and the location of reply data to be received.')
-    this.setColour(PROCEDURE_COLOR)
-    this.appendValueInput('ADDRESS')
-      .appendField('send to address')
-    this.appendValueInput('MONEY')
-      .appendField('   amount')
-    this.appendValueInput('GAS')
-      .appendField('   with fee budget')
-    this.appendDummyInput()
-      .appendField('and data from')
-    this.appendValueInput('SEND_DATA_START')
-      .appendField('   start slot')
-    this.appendValueInput('SEND_DATA_END')
-      .appendField('   end slot')
-    this.appendDummyInput()
-      .appendField('getting reply into')
-    this.appendValueInput('REPLY_DATA_START')
-      .appendField('   start slot')
-    this.appendValueInput('REPLY_DATA_END')
-      .appendField('   end slot')
-    this.setInputsInline(false)
-    this.setPreviousStatement(true)
-    this.setNextStatement(true)
-  }
-}
-
 Blockly.Blocks['LLL_call'] = {
   init: function() {
-    this.setTooltip('This is an alternative to the [send] block. It does the same thing but designates the temp data to be sent and received using the data length measured in bytes. The [send] block may be prefered to avoid dealing in bytes.')
+    this.setTooltip('Sends data and currency to another contract, causing that contract to run and reply with data, if any. Returns 0 upon failure or 1 upon success. _address_ is given for the receiving contract. _amount_ is the number of ethereum currency units to send. _fee_budget_ is the maximum number of minimal-cost run steps this contract will pay for. (This defaults to "all available" when not supplied). A _start_spot_ and length (in bytes) must be given for temp data to be sent and reply data to be received.')
     this.setColour(PROCEDURE_COLOR)
+    this.appendDummyInput()
+      .appendField('call contract')
     this.appendValueInput('ADDRESS')
-      .appendField('call address')
+      .appendField('   at address')
     this.appendValueInput('MONEY')
       .appendField('   sending amount')
     this.appendValueInput('GAS')
       .appendField('   with fee budget')
     this.appendDummyInput()
-      .appendField('and data from')
+      .appendField('and with data at')
     this.appendValueInput('SEND_DATA_START')
-      .appendField('   start slot')
+      .appendField('   temp spot')
     this.appendValueInput('SEND_DATA_BYTES')
-      .appendField('   with byte length')
+      .appendField('   of length')
     this.appendDummyInput()
       .appendField('getting reply into')
     this.appendValueInput('REPLY_DATA_START')
-      .appendField('   start slot')
+      .appendField('   temp spot')
     this.appendValueInput('REPLY_DATA_BYTES')
-      .appendField('   with byte length')
-    this.setOutput(false) // technically returns true when successful?
-    this.setPreviousStatement(true)
-    this.setNextStatement(true)
+      .appendField('   with length')
+    this.setOutput(true) // technically returns true when successful?
+    this.setPreviousStatement(false)
+    this.setNextStatement(false)
     this.setInputsInline(false)
   }
 }
@@ -535,17 +571,17 @@ Blockly.Blocks['LLL_math'] = {
 
 Blockly.Blocks['LLL_load'] = {
   init: function() {
-    this.setTooltip('Represents the data stored at the given temp slot or save slot, or alternatley, the input slot representing the data items provided by the caller, starting at 0.')
+    this.setTooltip('Represents the data item stored at the given location within temp storage, save storage, or the input provided to the contract by the caller. ')
     var PLACES = 
-    [['save slot', 'sload'],
-    ['temp slot', 'mload'],
-    ['input slot', '_input_load_slots'],
-    ['input byte', '_input_load_bytes']]
+    [['save spot', 'sload'],
+    ['temp spot', 'mload'],
+    // ['input slot', '_input_load_slots'],
+    ['input spot', '_input_load_bytes']]
     this.setColour(VAR_COLOR);
     this.appendDummyInput()
       .appendField('data at')
-      .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
-    this.appendValueInput('SLOT')
+      .appendField(new Blockly.FieldDropdown(PLACES), 'POOL')
+    this.appendValueInput('SPOT')
       .setCheck('Number')
     this.setOutput(true);
     this.setInputsInline(true);
@@ -560,17 +596,6 @@ Blockly.Blocks['LLL_byte'] = {
       .appendField('byte at')
     this.appendValueInput('DATA')
       .appendField('in')
-    this.setInputsInline(true);
-    this.setOutput(true);
-  }
-};
-
-Blockly.Blocks['LLL_balance'] = {
-  init: function() {
-    this.setTooltip('Represents the currency unit balance of the provided address.')
-    this.setColour(MATH_COLOR);
-    this.appendValueInput('ADDR')
-      .appendField('balance of')
     this.setInputsInline(true);
     this.setOutput(true);
   }
@@ -613,14 +638,14 @@ Blockly.Blocks['LLL_suicide'] = {
 
 Blockly.Blocks['LLL_store'] = {
   init: function() {
-    this.setTooltip('Stores a result at a given temp slot or save slot. Data in temp slots are only available while the contract runs this time. Data in save slots will also be available the next time it runs. Slots can be designated with either numbered or text labels.')
-    var PLACES = 
-	  [['save slot', 'sstore'],
-    ['temp slot', 'mstore']]
+    this.setTooltip('Stores a result at a given temp or save location. Data in temp locations are only available while the contract runs this time. Data in save locations will also be available the next time it runs. Locations can be designated with either numbers or text labels.')
+    var POOLS = 
+	  [['save spot', 'sstore'],
+    ['temp spot', 'mstore']]
     this.setColour(VAR_COLOR);
-    this.appendValueInput('SLOT')
+    this.appendValueInput('SPOT')
       .appendField('in')
-      .appendField(new Blockly.FieldDropdown(PLACES), 'PLACE')
+      .appendField(new Blockly.FieldDropdown(POOLS), 'POOL')
       .setCheck('Number')
     this.appendValueInput('VAL')
       .appendField('put')
@@ -631,3 +656,40 @@ Blockly.Blocks['LLL_store'] = {
 };
 
 
+// // alt blocks
+
+// Blockly.Blocks['LLL_store'] = {
+//   init: function() {
+//     this.setTooltip('Stores a result at a given temp or save location. Data in temp locations are only available while the contract runs this time. Data in save locations will also be available the next time it runs. Locations can be designated with either numbers or text labels.')
+//     var POOLS = 
+//     [['store', 'sstore'],
+//     ['label', 'mstore']]
+//     this.setColour(VAR_COLOR);
+//     this.appendValueInput('VAL')
+//       .appendField(new Blockly.FieldDropdown(POOLS), 'POOL')
+//     this.appendValueInput('SPOT')
+//       .appendField('as')
+//     this.setInputsInline(false);
+//     this.setPreviousStatement(true);
+//     this.setNextStatement(true);
+//   }
+// };
+
+// Blockly.Blocks['LLL_load'] = {
+//   init: function() {
+//     this.setTooltip('Represents the data item stored at the given location within temp storage, save storage, or the input provided to the contract by the caller. ')
+//     var PLACES = 
+//     [['storage', 'sload'],
+//     ['label', 'mload'],
+//     // ['input slot', '_input_load_slots'],
+//     ['input spot', '_input_load_bytes']]
+//     this.setColour(VAR_COLOR);
+//     this.appendDummyInput()
+//       .appendField('data at')
+//       .appendField(new Blockly.FieldDropdown(PLACES), 'POOL')
+//     this.appendValueInput('SPOT')
+//       .setCheck('Number')
+//     this.setOutput(true);
+//     this.setInputsInline(true);
+//   }
+// };

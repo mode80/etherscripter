@@ -180,7 +180,6 @@ function someToolsOn(event){
       'whileloop',
     ]
     var typical = minimal.concat([
-      'init',
       'currency',
       'mstore',
       'mval',

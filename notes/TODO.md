@@ -7,15 +7,13 @@ Visual smart contract builder for Ethereum
   x new init block
   x lll block 
   x make end slot of call block be "thru" not "up to"
-  . choose either tx.input/size(s) or contract.input
-  . change balance to take 0 args for POC5
-  . new signature for (call)
-    . call needs a non-zero gas limit 
-    . (call (- (gas) 21) ... ) is essentially unlimited (gas cost to do the subtraction and the call)
+  x change balance to take 0 args for POC5
+  x new signature for (call) CALL is now [ gas, to, value, datain, datain_sz, dataout, dataout_sz ]
+  x call needs a non-zero gas limit 
+  . CREATE is now [ value, datain, datain_sz ]
   . SLT, SGT 
   . Bitwise & | ^(xor) ~(not)
   . fix block AND should be && not (and) == (&) 
-  . revisit (balance) (only returns current contract balance now?) 
   . (origin)
   . tx.sender as synonym for contract.caller?
   . add (calldatacopy memindex calldataindex len) 
@@ -25,6 +23,9 @@ Visual smart contract builder for Ethereum
   . (gaslimit) -> block.gaslimit
   . (PC) program counter
   . (&&) is now multinary?
+  . choose either tx.input/size(s) or contract.input
+    . in fact reorg constants for consistency with serpent
+  . discourage using massively high mem addresses?
 
 * add Serpent 
   . find list of reserved words
