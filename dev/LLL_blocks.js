@@ -505,16 +505,37 @@ Blockly.Blocks['LLL_when'] = {
 
 // Function value blocks 
 
+Blockly.Blocks['LLL_bitlogic'] = {
+  init: function() {
+    this.setTooltip('Performs bitwise logic operations. These are almost never needed but if you do, you\'ll already know what they are.')
+    var OPERATORS =
+      [['|', '|'],
+      ['&', '&'],
+      ['^', '^'],
+      ['~', '~']]
+    this.setColour(MATH_COLOR);
+    this.setOutput(true);
+    this.appendValueInput('A')
+      .setCheck('Number')
+    this.appendValueInput('B')
+      .setCheck('Number')
+      .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.setInputsInline(true);
+  }
+};
+
 Blockly.Blocks['LLL_compare'] = {
   init: function() {
-    this.setTooltip('Compares two results for use in other blocks that require a condition.')
+    this.setTooltip('Compares two results for use in other blocks that require a condition. (Signed variations treat very large numbers above 2^128 as being negative.)')
     var OPERATORS =
       [['=', '='],
       ['>', '>'],
       ['<', '<'],
       ['\u2260', '!='],
       ['\u2264', '<='],
-      ['\u2265', '>=']]
+      ['\u2265', '>='],
+      ['(signed >)', 'sgt'],
+      ['(signed <)', 'slt']]
     this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
@@ -528,10 +549,10 @@ Blockly.Blocks['LLL_compare'] = {
 
 Blockly.Blocks['LLL_logic'] = {
   init: function() {
-    this.setTooltip('Builds a new condition from two other conditions. _and_ has the same meaning as the English word. _or_ means either one or both. (_xor_ is rarely needed. It means one or the other, but not both.)')
+    this.setTooltip('Builds a new condition from two other conditions. _and_ has the same meaning as the English word. _or_ means either one or both. (_xor_ is rare. It means one or the other, but not both.)')
     var OPERATORS =
-      [['and', 'and'],
-      ['or', 'or'] ,
+      [['or', '||'] ,
+      ['and', '&&'],
       ['(xor)', 'xor'] ,
       ];
     this.setColour(MATH_COLOR);

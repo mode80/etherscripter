@@ -301,6 +301,7 @@ Blockly.LLL.twoArgForms = function(block) {
 Blockly.LLL['LLL_math'] = Blockly.LLL.twoArgForms 
 Blockly.LLL['LLL_logic'] = Blockly.LLL.twoArgForms 
 Blockly.LLL['LLL_compare'] = Blockly.LLL.twoArgForms 
+Blockly.LLL['LLL_bitlogic'] = Blockly.LLL.twoArgForms 
 
 Blockly.LLL['LLL_val'] = function(block) {
   // takes user input and uses it as a number or string val 

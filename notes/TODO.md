@@ -10,10 +10,10 @@ Visual smart contract builder for Ethereum
   x change balance to take 0 args for POC5
   x new signature for (call) CALL is now [ gas, to, value, datain, datain_sz, dataout, dataout_sz ]
   x call needs a non-zero gas limit 
-  . CREATE is now [ value, datain, datain_sz ]
-  . SLT, SGT 
-  . Bitwise & | ^(xor) ~(not)
-  . fix block AND should be && not (and) == (&) 
+  x CREATE is now [ value, datain, datain_sz ]
+  x SLT, SGT 
+  x Bitwise & | ^(xor) ~(not)
+  x fix block AND should be && not (and) == (&) 
   . (origin)
   . tx.sender as synonym for contract.caller?
   . add (calldatacopy memindex calldataindex len) 
