@@ -221,8 +221,7 @@ Blockly.HLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.HLL.statementToCode(block, 'INIT');
   var body = Blockly.HLL.statementToCode(block, 'BODY');
-  //return '{ ;; INIT\n\n' + init + '\n}\n\n{ ;; BODY\n\n' + body + '\n}'
-  return init + '\n}\n\n{\n\n' + body 
+  return init + '(return 0 (lll { \n;; BODY START \n\n' + code + '\n;; BODY END\n} 0))' 
 }
 
 Blockly.HLL['LLL_whileloop'] = function(block) {

@@ -178,6 +178,7 @@ function someToolsOn(event){
       'stop',
       'when',
       'whileloop',
+      'init',
     ]
     var typical = minimal.concat([
       'currency',

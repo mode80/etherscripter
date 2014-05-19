@@ -92,6 +92,18 @@ Blockly.Blocks['LLL_create'] = {
   }
 }
 
+Blockly.Blocks['LLL_init'] = {
+  init: function() {
+    this.setColour(LOOP_COLOR)
+    this.appendStatementInput('INIT')
+      .appendField('init')
+    this.appendStatementInput('BODY')
+      .appendField('body')
+    this.setInputsInline(false)
+    this.setPreviousStatement(false)
+    this.setNextStatement(false)
+  }
+};
 
 // Blockly.Blocks['LLL_compile'] = {
 //   init: function() {
@@ -105,19 +117,6 @@ Blockly.Blocks['LLL_create'] = {
 //     this.setPreviousStatement(false)
 //     this.setNextStatement(false)
 //     this.setOutput(true)
-//   }
-// };
-
-// Blockly.Blocks['LLL_init'] = {
-//   init: function() {
-//     this.setColour(LOOP_COLOR)
-//     this.appendStatementInput('INIT')
-//       .appendField('init')
-//     this.appendStatementInput('BODY')
-//       .appendField('body')
-//     this.setInputsInline(false)
-//     this.setPreviousStatement(false)
-//     this.setNextStatement(false)
 //   }
 // };
 
@@ -275,12 +274,11 @@ Blockly.Blocks['LLL_blockinfo'] = {
 
 Blockly.Blocks['LLL_tx'] = {
   init: function() {
-    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _sender_ is the address of the sender (could be a contract). _origin_ is the address of the original sender (never a contract). _data_ is the first sender-supplied data item. _data_count_ is the total number of sender-supplied data items. _gas_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. _temp_storage_size_ is the current temp storage usage in bytes. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
+    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract.\n _amount_ is the monetary value sent in this transaction, measured in wei. _origin_ is the address of the original sender (never a contract). _data_ is the first sender-supplied data item. _data_count_ is the total number of sender-supplied data items. _gas_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. _temp_storage_size_ is the current temp storage usage in bytes. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
     var VALS =
         [
          ['amount', 'callvalue'], // monetary value
-         ['sender', 'caller'], // most recent sender address 
-         ['origin', 'origin'], // original sender address 
+         ['origin', 'origin'], // most recent sender address 
          ['data', '_data'], // == contract.input == (calldataload 0) 
          ['data count', '_data_count'], // number of message data items 
          ['temp storage size', 'msize'],
@@ -297,9 +295,10 @@ Blockly.Blocks['LLL_tx'] = {
 
 Blockly.Blocks['LLL_contract'] = {
   init: function() {
-    this.setTooltip('Provides info about this contract.\n _address_ is this contract\'s address. _balance_ is this contract\'s balance measured in wei. _input_ is the first (32 bytes of) input provided by the caller. _input_length_ is the total length of all contract input (in bytes). _code_length_ is the length of this contract\'s code (in bytes).')
+    this.setTooltip('Provides info about this contract.\n _address_ is this contract\'s address. _caller_ is the address of the contract caller (could be a contract). _balance_ is this contract\'s balance measured in wei. _input_ is the first (32 bytes of) input provided by the caller. _input_length_ is the total length of all contract input (in bytes). _code_length_ is the length of this contract\'s code (in bytes).')
     var VALS =
       [['address', 'address'],
+       ['caller', 'caller'], 
        ['balance', 'balance'],
        ['input', '_input'],
        ['input length', '_input_byte_count'],

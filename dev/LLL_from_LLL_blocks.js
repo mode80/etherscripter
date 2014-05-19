@@ -40,17 +40,16 @@ Blockly.LLL['LLL_copy'] = function(block) {
 // }
 
 
-// Blockly.LLL['LLL_init'] = function(block) {
-//   // wrapper for contract init and body 
-//   var init = Blockly.LLL.statementToCode(block, 'INIT');
-//   var body = Blockly.LLL.statementToCode(block, 'BODY');
-//   return init + '\n (return 0 (lll { ;; BODY \n\n' + body + '\n } 0)) ;; END BODY\n' 
-// }
-
-
 /////
 // POC-4 blocks
 /////
+
+Blockly.LLL['LLL_init'] = function(block) {
+  // wrapper for contract init and body 
+  var init = Blockly.LLL.statementToCode(block, 'INIT');
+  var body = Blockly.LLL.statementToCode(block, 'BODY');
+  return init + '  (return 0 (lll { ;; START BODY \n\n' + body + '\n  } 0)) ;; END BODY' 
+}
 
 Blockly.LLL['LLL_byte'] = function(block) {
   // returns the byte at postion BYTE in DATA 
@@ -372,7 +371,7 @@ Blockly.LLL['LLL_store'] = function(block) {
   // mstore sstore statements
   var order = Blockly.LLL.ORDER_NONE;
   var pool = block.getFieldValue('POOL')  
-  var spot = Blockly.LLL.valueToCode(block,'spot', order) || 0 
+  var spot = Blockly.LLL.valueToCode(block,'SPOT', order) || 0 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
   var code = '('+ pool + ' ' + spot + ' ' + val + ')'
   // if (pool=='sstore') code = '[[' + spot + ']] ' + val
