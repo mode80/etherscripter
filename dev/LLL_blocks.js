@@ -31,20 +31,28 @@ var UNUSED_COLOR = 160
 // POC-5 blocks 
 //
 
-// Blockly.Blocks['LLL_compile'] = {
-//   init: function() {
-//     this.setTooltip('Compiles code to the temp location provided, and returns the compiled length, measured in bytes).')
-//     this.setColour(PROCEDURE_COLOR)
-//     this.appendStatementInput('CODE')
-//       .appendField('compile')
-//     this.appendValueInput('TO_START')
-//       .appendField('to temp spot')
-//     this.setInputsInline(false)
-//     this.setPreviousStatement(false)
-//     this.setNextStatement(false)
-//     this.setOutput(true)
-//   }
-// };
+Blockly.Blocks['LLL_copy'] = {
+  init: function() {
+    var OPS =
+        [
+         ['code', 'codecopy'],
+         ['input', 'calldatacopy'],
+        ]
+    this.setTooltip('Copies code or input data to temp storage.')
+    this.setColour(PROCEDURE_COLOR);
+    this.appendDummyInput()
+      .appendField('copy')
+      .appendField(new Blockly.FieldDropdown(OPS), 'OP')
+    this.appendValueInput('DATA_LEN')
+      .appendField('of length')
+    this.appendValueInput('DATA_START')
+      .appendField('to temp spot')
+    this.setPreviousStatement(true)
+    this.setNextStatement(true)
+    this.setInputsInline(false)
+  }
+}
+
 
 Blockly.Blocks['LLL_compile_max'] = {
   init: function() {
@@ -84,6 +92,21 @@ Blockly.Blocks['LLL_create'] = {
   }
 }
 
+
+// Blockly.Blocks['LLL_compile'] = {
+//   init: function() {
+//     this.setTooltip('Compiles code to the temp location provided, and returns the compiled length, measured in bytes).')
+//     this.setColour(PROCEDURE_COLOR)
+//     this.appendStatementInput('CODE')
+//       .appendField('compile')
+//     this.appendValueInput('TO_START')
+//       .appendField('to temp spot')
+//     this.setInputsInline(false)
+//     this.setPreviousStatement(false)
+//     this.setNextStatement(false)
+//     this.setOutput(true)
+//   }
+// };
 
 // Blockly.Blocks['LLL_init'] = {
 //   init: function() {
@@ -252,7 +275,7 @@ Blockly.Blocks['LLL_blockinfo'] = {
 
 Blockly.Blocks['LLL_tx'] = {
   init: function() {
-    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _sender_ is the address of the sender (could be a contract). _origin_ is the address of the original sender (never a contract). _data_ is the first sender-supplied data item. _data_count_ is the total number of sender-supplied data items. _gas_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
+    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _sender_ is the address of the sender (could be a contract). _origin_ is the address of the original sender (never a contract). _data_ is the first sender-supplied data item. _data_count_ is the total number of sender-supplied data items. _gas_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. _temp_storage_size_ is the current temp storage usage in bytes. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
     var VALS =
         [
          ['amount', 'callvalue'], // monetary value
@@ -260,6 +283,7 @@ Blockly.Blocks['LLL_tx'] = {
          ['origin', 'origin'], // original sender address 
          ['data', '_data'], // == contract.input == (calldataload 0) 
          ['data count', '_data_count'], // number of message data items 
+         ['temp storage size', 'msize'],
          ['gas left', 'gas'],
          ['gas price', 'gasprice']
         ]

@@ -24,6 +24,14 @@ Blockly.LLL['LLL_compile_max'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
+Blockly.LLL['LLL_copy'] = function(block) {
+  var op = block.getFieldValue('OP') || ''  
+  var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE) || 0
+  var b = Blockly.LLL.valueToCode(block, 'DATA_LEN', Blockly.LLL.ORDER_NONE) || 0
+  var code = '(' + op + ' ' + a + ' 0 ' + b + ')\n' 
+  return code
+}
+
 // Blockly.LLL['LLL_compile'] = function(block) {
 //   var for_compiling = Blockly.LLL.statementToCode(block, 'CODE');
 //   var to_start = Blockly.LLL.valueToCode(block, 'TO_START', Blockly.LLL.ORDER_NONE) || 0

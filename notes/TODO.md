@@ -17,14 +17,12 @@ Visual smart contract builder for Ethereum
   x (origin)
   x tx.sender as synonym for contract.caller?
   x choose either tx.input/size(s) or contract.input
-  . add (calldatacopy memindex calldataindex len) 
-  . add (codecopy memindex codeindex) blocks
+  x add (calldatacopy memindex calldataindex len) 
+  x add (codecopy memindex codeindex) blocks
   x (codesize) -> contract.codesize
   x (gasprice) -> tx.gasprice
   x (gaslimit) -> block.gaslimit
-  . (PC) program counter
-  . (&&) is now multinary?
-
+  x (msize) -> tx.msize
 * add Serpent 
   . find list of reserved words
 * save functionality using appengine(?) cloud storage
