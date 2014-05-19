@@ -232,7 +232,7 @@ Blockly.Blocks['LLL_spend'] = {
 
 Blockly.Blocks['LLL_blockinfo'] = {
   init: function() {
-    this.setTooltip('Provides info about this blockchain block.\n _timestamp_ is when the block was mined, measured as the number of seconds since 1970 UTC.\n _number_ is the block number.\n _previous_hash_ is the data fingerprint for the last block (not this one).\n _coinbase_ is the address of the miner rewarded for finding this block.\n _difficulty_ is a measure of the current difficulty for mining this block.\n _total_fee_budget_ is the total of all fees available for contract execution on this block, measured in gas units.\n')
+    this.setTooltip('Provides info about this blockchain block.\n _timestamp_ is when the block was mined, measured as the number of seconds since 1970 UTC.\n _number_ is the block number.\n _previous_hash_ is the data fingerprint for the last block (not this one).\n _coinbase_ is the address of the miner rewarded for finding this block.\n _difficulty_ is a measure of the current difficulty for mining this block.\n _total_gas_ is the total of all fees available for contract execution on this block, measured in gas units.\n')
     var VALS =
         [
          ['number', 'number'],
@@ -240,7 +240,7 @@ Blockly.Blocks['LLL_blockinfo'] = {
          ['coinbase', 'coinbase'],
          ['timestamp', 'timestamp'],
          ['difficulty', 'difficulty'],
-         ['total fee budget', 'gaslimit'],
+         ['total gas', 'gaslimit'],
         ]
     this.setColour(VALUE_COLOR);
     this.setOutput(true);
@@ -252,15 +252,16 @@ Blockly.Blocks['LLL_blockinfo'] = {
 
 Blockly.Blocks['LLL_tx'] = {
   init: function() {
-    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _fee_budget_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
+    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract caller.\n _amount_ is the monetary value sent in this transaction, measured in wei. _sender_ is the address of the sender (could be a contract). _origin_ is the address of the original sender (never a contract). _data_ is the first sender-supplied data item. _data_count_ is the total number of sender-supplied data items. _gas_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
     var VALS =
         [
          ['amount', 'callvalue'], // monetary value
-         //['origin', 'origin'], // missing from POC-4 ? 
-         ['fee budget left', 'gas'],
-         // ['input slot count', '_input_slot_count'],// to be derived from (calldatasize)
-         ['input length', '_input_byte_count'],// as per (calldatasize) 
-         //['gas price', 'gasprice'],// missing from POC-4 ?  
+         ['sender', 'caller'], // most recent sender address 
+         ['origin', 'origin'], // original sender address 
+         ['data', '_data'], // == contract.input == (calldataload 0) 
+         ['data count', '_data_count'], // number of message data items 
+         ['gas left', 'gas'],
+         ['gas price', 'gasprice']
         ]
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
@@ -272,12 +273,14 @@ Blockly.Blocks['LLL_tx'] = {
 
 Blockly.Blocks['LLL_contract'] = {
   init: function() {
-    this.setTooltip('Provides info about this contract.\n _caller_ is the address of the account calling this contract. _address_ is this contract\'s address. _input_ is the first (32 bytes of) input provided by the caller. _balance_ is this contract\'s balance measured in wei.')
+    this.setTooltip('Provides info about this contract.\n _address_ is this contract\'s address. _balance_ is this contract\'s balance measured in wei. _input_ is the first (32 bytes of) input provided by the caller. _input_length_ is the total length of all contract input (in bytes). _code_length_ is the length of this contract\'s code (in bytes).')
     var VALS =
-      [['caller', 'caller'],
-       ['address', 'address'],
-       ['input', 'input'],
-       ['balance', 'balance']]
+      [['address', 'address'],
+       ['balance', 'balance'],
+       ['input', '_input'],
+       ['input length', '_input_byte_count'],
+       ['code length', 'codesize'],
+      ]
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
     this.appendDummyInput()

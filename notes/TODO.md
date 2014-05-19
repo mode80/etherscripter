@@ -14,18 +14,16 @@ Visual smart contract builder for Ethereum
   x SLT, SGT 
   x Bitwise & | ^(xor) ~(not)
   x fix block AND should be && not (and) == (&) 
-  . (origin)
-  . tx.sender as synonym for contract.caller?
+  x (origin)
+  x tx.sender as synonym for contract.caller?
+  x choose either tx.input/size(s) or contract.input
   . add (calldatacopy memindex calldataindex len) 
   . add (codecopy memindex codeindex) blocks
-  . (codesize) -> contract.codesize
-  . (gasprice) -> contract.codesize
-  . (gaslimit) -> block.gaslimit
+  x (codesize) -> contract.codesize
+  x (gasprice) -> tx.gasprice
+  x (gaslimit) -> block.gaslimit
   . (PC) program counter
   . (&&) is now multinary?
-  . choose either tx.input/size(s) or contract.input
-    . in fact reorg constants for consistency with serpent
-  . discourage using massively high mem addresses?
 
 * add Serpent 
   . find list of reserved words

@@ -219,10 +219,10 @@ Blockly.LLL['LLL_tx'] = function(block) {
   // tx related values 
   var code
   var val = block.getFieldValue('PROP');
-  if (val == '_input_slot_count') // count of 32-byte slots isn't supported natively but we can have it calculated
-    code = '(add (div (calldatasize) 32) (if (mod calldatasize 32) 1 0) )' 
-  else if (val == '_input_byte_count')
-    code = '(calldatasize)' 
+  if (val == '_data')
+    code = '(calldataload 0)' 
+  else if (val == '_data_count')
+    code = '(div (calldatasize) 32)' 
   else 
     code = '(' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
@@ -232,10 +232,10 @@ Blockly.LLL['LLL_contract'] = function(block) {
   // so called "closure" (contract) related values 
   var code
   var val = block.getFieldValue('PROP');
-  if (val == 'balance')
-    code = '(balance)' 
-  else if (val == 'input')
+  if (val == '_input')
     code = '(calldataload 0)' 
+  else if (val == '_input_byte_count')
+    code = '(calldatasize)' 
   else 
     code = '(' + val + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC];
