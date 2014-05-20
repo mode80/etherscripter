@@ -182,6 +182,7 @@ function someToolsOn(event){
     ]
     var typical = minimal.concat([
       'currency',
+      'input',
       'mstore',
       'mval',
       'if',

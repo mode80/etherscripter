@@ -31,6 +31,18 @@ var UNUSED_COLOR = 160
 // POC-5 blocks 
 //
 
+Blockly.Blocks['LLL_input'] = {
+  init: function() {
+    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: The first item is 1, as normal people would expect!)')
+    this.setColour(VALUE_COLOR)
+    this.setOutput(true)
+    this.appendValueInput('ORDINAL')
+    this.appendDummyInput()
+      .appendField('th input')
+    this.setInputsInline(true)
+  }
+}
+
 Blockly.Blocks['LLL_copy'] = {
   init: function() {
     var OPS =
@@ -257,10 +269,10 @@ Blockly.Blocks['LLL_blockinfo'] = {
     this.setTooltip('Provides info about this blockchain block.\n _timestamp_ is when the block was mined, measured as the number of seconds since 1970 UTC.\n _number_ is the block number.\n _previous_hash_ is the data fingerprint for the last block (not this one).\n _coinbase_ is the address of the miner rewarded for finding this block.\n _difficulty_ is a measure of the current difficulty for mining this block.\n _total_gas_ is the total of all fees available for contract execution on this block, measured in gas units.\n')
     var VALS =
         [
+         ['timestamp', 'timestamp'],
          ['number', 'number'],
          ['previous hash', 'prevhash'],
          ['coinbase', 'coinbase'],
-         ['timestamp', 'timestamp'],
          ['difficulty', 'difficulty'],
          ['total gas', 'gaslimit'],
         ]
@@ -274,13 +286,13 @@ Blockly.Blocks['LLL_blockinfo'] = {
 
 Blockly.Blocks['LLL_tx'] = {
   init: function() {
-    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract.\n _amount_ is the monetary value sent in this transaction, measured in wei. _origin_ is the address of the original sender (never a contract). _data_ is the first sender-supplied data item. _data_count_ is the total number of sender-supplied data items. _gas_left_ is the remaining fees available for execution, measured in gas units. _input_length_ is the length of all input measured in bytes. _temp_storage_size_ is the current temp storage usage in bytes. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
+    this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract.\n _amount_ is the monetary value sent in this transaction, measured in wei. _origin_ is the address of the original sender (never a contract). _gas_left_ is the remaining fees available for execution, measured in gas units. _temp_storage_size_ is the current temp storage usage in bytes. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
     var VALS =
         [
          ['amount', 'callvalue'], // monetary value
          ['origin', 'origin'], // most recent sender address 
-         ['data', '_data'], // == contract.input == (calldataload 0) 
-         ['data count', '_data_count'], // number of message data items 
+         // ['1st input', '_data'], // == contract.input == (calldataload 0) 
+         // ['input count', '_data_count'], 
          ['temp storage size', 'msize'],
          ['gas left', 'gas'],
          ['gas price', 'gasprice']
@@ -295,13 +307,14 @@ Blockly.Blocks['LLL_tx'] = {
 
 Blockly.Blocks['LLL_contract'] = {
   init: function() {
-    this.setTooltip('Provides info about this contract.\n _address_ is this contract\'s address. _caller_ is the address of the contract caller (could be a contract). _balance_ is this contract\'s balance measured in wei. _input_ is the first (32 bytes of) input provided by the caller. _input_length_ is the total length of all contract input (in bytes). _code_length_ is the length of this contract\'s code (in bytes).')
+    this.setTooltip('Provides info about this contract.\n _address_ is this contract\'s address. _caller_ is the address of the contract caller (could be a contract). _balance_ is this contract\'s balance measured in wei. _1st_input_ is the first (32 bytes of) input provided by the caller. _input_count_ is the number of (32 byte) inputs provided. _calldata_length_ is the total length of all contract input (in bytes). _code_length_ is the length of this contract\'s code (in bytes).')
     var VALS =
       [['address', 'address'],
        ['caller', 'caller'], 
        ['balance', 'balance'],
-       ['input', '_input'],
-       ['input length', '_input_byte_count'],
+       ['1st input', '_input'],
+       ['input count', '_input_count'],
+       ['calldata length', '_input_byte_count'],
        ['code length', 'codesize'],
       ]
     this.setColour(VALUE_COLOR)
@@ -623,7 +636,7 @@ Blockly.Blocks['LLL_load'] = {
     [['save spot', 'sload'],
     ['temp spot', 'mload'],
     // ['input slot', '_input_load_slots'],
-    ['input spot', 'calldataload']]
+    ['calldata spot', 'calldataload']]
     this.setColour(VAR_COLOR);
     this.appendDummyInput()
       .appendField('data at')

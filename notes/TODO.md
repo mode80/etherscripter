@@ -3,27 +3,7 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* make LLL POC-5 compatible
-  x new init block
-  x lll block 
-  x make end slot of call block be "thru" not "up to"
-  x change balance to take 0 args for POC5
-  x new signature for (call) CALL is now [ gas, to, value, datain, datain_sz, dataout, dataout_sz ]
-  x call needs a non-zero gas limit 
-  x CREATE is now [ value, datain, datain_sz ]
-  x SLT, SGT 
-  x Bitwise & | ^(xor) ~(not)
-  x fix block AND should be && not (and) == (&) 
-  x (origin)
-  x tx.sender as synonym for contract.caller?
-  x choose either tx.input/size(s) or contract.input
-  x add (calldatacopy memindex calldataindex len) 
-  x add (codecopy memindex codeindex) blocks
-  x (codesize) -> contract.codesize
-  x (gasprice) -> tx.gasprice
-  x (gaslimit) -> block.gaslimit
-  x (msize) -> tx.msize
-* decide how to handle accessing byte-oriented contract input
+* sample to test new POC-5 blocks
 * add Serpent 
   . find list of reserved words
 * save functionality using appengine(?) cloud storage

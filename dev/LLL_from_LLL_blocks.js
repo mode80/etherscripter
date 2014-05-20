@@ -16,6 +16,13 @@ goog.require('Blockly.LLL');
 // New POC-5 blocks
 /////
 
+Blockly.LLL['LLL_input'] = function(block) {
+  var ordinal = Blockly.LLL.valueToCode(block, 'ORDINAL', Blockly.LLL.ORDER_NONE) || 1
+  var index = '(* (- ' + ordinal + ' 1) 32)'
+  var code = '(calldataload ' + index + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+}
+
 Blockly.LLL['LLL_compile_max'] = function(block) {
   var for_compiling = Blockly.LLL.statementToCode(block, 'CODE');
   var to_start = Blockly.LLL.valueToCode(block, 'TO_START', Blockly.LLL.ORDER_NONE) || 0
@@ -230,12 +237,7 @@ Blockly.LLL['LLL_tx'] = function(block) {
   // tx related values 
   var code
   var val = block.getFieldValue('PROP');
-  if (val == '_data')
-    code = '(calldataload 0)' 
-  else if (val == '_data_count')
-    code = '(div (calldatasize) 32)' 
-  else 
-    code = '(' + val + ')'
+  code = '(' + val + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC];
 }
 
@@ -245,6 +247,8 @@ Blockly.LLL['LLL_contract'] = function(block) {
   var val = block.getFieldValue('PROP');
   if (val == '_input')
     code = '(calldataload 0)' 
+  else if (val == '_input_count')
+    code = '(div (calldatasize) 32)' 
   else if (val == '_input_byte_count')
     code = '(calldatasize)' 
   else 

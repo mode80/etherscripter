@@ -51,9 +51,10 @@
             <li onclick="toggleTool(event)" id="val"><a>value</a></li>
             <li onclick="toggleTool(event)" id="textval"><a>text value</a></li>
             <li onclick="toggleTool(event)" id="currency"><a>currency</a></li>
-            <li onclick="toggleTool(event)" id="tx"><a>transaction info</a></li>
-            <li onclick="toggleTool(event)" id="contract"><a>contract info</a></li>
             <li onclick="toggleTool(event)" id="blockinfo"><a>block info</a></li>
+            <li onclick="toggleTool(event)" id="contract"><a>contract info</a></li>
+            <li onclick="toggleTool(event)" id="tx"><a>transaction info</a></li>
+            <li onclick="toggleTool(event)" id="input"><a>input</a></li>
             <li onclick="toggleTool(event)" id="math"><a>math</a></li>
             <li onclick="toggleTool(event)" id="compare"><a>compare</a></li>
             <li onclick="toggleTool(event)" id="logic"><a>logic</a></li>
@@ -148,9 +149,10 @@
     <block type="LLL_val"><field name="VAL">0</field></block>
     <block type="LLL_textval"><field name="VAL">text</field></block>
     <block type="LLL_currency"> <field name="DENOM">ether</field> <value name="AMT"> <block type="LLL_val"> <field name="VAL">0</field> </block> </value> </block>
-    <block type="LLL_tx"></block>
-    <block type="LLL_contract"></block>
     <block type="LLL_blockinfo"></block>
+    <block type="LLL_contract"></block>
+    <block type="LLL_tx"></block>
+    <block type="LLL_input"></block>
     <block type="LLL_math"></block>
     <block type="LLL_compare"></block>
     <block type="LLL_bitlogic"></block>
