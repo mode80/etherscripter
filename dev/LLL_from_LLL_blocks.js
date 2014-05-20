@@ -115,16 +115,16 @@ Blockly.LLL['LLL_spend'] = function(block) {
   var address = Blockly.LLL.valueToCode(block,'TO', order) || 0  
   var money = Blockly.LLL.valueToCode(block,'MONEY', order) || '0wei' 
   var op = 'call'
-  var gas = '0'
+  var gas = '(- (gas) 21)'
   var send_start_i = '0'
   var send_bytes = '0'
   var reply_start_i = '0'
   var reply_bytes = '0'
   var code = '('+ 
     op +' '+ 
+    gas +' '+ 
     address +' '+ 
     money +' '+ 
-    gas +' '+ 
     send_start_i +' '+ 
     send_bytes +' '+ 
     reply_start_i +' '+ 
@@ -154,7 +154,7 @@ Blockly.LLL['LLL_call'] = function(block) {
   var op = 'call' 
   var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE) || '0x0' 
   var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE) || 0
-  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE) || '(- (gas) 20)'
+  var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE) || '(- (gas) 21)'
   var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE) || 0
   var send_bytes = Blockly.LLL.valueToCode(block, 'SEND_DATA_BYTES', Blockly.LLL.ORDER_NONE) || 0
   var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE) || 0
