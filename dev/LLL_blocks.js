@@ -623,7 +623,7 @@ Blockly.Blocks['LLL_load'] = {
     [['save spot', 'sload'],
     ['temp spot', 'mload'],
     // ['input slot', '_input_load_slots'],
-    ['input spot', '_input_load_bytes']]
+    ['input spot', 'calldataload']]
     this.setColour(VAR_COLOR);
     this.appendDummyInput()
       .appendField('data at')
@@ -702,41 +702,3 @@ Blockly.Blocks['LLL_store'] = {
   }
 };
 
-
-// // alt blocks
-
-// Blockly.Blocks['LLL_store'] = {
-//   init: function() {
-//     this.setTooltip('Stores a result at a given temp or save location. Data in temp locations are only available while the contract runs this time. Data in save locations will also be available the next time it runs. Locations can be designated with either numbers or text labels.')
-//     var POOLS = 
-//     [['store', 'sstore'],
-//     ['label', 'mstore']]
-//     this.setColour(VAR_COLOR);
-//     this.appendValueInput('VAL')
-//       .appendField(new Blockly.FieldDropdown(POOLS), 'POOL')
-//     this.appendValueInput('SPOT')
-//       .appendField('as')
-//     this.setInputsInline(false);
-//     this.setPreviousStatement(true);
-//     this.setNextStatement(true);
-//   }
-// };
-
-// Blockly.Blocks['LLL_load'] = {
-//   init: function() {
-//     this.setTooltip('Represents the data item stored at the given location within temp storage, save storage, or the input provided to the contract by the caller. ')
-//     var PLACES = 
-//     [['storage', 'sload'],
-//     ['label', 'mload'],
-//     // ['input slot', '_input_load_slots'],
-//     ['input spot', '_input_load_bytes']]
-//     this.setColour(VAR_COLOR);
-//     this.appendDummyInput()
-//       .appendField('data at')
-//       .appendField(new Blockly.FieldDropdown(PLACES), 'POOL')
-//     this.appendValueInput('SPOT')
-//       .setCheck('Number')
-//     this.setOutput(true);
-//     this.setInputsInline(true);
-//   }
-// };

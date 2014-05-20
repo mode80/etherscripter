@@ -64,8 +64,9 @@ Blockly.LLL['LLL_mstore'] = function(block) {
   // mstore statement
   var order = Blockly.LLL.ORDER_NONE;
   var spot = block.getFieldValue('SPOT') || 0
+  spot = Blockly.LLL.smartVal(spot).replace(/"/g,'') // unquote text spots to make use of LLL's autoassigned memory addresses
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
-  var code = '[' + spot + ']:' + val
+  var code = '[' + spot  + ']:' + val
   return code + '\n'
 }
 
@@ -73,6 +74,7 @@ Blockly.LLL['LLL_sstore'] = function(block) {
   // sstore statement
   var order = Blockly.LLL.ORDER_NONE;
   var spot = block.getFieldValue('SPOT') || 0
+  spot = Blockly.LLL.smartVal(spot)
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
   var code = '[[' + spot + ']]:' + val
   return code + '\n'
@@ -81,16 +83,18 @@ Blockly.LLL['LLL_sstore'] = function(block) {
 Blockly.LLL['LLL_mval'] = function(block) {
   // gets value from a memory spot 
   var order = Blockly.LLL.ORDER_NONE;
-  var val = block.getFieldValue('VAL') || 0  
-  var code = '@' + val
+  var spot = block.getFieldValue('VAL') || 0  
+  spot = Blockly.LLL.smartVal(spot).replace(/"/g,'') // unquote text spots to make use of LLL's autoassigned memory addresses
+  var code = '@' + spot 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
 Blockly.LLL['LLL_sval'] = function(block) {
   // gets value from a storage spot 
   var order = Blockly.LLL.ORDER_NONE;
-  var val = block.getFieldValue('VAL') || 0  
-  var code = '@@' + val
+  var spot = block.getFieldValue('VAL') || 0  
+  spot = Blockly.LLL.smartVal(spot)
+  var code = '@@' + spot 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
@@ -305,6 +309,20 @@ Blockly.LLL.twoArgForms = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
+Blockly.LLL.smartVal = function(val) {
+  // quotes non hexy strings and 'LLL-encodes' negative numbers
+  if ( isNaN(val) ) { // quote non-hexy string-like values
+    var is_hexprefixed = ((val+'').substr(0,2).toUpperCase()=='0X') 
+    var is_allhexchars = (/[^0-9a-fx]/i.exec(val)===null) 
+    if (is_hexprefixed && is_allhexchars)  // don't quote hexy strings 
+      retval = val
+    else 
+      retval = '"' + val.replace(/"/g,'') + '"' // outer quote normal strings
+  } else  // is a number
+    retval = (val<0) ? '(neg ' + -val + ')' : val + '' 
+  return retval 
+}
+
 Blockly.LLL['LLL_math'] = Blockly.LLL.twoArgForms 
 Blockly.LLL['LLL_logic'] = Blockly.LLL.twoArgForms 
 Blockly.LLL['LLL_compare'] = Blockly.LLL.twoArgForms 
@@ -314,16 +332,7 @@ Blockly.LLL['LLL_val'] = function(block) {
   // takes user input and uses it as a number or string val 
   var order = Blockly.LLL.ORDER_NONE;
   var val = block.getFieldValue('VAL') || 0  
-  var code = '' 
-  // if ( isNaN(val) ) { // quote non-hexy string-like values
-  //   var is_hexprefixed = ((val+'').substr(0,2).toUpperCase()=='0X') 
-  //   var is_allhexchars = (/[^0-9a-fx]/i.exec(val)===null) 
-  //   if (is_hexprefixed && is_allhexchars)  // don't quote hexy strings 
-  //     code = val
-  //   else 
-  //     code = '"' + val + '"' // quote normal strings
-  // } else  // is a number
-    code = (val<0) ? '(neg ' + -val + ')' : val + '' 
+  var code = Blockly.LLL.smartVal(val) 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
@@ -361,9 +370,9 @@ Blockly.LLL['LLL_load'] = function(block) {
   var spot = Blockly.LLL.valueToCode(block,'SPOT', order) || 0 
   var code
   if (pool=='sload') code = '(sload ' + spot + ')'
-  if (pool=='mload') code = '(mload ' + spot + ')'
+  if (pool=='mload') code = '(mload ' + spot.replace(/"/g,'')  + ')' // unquote text spots to make use of LLL's autoassigned memory addresses 
+  if (pool=='calldataload') code = '(calldataload ' + spot.replace(/"/g,'')  + ')' // same here
   // if (pool=='_input_load_slots') code = '(calldataload ' + spot * 32 + ')'
-  if (pool=='_input_load_bytes') code = '(calldataload ' + spot + ')'
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
@@ -372,10 +381,10 @@ Blockly.LLL['LLL_store'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var pool = block.getFieldValue('POOL')  
   var spot = Blockly.LLL.valueToCode(block,'SPOT', order) || 0 
+  if (pool =='mstore' || pool == 'calldataload') 
+    spot = spot.replace(/"/g,'') // unquote text spots to make use of LLL's autoassigned memory addresses 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
   var code = '('+ pool + ' ' + spot + ' ' + val + ')'
-  // if (pool=='sstore') code = '[[' + spot + ']] ' + val
-  // if (pool=='mstore') code = '[' + spot + '] ' + val
   return code + '\n'
 }
 

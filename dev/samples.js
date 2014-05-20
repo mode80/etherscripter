@@ -17,226 +17,135 @@ function fnCommentToString(f) {
 var samples = {
 
 coin_flip: fnCommentToString(function(){/*! 
-<xml>
-  <block type="LLL_comment" id="33" x="37" y="186">
-    <field name="NOTE">Coin flipping smart contract</field>
-    <next>
-      <block type="LLL_comment" id="34">
-        <field name="NOTE">When the time in seconds is even, consider it a winning flip</field>
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_init" id="340" x="34" y="40">
+    <statement name="INIT">
+      <block type="LLL_comment" id="326">
+        <field name="NOTE">Coin flipping smart contract</field>
         <next>
-          <block type="LLL_when" id="35" inline="false">
-            <field name="WORD">when</field>
-            <value name="COND">
-              <block type="LLL_compare" id="36" inline="true">
-                <field name="OP">=</field>
+          <block type="LLL_comment" id="327">
+            <field name="NOTE">When the time in seconds is even, consider it a winning flip</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_when" id="328" inline="false">
+        <field name="WORD">when</field>
+        <value name="COND">
+          <block type="LLL_compare" id="329" inline="true">
+            <field name="OP">=</field>
+            <value name="A">
+              <block type="LLL_math" id="330" inline="true">
+                <field name="OP">mod</field>
                 <value name="A">
-                  <block type="LLL_math" id="37" inline="true">
-                    <field name="OP">smod</field>
+                  <block type="LLL_blockinfo" id="331">
+                    <field name="PROP">timestamp</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="LLL_val" id="332">
+                    <field name="VAL">2</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="LLL_val" id="333">
+                <field name="VAL">0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="THEN">
+          <block type="LLL_comment" id="334">
+            <field name="NOTE">On a winning flip, the sender gets double their money back</field>
+            <next>
+              <block type="LLL_spend" id="335" inline="true">
+                <value name="MONEY">
+                  <block type="LLL_math" id="336" inline="true">
+                    <field name="OP">*</field>
                     <value name="A">
-                      <block type="LLL_block" id="38">
-                        <field name="PROP">timestamp</field>
+                      <block type="LLL_tx" id="337">
+                        <field name="PROP">callvalue</field>
                       </block>
                     </value>
                     <value name="B">
-                      <block type="LLL_val" id="39">
+                      <block type="LLL_val" id="338">
                         <field name="VAL">2</field>
                       </block>
                     </value>
                   </block>
                 </value>
-                <value name="B">
-                  <block type="LLL_val" id="40">
-                    <field name="VAL">0</field>
+                <value name="TO">
+                  <block type="LLL_tx" id="339">
+                    <field name="PROP">origin</field>
                   </block>
                 </value>
               </block>
-            </value>
-            <statement name="THEN">
-              <block type="LLL_comment" id="41">
-                <field name="NOTE">On a winning flip, the sender gets double their money back</field>
-                <next>
-                  <block type="LLL_mktx" id="42" inline="true">
-                    <value name="MONEY">
-                      <block type="LLL_math" id="43" inline="true">
-                        <field name="OP">mul</field>
-                        <value name="A">
-                          <block type="LLL_transaction" id="44">
-                            <field name="PROP">value</field>
-                          </block>
-                        </value>
-                        <value name="B">
-                          <block type="LLL_val" id="45">
-                            <field name="VAL">2</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <value name="TO">
-                      <block type="LLL_transaction" id="46">
-                        <field name="PROP">sender</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </statement>
+            </next>
           </block>
-        </next>
+        </statement>
       </block>
-    </next>
+    </statement>
   </block>
 </xml>
 */}),
 
 sales: fnCommentToString(function(){/*! 
-<xml>
-  <block type="LLL_comment" id="47" x="43" y="78">
-    <field name="NOTE">*** An Ethereum smart contract to sell a website for "5000 by March"</field>
-    <next>
-      <block type="LLL_comment" id="48">
-        <field name="NOTE">First, store buyer's ethereum address:</field>
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_init" id="113" x="52" y="55">
+    <statement name="INIT">
+      <block type="LLL_comment" id="80">
+        <field name="NOTE">*** An Ethereum smart contract to sell a website for "5000 by March"</field>
         <next>
-          <block type="LLL_store" id="49" inline="true">
-            <field name="POOL">sstore</field>
-            <value name="VAL">
-              <block type="LLL_val" id="50">
-                <field name="VAL">0x6af26739b9ffef8aa2985252e5357fde</field>
-              </block>
-            </value>
-            <value name="SPOT">
-              <block type="LLL_val" id="51">
-                <field name="VAL">BUYER</field>
-              </block>
-            </value>
+          <block type="LLL_comment" id="81">
+            <field name="NOTE">First, store buyer's ethereum address:</field>
             <next>
-              <block type="LLL_comment" id="52">
-                <field name="NOTE">Then, store seller's ethereum address:</field>
+              <block type="LLL_store" id="82" inline="true">
+                <field name="POOL">sstore</field>
+                <value name="SPOT">
+                  <block type="LLL_val" id="154">
+                    <field name="VAL">BUYER</field>
+                  </block>
+                </value>
+                <value name="VAL">
+                  <block type="LLL_val" id="83">
+                    <field name="VAL">0x6af26739b9ffef8aa2985252e5357fde</field>
+                  </block>
+                </value>
                 <next>
-                  <block type="LLL_store" id="53" inline="true">
-                    <field name="POOL">sstore</field>
-                    <value name="VAL">
-                      <block type="LLL_val" id="54">
-                        <field name="VAL">0xfeab802c014588f08bfee2741086c375</field>
-                      </block>
-                    </value>
-                    <value name="SPOT">
-                      <block type="LLL_val" id="55">
-                        <field name="VAL">SELLER</field>
-                      </block>
-                    </value>
+                  <block type="LLL_comment" id="85">
+                    <field name="NOTE">Then, store seller's ethereum address:</field>
                     <next>
-                      <block type="LLL_comment" id="56">
-                        <field name="NOTE">April 1, 2014 is 1396310400 in "computer time"</field>
+                      <block type="LLL_store" id="86" inline="true">
+                        <field name="POOL">sstore</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="151">
+                            <field name="VAL">SELLER</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_val" id="87">
+                            <field name="VAL">0xfeab802c014588f08bfee2741086c375</field>
+                          </block>
+                        </value>
                         <next>
-                          <block type="LLL_store" id="57" inline="true">
-                            <field name="POOL">sstore</field>
-                            <value name="VAL">
-                              <block type="LLL_val" id="58">
-                                <field name="VAL">1396310400</field>
-                              </block>
-                            </value>
-                            <value name="SPOT">
-                              <block type="LLL_val" id="59">
-                                <field name="VAL">DEADLINE</field>
-                              </block>
-                            </value>
+                          <block type="LLL_comment" id="89">
+                            <field name="NOTE">April 1, 2014 is 1396310400 in "computer time"</field>
                             <next>
-                              <block type="LLL_comment" id="60">
-                                <field name="NOTE">If the agreed amount is received on time...</field>
-                                <next>
-                                  <block type="LLL_when" id="61" inline="false">
-                                    <field name="WORD">when</field>
-                                    <value name="COND">
-                                      <block type="LLL_logic" id="62" inline="false">
-                                        <field name="OP">and</field>
-                                        <value name="A">
-                                          <block type="LLL_compare" id="63" inline="true">
-                                            <field name="OP">&gt;=</field>
-                                            <value name="A">
-                                              <block type="LLL_transaction" id="64">
-                                                <field name="PROP">value</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="LLL_currency" id="65" inline="true">
-                                                <field name="DENOM">ether</field>
-                                                <value name="AMT">
-                                                  <block type="LLL_val" id="66">
-                                                    <field name="VAL">5000</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="LLL_compare" id="67" inline="true">
-                                            <field name="OP">&lt;=</field>
-                                            <value name="A">
-                                              <block type="LLL_block" id="68">
-                                                <field name="PROP">timestamp</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="LLL_load" id="69" inline="true">
-                                                <field name="POOL">sload</field>
-                                                <value name="SPOT">
-                                                  <block type="LLL_val" id="70">
-                                                    <field name="VAL">DEADLINE</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="THEN">
-                                      <block type="LLL_comment" id="71">
-                                        <field name="NOTE">... then designate the buyer as the new website admin and pay the seller</field>
-                                        <next>
-                                          <block type="LLL_store" id="72" inline="true">
-                                            <field name="POOL">sstore</field>
-                                            <value name="VAL">
-                                              <block type="LLL_load" id="73" inline="true">
-                                                <field name="POOL">sload</field>
-                                                <value name="SPOT">
-                                                  <block type="LLL_val" id="74">
-                                                    <field name="VAL">BUYER</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <value name="SPOT">
-                                              <block type="LLL_val" id="75">
-                                                <field name="VAL">WEBSITE_ADMIN</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="LLL_mktx" id="76" inline="true">
-                                                <value name="MONEY">
-                                                  <block type="LLL_contract" id="77">
-                                                    <field name="PROP">balance</field>
-                                                  </block>
-                                                </value>
-                                                <value name="TO">
-                                                  <block type="LLL_load" id="78" inline="true">
-                                                    <field name="POOL">sload</field>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="79">
-                                                        <field name="VAL">SELLER</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
+                              <block type="LLL_store" id="90" inline="true">
+                                <field name="POOL">sstore</field>
+                                <value name="SPOT">
+                                  <block type="LLL_val" id="152">
+                                    <field name="VAL">DEADLINE</field>
                                   </block>
-                                </next>
+                                </value>
+                                <value name="VAL">
+                                  <block type="LLL_val" id="91">
+                                    <field name="VAL">1396310400</field>
+                                  </block>
+                                </value>
                               </block>
                             </next>
                           </block>
@@ -250,134 +159,173 @@ sales: fnCommentToString(function(){/*!
           </block>
         </next>
       </block>
-    </next>
-  </block>
-</xml>
-*/}),
-
-last_will: fnCommentToString(function(){/*! 
-<xml>
-  <block type="LLL_comment" id="80" x="25" y="20">
-    <field name="NOTE">Last Will &amp; Testament using a "dead-man's-switch"</field>
-    <next>
-      <block type="LLL_comment" id="81">
-        <field name="NOTE">If the contract isn't touched by the creator at least once per month, he's dead</field>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="93">
+        <field name="NOTE">If the agreed amount is received on time...</field>
         <next>
-          <block type="LLL_comment" id="82">
-            <field name="NOTE">Therefore, split all funds among the heirs</field>
-            <next>
-              <block type="LLL_when" id="83" inline="false">
-                <field name="WORD">when</field>
-                <value name="COND">
-                  <block type="LLL_compare" id="84" inline="true">
-                    <field name="OP">&lt;</field>
+          <block type="LLL_when" id="94" inline="false">
+            <field name="WORD">when</field>
+            <value name="COND">
+              <block type="LLL_logic" id="95" inline="false">
+                <field name="OP">and</field>
+                <value name="A">
+                  <block type="LLL_compare" id="96" inline="true">
+                    <field name="OP">&gt;=</field>
                     <value name="A">
-                      <block type="LLL_transaction" id="85">
-                        <field name="PROP">value</field>
+                      <block type="LLL_contract" id="114">
+                        <field name="PROP">balance</field>
                       </block>
                     </value>
                     <value name="B">
-                      <block type="LLL_math" id="86" inline="true">
-                        <field name="OP">mul</field>
-                        <value name="A">
-                          <block type="LLL_block" id="87">
-                            <field name="PROP">basefee</field>
-                          </block>
-                        </value>
-                        <value name="B">
-                          <block type="LLL_val" id="88">
-                            <field name="VAL">100</field>
+                      <block type="LLL_currency" id="98" inline="true">
+                        <field name="DENOM">ether</field>
+                        <value name="AMT">
+                          <block type="LLL_val" id="99">
+                            <field name="VAL">5000</field>
                           </block>
                         </value>
                       </block>
                     </value>
                   </block>
                 </value>
-                <statement name="THEN">
-                  <block type="LLL_comment" id="89">
-                    <field name="NOTE">stop if insufficient funds for execution</field>
-                    <next>
-                      <block type="LLL_stop" id="90"></block>
-                    </next>
-                  </block>
-                </statement>
-                <next>
-                  <block type="LLL_if" id="91" inline="false">
-                    <value name="COND">
-                      <block type="LLL_compare" id="92" inline="true">
-                        <field name="OP">=</field>
-                        <value name="A">
-                          <block type="LLL_load" id="93" inline="true">
-                            <field name="POOL">sload</field>
-                            <value name="SPOT">
-                              <block type="LLL_val" id="94">
-                                <field name="VAL">CREATOR</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="B">
-                          <block type="LLL_val" id="95">
-                            <field name="VAL">0</field>
+                <value name="B">
+                  <block type="LLL_compare" id="100" inline="true">
+                    <field name="OP">&lt;=</field>
+                    <value name="A">
+                      <block type="LLL_blockinfo" id="101">
+                        <field name="PROP">timestamp</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_load" id="102" inline="true">
+                        <field name="POOL">sload</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="153">
+                            <field name="VAL">DEADLINE</field>
                           </block>
                         </value>
                       </block>
                     </value>
-                    <statement name="THEN">
-                      <block type="LLL_comment" id="96">
-                        <field name="NOTE">This must be a newly created Will contact. Here we record the creator.</field>
-                        <next>
-                          <block type="LLL_store" id="97" inline="true">
-                            <field name="POOL">sstore</field>
-                            <value name="VAL">
-                              <block type="LLL_transaction" id="98">
-                                <field name="PROP">sender</field>
-                              </block>
-                            </value>
-                            <value name="SPOT">
-                              <block type="LLL_val" id="99">
-                                <field name="VAL">CREATOR</field>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="LLL_comment" id="100">
-                                <field name="NOTE">A future transaction received from the creator does three things: </field>
-                                <next>
-                                  <block type="LLL_comment" id="101">
-                                    <field name="NOTE">    1) It's proves he's alive and supresses distribution for another 30 days</field>
-                                    <next>
-                                      <block type="LLL_comment" id="102">
-                                        <field name="NOTE">    2) It naturally increases the contract's balance by the amount of the transaction value</field>
-                                        <next>
-                                          <block type="LLL_comment" id="103">
-                                            <field name="NOTE">    3) It optionally supplies a new list of heirs</field>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="THEN">
+              <block type="LLL_comment" id="104">
+                <field name="NOTE">... then designate the buyer as the new website admin and pay the seller</field>
+                <next>
+                  <block type="LLL_store" id="105" inline="true">
+                    <field name="POOL">sstore</field>
+                    <value name="SPOT">
+                      <block type="LLL_val" id="149">
+                        <field name="VAL">WEBSITE_ADMIN</field>
                       </block>
-                    </statement>
-                    <statement name="ELSE">
-                      <block type="LLL_if" id="104" inline="false">
+                    </value>
+                    <value name="VAL">
+                      <block type="LLL_load" id="106" inline="true">
+                        <field name="POOL">sload</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="150">
+                            <field name="VAL">BUYER</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="LLL_spend" id="109" inline="true">
+                        <value name="MONEY">
+                          <block type="LLL_contract" id="110">
+                            <field name="PROP">balance</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="LLL_load" id="111" inline="true">
+                            <field name="POOL">sload</field>
+                            <value name="SPOT">
+                              <block type="LLL_val" id="155">
+                                <field name="VAL">SELLER</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
+
+last_will: fnCommentToString(function(){/*! 
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_comment" id="50" x="18" y="15">
+    <field name="NOTE">Last Will &amp; Testament using a "dead-man's-switch"</field>
+    <next>
+      <block type="LLL_comment" id="51">
+        <field name="NOTE">If the contract isn't touched by the creator at least once per month, he's dead</field>
+        <next>
+          <block type="LLL_comment" id="52">
+            <field name="NOTE">Therefore, split all funds among the heirs</field>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="LLL_init" id="53" x="18" y="92">
+    <statement name="INIT">
+      <block type="LLL_comment" id="54">
+        <field name="NOTE">On contract creation, record the creator</field>
+        <next>
+          <block type="LLL_store" id="55" inline="true">
+            <field name="POOL">sstore</field>
+            <value name="SPOT">
+              <block type="LLL_val" id="56">
+                <field name="VAL">CREATOR</field>
+              </block>
+            </value>
+            <value name="VAL">
+              <block type="LLL_tx" id="57">
+                <field name="PROP">origin</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="58">
+        <field name="NOTE">A future transaction received from the creator does three things: </field>
+        <next>
+          <block type="LLL_comment" id="59">
+            <field name="NOTE">    1) It's proves he's alive and supresses distribution for another 30 days</field>
+            <next>
+              <block type="LLL_comment" id="60">
+                <field name="NOTE">    2) It naturally increases the contract's balance by the amount of the transaction value</field>
+                <next>
+                  <block type="LLL_comment" id="61">
+                    <field name="NOTE">    3) It optionally supplies a new list of heirs</field>
+                    <next>
+                      <block type="LLL_if" id="62" inline="false">
                         <value name="COND">
-                          <block type="LLL_compare" id="105" inline="true">
+                          <block type="LLL_compare" id="63" inline="true">
                             <field name="OP">=</field>
                             <value name="A">
-                              <block type="LLL_transaction" id="106">
-                                <field name="PROP">sender</field>
+                              <block type="LLL_tx" id="64">
+                                <field name="PROP">origin</field>
                               </block>
                             </value>
                             <value name="B">
-                              <block type="LLL_load" id="107" inline="true">
+                              <block type="LLL_load" id="65" inline="true">
                                 <field name="POOL">sload</field>
                                 <value name="SPOT">
-                                  <block type="LLL_val" id="108">
+                                  <block type="LLL_val" id="66">
                                     <field name="VAL">CREATOR</field>
                                   </block>
                                 </value>
@@ -386,120 +334,120 @@ last_will: fnCommentToString(function(){/*!
                           </block>
                         </value>
                         <statement name="THEN">
-                          <block type="LLL_comment" id="109">
+                          <block type="LLL_comment" id="67">
                             <field name="NOTE">Here we record the time of this touch by the creator. He's still alive.</field>
                             <next>
-                              <block type="LLL_store" id="110" inline="true">
+                              <block type="LLL_store" id="68" inline="true">
                                 <field name="POOL">sstore</field>
-                                <value name="VAL">
-                                  <block type="LLL_block" id="111">
-                                    <field name="PROP">timestamp</field>
-                                  </block>
-                                </value>
                                 <value name="SPOT">
-                                  <block type="LLL_val" id="112">
+                                  <block type="LLL_val" id="69">
                                     <field name="VAL">LAST_TOUCH</field>
                                   </block>
                                 </value>
+                                <value name="VAL">
+                                  <block type="LLL_blockinfo" id="70">
+                                    <field name="PROP">timestamp</field>
+                                  </block>
+                                </value>
                                 <next>
-                                  <block type="LLL_when" id="113" inline="false">
+                                  <block type="LLL_when" id="71" inline="false">
                                     <field name="WORD">when</field>
                                     <value name="COND">
-                                      <block type="LLL_compare" id="114" inline="true">
+                                      <block type="LLL_compare" id="72" inline="true">
                                         <field name="OP">&gt;</field>
                                         <value name="A">
-                                          <block type="LLL_transaction" id="115">
-                                            <field name="PROP">datan</field>
+                                          <block type="LLL_tx" id="73">
+                                            <field name="PROP">_data_count</field>
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="LLL_val" id="116">
+                                          <block type="LLL_val" id="74">
                                             <field name="VAL">0</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
                                     <statement name="THEN">
-                                      <block type="LLL_comment" id="117">
-                                        <field name="NOTE">The creator defines heirs by supplying their payment addresses via the transaction data items</field>
+                                      <block type="LLL_comment" id="75">
+                                        <field name="NOTE">The creator defines heirs by supplying their payment addresses as (padded 32-byte) inputs to the contract</field>
                                         <next>
-                                          <block type="LLL_comment" id="118">
+                                          <block type="LLL_comment" id="76">
                                             <field name="NOTE">He can change these by supplying a new set of addresses which replaces all of the old set</field>
                                             <next>
-                                              <block type="LLL_for" id="119" inline="false">
+                                              <block type="LLL_whileloop" id="77" inline="false">
                                                 <field name="WORD">WHILE</field>
                                                 <value name="COND">
-                                                  <block type="LLL_compare" id="120" inline="true">
+                                                  <block type="LLL_compare" id="78" inline="true">
                                                     <field name="OP">&lt;</field>
                                                     <value name="A">
-                                                      <block type="LLL_load" id="121" inline="true">
-                                                        <field name="POOL">mload</field>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="122">
-                                                            <field name="VAL">i</field>
-                                                          </block>
-                                                        </value>
+                                                      <block type="LLL_mval" id="79">
+                                                        <field name="VAL">i</field>
                                                       </block>
                                                     </value>
                                                     <value name="B">
-                                                      <block type="LLL_transaction" id="123">
-                                                        <field name="PROP">datan</field>
+                                                      <block type="LLL_tx" id="80">
+                                                        <field name="PROP">_data_count</field>
                                                       </block>
                                                     </value>
                                                   </block>
                                                 </value>
                                                 <statement name="DO">
-                                                  <block type="LLL_comment" id="124">
+                                                  <block type="LLL_comment" id="81">
                                                     <field name="NOTE">each heir will be recorded for future reference in the storage range 1000+</field>
                                                     <next>
-                                                      <block type="LLL_store" id="125" inline="true">
+                                                      <block type="LLL_store" id="82" inline="true">
                                                         <field name="POOL">sstore</field>
-                                                        <value name="VAL">
-                                                          <block type="LLL_load" id="126" inline="true">
-                                                            <field name="POOL">txdata</field>
-                                                            <value name="SPOT">
-                                                              <block type="LLL_val" id="127">
+                                                        <value name="SPOT">
+                                                          <block type="LLL_math" id="83" inline="true">
+                                                            <field name="OP">+</field>
+                                                            <value name="A">
+                                                              <block type="LLL_val" id="84">
+                                                                <field name="VAL">1000</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="LLL_mval" id="85">
                                                                 <field name="VAL">i</field>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_math" id="128" inline="true">
-                                                            <field name="OP">add</field>
-                                                            <value name="A">
-                                                              <block type="LLL_val" id="129">
-                                                                <field name="VAL">1000</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="B">
-                                                              <block type="LLL_val" id="130">
-                                                                <field name="VAL">i</field>
+                                                        <value name="VAL">
+                                                          <block type="LLL_load" id="86" inline="true">
+                                                            <field name="POOL">calldataload</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_math" id="144" inline="true">
+                                                                <field name="OP">*</field>
+                                                                <value name="A">
+                                                                  <block type="LLL_mval" id="87">
+                                                                    <field name="VAL">i</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="LLL_val" id="145">
+                                                                    <field name="VAL">32</field>
+                                                                  </block>
+                                                                </value>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="LLL_store" id="131" inline="true">
-                                                            <field name="POOL">mstore</field>
+                                                          <block type="LLL_mstore" id="88" inline="true">
+                                                            <field name="SPOT">i</field>
                                                             <value name="VAL">
-                                                              <block type="LLL_math" id="132" inline="true">
-                                                                <field name="OP">add</field>
+                                                              <block type="LLL_math" id="89" inline="true">
+                                                                <field name="OP">+</field>
                                                                 <value name="A">
-                                                                  <block type="LLL_val" id="133">
+                                                                  <block type="LLL_mval" id="90">
                                                                     <field name="VAL">i</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
-                                                                  <block type="LLL_val" id="134">
+                                                                  <block type="LLL_val" id="91">
                                                                     <field name="VAL">1</field>
                                                                   </block>
                                                                 </value>
-                                                              </block>
-                                                            </value>
-                                                            <value name="SPOT">
-                                                              <block type="LLL_val" id="135">
-                                                                <field name="VAL">i</field>
                                                               </block>
                                                             </value>
                                                           </block>
@@ -509,26 +457,21 @@ last_will: fnCommentToString(function(){/*!
                                                   </block>
                                                 </statement>
                                                 <next>
-                                                  <block type="LLL_for" id="136" inline="false">
+                                                  <block type="LLL_whileloop" id="92" inline="false">
                                                     <field name="WORD">WHILE</field>
                                                     <value name="COND">
-                                                      <block type="LLL_compare" id="137" inline="true">
+                                                      <block type="LLL_compare" id="93" inline="true">
                                                         <field name="OP">&lt;</field>
                                                         <value name="A">
-                                                          <block type="LLL_load" id="138" inline="true">
-                                                            <field name="POOL">mload</field>
-                                                            <value name="SPOT">
-                                                              <block type="LLL_val" id="139">
-                                                                <field name="VAL">i</field>
-                                                              </block>
-                                                            </value>
+                                                          <block type="LLL_mval" id="94">
+                                                            <field name="VAL">i</field>
                                                           </block>
                                                         </value>
                                                         <value name="B">
-                                                          <block type="LLL_load" id="140" inline="true">
+                                                          <block type="LLL_load" id="95" inline="true">
                                                             <field name="POOL">sload</field>
                                                             <value name="SPOT">
-                                                              <block type="LLL_val" id="141">
+                                                              <block type="LLL_val" id="96">
                                                                 <field name="VAL">HEIR_COUNT</field>
                                                               </block>
                                                             </value>
@@ -537,52 +480,47 @@ last_will: fnCommentToString(function(){/*!
                                                       </block>
                                                     </value>
                                                     <statement name="DO">
-                                                      <block type="LLL_comment" id="142">
-                                                        <field name="NOTE">any former heirs are removed in favor of this new set</field>
+                                                      <block type="LLL_comment" id="97">
+                                                        <field name="NOTE">any extra former heirs are removed</field>
                                                         <next>
-                                                          <block type="LLL_store" id="143" inline="true">
+                                                          <block type="LLL_store" id="98" inline="true">
                                                             <field name="POOL">sstore</field>
-                                                            <value name="VAL">
-                                                              <block type="LLL_val" id="144">
-                                                                <field name="VAL">0</field>
-                                                              </block>
-                                                            </value>
                                                             <value name="SPOT">
-                                                              <block type="LLL_math" id="145" inline="true">
-                                                                <field name="OP">add</field>
+                                                              <block type="LLL_math" id="99" inline="true">
+                                                                <field name="OP">+</field>
                                                                 <value name="A">
-                                                                  <block type="LLL_val" id="146">
+                                                                  <block type="LLL_val" id="100">
                                                                     <field name="VAL">1000</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
-                                                                  <block type="LLL_val" id="147">
+                                                                  <block type="LLL_mval" id="101">
                                                                     <field name="VAL">i</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
                                                             </value>
+                                                            <value name="VAL">
+                                                              <block type="LLL_val" id="102">
+                                                                <field name="VAL">0</field>
+                                                              </block>
+                                                            </value>
                                                             <next>
-                                                              <block type="LLL_store" id="148" inline="true">
-                                                                <field name="POOL">mstore</field>
+                                                              <block type="LLL_mstore" id="103" inline="true">
+                                                                <field name="SPOT">i</field>
                                                                 <value name="VAL">
-                                                                  <block type="LLL_math" id="149" inline="true">
-                                                                    <field name="OP">add</field>
+                                                                  <block type="LLL_math" id="104" inline="true">
+                                                                    <field name="OP">+</field>
                                                                     <value name="A">
-                                                                      <block type="LLL_val" id="150">
+                                                                      <block type="LLL_mval" id="105">
                                                                         <field name="VAL">i</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
-                                                                      <block type="LLL_val" id="151">
+                                                                      <block type="LLL_val" id="106">
                                                                         <field name="VAL">1</field>
                                                                       </block>
                                                                     </value>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="SPOT">
-                                                                  <block type="LLL_val" id="152">
-                                                                    <field name="VAL">i</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
@@ -592,19 +530,19 @@ last_will: fnCommentToString(function(){/*!
                                                       </block>
                                                     </statement>
                                                     <next>
-                                                      <block type="LLL_comment" id="153">
+                                                      <block type="LLL_comment" id="107">
                                                         <field name="NOTE">remember how many heirs we have for later</field>
                                                         <next>
-                                                          <block type="LLL_store" id="154" inline="true">
-                                                            <field name="POOL">mstore</field>
-                                                            <value name="VAL">
-                                                              <block type="LLL_transaction" id="155">
-                                                                <field name="PROP">datan</field>
+                                                          <block type="LLL_store" id="108" inline="true">
+                                                            <field name="POOL">sstore</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_val" id="109">
+                                                                <field name="VAL">HEIR_COUNT</field>
                                                               </block>
                                                             </value>
-                                                            <value name="SPOT">
-                                                              <block type="LLL_val" id="156">
-                                                                <field name="VAL">HEIR_COUNT</field>
+                                                            <value name="VAL">
+                                                              <block type="LLL_tx" id="110">
+                                                                <field name="PROP">_data_count</field>
                                                               </block>
                                                             </value>
                                                           </block>
@@ -626,37 +564,37 @@ last_will: fnCommentToString(function(){/*!
                           </block>
                         </statement>
                         <statement name="ELSE">
-                          <block type="LLL_comment" id="157">
+                          <block type="LLL_comment" id="111">
                             <field name="NOTE">A transaction received by anyone else triggers distribution to heirs if we haven't heard from the creator </field>
                             <next>
-                              <block type="LLL_comment" id="158">
+                              <block type="LLL_comment" id="112">
                                 <field name="NOTE">(there are 2,592,000 seconds in a month)</field>
                                 <next>
-                                  <block type="LLL_when" id="159" inline="false">
+                                  <block type="LLL_when" id="113" inline="false">
                                     <field name="WORD">when</field>
                                     <value name="COND">
-                                      <block type="LLL_compare" id="160" inline="true">
+                                      <block type="LLL_compare" id="114" inline="true">
                                         <field name="OP">&gt;</field>
                                         <value name="A">
-                                          <block type="LLL_block" id="161">
+                                          <block type="LLL_blockinfo" id="115">
                                             <field name="PROP">timestamp</field>
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="LLL_math" id="162" inline="true">
-                                            <field name="OP">add</field>
+                                          <block type="LLL_math" id="116" inline="true">
+                                            <field name="OP">+</field>
                                             <value name="A">
-                                              <block type="LLL_load" id="163" inline="true">
+                                              <block type="LLL_load" id="117" inline="true">
                                                 <field name="POOL">sload</field>
                                                 <value name="SPOT">
-                                                  <block type="LLL_val" id="164">
+                                                  <block type="LLL_val" id="118">
                                                     <field name="VAL">LAST_TOUCH</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
                                             <value name="B">
-                                              <block type="LLL_val" id="165">
+                                              <block type="LLL_val" id="119">
                                                 <field name="VAL">2592000</field>
                                               </block>
                                             </value>
@@ -665,53 +603,50 @@ last_will: fnCommentToString(function(){/*!
                                       </block>
                                     </value>
                                     <statement name="THEN">
-                                      <block type="LLL_comment" id="166">
-                                        <field name="NOTE">make sure there are heirs or else stop</field>
+                                      <block type="LLL_comment" id="120">
+                                        <field name="NOTE">calculate the equal portion for each heir</field>
                                         <next>
-                                          <block type="LLL_when" id="167" inline="false">
-                                            <field name="WORD">when</field>
-                                            <value name="COND">
-                                              <block type="LLL_compare" id="168" inline="true">
-                                                <field name="OP">=</field>
+                                          <block type="LLL_mstore" id="121" inline="true">
+                                            <field name="SPOT">PORTION</field>
+                                            <value name="VAL">
+                                              <block type="LLL_math" id="122" inline="true">
+                                                <field name="OP">div</field>
                                                 <value name="A">
-                                                  <block type="LLL_load" id="169" inline="true">
+                                                  <block type="LLL_contract" id="123">
+                                                    <field name="PROP">balance</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="LLL_load" id="124" inline="true">
                                                     <field name="POOL">sload</field>
                                                     <value name="SPOT">
-                                                      <block type="LLL_val" id="170">
+                                                      <block type="LLL_val" id="125">
                                                         <field name="VAL">HEIR_COUNT</field>
                                                       </block>
                                                     </value>
                                                   </block>
                                                 </value>
-                                                <value name="B">
-                                                  <block type="LLL_val" id="171">
-                                                    <field name="VAL">0</field>
-                                                  </block>
-                                                </value>
                                               </block>
                                             </value>
-                                            <statement name="THEN">
-                                              <block type="LLL_stop" id="172"></block>
-                                            </statement>
                                             <next>
-                                              <block type="LLL_comment" id="173">
-                                                <field name="NOTE">calculate the even portion</field>
+                                              <block type="LLL_comment" id="126">
+                                                <field name="NOTE">distribute the portions out to the heirs</field>
                                                 <next>
-                                                  <block type="LLL_store" id="174" inline="true">
-                                                    <field name="POOL">mstore</field>
-                                                    <value name="VAL">
-                                                      <block type="LLL_math" id="175" inline="true">
-                                                        <field name="OP">sdiv</field>
+                                                  <block type="LLL_whileloop" id="127" inline="false">
+                                                    <field name="WORD">WHILE</field>
+                                                    <value name="COND">
+                                                      <block type="LLL_compare" id="128" inline="true">
+                                                        <field name="OP">&lt;</field>
                                                         <value name="A">
-                                                          <block type="LLL_contract" id="176">
-                                                            <field name="PROP">balance</field>
+                                                          <block type="LLL_mval" id="129">
+                                                            <field name="VAL">i</field>
                                                           </block>
                                                         </value>
                                                         <value name="B">
-                                                          <block type="LLL_load" id="177" inline="true">
+                                                          <block type="LLL_load" id="130" inline="true">
                                                             <field name="POOL">sload</field>
                                                             <value name="SPOT">
-                                                              <block type="LLL_val" id="178">
+                                                              <block type="LLL_val" id="131">
                                                                 <field name="VAL">HEIR_COUNT</field>
                                                               </block>
                                                             </value>
@@ -719,100 +654,55 @@ last_will: fnCommentToString(function(){/*!
                                                         </value>
                                                       </block>
                                                     </value>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="179">
-                                                        <field name="VAL">PORTION</field>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="LLL_comment" id="180">
-                                                        <field name="NOTE">distribute the portions out to the heirs</field>
-                                                        <next>
-                                                          <block type="LLL_for" id="181" inline="false">
-                                                            <field name="WORD">WHILE</field>
-                                                            <value name="COND">
-                                                              <block type="LLL_compare" id="182" inline="true">
-                                                                <field name="OP">&lt;</field>
+                                                    <statement name="DO">
+                                                      <block type="LLL_spend" id="132" inline="true">
+                                                        <value name="MONEY">
+                                                          <block type="LLL_mval" id="133">
+                                                            <field name="VAL">PORTION</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="TO">
+                                                          <block type="LLL_load" id="134" inline="true">
+                                                            <field name="POOL">sload</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_math" id="135" inline="true">
+                                                                <field name="OP">+</field>
                                                                 <value name="A">
-                                                                  <block type="LLL_load" id="183" inline="true">
-                                                                    <field name="POOL">mload</field>
-                                                                    <value name="SPOT">
-                                                                      <block type="LLL_val" id="184">
-                                                                        <field name="VAL">i</field>
-                                                                      </block>
-                                                                    </value>
+                                                                  <block type="LLL_val" id="136">
+                                                                    <field name="VAL">1000</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
-                                                                  <block type="LLL_load" id="185" inline="true">
-                                                                    <field name="POOL">sload</field>
-                                                                    <value name="SPOT">
-                                                                      <block type="LLL_val" id="186">
-                                                                        <field name="VAL">HEIR_COUNT</field>
-                                                                      </block>
-                                                                    </value>
+                                                                  <block type="LLL_mval" id="137">
+                                                                    <field name="VAL">i</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
                                                             </value>
-                                                            <statement name="DO">
-                                                              <block type="LLL_mktx" id="187" inline="true">
-                                                                <value name="MONEY">
-                                                                  <block type="LLL_val" id="188">
-                                                                    <field name="VAL">PORTION</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="LLL_mstore" id="138" inline="true">
+                                                            <field name="SPOT">i</field>
+                                                            <value name="VAL">
+                                                              <block type="LLL_math" id="139" inline="true">
+                                                                <field name="OP">+</field>
+                                                                <value name="A">
+                                                                  <block type="LLL_mval" id="140">
+                                                                    <field name="VAL">i</field>
                                                                   </block>
                                                                 </value>
-                                                                <value name="TO">
-                                                                  <block type="LLL_load" id="189" inline="true">
-                                                                    <field name="POOL">sload</field>
-                                                                    <value name="SPOT">
-                                                                      <block type="LLL_math" id="190" inline="true">
-                                                                        <field name="OP">add</field>
-                                                                        <value name="A">
-                                                                          <block type="LLL_val" id="191">
-                                                                            <field name="VAL">1000</field>
-                                                                          </block>
-                                                                        </value>
-                                                                        <value name="B">
-                                                                          <block type="LLL_val" id="192">
-                                                                            <field name="VAL">i</field>
-                                                                          </block>
-                                                                        </value>
-                                                                      </block>
-                                                                    </value>
+                                                                <value name="B">
+                                                                  <block type="LLL_val" id="141">
+                                                                    <field name="VAL">1</field>
                                                                   </block>
                                                                 </value>
-                                                                <next>
-                                                                  <block type="LLL_store" id="193" inline="true">
-                                                                    <field name="POOL">mstore</field>
-                                                                    <value name="VAL">
-                                                                      <block type="LLL_math" id="194" inline="true">
-                                                                        <field name="OP">add</field>
-                                                                        <value name="A">
-                                                                          <block type="LLL_val" id="195">
-                                                                            <field name="VAL">i</field>
-                                                                          </block>
-                                                                        </value>
-                                                                        <value name="B">
-                                                                          <block type="LLL_val" id="196">
-                                                                            <field name="VAL">1</field>
-                                                                          </block>
-                                                                        </value>
-                                                                      </block>
-                                                                    </value>
-                                                                    <value name="SPOT">
-                                                                      <block type="LLL_val" id="197">
-                                                                        <field name="VAL">i</field>
-                                                                      </block>
-                                                                    </value>
-                                                                  </block>
-                                                                </next>
                                                               </block>
-                                                            </statement>
+                                                            </value>
                                                           </block>
                                                         </next>
                                                       </block>
-                                                    </next>
+                                                    </statement>
                                                   </block>
                                                 </next>
                                               </block>
@@ -828,7 +718,7 @@ last_will: fnCommentToString(function(){/*!
                           </block>
                         </statement>
                       </block>
-                    </statement>
+                    </next>
                   </block>
                 </next>
               </block>
@@ -836,124 +726,595 @@ last_will: fnCommentToString(function(){/*!
           </block>
         </next>
       </block>
-    </next>
+    </statement>
   </block>
 </xml>
 */}),
 
 marriage: fnCommentToString(function(){/*! 
-<xml>
-  <block type="LLL_comment" id="198" x="29" y="21">
-    <field name="NOTE">"I WANT HALF!" Marriage Smart Contract [based on the idea by @mids106 et al]</field>
-    <next>
-      <block type="LLL_when" id="199" inline="false">
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_init" id="740" x="9" y="12">
+    <statement name="INIT">
+      <block type="LLL_comment" id="603">
+        <field name="NOTE">"I WANT HALF!" Marriage Smart Contract [based on the idea by @mids106 et al]</field>
+        <next>
+          <block type="LLL_comment" id="617">
+            <field name="NOTE">At contract creation, we store the sender as partner_1 with partner_2 given as the 1st data item</field>
+            <next>
+              <block type="LLL_store" id="618" inline="true">
+                <field name="POOL">sstore</field>
+                <value name="SPOT">
+                  <block type="LLL_val" id="620">
+                    <field name="VAL">PARTNER_1</field>
+                  </block>
+                </value>
+                <value name="VAL">
+                  <block type="LLL_tx" id="619">
+                    <field name="PROP">sender</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="LLL_store" id="621" inline="true">
+                    <field name="POOL">sstore</field>
+                    <value name="SPOT">
+                      <block type="LLL_val" id="624">
+                        <field name="VAL">PARTNER_2</field>
+                      </block>
+                    </value>
+                    <value name="VAL">
+                      <block type="LLL_contract" id="741">
+                        <field name="PROP">_input</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="LLL_store" id="625" inline="true">
+                        <field name="POOL">sstore</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="627">
+                            <field name="VAL">STATE</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_val" id="626">
+                            <field name="VAL">PROPOSED</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="LLL_comment" id="628">
+                            <field name="NOTE">Partner_1 has now "PROPOSED" to partner_2 </field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_when" id="629" inline="false">
         <field name="WORD">when</field>
         <value name="COND">
-          <block type="LLL_compare" id="200" inline="true">
-            <field name="OP">&lt;</field>
+          <block type="LLL_compare" id="630" inline="true">
+            <field name="OP">=</field>
             <value name="A">
-              <block type="LLL_transaction" id="201">
-                <field name="PROP">value</field>
+              <block type="LLL_load" id="631" inline="true">
+                <field name="POOL">sload</field>
+                <value name="SPOT">
+                  <block type="LLL_val" id="632">
+                    <field name="VAL">STATE</field>
+                  </block>
+                </value>
               </block>
             </value>
             <value name="B">
-              <block type="LLL_math" id="202" inline="true">
-                <field name="OP">mul</field>
-                <value name="A">
-                  <block type="LLL_block" id="203">
-                    <field name="PROP">basefee</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="LLL_val" id="204">
-                    <field name="VAL">100</field>
-                  </block>
-                </value>
+              <block type="LLL_val" id="633">
+                <field name="VAL">PROPOSED</field>
               </block>
             </value>
           </block>
         </value>
         <statement name="THEN">
-          <block type="LLL_comment" id="205">
-            <field name="NOTE">The contract must receive at least 100x basefee for execution or it stops</field>
+          <block type="LLL_comment" id="634">
+            <field name="NOTE"> Partner_2 can accept the proposal by sending in a transaction with partner_1 given as the first data item</field>
             <next>
-              <block type="LLL_stop" id="206"></block>
+              <block type="LLL_when" id="635" inline="false">
+                <field name="WORD">when</field>
+                <value name="COND">
+                  <block type="LLL_logic" id="636" inline="false">
+                    <field name="OP">and</field>
+                    <value name="A">
+                      <block type="LLL_compare" id="637" inline="true">
+                        <field name="OP">=</field>
+                        <value name="A">
+                          <block type="LLL_tx" id="638">
+                            <field name="PROP">origin</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_val" id="639">
+                            <field name="VAL">PARTNER_2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_compare" id="640" inline="true">
+                        <field name="OP">=</field>
+                        <value name="A">
+                          <block type="LLL_contract" id="742">
+                            <field name="PROP">_input</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_load" id="643" inline="true">
+                            <field name="POOL">sload</field>
+                            <value name="SPOT">
+                              <block type="LLL_val" id="644">
+                                <field name="VAL">PARTNER_1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="THEN">
+                  <block type="LLL_store" id="645" inline="true">
+                    <field name="POOL">sstore</field>
+                    <value name="SPOT">
+                      <block type="LLL_val" id="647">
+                        <field name="VAL">STATE</field>
+                      </block>
+                    </value>
+                    <value name="VAL">
+                      <block type="LLL_val" id="646">
+                        <field name="VAL">MARRIED</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="LLL_comment" id="648">
+                    <field name="NOTE">Partner_1 and Partner_2 are now "MARRIED"!</field>
+                  </block>
+                </next>
+              </block>
             </next>
           </block>
         </statement>
         <next>
-          <block type="LLL_when" id="207" inline="false">
+          <block type="LLL_when" id="649" inline="false">
             <field name="WORD">when</field>
             <value name="COND">
-              <block type="LLL_compare" id="208" inline="true">
-                <field name="OP">=</field>
+              <block type="LLL_logic" id="650" inline="false">
+                <field name="OP">and</field>
                 <value name="A">
-                  <block type="LLL_load" id="209" inline="true">
-                    <field name="POOL">sload</field>
-                    <value name="SPOT">
-                      <block type="LLL_val" id="210">
-                        <field name="VAL">STATE</field>
+                  <block type="LLL_compare" id="651" inline="true">
+                    <field name="OP">=</field>
+                    <value name="A">
+                      <block type="LLL_load" id="652" inline="true">
+                        <field name="POOL">sload</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="653">
+                            <field name="VAL">STATE</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_val" id="654">
+                        <field name="VAL">MARRIED</field>
                       </block>
                     </value>
                   </block>
                 </value>
                 <value name="B">
-                  <block type="LLL_val" id="211">
-                    <field name="VAL">0</field>
+                  <block type="LLL_logic" id="655" inline="false">
+                    <field name="OP">or</field>
+                    <value name="A">
+                      <block type="LLL_compare" id="656" inline="true">
+                        <field name="OP">=</field>
+                        <value name="A">
+                          <block type="LLL_tx" id="657">
+                            <field name="PROP">origin</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_val" id="658">
+                            <field name="VAL">PARTNER_1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_compare" id="659" inline="true">
+                        <field name="OP">=</field>
+                        <value name="A">
+                          <block type="LLL_tx" id="660">
+                            <field name="PROP">origin</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_val" id="661">
+                            <field name="VAL">PARTNER_2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
                   </block>
                 </value>
               </block>
             </value>
             <statement name="THEN">
-              <block type="LLL_comment" id="212">
-                <field name="NOTE">At contract creation, we store the sender as partner_1 with partner_2 given as the 1st data item</field>
+              <block type="LLL_comment" id="662">
+                <field name="NOTE">Once married, the contract is a "joint" account and each partner must send in the same instruction to make a withdraw</field>
                 <next>
-                  <block type="LLL_store" id="213" inline="true">
-                    <field name="POOL">sstore</field>
-                    <value name="VAL">
-                      <block type="LLL_transaction" id="214">
-                        <field name="PROP">sender</field>
-                      </block>
-                    </value>
-                    <value name="SPOT">
-                      <block type="LLL_val" id="215">
-                        <field name="VAL">PARTNER_1</field>
-                      </block>
-                    </value>
+                  <block type="LLL_comment" id="663">
+                    <field name="NOTE">A valid withdrawal instruction is an incoming transaction where: </field>
                     <next>
-                      <block type="LLL_store" id="216" inline="true">
-                        <field name="POOL">sstore</field>
-                        <value name="VAL">
-                          <block type="LLL_load" id="217" inline="true">
-                            <field name="POOL">txdata</field>
-                            <value name="SPOT">
-                              <block type="LLL_val" id="218">
-                                <field name="VAL">0</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="SPOT">
-                          <block type="LLL_val" id="219">
-                            <field name="VAL">PARTNER_2</field>
-                          </block>
-                        </value>
+                      <block type="LLL_comment" id="664">
+                        <field name="NOTE">data item 0 is the withdraw code, data item 1 is the destination address, and data item 2 is the amount</field>
                         <next>
-                          <block type="LLL_store" id="220" inline="true">
-                            <field name="POOL">sstore</field>
-                            <value name="VAL">
-                              <block type="LLL_val" id="221">
-                                <field name="VAL">PROPOSED</field>
+                          <block type="LLL_when" id="665" inline="false">
+                            <field name="WORD">when</field>
+                            <value name="COND">
+                              <block type="LLL_compare" id="666" inline="true">
+                                <field name="OP">=</field>
+                                <value name="A">
+                                  <block type="LLL_contract" id="743">
+                                    <field name="PROP">_input</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="LLL_val" id="669">
+                                    <field name="VAL">WITHDRAW</field>
+                                  </block>
+                                </value>
                               </block>
                             </value>
-                            <value name="SPOT">
-                              <block type="LLL_val" id="222">
-                                <field name="VAL">STATE</field>
+                            <statement name="THEN">
+                              <block type="LLL_if" id="670" inline="false">
+                                <value name="COND">
+                                  <block type="LLL_logic" id="671" inline="false">
+                                    <field name="OP">and</field>
+                                    <value name="A">
+                                      <block type="LLL_compare" id="672" inline="true">
+                                        <field name="OP">!=</field>
+                                        <value name="A">
+                                          <block type="LLL_load" id="673" inline="true">
+                                            <field name="POOL">sload</field>
+                                            <value name="SPOT">
+                                              <block type="LLL_val" id="674">
+                                                <field name="VAL">WITHDRAW_CREATOR</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="LLL_tx" id="675">
+                                            <field name="PROP">origin</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="LLL_logic" id="676" inline="false">
+                                        <field name="OP">and</field>
+                                        <value name="A">
+                                          <block type="LLL_compare" id="677" inline="true">
+                                            <field name="OP">=</field>
+                                            <value name="A">
+                                              <block type="LLL_load" id="678" inline="true">
+                                                <field name="POOL">calldataload</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="679">
+                                                    <field name="VAL">32</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="LLL_load" id="680" inline="true">
+                                                <field name="POOL">sload</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="681">
+                                                    <field name="VAL">WITHDRAW_TO</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="LLL_compare" id="682" inline="true">
+                                            <field name="OP">=</field>
+                                            <value name="A">
+                                              <block type="LLL_load" id="683" inline="true">
+                                                <field name="POOL">calldataload</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="684">
+                                                    <field name="VAL">64</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="LLL_load" id="685" inline="true">
+                                                <field name="POOL">sload</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="686">
+                                                    <field name="VAL">WITHDRAW_AMOUNT</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="THEN">
+                                  <block type="LLL_comment" id="687">
+                                    <field name="NOTE">If a withdraw request is already pending from the other partner and this request matches, then do it.</field>
+                                    <next>
+                                      <block type="LLL_spend" id="688" inline="true">
+                                        <value name="MONEY">
+                                          <block type="LLL_load" id="689" inline="true">
+                                            <field name="POOL">sload</field>
+                                            <value name="SPOT">
+                                              <block type="LLL_val" id="690">
+                                                <field name="VAL">WITHDRAW_AMOUNT</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="TO">
+                                          <block type="LLL_load" id="691" inline="true">
+                                            <field name="POOL">sload</field>
+                                            <value name="SPOT">
+                                              <block type="LLL_val" id="692">
+                                                <field name="VAL">WITHDRAW_TO</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="LLL_comment" id="693">
+                                    <field name="NOTE">this is a new withdraw request; store it as pending until a matching request is received from other partner</field>
+                                    <next>
+                                      <block type="LLL_store" id="694" inline="true">
+                                        <field name="POOL">sstore</field>
+                                        <value name="SPOT">
+                                          <block type="LLL_val" id="697">
+                                            <field name="VAL">WITHDRAW_TO</field>
+                                          </block>
+                                        </value>
+                                        <value name="VAL">
+                                          <block type="LLL_load" id="695" inline="true">
+                                            <field name="POOL">txdata</field>
+                                            <value name="SPOT">
+                                              <block type="LLL_val" id="696">
+                                                <field name="VAL">32</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="LLL_store" id="698" inline="true">
+                                            <field name="POOL">sstore</field>
+                                            <value name="SPOT">
+                                              <block type="LLL_val" id="701">
+                                                <field name="VAL">WITHDRAW_AMOUNT</field>
+                                              </block>
+                                            </value>
+                                            <value name="VAL">
+                                              <block type="LLL_load" id="699" inline="true">
+                                                <field name="POOL">txdata</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="700">
+                                                    <field name="VAL">64</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="LLL_store" id="702" inline="true">
+                                                <field name="POOL">sstore</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="704">
+                                                    <field name="VAL">WITHDRAW_CREATOR</field>
+                                                  </block>
+                                                </value>
+                                                <value name="VAL">
+                                                  <block type="LLL_tx" id="703">
+                                                    <field name="PROP">origin</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
                               </block>
-                            </value>
+                            </statement>
                             <next>
-                              <block type="LLL_comment" id="223">
-                                <field name="NOTE">Partner_1 has now "PROPOSED" to partner_2 </field>
+                              <block type="LLL_comment" id="705">
+                                <field name="NOTE">Once married, the partners must both agree in order to get divorced and split the pot. I WANT HALF!</field>
+                                <next>
+                                  <block type="LLL_when" id="706" inline="false">
+                                    <field name="WORD">when</field>
+                                    <value name="COND">
+                                      <block type="LLL_compare" id="707" inline="true">
+                                        <field name="OP">=</field>
+                                        <value name="A">
+                                          <block type="LLL_contract" id="744">
+                                            <field name="PROP">_input</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="LLL_val" id="710">
+                                            <field name="VAL">DIVORCE</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="THEN">
+                                      <block type="LLL_if" id="711" inline="false">
+                                        <value name="COND">
+                                          <block type="LLL_compare" id="712" inline="true">
+                                            <field name="OP">!=</field>
+                                            <value name="A">
+                                              <block type="LLL_load" id="713" inline="true">
+                                                <field name="POOL">sload</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="714">
+                                                    <field name="VAL">DIVORCE_CREATOR</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="LLL_tx" id="715">
+                                                <field name="PROP">origin</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="THEN">
+                                          <block type="LLL_comment" id="716">
+                                            <field name="NOTE">a divorce request is already pending and 2nd party is agreeing, so split the pot</field>
+                                            <next>
+                                              <block type="LLL_store" id="717" inline="true">
+                                                <field name="POOL">mstore</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="721">
+                                                    <field name="VAL">HALF</field>
+                                                  </block>
+                                                </value>
+                                                <value name="VAL">
+                                                  <block type="LLL_math" id="718" inline="true">
+                                                    <field name="OP">div</field>
+                                                    <value name="A">
+                                                      <block type="LLL_contract" id="719">
+                                                        <field name="PROP">balance</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="LLL_val" id="720">
+                                                        <field name="VAL">2</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="LLL_spend" id="722" inline="true">
+                                                    <value name="MONEY">
+                                                      <block type="LLL_load" id="723" inline="true">
+                                                        <field name="POOL">mload</field>
+                                                        <value name="SPOT">
+                                                          <block type="LLL_val" id="724">
+                                                            <field name="VAL">HALF</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="TO">
+                                                      <block type="LLL_load" id="725" inline="true">
+                                                        <field name="POOL">sload</field>
+                                                        <value name="SPOT">
+                                                          <block type="LLL_val" id="726">
+                                                            <field name="VAL">PARTNER_1</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="LLL_spend" id="727" inline="true">
+                                                        <value name="MONEY">
+                                                          <block type="LLL_load" id="728" inline="true">
+                                                            <field name="POOL">mload</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_val" id="729">
+                                                                <field name="VAL">HALF</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="TO">
+                                                          <block type="LLL_load" id="730" inline="true">
+                                                            <field name="POOL">sload</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_val" id="731">
+                                                                <field name="VAL">PARTNER_2</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="LLL_store" id="732" inline="true">
+                                                            <field name="POOL">sstore</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_val" id="734">
+                                                                <field name="VAL">STATE</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="VAL">
+                                                              <block type="LLL_val" id="733">
+                                                                <field name="VAL">DIVORCED</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="LLL_comment" id="735">
+                                                                <field name="NOTE">The partners are now divorced. :(</field>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <statement name="ELSE">
+                                          <block type="LLL_comment" id="736">
+                                            <field name="NOTE">make a new divorce request pending, waiting for agreement</field>
+                                            <next>
+                                              <block type="LLL_store" id="737" inline="true">
+                                                <field name="POOL">sstore</field>
+                                                <value name="SPOT">
+                                                  <block type="LLL_val" id="739">
+                                                    <field name="VAL">DIVORCE_CREATOR</field>
+                                                  </block>
+                                                </value>
+                                                <value name="VAL">
+                                                  <block type="LLL_tx" id="738">
+                                                    <field name="PROP">origin</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
                               </block>
                             </next>
                           </block>
@@ -964,560 +1325,10 @@ marriage: fnCommentToString(function(){/*!
                 </next>
               </block>
             </statement>
-            <next>
-              <block type="LLL_when" id="224" inline="false">
-                <field name="WORD">when</field>
-                <value name="COND">
-                  <block type="LLL_compare" id="225" inline="true">
-                    <field name="OP">=</field>
-                    <value name="A">
-                      <block type="LLL_load" id="226" inline="true">
-                        <field name="POOL">sload</field>
-                        <value name="SPOT">
-                          <block type="LLL_val" id="227">
-                            <field name="VAL">STATE</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <value name="B">
-                      <block type="LLL_val" id="228">
-                        <field name="VAL">PROPOSED</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <statement name="THEN">
-                  <block type="LLL_comment" id="229">
-                    <field name="NOTE"> Partner_2 can accept the proposal by sending in a transaction with partner_1 given as the first data item</field>
-                    <next>
-                      <block type="LLL_when" id="230" inline="false">
-                        <field name="WORD">when</field>
-                        <value name="COND">
-                          <block type="LLL_logic" id="231" inline="false">
-                            <field name="OP">and</field>
-                            <value name="A">
-                              <block type="LLL_compare" id="232" inline="true">
-                                <field name="OP">=</field>
-                                <value name="A">
-                                  <block type="LLL_transaction" id="233">
-                                    <field name="PROP">sender</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="LLL_val" id="234">
-                                    <field name="VAL">PARTNER_2</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <block type="LLL_compare" id="235" inline="true">
-                                <field name="OP">=</field>
-                                <value name="A">
-                                  <block type="LLL_load" id="236" inline="true">
-                                    <field name="POOL">txdata</field>
-                                    <value name="SPOT">
-                                      <block type="LLL_val" id="237">
-                                        <field name="VAL">0</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="LLL_load" id="238" inline="true">
-                                    <field name="POOL">sload</field>
-                                    <value name="SPOT">
-                                      <block type="LLL_val" id="239">
-                                        <field name="VAL">PARTNER_1</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <statement name="THEN">
-                          <block type="LLL_store" id="240" inline="true">
-                            <field name="POOL">sstore</field>
-                            <value name="VAL">
-                              <block type="LLL_val" id="241">
-                                <field name="VAL">MARRIED</field>
-                              </block>
-                            </value>
-                            <value name="SPOT">
-                              <block type="LLL_val" id="242">
-                                <field name="VAL">STATE</field>
-                              </block>
-                            </value>
-                          </block>
-                        </statement>
-                        <next>
-                          <block type="LLL_comment" id="243">
-                            <field name="NOTE">Partner_1 and Partner_2 are now "MARRIED"!</field>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </statement>
-                <next>
-                  <block type="LLL_when" id="244" inline="false">
-                    <field name="WORD">when</field>
-                    <value name="COND">
-                      <block type="LLL_logic" id="245" inline="false">
-                        <field name="OP">and</field>
-                        <value name="A">
-                          <block type="LLL_compare" id="246" inline="true">
-                            <field name="OP">=</field>
-                            <value name="A">
-                              <block type="LLL_load" id="247" inline="true">
-                                <field name="POOL">sload</field>
-                                <value name="SPOT">
-                                  <block type="LLL_val" id="248">
-                                    <field name="VAL">STATE</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <block type="LLL_val" id="249">
-                                <field name="VAL">MARRIED</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="B">
-                          <block type="LLL_logic" id="250" inline="false">
-                            <field name="OP">or</field>
-                            <value name="A">
-                              <block type="LLL_compare" id="251" inline="true">
-                                <field name="OP">=</field>
-                                <value name="A">
-                                  <block type="LLL_transaction" id="252">
-                                    <field name="PROP">sender</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="LLL_val" id="253">
-                                    <field name="VAL">PARTNER_1</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <block type="LLL_compare" id="254" inline="true">
-                                <field name="OP">=</field>
-                                <value name="A">
-                                  <block type="LLL_transaction" id="255">
-                                    <field name="PROP">sender</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="LLL_val" id="256">
-                                    <field name="VAL">PARTNER_2</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <statement name="THEN">
-                      <block type="LLL_comment" id="257">
-                        <field name="NOTE">Once married, the contract is a "joint" account and each partner must send in the same instruction to make a withdraw</field>
-                        <next>
-                          <block type="LLL_comment" id="258">
-                            <field name="NOTE">A valid withdrawal instruction is an incoming transaction where: </field>
-                            <next>
-                              <block type="LLL_comment" id="259">
-                                <field name="NOTE">data item 0 is the withdraw code, data item 1 is the destination address, and data item 2 is the amount</field>
-                                <next>
-                                  <block type="LLL_when" id="260" inline="false">
-                                    <field name="WORD">when</field>
-                                    <value name="COND">
-                                      <block type="LLL_compare" id="261" inline="true">
-                                        <field name="OP">=</field>
-                                        <value name="A">
-                                          <block type="LLL_load" id="262" inline="true">
-                                            <field name="POOL">txdata</field>
-                                            <value name="SPOT">
-                                              <block type="LLL_val" id="263">
-                                                <field name="VAL">0</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="LLL_val" id="264">
-                                            <field name="VAL">WITHDRAW</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="THEN">
-                                      <block type="LLL_if" id="265" inline="false">
-                                        <value name="COND">
-                                          <block type="LLL_logic" id="266" inline="false">
-                                            <field name="OP">and</field>
-                                            <value name="A">
-                                              <block type="LLL_compare" id="267" inline="true">
-                                                <field name="OP">!=</field>
-                                                <value name="A">
-                                                  <block type="LLL_load" id="268" inline="true">
-                                                    <field name="POOL">sload</field>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="269">
-                                                        <field name="VAL">WITHDRAW_CREATOR</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="LLL_transaction" id="270">
-                                                    <field name="PROP">sender</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="LLL_logic" id="271" inline="false">
-                                                <field name="OP">and</field>
-                                                <value name="A">
-                                                  <block type="LLL_compare" id="272" inline="true">
-                                                    <field name="OP">=</field>
-                                                    <value name="A">
-                                                      <block type="LLL_load" id="273" inline="true">
-                                                        <field name="POOL">txdata</field>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="274">
-                                                            <field name="VAL">1</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <value name="B">
-                                                      <block type="LLL_load" id="275" inline="true">
-                                                        <field name="POOL">sload</field>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="276">
-                                                            <field name="VAL">WITHDRAW_TO</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="LLL_compare" id="277" inline="true">
-                                                    <field name="OP">=</field>
-                                                    <value name="A">
-                                                      <block type="LLL_load" id="278" inline="true">
-                                                        <field name="POOL">txdata</field>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="279">
-                                                            <field name="VAL">2</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <value name="B">
-                                                      <block type="LLL_load" id="280" inline="true">
-                                                        <field name="POOL">sload</field>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="281">
-                                                            <field name="VAL">WITHDRAW_AMOUNT</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="THEN">
-                                          <block type="LLL_comment" id="282">
-                                            <field name="NOTE">If a withdraw request is already pending from the other partner and this request matches, then do it.</field>
-                                            <next>
-                                              <block type="LLL_mktx" id="283" inline="true">
-                                                <value name="MONEY">
-                                                  <block type="LLL_load" id="284" inline="true">
-                                                    <field name="POOL">sload</field>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="285">
-                                                        <field name="VAL">WITHDRAW_AMOUNT</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <value name="TO">
-                                                  <block type="LLL_load" id="286" inline="true">
-                                                    <field name="POOL">sload</field>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="287">
-                                                        <field name="VAL">WITHDRAW_TO</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </statement>
-                                        <statement name="ELSE">
-                                          <block type="LLL_comment" id="288">
-                                            <field name="NOTE">this is a new withdraw request; store it as pending until a matching request is received from other partner</field>
-                                            <next>
-                                              <block type="LLL_store" id="289" inline="true">
-                                                <field name="POOL">sstore</field>
-                                                <value name="VAL">
-                                                  <block type="LLL_load" id="290" inline="true">
-                                                    <field name="POOL">txdata</field>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="291">
-                                                        <field name="VAL">1</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <value name="SPOT">
-                                                  <block type="LLL_val" id="292">
-                                                    <field name="VAL">WITHDRAW_TO</field>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="LLL_store" id="293" inline="true">
-                                                    <field name="POOL">sstore</field>
-                                                    <value name="VAL">
-                                                      <block type="LLL_load" id="294" inline="true">
-                                                        <field name="POOL">txdata</field>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="295">
-                                                            <field name="VAL">2</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="296">
-                                                        <field name="VAL">WITHDRAW_AMOUNT</field>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="LLL_store" id="297" inline="true">
-                                                        <field name="POOL">sstore</field>
-                                                        <value name="VAL">
-                                                          <block type="LLL_transaction" id="298">
-                                                            <field name="PROP">sender</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="299">
-                                                            <field name="VAL">WITHDRAW_CREATOR</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </statement>
-                                    <next>
-                                      <block type="LLL_comment" id="300">
-                                        <field name="NOTE">Once married, the partners must both agree in order to get divorced and split the pot. I WANT HALF!</field>
-                                        <next>
-                                          <block type="LLL_when" id="301" inline="false">
-                                            <field name="WORD">when</field>
-                                            <value name="COND">
-                                              <block type="LLL_compare" id="302" inline="true">
-                                                <field name="OP">=</field>
-                                                <value name="A">
-                                                  <block type="LLL_load" id="303" inline="true">
-                                                    <field name="POOL">txdata</field>
-                                                    <value name="SPOT">
-                                                      <block type="LLL_val" id="304">
-                                                        <field name="VAL">0</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="LLL_val" id="305">
-                                                    <field name="VAL">DIVORCE</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <statement name="THEN">
-                                              <block type="LLL_if" id="306" inline="false">
-                                                <value name="COND">
-                                                  <block type="LLL_compare" id="307" inline="true">
-                                                    <field name="OP">!=</field>
-                                                    <value name="A">
-                                                      <block type="LLL_load" id="308" inline="true">
-                                                        <field name="POOL">sload</field>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="309">
-                                                            <field name="VAL">DIVORCE_CREATOR</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <value name="B">
-                                                      <block type="LLL_transaction" id="310">
-                                                        <field name="PROP">sender</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <statement name="THEN">
-                                                  <block type="LLL_comment" id="311">
-                                                    <field name="NOTE">a divorce request is already pending and 2nd party is agreeing, so split the pot</field>
-                                                    <next>
-                                                      <block type="LLL_store" id="312" inline="true">
-                                                        <field name="POOL">mstore</field>
-                                                        <value name="VAL">
-                                                          <block type="LLL_math" id="313" inline="true">
-                                                            <field name="OP">sdiv</field>
-                                                            <value name="A">
-                                                              <block type="LLL_contract" id="314">
-                                                                <field name="PROP">balance</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="B">
-                                                              <block type="LLL_val" id="315">
-                                                                <field name="VAL">2</field>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="316">
-                                                            <field name="VAL">HALF</field>
-                                                          </block>
-                                                        </value>
-                                                        <next>
-                                                          <block type="LLL_mktx" id="317" inline="true">
-                                                            <value name="MONEY">
-                                                              <block type="LLL_load" id="318" inline="true">
-                                                                <field name="POOL">mload</field>
-                                                                <value name="SPOT">
-                                                                  <block type="LLL_val" id="319">
-                                                                    <field name="VAL">HALF</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                            <value name="TO">
-                                                              <block type="LLL_load" id="320" inline="true">
-                                                                <field name="POOL">sload</field>
-                                                                <value name="SPOT">
-                                                                  <block type="LLL_val" id="321">
-                                                                    <field name="VAL">PARTNER_1</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                            <next>
-                                                              <block type="LLL_mktx" id="322" inline="true">
-                                                                <value name="MONEY">
-                                                                  <block type="LLL_load" id="323" inline="true">
-                                                                    <field name="POOL">mload</field>
-                                                                    <value name="SPOT">
-                                                                      <block type="LLL_val" id="324">
-                                                                        <field name="VAL">HALF</field>
-                                                                      </block>
-                                                                    </value>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="TO">
-                                                                  <block type="LLL_load" id="325" inline="true">
-                                                                    <field name="POOL">sload</field>
-                                                                    <value name="SPOT">
-                                                                      <block type="LLL_val" id="326">
-                                                                        <field name="VAL">PARTNER_2</field>
-                                                                      </block>
-                                                                    </value>
-                                                                  </block>
-                                                                </value>
-                                                                <next>
-                                                                  <block type="LLL_store" id="327" inline="true">
-                                                                    <field name="POOL">sstore</field>
-                                                                    <value name="VAL">
-                                                                      <block type="LLL_val" id="328">
-                                                                        <field name="VAL">DIVORCED</field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <value name="SPOT">
-                                                                      <block type="LLL_val" id="329">
-                                                                        <field name="VAL">STATE</field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <next>
-                                                                      <block type="LLL_comment" id="330">
-                                                                        <field name="NOTE">The partners are now divorced. :(</field>
-                                                                      </block>
-                                                                    </next>
-                                                                  </block>
-                                                                </next>
-                                                              </block>
-                                                            </next>
-                                                          </block>
-                                                        </next>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </statement>
-                                                <statement name="ELSE">
-                                                  <block type="LLL_comment" id="331">
-                                                    <field name="NOTE">make a new divorce request pending, waiting for agreement</field>
-                                                    <next>
-                                                      <block type="LLL_store" id="332" inline="true">
-                                                        <field name="POOL">sstore</field>
-                                                        <value name="VAL">
-                                                          <block type="LLL_transaction" id="333">
-                                                            <field name="PROP">sender</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="SPOT">
-                                                          <block type="LLL_val" id="334">
-                                                            <field name="VAL">DIVORCE_CREATOR</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </statement>
-                                              </block>
-                                            </statement>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </statement>
-                  </block>
-                </next>
-              </block>
-            </next>
           </block>
         </next>
       </block>
-    </next>
+    </statement>
   </block>
 </xml>
 */}),

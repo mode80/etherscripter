@@ -23,6 +23,7 @@ Visual smart contract builder for Ethereum
   x (gasprice) -> tx.gasprice
   x (gaslimit) -> block.gaslimit
   x (msize) -> tx.msize
+* decide how to handle accessing byte-oriented contract input
 * add Serpent 
   . find list of reserved words
 * save functionality using appengine(?) cloud storage
