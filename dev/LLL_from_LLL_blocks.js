@@ -182,7 +182,7 @@ Blockly.LLL['LLL_tx'] = function(block) {
   var code
   var val = block.getFieldValue('PROP');
   if (val == '_input_slot_count') // count of 32-byte slots isn't supported natively but we can have it calculated
-    code = '(add (div (calldatasize) 32) (if (mod calldatasize 32) 1 0) )' 
+    code = '(div (calldatasize) 32)' 
   else if (val == '_input_byte_count')
     code = '(calldatasize)' 
   else 
