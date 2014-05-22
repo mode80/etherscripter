@@ -1026,13 +1026,13 @@ swear_jar: fnCommentToString(function(){/*!
                                                             <next>
                                                               <block type="LLL_spend" id="118" inline="true">
                                                                 <value name="MONEY">
-                                                                  <block type="LLL_mval" id="119">
-                                                                    <field name="VAL">BEST_MEMBER</field>
+                                                                  <block type="LLL_contract" id="120">
+                                                                    <field name="PROP">balance</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="TO">
-                                                                  <block type="LLL_contract" id="120">
-                                                                    <field name="PROP">balance</field>
+                                                                  <block type="LLL_mval" id="119">
+                                                                    <field name="VAL">BEST_MEMBER</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
