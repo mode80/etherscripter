@@ -2321,13 +2321,13 @@ swear_jar: fnCommentToString(function(){/*!
                                                     <next>
                                                       <block type="LLL_spend" id="469" inline="true">
                                                         <value name="MONEY">
-                                                          <block type="LLL_mval" id="470">
-                                                            <field name="VAL">BEST_MEMBER</field>
+                                                          <block type="LLL_contract" id="471">
+                                                            <field name="PROP">balance</field>
                                                           </block>
                                                         </value>
                                                         <value name="TO">
-                                                          <block type="LLL_contract" id="471">
-                                                            <field name="PROP">balance</field>
+                                                          <block type="LLL_mval" id="470">
+                                                            <field name="VAL">BEST_MEMBER</field>
                                                           </block>
                                                         </value>
                                                       </block>
