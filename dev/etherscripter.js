@@ -157,13 +157,15 @@ function allToolsOn(event){
   $('#toolboxmenu>li').addClass('active')  
   $('#toolbox block').attr('active','true')
   Blockly.updateToolbox(activeToolboxString())
-  $('#all-on, #typical-on, #minimal-on').removeClass('active')
+  $('#all-on, #typical-on, #minimal-on #none-on').removeClass('active')
   $('#' + event.target.className + '-on').addClass('active')
 }
 
 function someToolsOn(event){
-  //define defaults
-    var minimal = [
+  //define block sets 
+    var set = {}
+    set.none = []
+    set.minimal = [
       'comment',
       'val',
       'tx',
@@ -180,7 +182,7 @@ function someToolsOn(event){
       'whileloop',
       'init',
     ]
-    var typical = minimal.concat([
+    set.typical = set.minimal.concat([
       'currency',
       'input',
       'mstore',
@@ -188,11 +190,8 @@ function someToolsOn(event){
       'if',
     ])
   // which set was picked?
-    var toolset
-    if (event.target.className == 'minimal')
-      toolset = minimal
-    else
-      toolset = typical
+    var classname = event.target.className
+    var toolset = set[classname]
   // first reset all to off
     $('#toolboxmenu>li').removeClass('active')  
     $('#toolbox block').attr('active','false')
