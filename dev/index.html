@@ -37,6 +37,7 @@
             <li><a onclick="showBLL(1)">Show Blocks</a></li>
             <li><a onclick="showXML(1)">Show XML</a></li>
             <li><a onclick="showLLL(panes)">Show LLL</a></li>
+            <li><a onclick="showHLL(panes)">Show HLL</a></li>
           </ul>
         </li>
         <!-- Toolbox -->
@@ -125,10 +126,13 @@
         style="z-index:2; position:absolute; width:100%; height:10000px"></textarea>
       <textarea id="content-LLL" readonly="readonly" wrap="off" class="code" 
         style="z-index:1; position:absolute; width:100%; height:10000px;"></textarea>
+      <textarea id="content-HLL" readonly="readonly" wrap="off" class="code" 
+        style="z-index:1; position:absolute; width:100%; height:10000px;"></textarea>
       <div class="btn-group-vertical" style="position:absolute; top:10px; right:10px ; z-index:10">
         <li id="btn-BLL1" class="btn btn-default btn-show active" onclick="showBLL(1)" ontouchstart="showBLL(1)">Show Blocks</li>
         <li id="btn-XML1" class="btn btn-default btn-show" onclick="showXML(1)" ontouchstart="showXML(1)">Show XML</li>
         <li id="btn-LLL1" class="btn btn-default btn-show 1pane-only" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
+        <li id="btn-HLL1" class="btn btn-default btn-show 1pane-only" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Show HLL</li>
       </div>
     </div>
     <!-- Splitter -->
@@ -140,6 +144,7 @@
       style="position:relative; overflow:hidden; height:10000px; display:none;" >
       <div class="btn-group-vertical pane2-item" style="position:absolute; top:10px; right:10px ; z-index:10">
         <li id="btn-LLL2" class="btn btn-default btn-show" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
+        <li id="btn-HLL2" class="btn btn-default btn-show" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Show HLL</li>
       </div>
     </div>
   </div>
@@ -187,8 +192,10 @@
   <script src="blockly_compressed.js"></script>
   <script src="messages.js"></script>
   <script src="LLL.js"></script>
+  <script src="HLL.js"></script>
   <script src="LLL_blocks.js"></script>
   <script src="LLL_from_LLL_blocks.js"></script>
+  <script src="HLL_from_LLL_blocks.js"></script>
   <script src="storage.js"></script>
   <script src="etherscripter.js"></script>
   <script src="samples.js"></script>

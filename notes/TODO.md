@@ -3,7 +3,6 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* create a "context" block to collect loose (& rarely used) ends from block,tx,contract)? 
 * sample to test new POC-5 blocks
 * add Serpent 
   . find list of reserved words

@@ -321,6 +321,7 @@ Blockly.LLL.smartVal = function(val) {
   if ( isNaN(val) ) { // quote non-hexy string-like values
     var is_hexprefixed = ((val+'').substr(0,2).toUpperCase()=='0X') 
     var is_allhexchars = (/[^0-9a-fx]/i.exec(val)===null) 
+    var retval
     if (is_hexprefixed && is_allhexchars)  // don't quote hexy strings 
       retval = val
     else 

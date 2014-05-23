@@ -92,6 +92,19 @@ function showXML(pane) {
   content_XML.val(xmlText)
 }
 
+function showHLL(pane) {
+  pane = pane || 1
+  var content_HLL = $('#content-HLL')
+  content_HLL.prependTo($('#pane'+pane))
+  // Generate LLL code and display it.
+  //showBLL() // this must be visible to get the code out 
+  var code = Blockly.HLL.workspaceToCode();
+  deactivateOthers(pane)
+  content_HLL.css('z-index',9)
+  $('#btn-HLL'+pane).addClass('active')
+  content_HLL.html(code)
+}
+
 function showLLL(pane) {
   pane = pane || 1
   var content_LLL = $('#content-LLL')
@@ -107,9 +120,10 @@ function showLLL(pane) {
 
 function deactivateOthers(pane){
   pane = pane || 1
-  $('#content-BLL').css('z-index', 3)
-  $('#content-LLL').css('z-index', 2)
-  $('#content-XML').css('z-index', 1)
+  $('#content-BLL').css('z-index', 5)
+  $('#content-LLL').css('z-index', 4)
+  $('#content-HLL').css('z-index', 3)
+  $('#content-XML').css('z-index', 2)
   $('#pane'+pane+' .btn-show').removeClass('active')
 }
 

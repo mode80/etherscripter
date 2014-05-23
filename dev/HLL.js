@@ -104,7 +104,7 @@ Blockly.HLL.finish = function(code) {
     definitions.push(Blockly.HLL.definitions_[name]);
   }
   retval = definitions.join('\n') + '\n\n' + code;
-  retval = '{\n\n' + code + '\n}'
+  retval = '' + code + ''
   return retval
 };
 
