@@ -43,7 +43,7 @@ Blockly.HLL['LLL_mstore'] = function(block) {
   var spot = block.getFieldValue('SPOT') || 0
   spot = Blockly.HLL.smartVal(spot).replace(/"/g,'') // unquote text spots to make use of LLL's autoassigned memory addresses
   var val = Blockly.HLL.valueToCode(block,'VAL', order) || 0 
-  var code = 'mem[' + spot  + '] = ' + val
+  var code = '' + spot  + ' = ' + val
   return code + '\n'
 }
 
@@ -64,7 +64,7 @@ Blockly.HLL['LLL_mval'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
   var spot = block.getFieldValue('VAL') || 0  
   spot = Blockly.HLL.smartVal(spot).replace(/"/g,'') // unquote text spots to make use of LLL's autoassigned memory addresses
-  var code = 'mem[' + spot + ']'
+  var code = '' + spot + ''
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -269,7 +269,7 @@ Blockly.HLL['LLL_when'] = function(block) {
   var then_do = Blockly.HLL.statementToCode(block, 'THEN');
   if (op=='unless') cond = '!' + cond
   op = 'if'
-  var code =  op + ' ' + cond + ':\n' + then_do + '\n';
+  var code =  op + ' ' + cond + ':\n' + then_do ;
   return code;
 }
 
@@ -436,10 +436,13 @@ Blockly.HLL['LLL_store'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
   var pool = block.getFieldValue('POOL')  
   var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0 
+  var val = Blockly.HLL.valueToCode(block,'VAL', order) || 0 
   if (pool =='mstore' || pool == 'calldataload') 
     spot = spot.replace(/"/g,'') // unquote text spots to make use of LLL's autoassigned memory addresses 
-  var val = Blockly.HLL.valueToCode(block,'VAL', order) || 0 
-  var code = 'contract.storage[' + spot + '] = ' + val + '\n'
+    var code = 'mem[' + spot + '] = ' + val + '\n'
+  if (pool =='sstore' || pool == 'calldataload') {
+    var code = 'contract.storage[' + spot + '] = ' + val + '\n'
+  }
   return code 
 }
 

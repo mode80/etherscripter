@@ -177,14 +177,15 @@ Blockly.Blocks['LLL_init'] = {
 //
 
 var valValidator = function(given) {return given.replace(/[^a-z0-9_]/gi,'')}
+var varValidator = function(given) {return given.replace(/^[0-9]|[^a-z0-9_]/gi,'')}
 
 Blockly.Blocks['LLL_mstore'] = {
   init: function() {
     this.setTooltip('Labels a temporary result. This stores the result at a temp spot identified by the @-prefixed label. This is a compact form of the [in temp spot __ put __] block. Data in a temp spot is cleared after the contract stops running this time.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
-      .appendField('@')
-      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SPOT')
+      .appendField('')
+      .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
     this.appendValueInput('VAL')
       .appendField('=')
     this.setInputsInline(true)
@@ -198,8 +199,8 @@ Blockly.Blocks['LLL_sstore'] = {
     this.setTooltip('Labels a saved result. This stores the result in a save spot identified by the @@-prefixed label. This is a compact form of the [in save spot __ put __] block. Data in save spots are still available the next time this contract runs.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
-      .appendField('store @@')
-      .appendField(new Blockly.FieldTextInput('', valValidator ), 'SPOT')
+      .appendField('save at')
+      .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
     this.appendValueInput('VAL')
       .appendField('=')
     this.setInputsInline(true)
@@ -214,7 +215,7 @@ Blockly.Blocks['LLL_mval'] = {
     this.setTooltip('The data in a given temp spot. It is a compact form of the [data at temp spot ___] block.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
-        .appendField('@')
+        .appendField('')
         .appendField(new Blockly.FieldTextInput('', valValidator ), 'VAL')
     this.setOutput(true)
   }
@@ -225,7 +226,7 @@ Blockly.Blocks['LLL_sval'] = {
     this.setTooltip('The data in a given save spot. It is a compact form of the [data at save spot ___] block.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
-        .appendField('@@')
+        .appendField('saved at')
         .appendField(new Blockly.FieldTextInput('', valValidator ), 'VAL')
     this.setOutput(true)
   }
