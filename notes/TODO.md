@@ -3,9 +3,10 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* sample to test new POC-5 blocks
 * add Serpent 
-  . find list of reserved words
+  . what to do about init block indenting?
+* add codeMirror
+* sample to test new POC-5 blocks
 * save functionality using appengine(?) cloud storage
 * what is etherscripter page
 * create generator and block-set targeting HLL

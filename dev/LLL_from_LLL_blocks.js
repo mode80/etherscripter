@@ -27,10 +27,11 @@ Blockly.LLL['LLL_compile_max'] = function(block) {
   var for_compiling = Blockly.LLL.statementToCode(block, 'CODE');
   var to_start = Blockly.LLL.valueToCode(block, 'TO_START', Blockly.LLL.ORDER_NONE) || 0
   var max_len = Blockly.LLL.valueToCode(block, 'MAX_LEN', Blockly.LLL.ORDER_NONE) || 0
+  var code
   if (max_len == 0)
-    var code = '(lll\n { \n' + for_compiling + ' }\n ' + to_start + '\n)' 
+    code = '(lll\n { \n' + for_compiling + ' }\n ' + to_start + '\n)' 
   else
-    var code = '(lll\n { \n' + for_compiling + ' }\n ' + to_start + '\n ' + max_len + '\n)' 
+    code = '(lll\n { \n' + for_compiling + ' }\n ' + to_start + '\n ' + max_len + '\n)' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
@@ -318,10 +319,10 @@ Blockly.LLL.twoArgForms = function(block) {
 
 Blockly.LLL.smartVal = function(val) {
   // quotes non hexy strings and 'LLL-encodes' negative numbers
+  var retval
   if ( isNaN(val) ) { // quote non-hexy string-like values
     var is_hexprefixed = ((val+'').substr(0,2).toUpperCase()=='0X') 
     var is_allhexchars = (/[^0-9a-fx]/i.exec(val)===null) 
-    var retval
     if (is_hexprefixed && is_allhexchars)  // don't quote hexy strings 
       retval = val
     else 

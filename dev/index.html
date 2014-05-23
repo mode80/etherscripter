@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>EtherScripter - Visual smart-contract builder for Ethereum</title>
+  <!--<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/commonlisp/commonlisp.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/python/python.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.css" rel="stylesheet" >
+  <link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/theme/solarized.css" rel="stylesheet" >
+  --> 
   <link href="flatly_bootstrap.min.css" rel="stylesheet" >
   <style>
     .code { font-family: monospace; font-size: 18px }
@@ -36,8 +42,8 @@
             <li class="divider"></li> 
             <li><a onclick="showBLL(1)">Show Blocks</a></li>
             <li><a onclick="showXML(1)">Show XML</a></li>
-            <li><a onclick="showLLL(panes)">Show LLL</a></li>
             <li><a onclick="showHLL(panes)">Show HLL</a></li>
+            <li><a onclick="showLLL(panes)">Show LLL</a></li>
           </ul>
         </li>
         <!-- Toolbox -->
@@ -131,8 +137,8 @@
       <div class="btn-group-vertical" style="position:absolute; top:10px; right:10px ; z-index:10">
         <li id="btn-BLL1" class="btn btn-default btn-show active" onclick="showBLL(1)" ontouchstart="showBLL(1)">Show Blocks</li>
         <li id="btn-XML1" class="btn btn-default btn-show" onclick="showXML(1)" ontouchstart="showXML(1)">Show XML</li>
-        <li id="btn-LLL1" class="btn btn-default btn-show 1pane-only" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
         <li id="btn-HLL1" class="btn btn-default btn-show 1pane-only" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Show HLL</li>
+        <li id="btn-LLL1" class="btn btn-default btn-show 1pane-only" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
       </div>
     </div>
     <!-- Splitter -->
@@ -143,8 +149,8 @@
     <div id="pane2" class="pane2-item" 
       style="position:relative; overflow:hidden; height:10000px; display:none;" >
       <div class="btn-group-vertical pane2-item" style="position:absolute; top:10px; right:10px ; z-index:10">
+        <li id="btn-HLL2" class="btn btn-default btn-show active" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Show HLL</li>
         <li id="btn-LLL2" class="btn btn-default btn-show" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
-        <li id="btn-HLL2" class="btn btn-default btn-show" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Show HLL</li>
       </div>
     </div>
   </div>

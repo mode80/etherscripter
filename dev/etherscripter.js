@@ -42,7 +42,10 @@
   })
 
 function onChange() {
-  if (window.panes==2) showLLL(window.panes)
+  if (window.panes==2) {
+    if ($('#btn-LLL2').hasClass('active')) showLLL(window.panes)
+    if ($('#btn-HLL2').hasClass('active')) showHLL(window.panes)
+  }
 }
 
 function clearWorkspace() {
@@ -116,7 +119,7 @@ function showLLL(pane) {
   content_LLL.css('z-index',9)
   $('#btn-LLL'+pane).addClass('active')
   content_LLL.html(code)
-}
+  }
 
 function deactivateOthers(pane){
   pane = pane || 1
@@ -145,7 +148,7 @@ function splitPane(){
   $('#single-menu').removeClass('active')
   $('#split-menu').addClass('active')
   window.panes = 2 
-  onChange() // kick 2nd pane refresh as if on edit 
+  showHLL(2) // kick 2nd pane refresh as if on edit 
 }
 
 function activeToolboxString(){

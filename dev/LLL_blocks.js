@@ -33,7 +33,7 @@ var UNUSED_COLOR = 160
 
 Blockly.Blocks['LLL_input'] = {
   init: function() {
-    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: The first item is 1, as normal people would expect!)')
+    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: Here the first item is 1 not 0)')
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
     this.appendValueInput('ORDINAL')
