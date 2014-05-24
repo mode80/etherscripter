@@ -9,7 +9,7 @@
     });
 
 // simulate menu click for typical tools
-  someToolsOn({target:{className:'minimal'}}) 
+  someToolsOn({target:{className:'typical'}}) 
 
 // wire up local storage save/restore
   window.setTimeout(BlocklyStorage.restoreBlocks, 0);
@@ -200,7 +200,6 @@ function someToolsOn(event){
       'init',
     ]
     set.typical = set.minimal.concat([
-      'currency',
       'input',
       'mstore',
       'mval',

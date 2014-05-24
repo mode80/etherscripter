@@ -2358,6 +2358,648 @@ swear_jar: fnCommentToString(function(){/*!
     </statement>
   </block>
 </xml>
-*/})
+*/}),
+
+rock_paper_scissors: fnCommentToString(function(){/*! 
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_init" id="630" x="24" y="48">
+    <statement name="INIT">
+      <block type="LLL_comment" id="631">
+        <field name="NOTE">Rock, Paper, Scissors</field>
+        <next>
+          <block type="LLL_store" id="632" inline="true">
+            <field name="POOL">sstore</field>
+            <value name="SPOT">
+              <block type="LLL_math" id="633" inline="true">
+                <field name="OP">+</field>
+                <value name="A">
+                  <block type="LLL_val" id="634">
+                    <field name="VAL">PLAYER</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="LLL_val" id="635">
+                    <field name="VAL">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="VAL">
+              <block type="LLL_val" id="636">
+                <field name="VAL">0xb7b2e5e12992267f85455ffee1435f02760402f0</field>
+              </block>
+            </value>
+            <next>
+              <block type="LLL_store" id="637" inline="true">
+                <field name="POOL">sstore</field>
+                <value name="SPOT">
+                  <block type="LLL_math" id="638" inline="true">
+                    <field name="OP">+</field>
+                    <value name="A">
+                      <block type="LLL_val" id="639">
+                        <field name="VAL">PLAYER</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_val" id="640">
+                        <field name="VAL">2</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="VAL">
+                  <block type="LLL_val" id="641">
+                    <field name="VAL">0xfeab802c014588f08bfee2741086c37582b30dc2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="LLL_store" id="642" inline="true">
+                    <field name="POOL">sstore</field>
+                    <value name="SPOT">
+                      <block type="LLL_val" id="643">
+                        <field name="VAL">0xb7b2e5e12992267f85455ffee1435f02760402f0</field>
+                      </block>
+                    </value>
+                    <value name="VAL">
+                      <block type="LLL_val" id="644">
+                        <field name="VAL">1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="LLL_store" id="645" inline="true">
+                        <field name="POOL">sstore</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="646">
+                            <field name="VAL">0xfeab802c014588f08bfee2741086c37582b30dc2</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_val" id="647">
+                            <field name="VAL">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_mstore" id="648" inline="true">
+        <field name="SPOT">PLAYER_NUM</field>
+        <value name="VAL">
+          <block type="LLL_load" id="649" inline="true">
+            <field name="POOL">sload</field>
+            <value name="SPOT">
+              <block type="LLL_contract" id="650">
+                <field name="PROP">caller</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="LLL_store" id="651" inline="true">
+            <field name="POOL">sstore</field>
+            <value name="SPOT">
+              <block type="LLL_math" id="652" inline="true">
+                <field name="OP">+</field>
+                <value name="A">
+                  <block type="LLL_val" id="653">
+                    <field name="VAL">CHOICE</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="LLL_mval" id="654">
+                    <field name="VAL">PLAYER_NUM</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="VAL">
+              <block type="LLL_contract" id="655">
+                <field name="PROP">_input</field>
+              </block>
+            </value>
+            <next>
+              <block type="LLL_store" id="656" inline="true">
+                <field name="POOL">sstore</field>
+                <value name="SPOT">
+                  <block type="LLL_math" id="657" inline="true">
+                    <field name="OP">+</field>
+                    <value name="A">
+                      <block type="LLL_val" id="658">
+                        <field name="VAL">IN_BLOCK</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="LLL_mval" id="659">
+                        <field name="VAL">PLAYER_NUM</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="VAL">
+                  <block type="LLL_blockinfo" id="660">
+                    <field name="PROP">number</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="LLL_comment" id="661">
+                    <field name="NOTE">Ensure both players' choices came in at the same time. (No peeking!)</field>
+                    <next>
+                      <block type="LLL_when" id="662" inline="false">
+                        <field name="WORD">when</field>
+                        <value name="COND">
+                          <block type="LLL_compare" id="663" inline="false">
+                            <field name="OP">!=</field>
+                            <value name="A">
+                              <block type="LLL_load" id="664" inline="true">
+                                <field name="POOL">sload</field>
+                                <value name="SPOT">
+                                  <block type="LLL_math" id="665" inline="true">
+                                    <field name="OP">+</field>
+                                    <value name="A">
+                                      <block type="LLL_val" id="666">
+                                        <field name="VAL">IN_BLOCK</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="LLL_val" id="667">
+                                        <field name="VAL">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="LLL_load" id="668" inline="true">
+                                <field name="POOL">sload</field>
+                                <value name="SPOT">
+                                  <block type="LLL_math" id="669" inline="true">
+                                    <field name="OP">+</field>
+                                    <value name="A">
+                                      <block type="LLL_val" id="670">
+                                        <field name="VAL">IN_BLOCK</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="LLL_val" id="671">
+                                        <field name="VAL">2</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="THEN">
+                          <block type="LLL_stop" id="672"></block>
+                        </statement>
+                        <next>
+                          <block type="LLL_comment" id="673">
+                            <field name="NOTE">Label each player's choice for easy reference</field>
+                            <next>
+                              <block type="LLL_mstore" id="674" inline="true">
+                                <field name="SPOT">CHOICE1</field>
+                                <value name="VAL">
+                                  <block type="LLL_load" id="675" inline="true">
+                                    <field name="POOL">sload</field>
+                                    <value name="SPOT">
+                                      <block type="LLL_math" id="676" inline="true">
+                                        <field name="OP">+</field>
+                                        <value name="A">
+                                          <block type="LLL_val" id="677">
+                                            <field name="VAL">CHOICE</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="LLL_val" id="678">
+                                            <field name="VAL">1</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="LLL_mstore" id="679" inline="true">
+                                    <field name="SPOT">CHOICE2</field>
+                                    <value name="VAL">
+                                      <block type="LLL_load" id="680" inline="true">
+                                        <field name="POOL">sload</field>
+                                        <value name="SPOT">
+                                          <block type="LLL_math" id="681" inline="true">
+                                            <field name="OP">+</field>
+                                            <value name="A">
+                                              <block type="LLL_val" id="682">
+                                                <field name="VAL">CHOICE</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="LLL_val" id="683">
+                                                <field name="VAL">2</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="LLL_comment" id="684">
+                                        <field name="NOTE">If it's a tie, nobody wins, so stop here</field>
+                                        <next>
+                                          <block type="LLL_when" id="685" inline="false">
+                                            <field name="WORD">when</field>
+                                            <value name="COND">
+                                              <block type="LLL_compare" id="686" inline="true">
+                                                <field name="OP">=</field>
+                                                <value name="A">
+                                                  <block type="LLL_mval" id="687">
+                                                    <field name="VAL">CHOICE1</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="LLL_mval" id="688">
+                                                    <field name="VAL">CHOICE2</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="THEN">
+                                              <block type="LLL_stop" id="689"></block>
+                                            </statement>
+                                            <next>
+                                              <block type="LLL_comment" id="690">
+                                                <field name="NOTE">Unless both players made a valid choice, stop here. (No "dynamite" allowed!)</field>
+                                                <next>
+                                                  <block type="LLL_when" id="691" inline="false">
+                                                    <field name="WORD">unless</field>
+                                                    <value name="COND">
+                                                      <block type="LLL_logic" id="692" inline="false">
+                                                        <field name="OP">&amp;&amp;</field>
+                                                        <value name="A">
+                                                          <block type="LLL_logic" id="693" inline="false">
+                                                            <field name="OP">||</field>
+                                                            <value name="A">
+                                                              <block type="LLL_compare" id="694" inline="true">
+                                                                <field name="OP">=</field>
+                                                                <value name="A">
+                                                                  <block type="LLL_mval" id="695">
+                                                                    <field name="VAL">CHOICE1</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="LLL_textval" id="696">
+                                                                    <field name="VAL">ROCK</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="LLL_logic" id="697" inline="false">
+                                                                <field name="OP">||</field>
+                                                                <value name="A">
+                                                                  <block type="LLL_compare" id="698" inline="true">
+                                                                    <field name="OP">=</field>
+                                                                    <value name="A">
+                                                                      <block type="LLL_mval" id="699">
+                                                                        <field name="VAL">CHOICE1</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="LLL_textval" id="700">
+                                                                        <field name="VAL">PAPER</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="LLL_compare" id="701" inline="true">
+                                                                    <field name="OP">=</field>
+                                                                    <value name="A">
+                                                                      <block type="LLL_mval" id="702">
+                                                                        <field name="VAL">CHOICE1</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="LLL_textval" id="703">
+                                                                        <field name="VAL">SCISSORS</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="LLL_logic" id="704" inline="false">
+                                                            <field name="OP">||</field>
+                                                            <value name="A">
+                                                              <block type="LLL_compare" id="705" inline="true">
+                                                                <field name="OP">=</field>
+                                                                <value name="A">
+                                                                  <block type="LLL_mval" id="706">
+                                                                    <field name="VAL">CHOICE2</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="LLL_textval" id="707">
+                                                                    <field name="VAL">ROCK</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="LLL_logic" id="708" inline="false">
+                                                                <field name="OP">||</field>
+                                                                <value name="A">
+                                                                  <block type="LLL_compare" id="709" inline="true">
+                                                                    <field name="OP">=</field>
+                                                                    <value name="A">
+                                                                      <block type="LLL_mval" id="710">
+                                                                        <field name="VAL">CHOICE2</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="LLL_textval" id="711">
+                                                                        <field name="VAL">PAPER</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="LLL_compare" id="712" inline="true">
+                                                                    <field name="OP">=</field>
+                                                                    <value name="A">
+                                                                      <block type="LLL_mval" id="713">
+                                                                        <field name="VAL">CHOICE2</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="LLL_textval" id="714">
+                                                                        <field name="VAL">SCISSORS</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="THEN">
+                                                      <block type="LLL_stop" id="715"></block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="LLL_comment" id="716">
+                                                        <field name="NOTE">Check each valid combo to determine the winner</field>
+                                                        <next>
+                                                          <block type="LLL_when" id="717" inline="false">
+                                                            <field name="WORD">when</field>
+                                                            <value name="COND">
+                                                              <block type="LLL_compare" id="718" inline="true">
+                                                                <field name="OP">=</field>
+                                                                <value name="A">
+                                                                  <block type="LLL_mval" id="719">
+                                                                    <field name="VAL">CHOICE1</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="LLL_textval" id="720">
+                                                                    <field name="VAL">ROCK</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="THEN">
+                                                              <block type="LLL_if" id="721" inline="false">
+                                                                <value name="COND">
+                                                                  <block type="LLL_compare" id="722" inline="true">
+                                                                    <field name="OP">=</field>
+                                                                    <value name="A">
+                                                                      <block type="LLL_mval" id="723">
+                                                                        <field name="VAL">CHOICE2</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="LLL_textval" id="724">
+                                                                        <field name="VAL">SCISSORS</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="THEN">
+                                                                  <block type="LLL_mstore" id="725" inline="true">
+                                                                    <field name="SPOT">WINNER</field>
+                                                                    <value name="VAL">
+                                                                      <block type="LLL_val" id="726">
+                                                                        <field name="VAL">1</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <statement name="ELSE">
+                                                                  <block type="LLL_mstore" id="727" inline="true">
+                                                                    <field name="SPOT">WINNER</field>
+                                                                    <value name="VAL">
+                                                                      <block type="LLL_val" id="728">
+                                                                        <field name="VAL">2</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                              </block>
+                                                            </statement>
+                                                            <next>
+                                                              <block type="LLL_when" id="729" inline="false">
+                                                                <field name="WORD">when</field>
+                                                                <value name="COND">
+                                                                  <block type="LLL_compare" id="730" inline="true">
+                                                                    <field name="OP">=</field>
+                                                                    <value name="A">
+                                                                      <block type="LLL_mval" id="731">
+                                                                        <field name="VAL">CHOICE1</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="LLL_textval" id="732">
+                                                                        <field name="VAL">PAPER</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="THEN">
+                                                                  <block type="LLL_if" id="733" inline="false">
+                                                                    <value name="COND">
+                                                                      <block type="LLL_compare" id="734" inline="true">
+                                                                        <field name="OP">=</field>
+                                                                        <value name="A">
+                                                                          <block type="LLL_mval" id="735">
+                                                                            <field name="VAL">CHOICE2</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <block type="LLL_textval" id="736">
+                                                                            <field name="VAL">ROCK</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <statement name="THEN">
+                                                                      <block type="LLL_mstore" id="737" inline="true">
+                                                                        <field name="SPOT">WINNER</field>
+                                                                        <value name="VAL">
+                                                                          <block type="LLL_val" id="738">
+                                                                            <field name="VAL">1</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </statement>
+                                                                    <statement name="ELSE">
+                                                                      <block type="LLL_mstore" id="739" inline="true">
+                                                                        <field name="SPOT">WINNER</field>
+                                                                        <value name="VAL">
+                                                                          <block type="LLL_val" id="740">
+                                                                            <field name="VAL">2</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </statement>
+                                                                  </block>
+                                                                </statement>
+                                                                <next>
+                                                                  <block type="LLL_when" id="741" inline="false">
+                                                                    <field name="WORD">when</field>
+                                                                    <value name="COND">
+                                                                      <block type="LLL_compare" id="742" inline="true">
+                                                                        <field name="OP">=</field>
+                                                                        <value name="A">
+                                                                          <block type="LLL_mval" id="743">
+                                                                            <field name="VAL">CHOICE1</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <block type="LLL_textval" id="744">
+                                                                            <field name="VAL">SCISSORS</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <statement name="THEN">
+                                                                      <block type="LLL_if" id="745" inline="false">
+                                                                        <value name="COND">
+                                                                          <block type="LLL_compare" id="746" inline="true">
+                                                                            <field name="OP">=</field>
+                                                                            <value name="A">
+                                                                              <block type="LLL_mval" id="747">
+                                                                                <field name="VAL">CHOICE2</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="B">
+                                                                              <block type="LLL_textval" id="748">
+                                                                                <field name="VAL">PAPER</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <statement name="THEN">
+                                                                          <block type="LLL_mstore" id="749" inline="true">
+                                                                            <field name="SPOT">WINNER</field>
+                                                                            <value name="VAL">
+                                                                              <block type="LLL_val" id="750">
+                                                                                <field name="VAL">1</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </statement>
+                                                                        <statement name="ELSE">
+                                                                          <block type="LLL_mstore" id="751" inline="true">
+                                                                            <field name="SPOT">WINNER</field>
+                                                                            <value name="VAL">
+                                                                              <block type="LLL_val" id="752">
+                                                                                <field name="VAL">2</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </statement>
+                                                                      </block>
+                                                                    </statement>
+                                                                    <next>
+                                                                      <block type="LLL_comment" id="753">
+                                                                        <field name="NOTE">Pay the winner</field>
+                                                                        <next>
+                                                                          <block type="LLL_spend" id="754" inline="true">
+                                                                            <value name="MONEY">
+                                                                              <block type="LLL_contract" id="755">
+                                                                                <field name="PROP">balance</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="TO">
+                                                                              <block type="LLL_load" id="756" inline="true">
+                                                                                <field name="POOL">sload</field>
+                                                                                <value name="SPOT">
+                                                                                  <block type="LLL_math" id="757" inline="true">
+                                                                                    <field name="OP">+</field>
+                                                                                    <value name="A">
+                                                                                      <block type="LLL_val" id="758">
+                                                                                        <field name="VAL">PLAYER</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="B">
+                                                                                      <block type="LLL_mval" id="759">
+                                                                                        <field name="VAL">WINNER</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
 
 }

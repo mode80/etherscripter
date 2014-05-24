@@ -5,6 +5,10 @@ Visual smart contract builder for Ethereum
 ### TODO
 * add Serpent 
   . what to do about init block indenting?
+  x figure out order use (see and-or sequence in rock paper scissor sample)
+  x revisit mval sval store etc to ensure consistency between LLL & Serpent 
+    in serpent x, y is '[0x0, mload, 0x20, mload]' (the dereferenced values of x, y)
+    in LLL x,y is just 0x0, 0x20 (the memory addresses)
 * add codeMirror
 * sample to test new POC-5 blocks
 * save functionality using appengine(?) cloud storage
