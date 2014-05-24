@@ -122,7 +122,10 @@ Blockly.HLL['LLL_hash'] = function(block) {
   var code = ''
   var a = Blockly.HLL.valueToCode(block, 'DATA_START', Blockly.HLL.ORDER_NONE) || 0
   var b = Blockly.HLL.valueToCode(block, 'DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
-  if (b!== 32) code = '///// WARNING -- Serpent can only sha3 with values of length 32 /////\n' 
+  if (b!== 32) {
+    var warn = '///// WARNING -- Serpent can only sha3 with values of length 32 /////\n'  
+    code = warn 
+  }
   code += 'sha3(' + a + ')'
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
@@ -338,8 +341,9 @@ Blockly.HLL['LLL_compare'] = function(block) {
   var code = ''
   if (op=='=') op = '==' 
   var code = a + ' ' + op + ' ' + b 
-  if (op=='sgt' || op=='slt') code = 
-    '///// WARNING signed comparison operators not supported yet in Serpent /////'
+  if (op=='sgt' || op=='slt') {
+    var code = '///// WARNING -- signed comparison operators not supported yet in Serpent /////' 
+  }
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -349,8 +353,9 @@ Blockly.HLL['LLL_bitlogic'] = function(block) {
   var op = block.getFieldValue('OP')
   var a = Blockly.HLL.valueToCode(block, 'A', Blockly.HLL.ORDER_NONE) || 0
   var b = Blockly.HLL.valueToCode(block, 'B', Blockly.HLL.ORDER_NONE) || 0
-  if (op == '~' || op == '^' ) 
+  if (op == '~' || op == '^' ) { 
     var code = '///// WARNING ~ and ^ bitwise operators not supported yet in Serpent /////'
+  }
   else
     var code = a + ' ' + op + ' ' + b 
   return [code, Blockly.HLL.ORDER_ATOMIC]
@@ -466,7 +471,7 @@ Blockly.HLL['LLL_compile_max'] = function(block) {
   var for_compiling = Blockly.HLL.statementToCode(block, 'CODE');
   var to_start = Blockly.HLL.valueToCode(block, 'TO_START', Blockly.HLL.ORDER_NONE) || 0
   var max_len = Blockly.HLL.valueToCode(block, 'MAX_LEN', Blockly.HLL.ORDER_NONE) || 0
-  code = '///// WARNING Serpent does not yet support inline compiling /////\n'
+  code = '///// WARNING -- Serpent does not yet support inline compiling /////\n'
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -474,7 +479,7 @@ Blockly.HLL['LLL_copy'] = function(block) {
   var op = block.getFieldValue('OP') || ''  
   var a = Blockly.HLL.valueToCode(block, 'DATA_START', Blockly.HLL.ORDER_NONE) || 0
   var b = Blockly.HLL.valueToCode(block, 'DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
-  code = '///// WARNING Serpent does not yet support copying code to memory /////\n'
+  code = '///// WARNING -- Serpent does not yet support copying code to memory /////\n'
   return code
 }
 

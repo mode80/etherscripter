@@ -45,6 +45,7 @@ function onChange() {
   if (window.panes==2) {
     if ($('#btn-LLL2').hasClass('active')) showLLL(window.panes)
     if ($('#btn-HLL2').hasClass('active')) showHLL(window.panes)
+    if ($('#btn-GLL2').hasClass('active')) showGLL(window.panes)
   }
 }
 
@@ -99,8 +100,6 @@ function showHLL(pane) {
   pane = pane || 1
   var content_HLL = $('#content-HLL')
   content_HLL.prependTo($('#pane'+pane))
-  // Generate LLL code and display it.
-  //showBLL() // this must be visible to get the code out 
   var code = Blockly.HLL.workspaceToCode();
   deactivateOthers(pane)
   content_HLL.css('z-index',9)
@@ -108,12 +107,21 @@ function showHLL(pane) {
   content_HLL.html(code)
 }
 
+function showGLL(pane) {
+  pane = pane || 1
+  var content_GLL = $('#content-GLL')
+  content_GLL.prependTo($('#pane'+pane))
+  var code = Blockly.GLL.workspaceToCode();
+  deactivateOthers(pane)
+  content_GLL.css('z-index',9)
+  $('#btn-GLL'+pane).addClass('active')
+  content_GLL.html(code)
+}
+
 function showLLL(pane) {
   pane = pane || 1
   var content_LLL = $('#content-LLL')
   content_LLL.prependTo($('#pane'+pane))
-  // Generate LLL code and display it.
-  //showBLL() // this must be visible to get the code out 
   var code = Blockly.LLL.workspaceToCode();
   deactivateOthers(pane)
   content_LLL.css('z-index',9)
@@ -124,9 +132,10 @@ function showLLL(pane) {
 function deactivateOthers(pane){
   pane = pane || 1
   $('#content-BLL').css('z-index', 5)
-  $('#content-LLL').css('z-index', 4)
-  $('#content-HLL').css('z-index', 3)
-  $('#content-XML').css('z-index', 2)
+  $('#content-HLL').css('z-index', 4)
+  $('#content-GLL').css('z-index', 3)
+  $('#content-LLL').css('z-index', 2)
+  $('#content-XML').css('z-index', 1)
   $('#pane'+pane+' .btn-show').removeClass('active')
 }
 
