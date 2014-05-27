@@ -23,7 +23,7 @@ Blockly.HLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.HLL.statementToCode(block, 'INIT');
   var body = Blockly.HLL.statementToCode(block, 'BODY');
-  return init + '\n\n' + body + '\n' 
+  return 'if !contract.storage["_run_before_"]:\n' + init + '  contract.storage["_run_before_"] = 1\nelse:\n' + body + '\n' 
 }
 
 //x

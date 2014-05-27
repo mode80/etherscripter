@@ -3,7 +3,6 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* add Mutan
 * add Serpent 
   . [data at temp spot _(var)x_] or [... _1_] not consistent between LLL and Serpent
   . what to do about init block indenting?
@@ -11,6 +10,7 @@ Visual smart contract builder for Ethereum
   x revisit mval sval store etc to ensure consistency between LLL & Serpent 
     in serpent x, y is '[0x0, mload, 0x20, mload]' (the dereferenced values of x, y)
     in LLL x,y is just 0x0, 0x20 (the memory addresses)
+* add Mutan?
 * add codeMirror
 * sample to test new POC-5 blocks
 * save functionality using appengine(?) cloud storage
