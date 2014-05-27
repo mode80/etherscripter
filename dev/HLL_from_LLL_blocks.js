@@ -12,7 +12,7 @@ goog.provide('Blockly.HLL.LLLblocks_generator');
 
 goog.require('Blockly.HLL');
 
-Blockly.HLL.MAX_GAS = '(tx.gas - 21)'
+Blockly.HLL.MAX_GAS = '(tx.gas - 100)'
 
 /////
 // POC-4 blocks

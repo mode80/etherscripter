@@ -8,6 +8,260 @@ function fnCommentToString(f) {
 
 window.samples = {
 
+mitch_jack_bet: fnCommentToString(function(){/*! 
+<xml>
+  <block type="LLL_init" id="79" x="18" y="19">
+    <statement name="INIT">
+      <block type="LLL_comment" id="80">
+        <field name="NOTE">Simple Bet v2</field>
+        <next>
+          <block type="LLL_comment" id="81">
+            <field name="NOTE">Mitch bets Jack that BTC will be over $2000 by Dec 5, 2014</field>
+            <next>
+              <block type="LLL_comment" id="82">
+                <field name="NOTE">This "init" code runs one time only when the contract is first created</field>
+                <next>
+                  <block type="LLL_comment" id="83">
+                    <field name="NOTE">These addresses are fake but you can see the format</field>
+                    <next>
+                      <block type="LLL_store" id="84" inline="true">
+                        <field name="POOL">sstore</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="85">
+                            <field name="VAL">Mitch</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_val" id="86">
+                            <field name="VAL">0xf4b7cc7faa866a2275972317598e7d936cfc9adc</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="LLL_store" id="87" inline="true">
+                            <field name="POOL">sstore</field>
+                            <value name="SPOT">
+                              <block type="LLL_val" id="88">
+                                <field name="VAL">Jack</field>
+                              </block>
+                            </value>
+                            <value name="VAL">
+                              <block type="LLL_val" id="89">
+                                <field name="VAL">0x52c5535efae9bd86e04c627aa5c716a392358c5e</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_comment" id="90">
+        <field name="NOTE">Grabbing outside data like the BTC price will be available eventually...</field>
+        <next>
+          <block type="LLL_comment" id="91">
+            <field name="NOTE">...by asking a "data feed" contract once the ecosystem evolves.</field>
+            <next>
+              <block type="LLL_comment" id="92">
+                <field name="NOTE">Until then, we can take the data supplied to the contract as the BTC price.</field>
+                <next>
+                  <block type="LLL_comment" id="93">
+                    <field name="NOTE">We use a temp slot here since we don't need to store it between runs.</field>
+                    <next>
+                      <block type="LLL_store" id="94" inline="true">
+                        <field name="POOL">mstore</field>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="95">
+                            <field name="VAL">BTC</field>
+                          </block>
+                        </value>
+                        <value name="VAL">
+                          <block type="LLL_contract" id="96">
+                            <field name="PROP">_input</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="LLL_comment" id="97">
+                            <field name="NOTE">We can use an 'OR' block here to avoid duplicating the code for each person</field>
+                            <next>
+                              <block type="LLL_when" id="98" inline="false">
+                                <field name="WORD">when</field>
+                                <value name="COND">
+                                  <block type="LLL_logic" id="99" inline="false">
+                                    <field name="OP">or</field>
+                                    <value name="A">
+                                      <block type="LLL_compare" id="100" inline="true">
+                                        <field name="OP">=</field>
+                                        <value name="A">
+                                          <block type="LLL_contract" id="101">
+                                            <field name="PROP">caller</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="LLL_load" id="102" inline="true">
+                                            <field name="POOL">sload</field>
+                                            <value name="SPOT">
+                                              <block type="LLL_val" id="103">
+                                                <field name="VAL">Mitch</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="LLL_compare" id="104" inline="true">
+                                        <field name="OP">=</field>
+                                        <value name="A">
+                                          <block type="LLL_contract" id="105">
+                                            <field name="PROP">caller</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="LLL_load" id="106" inline="true">
+                                            <field name="POOL">sload</field>
+                                            <value name="SPOT">
+                                              <block type="LLL_val" id="107">
+                                                <field name="VAL">Jack</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="THEN">
+                                  <block type="LLL_comment" id="108">
+                                    <field name="NOTE">block.timestamp will be seconds elapsed since 1970 GMT.</field>
+                                    <next>
+                                      <block type="LLL_comment" id="109">
+                                        <field name="NOTE">So for 12/04/2015 that's 1449187200 </field>
+                                        <next>
+                                          <block type="LLL_when" id="110" inline="false">
+                                            <field name="WORD">when</field>
+                                            <value name="COND">
+                                              <block type="LLL_compare" id="111" inline="true">
+                                                <field name="OP">&gt;</field>
+                                                <value name="A">
+                                                  <block type="LLL_blockinfo" id="112">
+                                                    <field name="PROP">timestamp</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="LLL_val" id="113">
+                                                    <field name="VAL">1449187200</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="THEN">
+                                              <block type="LLL_if" id="114" inline="false">
+                                                <value name="COND">
+                                                  <block type="LLL_compare" id="115" inline="true">
+                                                    <field name="OP">&gt;</field>
+                                                    <value name="A">
+                                                      <block type="LLL_load" id="116" inline="true">
+                                                        <field name="POOL">mload</field>
+                                                        <value name="SPOT">
+                                                          <block type="LLL_val" id="117">
+                                                            <field name="VAL">BTC</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="LLL_val" id="118">
+                                                        <field name="VAL">2000</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="THEN">
+                                                  <block type="LLL_comment" id="119">
+                                                    <field name="NOTE">If BTC is over 2000 pay off Mitch</field>
+                                                    <next>
+                                                      <block type="LLL_spend" id="120" inline="true">
+                                                        <value name="MONEY">
+                                                          <block type="LLL_contract" id="121">
+                                                            <field name="PROP">balance</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="TO">
+                                                          <block type="LLL_load" id="122" inline="true">
+                                                            <field name="POOL">sload</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_val" id="123">
+                                                                <field name="VAL">Mitch</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <statement name="ELSE">
+                                                  <block type="LLL_comment" id="124">
+                                                    <field name="NOTE">Otherwise it must not be over 2000 so pay off Jack</field>
+                                                    <next>
+                                                      <block type="LLL_spend" id="125" inline="true">
+                                                        <value name="MONEY">
+                                                          <block type="LLL_contract" id="126">
+                                                            <field name="PROP">balance</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="TO">
+                                                          <block type="LLL_load" id="127" inline="true">
+                                                            <field name="POOL">sload</field>
+                                                            <value name="SPOT">
+                                                              <block type="LLL_val" id="128">
+                                                                <field name="VAL">Jack</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="LLL_comment" id="129">
+                                    <field name="NOTE">We don't need explicit "stop" blocks since contract will stop when it reaches the end.</field>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
+
 coin_flip: fnCommentToString(function(){/*! 
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="LLL_init" id="501" x="34" y="40">
