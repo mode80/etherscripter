@@ -16,21 +16,21 @@
   BlocklyStorage.backupOnUnload();
 
 // wire splitter events
-    $('#splitter').mousedown(function(){ 
-      window.split_dragging = true 
-    })
-    $(document).mousemove(function(event){
-      if (window.split_dragging) {
-        $('#pane1').css('width',(event.pageX))
-        Blockly.fireUiEvent(window,'resize')
-      }
-    })
-    $('#splitter').mouseup(function(event){
-      if (window.split_dragging) {
-        window.split_dragging = false
-        Blockly.fireUiEvent(window,'resize')
-      }
-    })
+  $('#splitter').mousedown(function(){ 
+    window.split_dragging = true 
+  })
+  $(document).mousemove(function(event){
+    if (window.split_dragging) {
+      $('#pane1').css('width',(event.pageX))
+      Blockly.fireUiEvent(window,'resize')
+    }
+  })
+  $('#splitter').mouseup(function(event){
+    if (window.split_dragging) {
+      window.split_dragging = false
+      Blockly.fireUiEvent(window,'resize')
+    }
+  })
 
 // init other stuff
   $(function(){ // onready
@@ -39,18 +39,56 @@
 
     singlePane()
 
+    // codemirror setup 
+      // LLL
+      window.code_LLL = CodeMirror($('#pane1')[0],{
+        mode: 'commonlisp',
+        theme: 'neo',
+        readOnly: true,
+      });
+      $(code_LLL.getWrapperElement())
+        .attr('id','content-LLL')
+        .css('z-index','1')
+        .css('width','100%')
+        .css('margin','10px')
+        .css('height','10000px')
+      // HLL
+      window.code_HLL = CodeMirror($('#pane1')[0],{
+        mode: 'python',
+        theme: 'neo',
+        readOnly: true,
+      });
+      $(code_HLL.getWrapperElement())
+        .attr('id','content-HLL')
+        .css('z-index','1')
+        .css('width','100%')
+        .css('margin','10px')
+        .css('height','10000px')
+      // XML
+      window.code_XML = CodeMirror($('#pane1')[0],{
+        mode: 'xml',
+        theme: 'neo',
+        readOnly: false,
+      });
+      $(code_XML.getWrapperElement())
+        .attr('id','content-XML')
+        .css('z-index','1')
+        .css('width','100%')
+        .css('height','auto')
+      code_XML.on('change',function(){window.xml_dirty=true})
+
   })
 
 function onChange() {
   if (window.panes==2) {
     if ($('#btn-LLL2').hasClass('active')) showLLL(window.panes)
     if ($('#btn-HLL2').hasClass('active')) showHLL(window.panes)
-    if ($('#btn-GLL2').hasClass('active')) showGLL(window.panes)
+    // if ($('#btn-GLL2').hasClass('active')) showGLL(window.panes)
   }
 }
 
 function clearWorkspace() {
-  $('#content-XML').val('<xml></xml>')
+  window.code_XML.setValue('<xml></xml>')
   window.xml_dirty = true 
   showBLL(1)
 }
@@ -61,11 +99,10 @@ function showBLL(pane) {
   var content_BLL = $('#content-BLL')
   content_BLL.prependTo($('#pane'+pane))
   deactivateOthers(pane)
-  content_BLL.css('z-index',9)
+  content_BLL.css('z-index',9).show()
   $('#btn-BLL'+pane).addClass('active')
-  $('#content-BLL').show()
   // Paint blocks 
-  var xmlText = $('#content-XML').val()
+  var xmlText = window.code_XML.getValue()
   var xmlDom = null
   Blockly.fireUiEvent(window,'resize')
   if (window.xml_dirty) {
@@ -91,9 +128,9 @@ function showXML(pane) {
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom)
   deactivateOthers(pane)
   content_XML.css('z-index',9)
-  $('#btn-XML'+pane).addClass('active')
+  $('#btn-XML'+pane).addClass('active').show()
   $('#content-BLL').hide()
-  content_XML.val(xmlText)
+  window.code_XML.setValue(xmlText)
 }
 
 function showHLL(pane) {
@@ -102,21 +139,21 @@ function showHLL(pane) {
   content_HLL.prependTo($('#pane'+pane))
   var code = Blockly.HLL.workspaceToCode();
   deactivateOthers(pane)
-  content_HLL.css('z-index',9)
+  content_HLL.css('z-index',9).show()
   $('#btn-HLL'+pane).addClass('active')
-  content_HLL.html(code)
+  window.code_HLL.setValue(code)
 }
 
-function showGLL(pane) {
-  pane = pane || 1
-  var content_GLL = $('#content-GLL')
-  content_GLL.prependTo($('#pane'+pane))
-  var code = Blockly.GLL.workspaceToCode();
-  deactivateOthers(pane)
-  content_GLL.css('z-index',9)
-  $('#btn-GLL'+pane).addClass('active')
-  content_GLL.html(code)
-}
+// function showGLL(pane) {
+//   pane = pane || 1
+//   var content_GLL = $('#content-GLL')
+//   content_GLL.prependTo($('#pane'+pane))
+//   var code = Blockly.GLL.workspaceToCode();
+//   deactivateOthers(pane)
+//   content_GLL.css('z-index',9).show()
+//   $('#btn-GLL'+pane).addClass('active')
+//   content_GLL.html(code)
+// }
 
 function showLLL(pane) {
   pane = pane || 1
@@ -124,16 +161,24 @@ function showLLL(pane) {
   content_LLL.prependTo($('#pane'+pane))
   var code = Blockly.LLL.workspaceToCode();
   deactivateOthers(pane)
-  content_LLL.css('z-index',9)
+  content_LLL.css('z-index',9).show()
   $('#btn-LLL'+pane).addClass('active')
-  content_LLL.html(code)
+  window.code_LLL.setValue(code)
   }
+
+function loadSample(event) {
+  var sample_id = event.target.id
+  var xmlText = samples[sample_id] 
+  window.code_XML.setValue(xmlText)
+  window.xml_dirty = true
+  showBLL()
+}
 
 function deactivateOthers(pane){
   pane = pane || 1
   $('#content-BLL').css('z-index', 5)
   $('#content-HLL').css('z-index', 4)
-  $('#content-GLL').css('z-index', 3)
+  // $('#content-GLL').css('z-index', 3)
   $('#content-LLL').css('z-index', 2)
   $('#content-XML').css('z-index', 1)
   $('#pane'+pane+' .btn-show').removeClass('active')

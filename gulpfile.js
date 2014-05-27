@@ -15,8 +15,13 @@ gulp.task('min', function() {
     			'dev/LLL.js',
                 'dev/LLL_blocks.js',
                 'dev/LLL_from_LLL_blocks.js',
+                'dev/HLL.js',
+                'dev/HLL_from_LLL_blocks.js',
     			'dev/storage.js',
     			'dev/messages.js',
+                'dev/codemirror_LLL.js',
+                'dev/codemirror_XML.js',
+                'dev/codemirror_serpent.js',
     			'dev/etherscripter.js',
     			])
         .pipe(concat('my.min.js'))
@@ -27,6 +32,7 @@ gulp.task('min', function() {
 // Concat libraries
 gulp.task('concat', ['min'], function() {
     return gulp.src([
+                'dev/codemirror_4_2_0.min.js',
     			'dev/blockly_compressed.js',
                 'dev/jquery.min.js',
     			deploy_dir + '/my.min.js',

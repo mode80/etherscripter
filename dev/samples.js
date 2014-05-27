@@ -1,11 +1,3 @@
-function loadSample(event) {
-  var sample_id = event.target.id
-  document.getElementById('content-XML')
-    .value = samples[sample_id]
-  window.xml_dirty = true
-  showBLL()
-}
-
 function fnCommentToString(f) {
   // a super hacky workaround to get multiline strings in JS
   // takes a function and returns the innars /*! delimited thus */ as a big string 
@@ -14,7 +6,7 @@ function fnCommentToString(f) {
       replace(/\*\/[^\/]+$/, '');
 }
 
-var samples = {
+window.samples = {
 
 coin_flip: fnCommentToString(function(){/*! 
 <xml xmlns="http://www.w3.org/1999/xhtml">

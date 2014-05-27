@@ -234,7 +234,7 @@ Blockly.HLL['LLL_forloop'] = function(block) {
   first = first.trim()
   cond = cond.trim()
   after_each = after_each.trim()
-  return first + '\n' + 'while ' + cond + ':\n' + loop + '  ' + after_each + '\n' 
+  return first + '\n' + 'while ' + cond + ':\n' + loop + '  ' + after_each + '' 
 }
 
 //x
@@ -247,7 +247,7 @@ Blockly.HLL['LLL_whileloop'] = function(block) {
   if (is_until) {
     cond = '!(' + cond + ')'
   }
-  return 'while ' + cond + ':\n' + loop + '\n' 
+  return 'while ' + cond + ':\n' + loop + '' 
 }
 
 //////// 

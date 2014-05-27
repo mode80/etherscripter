@@ -3,12 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>EtherScripter - Visual smart-contract builder for Ethereum</title>
-<!--   <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/commonlisp/commonlisp.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/python/python.js"></script>
-  <link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.css" rel="stylesheet" >
-  <link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/theme/solarized.css" rel="stylesheet" >
- -->  <link href="flatly_bootstrap.min.css" rel="stylesheet" >
+  <link href="codemirror.css" rel="stylesheet" >
+  <link href="codemirror_neo.css" rel="stylesheet" >
+  <link href="flatly_bootstrap.min.css" rel="stylesheet" >
   <style>
     .code { font-family: monospace; font-size: 18px }
     .blocklySVG {border: 0px solid #ddd;}
@@ -39,10 +36,10 @@
             <li id="single-menu" class="active"><a onclick="singlePane()">Single Pane</a></li>
             <li id="split-menu"><a onclick="splitPane()">Split Pane</a></li>
             <li class="divider"></li> 
-            <li><a onclick="showBLL(1)">Show BLL</a></li>
+            <li><a onclick="showBLL(1)">Show Blocks</a></li>
             <li><a onclick="showXML(1)">Show XML</a></li>
-            <li><a onclick="showHLL(panes)">Show HLL</a></li>
-            <li><a onclick="showGLL(panes)">Show GLL</a></li>
+            <li><a onclick="showHLL(panes)">Show Serpent</a></li>
+            <!--<li><a onclick="showGLL(panes)">Show GLL</a></li> -->
             <li><a onclick="showLLL(panes)">Show LLL</a></li>
           </ul>
         </li>
@@ -124,26 +121,20 @@
   </div>
 
 <!-- Workspace -->
-  <div id="frame" style="position:relative; width: auto; margin-right:16px; margin-top:60px; height:1000vh">
+  <div id="frame" style="position:relative; width: auto; margin-right:16px; margin-top:60px; height:1000px">
     <div style="clear:both;"></div>
     <!-- Pane 1 -->
     <div id="pane1"style="position:relative; float:left; width:100%; height:10000px">
       <div id="content-BLL" 
         style="z-index:3; position:absolute; width:100%; height:10000px" ></div>
-      <textarea id="content-XML" wrap="off" class="code" onkeydown="window.xml_dirty=true" 
+<!--       <textarea id="content-XML" wrap="off" class="code" onkeydown="window.xml_dirty=true" 
         style="z-index:2; position:absolute; width:100%; height:10000px"></textarea>
-      <textarea id="content-LLL" readonly="readonly" wrap="off" class="code" 
-        style="z-index:1; position:absolute; width:100%; height:10000px;"></textarea>
-      <textarea id="content-HLL" readonly="readonly" wrap="off" class="code" 
-        style="z-index:1; position:absolute; width:100%; height:10000px;"></textarea>
-      <textarea id="content-GLL" readonly="readonly" wrap="off" class="code" 
-        style="z-index:1; position:absolute; width:100%; height:10000px;"></textarea>
-      <div class="btn-group-vertical" style="position:absolute; top:10px; right:10px ; z-index:10">
-        <li id="btn-BLL1" class="btn btn-default btn-show active" onclick="showBLL(1)" ontouchstart="showBLL(1)">Show BLL</li>
-        <li id="btn-HLL1" class="btn btn-default btn-show 1pane-only" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Show HLL</li>
-        <li id="btn-GLL1" class="btn btn-default btn-show 1pane-only" onclick="showGLL(panes)" ontouchstart="showGLL(panes)">Show GLL</li>
-        <li id="btn-LLL1" class="btn btn-default btn-show 1pane-only" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
-        <li id="btn-XML1" class="btn btn-default btn-show" onclick="showXML(1)" ontouchstart="showXML(1)">Show XML</li>
+ -->      <div class="btn-group-vertical" style="position:absolute; top:10px; right:10px ; z-index:10">
+        <li id="btn-BLL1" class="btn btn-default btn-show active" onclick="showBLL(1)" ontouchstart="showBLL(1)">Blocks</li>
+        <li id="btn-HLL1" class="btn btn-default btn-show 1pane-only" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Serpent</li>
+        <!--<li id="btn-GLL1" class="btn btn-default btn-show 1pane-only" onclick="showGLL(panes)" ontouchstart="showGLL(panes)">Show GLL</li>-->
+        <li id="btn-LLL1" class="btn btn-default btn-show 1pane-only" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">LLL</li>
+        <li id="btn-XML1" class="btn btn-default btn-show" onclick="showXML(1)" ontouchstart="showXML(1)">XML</li>
       </div>
     </div>
     <!-- Splitter -->
@@ -154,9 +145,9 @@
     <div id="pane2" class="pane2-item" 
       style="position:relative; overflow:hidden; height:10000px; display:none;" >
       <div class="btn-group-vertical pane2-item" style="position:absolute; top:10px; right:10px ; z-index:10">
-        <li id="btn-HLL2" class="btn btn-default btn-show active" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Show HLL</li>
-        <li id="btn-GLL2" class="btn btn-default btn-show" onclick="showGLL(panes)" ontouchstart="showGLL(panes)">Show GLL</li>
-        <li id="btn-LLL2" class="btn btn-default btn-show" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">Show LLL</li>
+        <li id="btn-HLL2" class="btn btn-default btn-show active" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Serpent</li>
+        <!--<li id="btn-GLL2" class="btn btn-default btn-show" onclick="showGLL(panes)" ontouchstart="showGLL(panes)">Show GLL</li>-->
+        <li id="btn-LLL2" class="btn btn-default btn-show" onclick="showLLL(panes)" ontouchstart="showLLL(panes)">LLL</li>
       </div>
     </div>
   </div>
@@ -204,13 +195,17 @@
   <script src="blockly_compressed.js"></script>
   <script src="messages.js"></script>
   <script src="LLL.js"></script>
-  <script src="HLL.js"></script>
-  <script src="GLL.js"></script>
   <script src="LLL_blocks.js"></script>
   <script src="LLL_from_LLL_blocks.js"></script>
+  <script src="HLL.js"></script>
   <script src="HLL_from_LLL_blocks.js"></script>
-  <script src="GLL_from_LLL_blocks.js"></script>
+  <!--<script src="GLL.js"></script>-->
+  <!--<script src="GLL_from_LLL_blocks.js"></script>-->
   <script src="storage.js"></script>
+  <script src="codemirror_4_2_0.min.js"></script>
+  <script src="codemirror_LLL.js"></script>
+  <script src="codemirror_XML.js"></script>
+  <script src="codemirror_serpent.js"></script>
   <script src="etherscripter.js"></script>
   <script src="samples.js"></script>
   <script src="bootstrap.min.js"></script>
