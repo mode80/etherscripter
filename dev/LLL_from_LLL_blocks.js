@@ -29,9 +29,9 @@ Blockly.LLL['LLL_compile_max'] = function(block) {
   var max_len = Blockly.LLL.valueToCode(block, 'MAX_LEN', Blockly.LLL.ORDER_NONE) || 0
   var code
   if (max_len == 0)
-    code = '(lll\n seq( \n' + for_compiling + ' )\n ' + to_start + '\n)' 
+    code = '(lll\n (seq \n' + for_compiling + ' )\n ' + to_start + '\n)' 
   else
-    code = '(lll\n seq( \n' + for_compiling + ' )\n ' + to_start + '\n ' + max_len + '\n)' 
+    code = '(lll\n (seq \n' + for_compiling + ' )\n ' + to_start + '\n ' + max_len + '\n)' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
@@ -51,7 +51,7 @@ Blockly.LLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.LLL.statementToCode(block, 'INIT');
   var body = Blockly.LLL.statementToCode(block, 'BODY');
-  return init + '  (return 0 (lll seq( ;; START BODY \n\n' + body + '\n  ) 0)) ;; END BODY' 
+  return init + '  (return 0 (lll (seq ;; START BODY \n\n' + body + '\n  ) 0)) ;; END BODY' 
 }
 
 Blockly.LLL['LLL_byte'] = function(block) {
@@ -262,7 +262,7 @@ Blockly.LLL['LLL_forloop'] = function(block) {
   first = first.trim()
   cond = cond.trim()
   after_each = after_each.trim()
-  return '(for ' + first + ' ' + cond + ' ' + after_each + '\n seq( \n' + loop + ' )  \n)\n'
+  return '(for ' + first + ' ' + cond + ' ' + after_each + '\n (seq \n' + loop + ' )  \n)\n'
 }
 
 Blockly.LLL['LLL_whileloop'] = function(block) {
@@ -275,7 +275,7 @@ Blockly.LLL['LLL_whileloop'] = function(block) {
   if (is_until) {
     cond = '(not ' + cond + ' )';
   }
-  return '(for ' + '()' + ' ' + cond + ' ()\n seq( \n' + loop + ' )\n)\n'
+  return '(for ' + '()' + ' ' + cond + ' ()\n (seq \n' + loop + ' )\n)\n'
 }
 
 //////// 
@@ -287,7 +287,7 @@ Blockly.LLL['LLL_if'] = function(block) {
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE) || 1
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
   var else_do = Blockly.LLL.statementToCode(block, 'ELSE');
-  var code = '(if ' + cond + '\n seq( \n' + then_do + ' )\n seq( \n' + else_do + ' )\n)\n';
+  var code = '(if ' + cond + '\n (seq \n' + then_do + ' )\n (seq \n' + else_do + ' )\n)\n';
   return code;
 }
 
@@ -296,7 +296,7 @@ Blockly.LLL['LLL_when'] = function(block) {
   var word = block.getFieldValue('WORD') 
   var cond = Blockly.LLL.valueToCode(block, 'COND', Blockly.LLL.ORDER_NONE) || 1
   var then_do = Blockly.LLL.statementToCode(block, 'THEN');
-  var code = '(' + word + ' '+ cond + '\n seq( \n' + then_do + ' )\n)\n';
+  var code = '(' + word + ' '+ cond + '\n (seq \n' + then_do + ' )\n)\n';
   return code;
 }
 
