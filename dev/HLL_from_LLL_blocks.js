@@ -23,10 +23,10 @@ Blockly.HLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.HLL.statementToCode(block, 'INIT');
   var body = Blockly.HLL.statementToCode(block, 'BODY');
-  return 'if !contract.storage["_run_before_"]:\n' + init + '  contract.storage["_run_before_"] = 1\nelse:\n' + body + '\n' 
+  return 'if !contract.storage["_has_run_"]:\n' + init + '  contract.storage["_has_run_"] = 1\nelse:\n' + body + '\n' 
 }
 
-//x
+//x byte
 Blockly.HLL['LLL_byte'] = function(block) {
   // returns the byte at postion BYTE in DATA 
   var order = Blockly.HLL.ORDER_NONE;
@@ -36,7 +36,7 @@ Blockly.HLL['LLL_byte'] = function(block) {
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
-//x
+//x byte
 Blockly.HLL['LLL_mstore'] = function(block) {
   // mstore statement
   var order = Blockly.HLL.ORDER_NONE;
@@ -58,7 +58,7 @@ Blockly.HLL['LLL_sstore'] = function(block) {
   return code + '\n'
 }
 
-//x
+//x byte
 Blockly.HLL['LLL_mval'] = function(block) {
   // gets value from a memory spot 
   var order = Blockly.HLL.ORDER_NONE;
@@ -78,9 +78,8 @@ Blockly.HLL['LLL_sval'] = function(block) {
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
-//x
+//x remove?
 Blockly.HLL['LLL_textval'] = function(block) {
-  // gets value from a memory spot 
   var order = Blockly.HLL.ORDER_NONE;
   var val = block.getFieldValue('VAL') || 0  
   var code = '"' + val + '"'
@@ -90,7 +89,7 @@ Blockly.HLL['LLL_textval'] = function(block) {
 //x
 Blockly.HLL['LLL_comment'] = function(block) {
   // a LLL comment  
-  return '// ' + block.getFieldValue('NOTE') + '\n' 
+  return '# ' + block.getFieldValue('NOTE') + '\n' 
 }
 
 
@@ -130,7 +129,7 @@ Blockly.HLL['LLL_hash'] = function(block) {
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
-//x // byte
+//x // byte -- currently unusable in Serpent without an array or "value group" block 
 Blockly.HLL['LLL_call'] = function(block) {
   // call 
   var op = 'msg' 
@@ -154,7 +153,7 @@ Blockly.HLL['LLL_call'] = function(block) {
   return code
 }
 
-//x // byte
+//x // byte -- currently unusable in Serpent without an array or "value group" block
 Blockly.HLL['LLL_return'] = function(block) {
   // return 
   var op = 'return' 
@@ -201,7 +200,7 @@ Blockly.HLL['LLL_tx'] = function(block) {
 
 //x
 Blockly.HLL['LLL_contract'] = function(block) {
-  // so called "closure" (contract) related values 
+  // contract related values 
   var code
   var val = block.getFieldValue('PROP');
 

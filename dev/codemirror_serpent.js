@@ -324,7 +324,7 @@
           return scope.offset - (closing ? conf.indentUnit : 0);
       },
 
-      lineComment: "/",
+      lineComment: "#",
       fold: "indent"
     };
     return external;
