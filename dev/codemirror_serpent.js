@@ -103,7 +103,7 @@
       var ch = stream.peek();
 
       // Handle Comments
-      if (ch == "/") {
+      if (ch == "#") {
         stream.skipToEnd();
         return "comment";
       }

@@ -348,7 +348,7 @@ Blockly.Blocks['LLL_contract'] = {
 
 Blockly.Blocks['LLL_hash'] = {
   init: function() {
-    this.setTooltip('Provides a "fingerprint" for the data in temp storage from the given start spot with the given length. Identical data always gives the same fingerprint.')
+    this.setTooltip('Provides a "fingerprint" for the data in temp storage from the given start spot with the given length (in bytes). Identical data always gives the same fingerprint.')
     this.setColour(MATH_COLOR);
     this.setOutput(true)
     this.appendDummyInput()

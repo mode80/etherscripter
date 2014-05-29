@@ -158,11 +158,8 @@ Blockly.HLL['LLL_hash'] = function(block) {
   var code = ''
   var a = Blockly.HLL.valueToCode(block, 'DATA_START', Blockly.HLL.ORDER_NONE) || 0
   var b = Blockly.HLL.valueToCode(block, 'DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
-  if (b!== 32) {
-    var warn = '///// WARNING -- Serpent can only sha3 with values of length 32 /////\n'  
-    code = warn 
-  }
-  code += 'sha3(' + a + ')'
+  b = '(' + b + ' / 32) ' // serpent expects length in slots
+  code += 'sha3(' + a + ', ' + b + ')'
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -404,12 +401,6 @@ Blockly.HLL['LLL_val'] = function(block) {
   var val = block.getFieldValue('VAL') || 0  
   var code = Blockly.HLL.smartVal(val) 
   return [code, Blockly.HLL.ORDER_ATOMIC]
-}
-
-//x
-Blockly.HLL['LLL_comment'] = function(block) {
-  // a LLL comment  
-  return '// ' + block.getFieldValue('NOTE') + '\n' 
 }
 
 //x

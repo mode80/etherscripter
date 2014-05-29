@@ -115,13 +115,6 @@ Blockly.LLL['LLL_textval'] = function(block) {
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
-
-Blockly.LLL['LLL_comment'] = function(block) {
-  // a LLL comment  
-  return ';; ' + block.getFieldValue('NOTE') + '\n' 
-}
-
-
 Blockly.LLL['LLL_spend'] = function(block) {
   // spend statement (a stripped version of call that just spends)
   var order = Blockly.LLL.ORDER_NONE;
