@@ -82,8 +82,8 @@ mitch_jack_bet: fnCommentToString(function(){/*!
                           </block>
                         </value>
                         <value name="VAL">
-                          <block type="LLL_contract" id="96">
-                            <field name="PROP">_input</field>
+                          <block type="LLL_input" id="96">
+                            <field name="INDEX">0</field>
                           </block>
                         </value>
                         <next>
@@ -677,7 +677,7 @@ last_will: fnCommentToString(function(){/*!
                                                               </block>
                                                             </value>
                                                             <value name="VAL">
-                                                              <block type="LLL_input" id="147" inline="true">
+                                                              <block type="LLL_thinput" id="147" inline="true">
                                                                 <value name="ORDINAL">
                                                                   <block type="LLL_mval" id="148">
                                                                     <field name="VAL">i</field>
@@ -997,8 +997,8 @@ marriage: fnCommentToString(function(){/*!
                       </block>
                     </value>
                     <value name="VAL">
-                      <block type="LLL_contract" id="298">
-                        <field name="PROP">_input</field>
+                      <block type="LLL_input" id="298">
+                        <field name="INDEX">0</field>
                       </block>
                     </value>
                     <next>
@@ -1080,8 +1080,8 @@ marriage: fnCommentToString(function(){/*!
                       <block type="LLL_compare" id="314" inline="true">
                         <field name="OP">=</field>
                         <value name="A">
-                          <block type="LLL_contract" id="315">
-                            <field name="PROP">_input</field>
+                          <block type="LLL_input" id="315">
+                            <field name="INDEX">0</field>
                           </block>
                         </value>
                         <value name="B">
@@ -1201,8 +1201,8 @@ marriage: fnCommentToString(function(){/*!
                               <block type="LLL_compare" id="339" inline="true">
                                 <field name="OP">=</field>
                                 <value name="A">
-                                  <block type="LLL_contract" id="340">
-                                    <field name="PROP">_input</field>
+                                  <block type="LLL_input" id="340">
+                                    <field name="INDEX">0</field>
                                   </block>
                                 </value>
                                 <value name="B">
@@ -1244,7 +1244,7 @@ marriage: fnCommentToString(function(){/*!
                                           <block type="LLL_compare" id="349" inline="true">
                                             <field name="OP">=</field>
                                             <value name="A">
-                                              <block type="LLL_input" id="411" inline="true">
+                                              <block type="LLL_thinput" id="411" inline="true">
                                                 <value name="ORDINAL">
                                                   <block type="LLL_val" id="412">
                                                     <field name="VAL">2</field>
@@ -1268,7 +1268,7 @@ marriage: fnCommentToString(function(){/*!
                                           <block type="LLL_compare" id="354" inline="true">
                                             <field name="OP">=</field>
                                             <value name="A">
-                                              <block type="LLL_input" id="413" inline="true">
+                                              <block type="LLL_thinput" id="413" inline="true">
                                                 <value name="ORDINAL">
                                                   <block type="LLL_val" id="414">
                                                     <field name="VAL">3</field>
@@ -1333,7 +1333,7 @@ marriage: fnCommentToString(function(){/*!
                                           </block>
                                         </value>
                                         <value name="VAL">
-                                          <block type="LLL_input" id="415" inline="true">
+                                          <block type="LLL_thinput" id="415" inline="true">
                                             <value name="ORDINAL">
                                               <block type="LLL_val" id="416">
                                                 <field name="VAL">2</field>
@@ -1350,7 +1350,7 @@ marriage: fnCommentToString(function(){/*!
                                               </block>
                                             </value>
                                             <value name="VAL">
-                                              <block type="LLL_input" id="417" inline="true">
+                                              <block type="LLL_thinput" id="417" inline="true">
                                                 <value name="ORDINAL">
                                                   <block type="LLL_val" id="418">
                                                     <field name="VAL">3</field>
@@ -1391,8 +1391,8 @@ marriage: fnCommentToString(function(){/*!
                                       <block type="LLL_compare" id="379" inline="true">
                                         <field name="OP">=</field>
                                         <value name="A">
-                                          <block type="LLL_contract" id="380">
-                                            <field name="PROP">_input</field>
+                                          <block type="LLL_input" id="380">
+                                            <field name="INDEX">0</field>
                                           </block>
                                         </value>
                                         <value name="B">
@@ -1635,8 +1635,8 @@ toothfairy: fnCommentToString(function(){/*!
                   </block>
                 </value>
                 <value name="VAL">
-                  <block type="LLL_contract" id="66">
-                    <field name="PROP">_input</field>
+                  <block type="LLL_input" id="66">
+                    <field name="INDEX">0</field>
                   </block>
                 </value>
               </block>
@@ -1874,8 +1874,8 @@ insurance: fnCommentToString(function(){/*!
                           </block>
                         </value>
                         <value name="VAL">
-                          <block type="LLL_contract" id="394">
-                            <field name="PROP">_input</field>
+                          <block type="LLL_input" id="394">
+                            <field name="INDEX">0</field>
                           </block>
                         </value>
                       </block>
@@ -2018,8 +2018,8 @@ insurance: fnCommentToString(function(){/*!
                                         <statement name="THEN">
                                           <block type="LLL_spend" id="389" inline="true">
                                             <value name="MONEY">
-                                              <block type="LLL_contract" id="395">
-                                                <field name="PROP">_input</field>
+                                              <block type="LLL_input" id="395">
+                                                <field name="INDEX">0</field>
                                               </block>
                                             </value>
                                             <value name="TO">
@@ -2089,8 +2089,8 @@ vote_registry: fnCommentToString(function(){/*!
           <block type="LLL_mstore" id="561" inline="true">
             <field name="SPOT">VOTED_ITEM</field>
             <value name="VAL">
-              <block type="LLL_contract" id="562">
-                <field name="PROP">_input</field>
+              <block type="LLL_input" id="562">
+                <field name="INDEX">0</field>
               </block>
             </value>
             <next>
@@ -2726,8 +2726,8 @@ rock_paper_scissors: fnCommentToString(function(){/*!
               </block>
             </value>
             <value name="VAL">
-              <block type="LLL_contract" id="655">
-                <field name="PROP">_input</field>
+              <block type="LLL_input" id="655">
+                <field name="INDEX">0</field>
               </block>
             </value>
             <next>

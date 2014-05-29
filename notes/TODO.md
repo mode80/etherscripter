@@ -4,6 +4,7 @@ Visual smart contract builder for Ethereum
 
 ### TODO
 * dropdown version of the "th input" block
+* serpent sha3 variable length
 * make call/return usable in Serpent 
   with[reserve __ spots at new temp spot ___]
       [___ spots past __ =]

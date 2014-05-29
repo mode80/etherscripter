@@ -33,6 +33,30 @@ var UNUSED_COLOR = 160
 
 Blockly.Blocks['LLL_input'] = {
   init: function() {
+    var ordinals =
+        [
+         ['1st', '0'],
+         ['2nd', '1'],
+         ['3rd', '2'],
+         ['4th', '3'],
+         ['5th', '4'],
+         ['6th', '5'],
+         ['7th', '6'],
+         ['8th', '7'],
+         ['9th', '8'],
+        ]
+    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: Here the first item is "1st" not 0)')
+    this.setColour(VALUE_COLOR)
+    this.setOutput(true)
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(ordinals), 'INDEX')
+      .appendField('input')
+    this.setInputsInline(true)
+  }
+}
+
+Blockly.Blocks['LLL_thinput'] = {
+  init: function() {
     this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: Here the first item is 1 not 0)')
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
@@ -183,10 +207,8 @@ Blockly.Blocks['LLL_mstore'] = {
   init: function() {
     this.setTooltip('Labels a temporary result. This stores the result at a temp spot identified by the @-prefixed label. This is a compact form of the [in temp spot __ put __] block. Data in a temp spot is cleared after the contract stops running this time.')
     this.setColour(VAR_COLOR)
-    this.appendDummyInput()
-      .appendField('')
-      .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
     this.appendValueInput('VAL')
+      .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
       .appendField('=')
     this.setInputsInline(true)
     this.setPreviousStatement(true)
@@ -365,7 +387,7 @@ Blockly.Blocks['LLL_prefixop'] = {
     this.appendValueInput('A')
       .setCheck('Number')
       .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP')
-    this.setInputsInline(true)
+    this.setInputsInline(false)
   }
 }
 
@@ -637,13 +659,12 @@ Blockly.Blocks['LLL_load'] = {
     // ['input slot', '_input_load_slots'],
     ['calldata spot', 'calldataload']]
     this.setColour(VAR_COLOR);
-    this.appendDummyInput()
+    this.appendValueInput('SPOT')
       .appendField('data at')
       .appendField(new Blockly.FieldDropdown(PLACES), 'POOL')
-    this.appendValueInput('SPOT')
       .setCheck('Number')
     this.setOutput(true);
-    this.setInputsInline(true);
+    this.setInputsInline(false);
   }
 };
 

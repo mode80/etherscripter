@@ -59,14 +59,14 @@
             <li onclick="toggleTool(event)" id="contract"><a>contract info</a></li>
             <li onclick="toggleTool(event)" id="tx"><a>transaction info</a></li>
             <li onclick="toggleTool(event)" id="input"><a>input</a></li>
+            <li onclick="toggleTool(event)" id="thinput"><a>open input</a></li>
             <li onclick="toggleTool(event)" id="math"><a>math</a></li>
             <li onclick="toggleTool(event)" id="compare"><a>compare</a></li>
             <li onclick="toggleTool(event)" id="logic"><a>logic</a></li>
-            <li onclick="toggleTool(event)" id="bitlogic"><a>bit logic</a></li>
             <li onclick="toggleTool(event)" id="store"><a>store</a></li>
             <li onclick="toggleTool(event)" id="load"><a>load</a></li>
-            <li onclick="toggleTool(event)" id="mstore"><a>memory store</a></li>
-            <li onclick="toggleTool(event)" id="mval"><a>memory value</a></li>
+            <li onclick="toggleTool(event)" id="mstore"><a>temp store</a></li>
+            <li onclick="toggleTool(event)" id="mval"><a>temp value</a></li>
             <li onclick="toggleTool(event)" id="sstore"><a>storage store</a></li>
             <li onclick="toggleTool(event)" id="sval"><a>storage value</a></li>
             <li onclick="toggleTool(event)" id="spend"><a>spend</a></li>
@@ -76,6 +76,7 @@
             <li onclick="toggleTool(event)" id="if"><a>if</a></li>
             <li onclick="toggleTool(event)" id="whileloop"><a>while loop</a></li>
             <li onclick="toggleTool(event)" id="init"><a>init</a></li>
+            <li onclick="toggleTool(event)" id="bitlogic"><a>bit logic</a></li>
             <li onclick="toggleTool(event)" id="prefixop"><a>prefix</a></li>
             <li onclick="toggleTool(event)" id="byte"><a>byte</a></li>
             <li onclick="toggleTool(event)" id="return"><a>reply</a></li>
@@ -161,9 +162,9 @@
     <block type="LLL_contract"></block>
     <block type="LLL_tx"></block>
     <block type="LLL_input"></block>
+    <block type="LLL_thinput"></block>
     <block type="LLL_math"></block>
     <block type="LLL_compare"></block>
-    <block type="LLL_bitlogic"></block>
     <block type="LLL_logic"></block>
     <block type="LLL_store"></block>
     <block type="LLL_load"></block>
@@ -179,6 +180,7 @@
     <block type="LLL_whileloop"></block>
     <block type="LLL_forloop"></block>
     <block type="LLL_init"></block>
+    <block type="LLL_bitlogic"></block>
     <block type="LLL_prefixop"></block>
     <block type="LLL_byte"></block>
     <block type="LLL_return"></block>

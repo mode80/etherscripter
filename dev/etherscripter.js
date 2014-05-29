@@ -228,7 +228,7 @@ function allToolsOn(event){
   $('#toolboxmenu>li').addClass('active')  
   $('#toolbox block').attr('active','true')
   Blockly.updateToolbox(activeToolboxString())
-  $('#all-on, #typical-on, #minimal-on #none-on').removeClass('active')
+  $('#all-on, #typical-on, #minimal-on, #none-on').removeClass('active')
   $('#' + event.target.className + '-on').addClass('active')
 }
 

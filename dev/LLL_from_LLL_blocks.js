@@ -17,7 +17,13 @@ goog.require('Blockly.LLL');
 /////
 
 Blockly.LLL['LLL_input'] = function(block) {
-  var ordinal = Blockly.LLL.valueToCode(block, 'ORDINAL', Blockly.LLL.ORDER_NONE) || 1
+  var index = block.getFieldValue('INDEX') || 0
+  var code = '(calldataload ' + index + ')' 
+  return [code, Blockly.LLL.ORDER_ATOMIC]
+}
+
+Blockly.LLL['LLL_thinput'] = function(block) {
+  var ordinal = Blockly.LLL.valueToCode(block, 'ORDINAL', Blockly.LLL.ORDER_NONE) || 0
   var index = '(* (- ' + ordinal + ' 1) 32)'
   var code = '(calldataload ' + index + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC]

@@ -15,6 +15,43 @@ goog.require('Blockly.HLL');
 Blockly.HLL.MAX_GAS = '(tx.gas - 100)'
 
 /////
+// New POC-5 blocks
+/////
+
+//x
+Blockly.HLL['LLL_input'] = function(block) {
+  var index = block.getFieldValue('INDEX') || 0
+  var code = 'msg.data[' + index + ']' 
+  return [code, Blockly.HLL.ORDER_ATOMIC]
+}
+
+//x
+Blockly.HLL['LLL_thinput'] = function(block) {
+  var ordinal = Blockly.HLL.valueToCode(block, 'ORDINAL', Blockly.HLL.ORDER_NONE) || 1
+  var index = '(' + ordinal + ' - 1)'
+  var code = 'msg.data[' + index + ']' 
+  return [code, Blockly.HLL.ORDER_ATOMIC]
+}
+
+//x // bytes
+Blockly.HLL['LLL_compile_max'] = function(block) {
+  var for_compiling = Blockly.HLL.statementToCode(block, 'CODE');
+  var to_start = Blockly.HLL.valueToCode(block, 'TO_START', Blockly.HLL.ORDER_NONE) || 0
+  var max_len = Blockly.HLL.valueToCode(block, 'MAX_LEN', Blockly.HLL.ORDER_NONE) || 0
+  code = '///// WARNING -- Serpent does not yet support inline compiling /////\n'
+  return [code, Blockly.HLL.ORDER_ATOMIC]
+}
+
+//x // bytes 
+Blockly.HLL['LLL_copy'] = function(block) {
+  var op = block.getFieldValue('OP') || ''  
+  var a = Blockly.HLL.valueToCode(block, 'DATA_START', Blockly.HLL.ORDER_NONE) || 0
+  var b = Blockly.HLL.valueToCode(block, 'DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
+  code = '///// WARNING -- Serpent does not yet support copying code to memory /////\n'
+  return code
+}
+
+/////
 // POC-4 blocks
 /////
 
@@ -23,7 +60,7 @@ Blockly.HLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.HLL.statementToCode(block, 'INIT');
   var body = Blockly.HLL.statementToCode(block, 'BODY');
-  return 'if !contract.storage["_has_run_"]:\n' + init + '  contract.storage["_has_run_"] = 1\nelse:\n' + body + '\n' 
+  return 'if !contract.storage["_CREATED_"]:\n' + init + '  contract.storage["_CREATED_"] = 1\nelse:\n' + body + '\n' 
 }
 
 //x byte
@@ -452,33 +489,5 @@ Blockly.HLL['LLL_store'] = function(block) {
     var code = 'contract.storage[' + spot + '] = ' + val + '\n'
   }
   return code 
-}
-
-/////
-// New POC-5 blocks
-/////
-
-//x
-Blockly.HLL['LLL_input'] = function(block) {
-  var ordinal = Blockly.HLL.valueToCode(block, 'ORDINAL', Blockly.HLL.ORDER_NONE) || 1
-  var index = '(' + ordinal + ' - 1)'
-  var code = 'msg.data[' + index + ']' 
-  return [code, Blockly.HLL.ORDER_ATOMIC]
-}
-
-Blockly.HLL['LLL_compile_max'] = function(block) {
-  var for_compiling = Blockly.HLL.statementToCode(block, 'CODE');
-  var to_start = Blockly.HLL.valueToCode(block, 'TO_START', Blockly.HLL.ORDER_NONE) || 0
-  var max_len = Blockly.HLL.valueToCode(block, 'MAX_LEN', Blockly.HLL.ORDER_NONE) || 0
-  code = '///// WARNING -- Serpent does not yet support inline compiling /////\n'
-  return [code, Blockly.HLL.ORDER_ATOMIC]
-}
-
-Blockly.HLL['LLL_copy'] = function(block) {
-  var op = block.getFieldValue('OP') || ''  
-  var a = Blockly.HLL.valueToCode(block, 'DATA_START', Blockly.HLL.ORDER_NONE) || 0
-  var b = Blockly.HLL.valueToCode(block, 'DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
-  code = '///// WARNING -- Serpent does not yet support copying code to memory /////\n'
-  return code
 }
 
