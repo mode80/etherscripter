@@ -3,20 +3,18 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
-* serpent sha3 variable length
-* make call/return usable in Serpent 
-  with[reserve __ spots at new temp spot ___]
-      [___ spots past __ =]
-      [___ spots past __]
+* switch to slots and slotlengths 
+* make call/return usable in Serpent with
+      [reserve __ 
+       temp spots at __]
+      [data at __ spots 
+       past temp spot __ =]
+      [data at __ spots 
+       past temp spot __]
 * pull input out of "data at ___ spot" with [__th input] and (maybe) [__bytes starting at byte ___ of _/memory/input_]
 * erradicate bytes and target the Serpent subset?
-* add Serpent 
-  . [data at temp spot _(var)x_] or [... _1_] not consistent between LLL and Serpent
-  . check order of operations are correct in block combos
-  x what to do about init block indenting?
-  x revisit mval sval store etc to ensure consistency between LLL & Serpent 
-    in serpent x, y is '[0x0, mload, 0x20, mload]' (the dereferenced values of x, y)
-    in LLL x,y is just 0x0, 0x20 (the memory addresses)
+* [data at temp spot _(var)x_] or [... _1_] not consistent between LLL and Serpent
+* check order of operations are correct in block combos
 * add Mutan? would need to post-process in order to add var definitions
 * sample to test new POC-5 blocks
 * save functionality using appengine(?) cloud storage (gitlab?)

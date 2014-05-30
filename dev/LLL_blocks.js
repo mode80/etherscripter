@@ -31,6 +31,55 @@ var UNUSED_COLOR = 160
 // POC-5 blocks 
 //
 
+Blockly.Blocks['LLL_reserve'] = {
+  init: function() {
+    // var POOLS = 
+    // [['temp', 'temp'],
+    // ['save', 'save'] ]
+    this.setTooltip('Reserves the given number of consecutive temp spots, starting at the given label. These can later be accessed by number.')
+    this.setColour(VAR_COLOR);
+    this.appendValueInput('LEN')
+      .appendField('reserve')
+    this.appendValueInput('SPOT')
+      // .appendField(new Blockly.FieldDropdown(POOLS), 'POOL')
+      .appendField('spots at')
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_array_get'] = {
+  init: function() {
+    this.setTooltip('Gets a numbered data item beyond the given temp spot.')
+    this.setColour(VAR_COLOR);
+    this.appendValueInput('INDEX')
+      .appendField('data')
+    this.appendValueInput('SPOT')
+      .appendField('spots past ')
+    this.setOutput(true);
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks['LLL_array_set'] = {
+  init: function() {
+    this.setTooltip('Sets a numbered data item beyond the given temp spot. These spots should be reserved first with the [reserve..] block')
+    this.setColour(VAR_COLOR);
+    this.appendValueInput('INDEX')
+      .appendField('data')
+    this.appendValueInput('SPOT')
+      .appendField('spots past ')
+    this.appendValueInput('VAL')
+      .appendField('=')
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setInputsInline(true);
+  }
+};
+
+
 Blockly.Blocks['LLL_input'] = {
   init: function() {
     var ordinals =

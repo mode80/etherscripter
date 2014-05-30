@@ -19,6 +19,49 @@ Blockly.HLL.MAX_GAS = '(tx.gas - 100)'
 /////
 
 //x
+Blockly.HLL['LLL_reserve'] = function(block) {
+  var order = Blockly.HLL.ORDER_NONE;
+  var len = Blockly.HLL.valueToCode(block,'LEN', order) || 0 
+  var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0  
+  var code
+  if (isNaN(spot))
+    spot = spot.replace(/"/g,'') // unquote text spots to make use of autoassigned memory addresses  
+  else
+    spot = 'x' + spot  
+  code = spot + ' = array(' + len + ')\n' 
+  return code
+}
+
+//x
+Blockly.HLL['LLL_array_get'] = function(block) {
+  var order = Blockly.HLL.ORDER_NONE;
+  var index = Blockly.HLL.valueToCode(block,'INDEX', order) || 0 
+  var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0  
+  var code
+  if (isNaN(spot))
+    spot = spot.replace(/"/g,'') // unquote text spots to make use of autoassigned memory addresses  
+  else
+    spot = 'x' + spot  
+  code = spot + '[' + index + ']' 
+  return [code, Blockly.HLL.ORDER_ATOMIC]
+}
+
+//x
+Blockly.HLL['LLL_array_set'] = function(block) {
+  var order = Blockly.HLL.ORDER_NONE;
+  var index = Blockly.HLL.valueToCode(block,'INDEX', order) || 0 
+  var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0  
+  var val = Blockly.HLL.valueToCode(block,'VAL', order) || 0  
+  var code
+  if (isNaN(spot))
+    spot = spot.replace(/"/g,'') // unquote text spots to make use of autoassigned memory addresses  
+  else
+    spot = 'x' + spot  
+  code = spot + '[' + index + '] = ' + val + '\n' 
+  return code
+}
+
+//x
 Blockly.HLL['LLL_input'] = function(block) {
   var index = block.getFieldValue('INDEX') || 0
   var code = 'msg.data[' + index + ']' 
@@ -60,7 +103,7 @@ Blockly.HLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.HLL.statementToCode(block, 'INIT');
   var body = Blockly.HLL.statementToCode(block, 'BODY');
-  return 'if !contract.storage["_CREATED_"]:\n' + init + '  contract.storage["_CREATED_"] = 1\nelse:\n' + body + '\n' 
+  return 'if not (contract.storage["_CREATED_"]):\n' + init + '  contract.storage["_CREATED_"] = 1\nelse:\n' + body + '\n' 
 }
 
 //x byte
@@ -148,7 +191,7 @@ Blockly.HLL['LLL_prefixop'] = function(block) {
   var op = block.getFieldValue('OP')
   var a = Blockly.HLL.valueToCode(block, 'A', Blockly.HLL.ORDER_NONE)
   if (op=='neg') code = '-(' + a + ')'
-  if (op=='not') code = '!(' + a + ')' 
+  if (op=='not') code = 'not (' + a + ')' 
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -176,15 +219,15 @@ Blockly.HLL['LLL_call'] = function(block) {
   var reply_bytes = Blockly.HLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.HLL.ORDER_NONE) || 0
   // msg(to, value, gas, datastart, datalen, outputstart, outputlen)
   var code = 
-    op +'('+ 
+    op +'( '+ 
     address +', '+ 
     money +', '+ 
     gas +', '+ 
     send_start_i +', '+  // bytes.. even in Serpent
     '(' + send_bytes +' / 32), '+ 
     reply_start_i +', '+ 
-    '(' + reply_bytes + '/ 32)\n'
-  return code
+    '(' + reply_bytes + '/ 32) )\n'
+  return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
 //x // byte -- currently unusable in Serpent without an array or "value group" block
@@ -278,7 +321,7 @@ Blockly.HLL['LLL_whileloop'] = function(block) {
       Blockly.HLL.ORDER_NONE) || 'false'
   var loop = Blockly.HLL.statementToCode(block, 'DO')
   if (is_until) {
-    cond = '!(' + cond + ')'
+    cond = 'not (' + cond + ')'
   }
   return 'while ' + cond + ':\n' + loop + '' 
 }
@@ -303,7 +346,7 @@ Blockly.HLL['LLL_when'] = function(block) {
   var op  = block.getFieldValue('WORD') 
   var cond = Blockly.HLL.valueToCode(block, 'COND', Blockly.HLL.ORDER_NONE) || 1
   var then_do = Blockly.HLL.statementToCode(block, 'THEN');
-  if (op=='unless') cond = '!(' + cond + ')'
+  if (op=='unless') cond = 'not (' + cond + ')'
   op = 'if'
   var code =  op + ' ' + cond + ':\n' + then_do ;
   return code;
@@ -373,9 +416,12 @@ Blockly.HLL['LLL_compare'] = function(block) {
   var b = Blockly.HLL.valueToCode(block, 'B', Blockly.HLL.ORDER_NONE) || 0
   var code = ''
   if (op=='=') op = '==' 
-  var code = a + ' ' + op + ' ' + b 
+  if (op=='!=')
+    code = 'not (' + a + ' == ' + b + ')'
+  else
+    code = a + ' ' + op + ' ' + b 
   if (op=='sgt' || op=='slt') {
-    var code = '///// WARNING -- signed comparison operators not supported yet in Serpent /////' 
+    code = '///// WARNING -- signed comparison operators not supported yet in Serpent /////' 
   }
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }

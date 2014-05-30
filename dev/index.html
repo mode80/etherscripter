@@ -69,6 +69,9 @@
             <li onclick="toggleTool(event)" id="mval"><a>temp value</a></li>
             <li onclick="toggleTool(event)" id="sstore"><a>storage store</a></li>
             <li onclick="toggleTool(event)" id="sval"><a>storage value</a></li>
+            <li onclick="toggleTool(event)" id="reserve"><a>reserve</a></li>
+            <li onclick="toggleTool(event)" id="array_set"><a>set numbered</a></li>
+            <li onclick="toggleTool(event)" id="array_get"><a>get numbered</a></li>
             <li onclick="toggleTool(event)" id="spend"><a>spend</a></li>
             <li onclick="toggleTool(event)" id="stop"><a>stop</a></li>
             <li onclick="toggleTool(event)" id="suicide"><a>self destruct</a></li>
@@ -79,12 +82,12 @@
             <li onclick="toggleTool(event)" id="bitlogic"><a>bit logic</a></li>
             <li onclick="toggleTool(event)" id="prefixop"><a>prefix</a></li>
             <li onclick="toggleTool(event)" id="byte"><a>byte</a></li>
+            <li onclick="toggleTool(event)" id="hash"><a>hash</a></li>
             <li onclick="toggleTool(event)" id="return"><a>reply</a></li>
             <li onclick="toggleTool(event)" id="copy"><a>copy</a></li>
             <li onclick="toggleTool(event)" id="compile_max"><a>compile</a></li>
             <li onclick="toggleTool(event)" id="call"><a>call</a></li>
             <li onclick="toggleTool(event)" id="create"><a>create</a></li>
-            <li onclick="toggleTool(event)" id="hash"><a>hash</a></li>
             <li onclick="toggleTool(event)" id="forloop"><a>for loop</a></li>
           </ul>
         </li>
@@ -172,6 +175,9 @@
     <block type="LLL_mval"></block>
     <block type="LLL_sstore"></block>
     <block type="LLL_sval"></block>
+    <block type="LLL_reserve"></block>
+    <block type="LLL_array_set"></block>
+    <block type="LLL_array_get"></block>
     <block type="LLL_spend"></block>
     <block type="LLL_stop"></block>
     <block type="LLL_suicide"></block>
@@ -183,12 +189,12 @@
     <block type="LLL_bitlogic"></block>
     <block type="LLL_prefixop"></block>
     <block type="LLL_byte"></block>
+    <block type="LLL_hash"></block>
     <block type="LLL_return"></block>
     <block type="LLL_call"></block>
     <block type="LLL_create"></block>
     <block type="LLL_compile_max"></block>
     <block type="LLL_copy"></block>
-    <block type="LLL_hash"></block>
   </xml>
 
 <!-- build:js -->
