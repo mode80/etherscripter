@@ -4,19 +4,18 @@ Visual smart contract builder for Ethereum
 
 ### TODO
 * switch to slots and slotlengths 
-* make call/return usable in Serpent with
-      [reserve __ 
-       temp spots at __]
-      [data at __ spots 
-       past temp spot __ =]
-      [data at __ spots 
-       past temp spot __]
-* pull input out of "data at ___ spot" with [__th input] and (maybe) [__bytes starting at byte ___ of _/memory/input_]
 * erradicate bytes and target the Serpent subset?
+* [temp slot _expression_] makes no sense in Serpent
 * [data at temp spot _(var)x_] or [... _1_] not consistent between LLL and Serpent
+* pull input out of "data at ___ spot" with [__th input] and (maybe) [__bytes starting at byte ___ of _/memory/input_]
+* consider changing val block to require explicit quotes 
+* look for other places require quote removal when used a spot identifiers
+
+* make last_call_success a "global" property on contract so call can be a statement
+
+* sample to test new POC-5 blocks
 * check order of operations are correct in block combos
 * add Mutan? would need to post-process in order to add var definitions
-* sample to test new POC-5 blocks
 * save functionality using appengine(?) cloud storage (gitlab?)
 * what is etherscripter page
 * integrate or port EVM compiler

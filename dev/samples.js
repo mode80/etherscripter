@@ -8,6 +8,208 @@ function fnCommentToString(f) {
 
 window.samples = {
 
+random: fnCommentToString(function(){/*! 
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="LLL_init" id="100" x="-26" y="71">
+    <statement name="INIT">
+      <block type="LLL_comment" id="101">
+        <field name="NOTE">A utility contract that returns a pseudo-random number in a given range from an optional seed</field>
+        <next>
+          <block type="LLL_comment" id="102">
+            <field name="NOTE">1st input is the lower bound of the range, inclusive</field>
+            <next>
+              <block type="LLL_comment" id="103">
+                <field name="NOTE">2nd input is the upper bound of the range, inclusive</field>
+                <next>
+                  <block type="LLL_comment" id="104">
+                    <field name="NOTE">optional 3nd input is used as a seed for random number generation</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="BODY">
+      <block type="LLL_mstore" id="105" inline="true">
+        <field name="SPOT">lower_bound</field>
+        <value name="VAL">
+          <block type="LLL_input" id="106">
+            <field name="INDEX">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="LLL_mstore" id="107" inline="true">
+            <field name="SPOT">upper_bound</field>
+            <value name="VAL">
+              <block type="LLL_input" id="108">
+                <field name="INDEX">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="LLL_mstore" id="109" inline="true">
+                <field name="SPOT">seed</field>
+                <value name="VAL">
+                  <block type="LLL_input" id="110">
+                    <field name="INDEX">2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="LLL_mstore" id="111" inline="false">
+                    <field name="SPOT">range</field>
+                    <value name="VAL">
+                      <block type="LLL_math" id="112" inline="true">
+                        <field name="OP">+</field>
+                        <value name="A">
+                          <block type="LLL_math" id="113" inline="true">
+                            <field name="OP">-</field>
+                            <value name="A">
+                              <block type="LLL_mval" id="114">
+                                <field name="VAL">upper_bound</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="LLL_mval" id="115">
+                                <field name="VAL">lower_bound</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="LLL_val" id="116">
+                            <field name="VAL">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="LLL_reserve" id="117" inline="true">
+                        <value name="LEN">
+                          <block type="LLL_val" id="118">
+                            <field name="VAL">2</field>
+                          </block>
+                        </value>
+                        <value name="SPOT">
+                          <block type="LLL_val" id="119">
+                            <field name="VAL">hashable</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="LLL_array_set" id="120" inline="true">
+                            <value name="INDEX">
+                              <block type="LLL_val" id="121">
+                                <field name="VAL">0</field>
+                              </block>
+                            </value>
+                            <value name="SPOT">
+                              <block type="LLL_val" id="122">
+                                <field name="VAL">hashable</field>
+                              </block>
+                            </value>
+                            <value name="VAL">
+                              <block type="LLL_mval" id="123">
+                                <field name="VAL">seed</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="LLL_array_set" id="124" inline="true">
+                                <value name="INDEX">
+                                  <block type="LLL_val" id="125">
+                                    <field name="VAL">1</field>
+                                  </block>
+                                </value>
+                                <value name="SPOT">
+                                  <block type="LLL_val" id="126">
+                                    <field name="VAL">hashable</field>
+                                  </block>
+                                </value>
+                                <value name="VAL">
+                                  <block type="LLL_blockinfo" id="127">
+                                    <field name="PROP">timestamp</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="LLL_mstore" id="128" inline="false">
+                                    <field name="SPOT">random_piece</field>
+                                    <value name="VAL">
+                                      <block type="LLL_hash" id="129" inline="true">
+                                        <value name="DATA_START">
+                                          <block type="LLL_mval" id="130">
+                                            <field name="VAL">hashable</field>
+                                          </block>
+                                        </value>
+                                        <value name="DATA_LEN">
+                                          <block type="LLL_val" id="131">
+                                            <field name="VAL">64</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="LLL_mstore" id="132" inline="false">
+                                        <field name="SPOT">result</field>
+                                        <value name="VAL">
+                                          <block type="LLL_math" id="133" inline="true">
+                                            <field name="OP">+</field>
+                                            <value name="A">
+                                              <block type="LLL_mval" id="134">
+                                                <field name="VAL">lowerbound</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="LLL_math" id="135" inline="true">
+                                                <field name="OP">mod</field>
+                                                <value name="A">
+                                                  <block type="LLL_mval" id="136">
+                                                    <field name="VAL">random_piece</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="LLL_mval" id="137">
+                                                    <field name="VAL">range</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="LLL_return" id="138" inline="false">
+                                            <value name="DATA_START">
+                                              <block type="LLL_mval" id="139">
+                                                <field name="VAL">result</field>
+                                              </block>
+                                            </value>
+                                            <value name="DATA_LEN">
+                                              <block type="LLL_val" id="140">
+                                                <field name="VAL">1</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+*/}),
+
 mitch_jack_bet: fnCommentToString(function(){/*! 
 <xml>
   <block type="LLL_init" id="79" x="18" y="19">

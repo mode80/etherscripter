@@ -69,9 +69,10 @@
             <li onclick="toggleTool(event)" id="mval"><a>temp value</a></li>
             <li onclick="toggleTool(event)" id="sstore"><a>storage store</a></li>
             <li onclick="toggleTool(event)" id="sval"><a>storage value</a></li>
-            <li onclick="toggleTool(event)" id="reserve"><a>reserve</a></li>
-            <li onclick="toggleTool(event)" id="array_set"><a>set numbered</a></li>
-            <li onclick="toggleTool(event)" id="array_get"><a>get numbered</a></li>
+            <li onclick="toggleTool(event)" id="reserve"><a>reserve array</a></li>
+            <li onclick="toggleTool(event)" id="array_set"><a>array set</a></li>
+            <li onclick="toggleTool(event)" id="array_get"><a>array get</a></li>
+            <li onclick="toggleTool(event)" id="array"><a>array</a></li>
             <li onclick="toggleTool(event)" id="spend"><a>spend</a></li>
             <li onclick="toggleTool(event)" id="stop"><a>stop</a></li>
             <li onclick="toggleTool(event)" id="suicide"><a>self destruct</a></li>
@@ -115,6 +116,8 @@
             <li><a onclick="loadSample(event)" id="last_will">Last Will</a></li>
             <li><a onclick="loadSample(event)" id="marriage">Marriage Contract</a></li>
             <li><a onclick="loadSample(event)" id="rock_paper_scissors">Rock Paper Scissors</a></li>
+            <li class="divider"></li> 
+            <li><a onclick="loadSample(event)" id="random">Random Number Maker</a></li>
           </ul>
         </li>
         <!-- About -->
@@ -178,6 +181,7 @@
     <block type="LLL_reserve"></block>
     <block type="LLL_array_set"></block>
     <block type="LLL_array_get"></block>
+    <block type="LLL_array"></block>
     <block type="LLL_spend"></block>
     <block type="LLL_stop"></block>
     <block type="LLL_suicide"></block>

@@ -22,10 +22,10 @@ var VAR_COLOR = 260
 var FLOW_COLOR = 210 
 var LOOP_COLOR = 160
 var MATH_COLOR = 230 
-var PROCEDURE_COLOR = 290
+var PROCEDURE_COLOR = 100 
 var STATEMENT_COLOR = 330
-var OTHER_COLOR = 58 
-var UNUSED_COLOR = 160
+var COMMENT_COLOR = 58 
+var ARRAY_COLOR = 290 
 
 //
 // POC-5 blocks 
@@ -33,16 +33,13 @@ var UNUSED_COLOR = 160
 
 Blockly.Blocks['LLL_reserve'] = {
   init: function() {
-    // var POOLS = 
-    // [['temp', 'temp'],
-    // ['save', 'save'] ]
     this.setTooltip('Reserves the given number of consecutive temp spots, starting at the given label. These can later be accessed by number.')
-    this.setColour(VAR_COLOR);
+    this.setColour(ARRAY_COLOR);
+    this.appendDummyInput()
+      .appendField('make set')
+      .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
     this.appendValueInput('LEN')
-      .appendField('reserve')
-    this.appendValueInput('SPOT')
-      // .appendField(new Blockly.FieldDropdown(POOLS), 'POOL')
-      .appendField('spots at')
+      .appendField('of size')
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -52,11 +49,11 @@ Blockly.Blocks['LLL_reserve'] = {
 Blockly.Blocks['LLL_array_get'] = {
   init: function() {
     this.setTooltip('Gets a numbered data item beyond the given temp spot.')
-    this.setColour(VAR_COLOR);
-    this.appendValueInput('INDEX')
-      .appendField('data')
-    this.appendValueInput('SPOT')
-      .appendField('spots past ')
+    this.setColour(ARRAY_COLOR);
+    this.appendValueInput('ORDINAL')
+    this.appendDummyInput()
+      .appendField('th item of set')
+      .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
     this.setOutput(true);
     this.setInputsInline(true);
   }
@@ -65,12 +62,11 @@ Blockly.Blocks['LLL_array_get'] = {
 Blockly.Blocks['LLL_array_set'] = {
   init: function() {
     this.setTooltip('Sets a numbered data item beyond the given temp spot. These spots should be reserved first with the [reserve..] block')
-    this.setColour(VAR_COLOR);
-    this.appendValueInput('INDEX')
-      .appendField('data')
-    this.appendValueInput('SPOT')
-      .appendField('spots past ')
+    this.setColour(ARRAY_COLOR);
+    this.appendValueInput('ORDINAL')
     this.appendValueInput('VAL')
+      .appendField('th item of set')
+      .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
       .appendField('=')
     this.setOutput(false);
     this.setPreviousStatement(true);
@@ -78,6 +74,18 @@ Blockly.Blocks['LLL_array_set'] = {
     this.setInputsInline(true);
   }
 };
+
+Blockly.Blocks['LLL_array'] = {
+  init: function() {
+    this.setTooltip('')
+    this.setColour(ARRAY_COLOR)
+    this.appendDummyInput()
+        .appendField('set')
+        .appendField(new Blockly.FieldTextInput('', valValidator ), 'SPOT')
+    this.setOutput(true)
+  }
+}
+
 
 
 Blockly.Blocks['LLL_input'] = {
@@ -257,6 +265,7 @@ Blockly.Blocks['LLL_mstore'] = {
     this.setTooltip('Labels a temporary result. This stores the result at a temp spot identified by the @-prefixed label. This is a compact form of the [in temp spot __ put __] block. Data in a temp spot is cleared after the contract stops running this time.')
     this.setColour(VAR_COLOR)
     this.appendValueInput('VAL')
+      .appendField('var')
       .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
       .appendField('=')
     this.setInputsInline(true)
@@ -286,7 +295,7 @@ Blockly.Blocks['LLL_mval'] = {
     this.setTooltip('The data in a given temp spot. It is a compact form of the [data at temp spot ___] block.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
-        .appendField('')
+        .appendField('var')
         .appendField(new Blockly.FieldTextInput('', valValidator ), 'VAL')
     this.setOutput(true)
   }
@@ -735,7 +744,7 @@ Blockly.Blocks['LLL_byte'] = {
 Blockly.Blocks['LLL_comment'] = {
   init: function() {
     this.setTooltip('Has no effect on contract behaviour but provides for English notes on the nearby code.')
-    this.setColour(OTHER_COLOR);
+    this.setColour(COMMENT_COLOR);
     this.appendDummyInput()
       .appendField('note:')
       .appendField(new Blockly.FieldTextInput(''), 'NOTE')

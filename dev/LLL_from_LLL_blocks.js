@@ -20,8 +20,7 @@ goog.require('Blockly.LLL');
 Blockly.LLL['LLL_reserve'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
   var len = Blockly.HLL.valueToCode(block,'LEN', order) || 0 
-  var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0  
-  spot = spot.replace(/"/g,'')
+  var spot = block.getFieldValue('SPOT') || ''  
   var code = ''
   for (var index = 0; index < len; index++ )
     code += '(mstore ' + spot + index+ " 0)\n" 
@@ -31,24 +30,31 @@ Blockly.LLL['LLL_reserve'] = function(block) {
 //x
 Blockly.LLL['LLL_array_get'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
-  var index = Blockly.HLL.valueToCode(block,'INDEX', order) || 0 
-  var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0  
-  spot = spot.replace(/"/g,'')
-  var code = '(mload ' + spot + index + ')'
+  var ordinal = Blockly.HLL.valueToCode(block,'ORDINAL', order) || 0 
+  var spot = block.getFieldValue('SPOT') || ''  
+  var code = '(mload (+ ' + spot + '0 (* 32 (- ' + ordinal + ' 1)) ))'
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
 //x
 Blockly.LLL['LLL_array_set'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
-  var index = Blockly.HLL.valueToCode(block,'INDEX', order) || 0 
-  var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0  
-  spot = spot.replace(/"/g,'')
+  var ordinal = Blockly.HLL.valueToCode(block,'ORDINAL', order) || 0 
+  var spot = block.getFieldValue('SPOT') || ''  
   var val = Blockly.HLL.valueToCode(block,'VAL', order) || 0  
-  var code
-  code = '(mstore ' + spot + index + ' ' + val + ')\n' 
+  var code = '(mstore (+ ' + spot + '0 (* 32 (- ' + ordinal + ' 1)) ) ' + val + ')\n'
   return code
 }
+
+//x
+Blockly.LLL['LLL_array'] = function(block) {
+  var order = Blockly.HLL.ORDER_NONE;
+  var spot = block.getFieldValue('SPOT') || ''  
+  var code
+  code = spot + '0'
+  return [code, Blockly.HLL.ORDER_ATOMIC]
+}
+
 
 
 Blockly.LLL['LLL_input'] = function(block) {
@@ -186,6 +192,7 @@ Blockly.LLL['LLL_hash'] = function(block) {
   var op = 'sha3' 
   var a = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE) || 0
   var b = Blockly.LLL.valueToCode(block, 'DATA_LEN', Blockly.LLL.ORDER_NONE) || 0
+  a = a.replace(/"/g,'') // unquote text spots 
   var code = '(' + op + ' ' + a + ' ' + b + ')' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
@@ -209,7 +216,7 @@ Blockly.LLL['LLL_call'] = function(block) {
     send_bytes +' '+ 
     reply_start_i +' '+ 
     reply_bytes + ')\n'
-  return code
+  return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
 // Blockly.LLL['LLL_send'] = function(block) {
