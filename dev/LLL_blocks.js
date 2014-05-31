@@ -33,7 +33,7 @@ var ARRAY_COLOR = 290
 
 Blockly.Blocks['LLL_reserve'] = {
   init: function() {
-    this.setTooltip('Reserves the given number of consecutive temp spots, starting at the given label. These can later be accessed by number.')
+    this.setTooltip('Makes a new named data set of the given size.')
     this.setColour(ARRAY_COLOR);
     this.appendDummyInput()
       .appendField('make set')
@@ -48,7 +48,7 @@ Blockly.Blocks['LLL_reserve'] = {
 
 Blockly.Blocks['LLL_array_get'] = {
   init: function() {
-    this.setTooltip('Gets a numbered data item beyond the given temp spot.')
+    this.setTooltip('Get the numbered data item from the named set. The "1th" item is the first item in the set. "2th" is second, etc.')
     this.setColour(ARRAY_COLOR);
     this.appendValueInput('ORDINAL')
     this.appendDummyInput()
@@ -61,7 +61,7 @@ Blockly.Blocks['LLL_array_get'] = {
 
 Blockly.Blocks['LLL_array_set'] = {
   init: function() {
-    this.setTooltip('Sets a numbered data item beyond the given temp spot. These spots should be reserved first with the [reserve..] block')
+    this.setTooltip('Set the numbered data item in the named set. The "1th" item is the first item in the set. "2th" is second, etc.')
     this.setColour(ARRAY_COLOR);
     this.appendValueInput('ORDINAL')
     this.appendValueInput('VAL')
@@ -77,7 +77,7 @@ Blockly.Blocks['LLL_array_set'] = {
 
 Blockly.Blocks['LLL_array'] = {
   init: function() {
-    this.setTooltip('')
+    this.setTooltip('A reference to a previously created named data set.')
     this.setColour(ARRAY_COLOR)
     this.appendDummyInput()
         .appendField('set')
@@ -86,6 +86,28 @@ Blockly.Blocks['LLL_array'] = {
   }
 }
 
+// Blockly.Blocks['LLL_array_single'] = {
+//   init: function() {
+//     this.setTooltip('A short-lived set containing just the single item supplied.')
+//     this.setColour(ARRAY_COLOR);
+//     this.appendValueInput('VAL')
+//       .appendField('set of single item')
+//     this.setOutput(false);
+//     this.setPreviousStatement(true);
+//     this.setNextStatement(true);
+//     this.setInputsInline(true);
+//   }
+// };
+
+// Blockly.Blocks['LLL_array_inline'] = {
+//   init: function() {
+//     this.setTooltip('Makes a short-lived data set filled with the provided data items.')
+//     this.setColour(ARRAY_COLOR);
+//     this.appendStatementInput('ITEMS')
+//         .appendField('set items');
+//     this.setOutput(true)
+//   }
+// };
 
 
 Blockly.Blocks['LLL_input'] = {
