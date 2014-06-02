@@ -31,15 +31,80 @@ var ARRAY_COLOR = 290
 // POC-5 blocks 
 //
 
+
+Blockly.Blocks.ordinals =
+  [
+   ['1st', '0'],
+   ['2nd', '1'],
+   ['3rd', '2'],
+   ['4th', '3'],
+   ['5th', '4'],
+   ['6th', '5'],
+   ['7th', '6'],
+   ['8th', '7'],
+   ['9th', '8'],
+   ['10th', '9'],
+   ['11th', '10'],
+   ['12th', '11'],
+   ['13th', '12'],
+   ['14th', '13'],
+   ['15th', '14'],
+   ['16th', '15'],
+   ['17th', '16'],
+   ['18th', '17'],
+   ['19th', '18'],
+   ['20th', '19'],
+   ]
+
+// Blockly.Blocks['LLL_items'] = {
+//   init: function() {
+//     this.setTooltip('The numbered reply items to be sent with then next call block.') 
+//     this.setColour(ARRAY_COLOR)
+//     this.appendValueInput()
+//       .appendField(new Blockly.FieldDropdown(Blockly.Blocks.ordinals), 'INDEX')
+//       .appendField('item of data set =')
+//     this.setInputsInline(false)
+//     this.setPreviousStatement(true);
+//     this.setNextStatement(true);
+//   }
+// }
+
+Blockly.Blocks['LLL_reply'] = {
+  init: function() {
+    this.setTooltip('Ends the contract execution and replies to the caller with give number of formerly set reply items.')
+    this.setColour(PROCEDURE_COLOR);
+    this.appendValueInput('DATA_LEN')
+      .appendField('reply with first ')
+    this.appendDummyInput()
+      .appendField('items of data set')
+    this.setPreviousStatement(true)
+    this.setInputsInline(false)
+  }
+}
+
 Blockly.Blocks['LLL_reserve'] = {
+  init: function() {
+    this.setTooltip('Reserves the given amount of numbered temp slots. Using numbered temp slots without reserving them first yields unpredictable results.')
+    this.setColour(ARRAY_COLOR);
+    this.appendValueInput('LEN')
+      .appendField('reserve')
+    this.appendDummyInput()
+      .appendField('temp slots')
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Blocks['LLL_array_make'] = {
   init: function() {
     this.setTooltip('Makes a new named data set of the given size.')
     this.setColour(ARRAY_COLOR);
     this.appendDummyInput()
-      .appendField('make set')
+      .appendField('make')
       .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
     this.appendValueInput('LEN')
-      .appendField('of size')
+      .appendField('set of size')
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -52,8 +117,9 @@ Blockly.Blocks['LLL_array_get'] = {
     this.setColour(ARRAY_COLOR);
     this.appendValueInput('ORDINAL')
     this.appendDummyInput()
-      .appendField('th item of set')
+      .appendField('th item of')
       .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
+      .appendField('set')
     this.setOutput(true);
     this.setInputsInline(true);
   }
@@ -65,9 +131,9 @@ Blockly.Blocks['LLL_array_set'] = {
     this.setColour(ARRAY_COLOR);
     this.appendValueInput('ORDINAL')
     this.appendValueInput('VAL')
-      .appendField('th item of set')
+      .appendField('th item of')
       .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
-      .appendField('=')
+      .appendField('set =')
     this.setOutput(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -112,23 +178,11 @@ Blockly.Blocks['LLL_array'] = {
 
 Blockly.Blocks['LLL_input'] = {
   init: function() {
-    var ordinals =
-        [
-         ['1st', '0'],
-         ['2nd', '1'],
-         ['3rd', '2'],
-         ['4th', '3'],
-         ['5th', '4'],
-         ['6th', '5'],
-         ['7th', '6'],
-         ['8th', '7'],
-         ['9th', '8'],
-        ]
     this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: Here the first item is "1st" not 0)')
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
     this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown(ordinals), 'INDEX')
+      .appendField(new Blockly.FieldDropdown(Blockly.Blocks.ordinals), 'INDEX')
       .appendField('input')
     this.setInputsInline(true)
   }
@@ -195,7 +249,7 @@ Blockly.Blocks['LLL_create'] = {
     this.appendDummyInput()
       .appendField('from code')
     this.appendValueInput('DATA_START')
-      .appendField('   at temp spot')
+      .appendField('   at start spot')
     this.appendValueInput('DATA_LEN')
       .appendField('   of length')
     this.appendValueInput('MONEY')
@@ -318,7 +372,7 @@ Blockly.Blocks['LLL_mval'] = {
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
         .appendField('var')
-        .appendField(new Blockly.FieldTextInput('', valValidator ), 'VAL')
+        .appendField(new Blockly.FieldTextInput('', varValidator ), 'VAL')
     this.setOutput(true)
   }
 }
@@ -448,7 +502,7 @@ Blockly.Blocks['LLL_return'] = {
     this.appendDummyInput()
       .appendField('reply with data')
     this.appendValueInput('DATA_START')
-      .appendField('   at temp spot')
+      .appendField('   at start spot')
     this.appendValueInput('DATA_LEN')
       .appendField('   of length')
     this.setPreviousStatement(true)
@@ -814,4 +868,18 @@ Blockly.Blocks['LLL_store'] = {
     this.setNextStatement(true);
   }
 };
+
+// Blockly.Blocks['LLL_save'] = {
+//   init: function() {
+//     this.setTooltip('Stores a result at a given save location. Data in save locations will be available the next time the contract runs. Locations can be designated with either numbers or text labels.')
+//     this.setColour(VAR_COLOR);
+//     this.appendValueInput('SPOT')
+//       .appendField('in spot')
+//     this.appendValueInput('VAL')
+//       .appendField('save')
+//     this.setInputsInline(true);
+//     this.setPreviousStatement(true);
+//     this.setNextStatement(true);
+//   }
+// };
 

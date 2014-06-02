@@ -21,14 +21,18 @@ Blockly.HLL.MAX_GAS = '(tx.gas - 100)'
 //x
 Blockly.HLL['LLL_reserve'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
+  var spot = 'temp' 
+  var len = Blockly.HLL.valueToCode(block,'LEN', order) || 0 
+  var code = spot + ' = array(' + len + ')\n'
+  return code
+}
+
+//x
+Blockly.HLL['LLL_array_make'] = function(block) {
+  var order = Blockly.HLL.ORDER_NONE;
   var spot = block.getFieldValue('SPOT') || ''  
   var len = Blockly.HLL.valueToCode(block,'LEN', order) || 0 
-  var code
-  if (isNaN(spot))
-    spot = spot.replace(/"/g,'') // unquote text spots to make use of autoassigned memory addresses  
-  else
-    spot = 'x' + spot  
-  code = spot + ' = array(' + len + ')\n' 
+  var code = spot + ' = array(' + len + ')\n' 
   return code
 }
 
@@ -37,8 +41,7 @@ Blockly.HLL['LLL_array_get'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
   var index = Blockly.HLL.valueToCode(block,'ORDINAL', order) || 0 
   var spot = block.getFieldValue('SPOT') || ''  
-  var code
-  code = spot + '[' + index + '-1]' 
+  var code = spot + '[' + index + '-1]'
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -48,8 +51,7 @@ Blockly.HLL['LLL_array_set'] = function(block) {
   var index = Blockly.HLL.valueToCode(block,'ORDINAL', order) || 0 
   var spot = block.getFieldValue('SPOT') || ''  
   var val = Blockly.HLL.valueToCode(block,'VAL', order) || 0  
-  var code
-  code = spot + '[' + index + '-1] = ' + val + '\n' 
+  var code = spot + '[' + index + '-1] = ' + val + '\n'
   return code
 }
 
@@ -57,8 +59,7 @@ Blockly.HLL['LLL_array_set'] = function(block) {
 Blockly.HLL['LLL_array'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
   var spot = block.getFieldValue('SPOT') || ''  
-  var code
-  code = spot 
+  var code = spot
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -82,7 +83,7 @@ Blockly.HLL['LLL_compile_max'] = function(block) {
   var for_compiling = Blockly.HLL.statementToCode(block, 'CODE');
   var to_start = Blockly.HLL.valueToCode(block, 'TO_START', Blockly.HLL.ORDER_NONE) || 0
   var max_len = Blockly.HLL.valueToCode(block, 'MAX_LEN', Blockly.HLL.ORDER_NONE) || 0
-  code = '///// WARNING -- Serpent does not yet support inline compiling /////\n'
+  var code = '///// WARNING -- Serpent does not yet support inline compiling /////\n'
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
 
@@ -91,7 +92,7 @@ Blockly.HLL['LLL_copy'] = function(block) {
   var op = block.getFieldValue('OP') || ''  
   var a = Blockly.HLL.valueToCode(block, 'DATA_START', Blockly.HLL.ORDER_NONE) || 0
   var b = Blockly.HLL.valueToCode(block, 'DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
-  code = '///// WARNING -- Serpent does not yet support copying code to memory /////\n'
+  var code = '///// WARNING -- Serpent does not yet support copying code to memory /////\n'
   return code
 }
 
@@ -507,9 +508,11 @@ Blockly.HLL['LLL_load'] = function(block) {
   if (pool=='sload') 
     code = 'contract.storage[' + spot + ']'
   if (pool=='mload') {
-    spot = spot.replace(/"/g,'') // unquote text spots 
-    if (!isNaN(spot)) spot = 'mem[' + spot + ']' 
-    code = spot
+    if (spot.substr(0,1) == '"' && spot.substr(-1,1) == '"') // we have text as the slot number 
+      // using text as the temp slot number is possible but inefficient, so convert it to a matching serpent "autonumbered" var 
+      code = spot.replace(/"/g,'') 
+    else  // it's a number or expression for a slot number
+      code = 'temp[' + spot + ']' // dereference 
   }
   if (pool=='calldataload') {
     spot = spot.replace(/"/g,'') // same here 
@@ -526,9 +529,12 @@ Blockly.HLL['LLL_store'] = function(block) {
   var spot = Blockly.HLL.valueToCode(block,'SPOT', order) || 0 
   var val = Blockly.HLL.valueToCode(block,'VAL', order) || 0 
   if (pool =='mstore') {
-    spot = spot.replace(/"/g,'') // unquote text spots
-    if (!isNaN(spot)) spot = 'mem[' + spot + ']'
-    var code = spot + ' = ' + val + '\n'
+    if (spot.substr(0,1) == '"' && spot.substr(-1,1) == '"') // we have quoted text as the slot number 
+      // using text as the temp slot number is possible but inefficient, so convert it to a matching serpent "autonumbered" var 
+      code = spot.replace(/"/g,'') 
+    else  // it's a number or expression for a slot number
+      code = 'temp[' + spot + ']' // dereference 
+    var code = code + ' = ' + val + '\n'
   }
   if (pool =='sstore') 
     var code = 'contract.storage[' + spot + '] = ' + val + '\n'

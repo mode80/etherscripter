@@ -3,36 +3,33 @@ Visual smart contract builder for Ethereum
 ##
 
 ### TODO
+
+* fix lll to work with new temp array paradigm
+
 * switch to slots and slotlengths 
+  . code expectations
+    . serpent
+    . lll
+  . labels
+
 * erradicate bytes and target the Serpent subset?
+* storage "arrays?"
+* relentlessly simplify remaining blocks 
 
-* what should [temp slot ___] = val do in Serpent?
-  * notes
-    . ___ can be: number, text, or expression 
-      if number: 
-        mem[number] = val 
-        mem[number] 
-      if exp: 
-        mem[exp] = val 
-        mem[exp] 
-      if text: 
-        if !text : text = array(1)
-        mem[text] = val
-         
-        text = [val] 
-        text[0] 
-  * problems
-    . [temp slot _expression_] makes no sense in Serpent
-    . [data at temp spot _(var)x_] or [... _1_] not consistent between LLL and Serpent
-
-* Make only sets snap into block places that need sets
-
-* pull input out of "data at ___ spot" with [__th input] and (maybe) [__bytes starting at byte ___ of _/memory/input_]
+* pull input out of "data at ___ spot",  replace with [__th input] and (maybe) [__bytes starting at byte ___ of _/memory/input_]
 * consider changing val block to require explicit quotes 
 * look for other places require quote removal when used a spot identifiers
 
+* revisit tooltips
+
 * sample to test new POC-5 blocks
 * check order of operations are correct in block combos
+
+* rename blocks with consistent underscores, rename xml fields ?
+  . return -> reply
+
+* RELEASE
+
 * add Mutan? would need to post-process in order to add var definitions
 * save functionality using appengine(?) cloud storage (gitlab?)
 * what is etherscripter page

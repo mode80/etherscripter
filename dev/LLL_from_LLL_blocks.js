@@ -17,13 +17,23 @@ goog.require('Blockly.LLL');
 /////
 
 //x
-Blockly.LLL['LLL_reserve'] = function(block) {
+Blockly.LLL['LLL_array_make'] = function(block) {
   var order = Blockly.HLL.ORDER_NONE;
   var len = Blockly.HLL.valueToCode(block,'LEN', order) || 0 
   var spot = block.getFieldValue('SPOT') || ''  
   var code = ''
   for (var index = 0; index < len; index++ )
-    code += '(mstore ' + spot + index+ " 0)\n" 
+    code += '(mstore ' + spot + index+ ' 0)\n' 
+  return code
+}
+
+//x byte //TODO doesnt work with expressions given for len
+Blockly.LLL['LLL_reserve'] = function(block) {
+  var order = Blockly.HLL.ORDER_NONE;
+  var len = Blockly.HLL.valueToCode(block,'LEN', order) || 0 
+  var code = ''
+  for (var index = 0; index < len; index++ )
+    code += '(mstore (+ temp (* ' + index+ ' 32)) 0)\n' 
   return code
 }
 
@@ -423,9 +433,13 @@ Blockly.LLL['LLL_store'] = function(block) {
   var order = Blockly.LLL.ORDER_NONE;
   var pool = block.getFieldValue('POOL')  
   var spot = Blockly.LLL.valueToCode(block,'SPOT', order) || 0 
-  if (pool =='mstore' || pool == 'calldataload') 
-    spot = spot.replace(/"/g,'') // unquote text spots to make use of LLL's autoassigned memory addresses 
   var val = Blockly.LLL.valueToCode(block,'VAL', order) || 0 
+  if (pool =='mstore') 
+    if (spot.substr(0,1) == '"' && spot.substr(-1,1) == '"') // we have quoted text as the slot number 
+      // using text as the temp slot number is possible but inefficient, so convert it to a matching serpent "autonumbered" var 
+      spot = spot.replace(/"/g,'') 
+    else  // it's a number or expression for a slot number
+      spot = '(+ temp (* 32 ' + spot + '))' // dereference 
   var code = '('+ pool + ' ' + spot + ' ' + val + ')'
   return code + '\n'
 }

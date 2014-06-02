@@ -60,6 +60,7 @@
             <li onclick="toggleTool(event)" id="tx"><a>transaction info</a></li>
             <li onclick="toggleTool(event)" id="input"><a>input</a></li>
             <li onclick="toggleTool(event)" id="thinput"><a>open input</a></li>
+            <!-- <li onclick="toggleTool(event)" id="items"><a>data items</a></li> -->
             <li onclick="toggleTool(event)" id="math"><a>math</a></li>
             <li onclick="toggleTool(event)" id="compare"><a>compare</a></li>
             <li onclick="toggleTool(event)" id="logic"><a>logic</a></li>
@@ -84,7 +85,8 @@
             <li onclick="toggleTool(event)" id="prefixop"><a>prefix</a></li>
             <li onclick="toggleTool(event)" id="byte"><a>byte</a></li>
             <li onclick="toggleTool(event)" id="hash"><a>hash</a></li>
-            <li onclick="toggleTool(event)" id="return"><a>reply</a></li>
+            <li onclick="toggleTool(event)" id="return"><a>return</a></li>
+            <li onclick="toggleTool(event)" id="reply"><a>reply</a></li>
             <li onclick="toggleTool(event)" id="copy"><a>copy</a></li>
             <li onclick="toggleTool(event)" id="compile_max"><a>compile</a></li>
             <li onclick="toggleTool(event)" id="call"><a>call</a></li>
@@ -169,16 +171,19 @@
     <block type="LLL_tx"></block>
     <block type="LLL_input"></block>
     <block type="LLL_thinput"></block>
+    <!-- <block type="LLL_items"></block> -->
     <block type="LLL_math"></block>
     <block type="LLL_compare"></block>
     <block type="LLL_logic"></block>
     <block type="LLL_store"></block>
+    <!-- <block type="LLL_save"></block> -->
     <block type="LLL_load"></block>
     <block type="LLL_mstore"></block>
     <block type="LLL_mval"></block>
     <block type="LLL_sstore"></block>
     <block type="LLL_sval"></block>
     <block type="LLL_reserve"></block>
+    <block type="LLL_array_make"></block>
     <block type="LLL_array_set"></block>
     <block type="LLL_array_get"></block>
     <block type="LLL_array"></block>
@@ -195,6 +200,7 @@
     <block type="LLL_byte"></block>
     <block type="LLL_hash"></block>
     <block type="LLL_return"></block>
+    <block type="LLL_reply"></block>
     <block type="LLL_call"></block>
     <block type="LLL_create"></block>
     <block type="LLL_compile_max"></block>

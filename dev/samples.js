@@ -84,7 +84,7 @@ random: fnCommentToString(function(){/*!
                       </block>
                     </value>
                     <next>
-                      <block type="LLL_reserve" id="147" inline="true">
+                      <block type="LLL_array_make" id="147" inline="true">
                         <field name="SPOT">hash_fodder</field>
                         <value name="LEN">
                           <block type="LLL_val" id="173">
@@ -163,7 +163,7 @@ random: fnCommentToString(function(){/*!
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="LLL_reserve" id="298" inline="true">
+                                          <block type="LLL_array_make" id="298" inline="true">
                                             <field name="SPOT">reply</field>
                                             <value name="LEN">
                                               <block type="LLL_val" id="299">
