@@ -10,19 +10,19 @@ window.samples = {
 
 random: fnCommentToString(function(){/*! 
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="LLL_init" id="130" x="21" y="19">
+  <block type="LLL_init" id="131" x="6" y="98">
     <statement name="INIT">
-      <block type="LLL_comment" id="131">
-        <field name="NOTE">A utility contract that returns a pseudo-random number in a given range from an optional seed</field>
+      <block type="LLL_comment" id="132">
+        <field name="NOTE">A utility contract that returns a pseudo-random number in a given range</field>
         <next>
-          <block type="LLL_comment" id="132">
+          <block type="LLL_comment" id="133">
             <field name="NOTE">1st input is the lower bound of the range, inclusive</field>
             <next>
-              <block type="LLL_comment" id="133">
+              <block type="LLL_comment" id="134">
                 <field name="NOTE">2nd input is the upper bound of the range, inclusive</field>
                 <next>
-                  <block type="LLL_comment" id="134">
-                    <field name="NOTE">optional 3nd input is used as a seed for random number generation</field>
+                  <block type="LLL_comment" id="135">
+                    <field name="NOTE">optional 3rd input is used as a seed for random number generation</field>
                   </block>
                 </next>
               </block>
@@ -32,173 +32,132 @@ random: fnCommentToString(function(){/*!
       </block>
     </statement>
     <statement name="BODY">
-      <block type="LLL_mstore" id="135" inline="true">
+      <block type="LLL_mstore" id="136" inline="true">
         <field name="SPOT">lower_bound</field>
         <value name="VAL">
-          <block type="LLL_input" id="136">
+          <block type="LLL_input" id="137">
             <field name="INDEX">0</field>
           </block>
         </value>
         <next>
-          <block type="LLL_mstore" id="137" inline="true">
+          <block type="LLL_mstore" id="138" inline="true">
             <field name="SPOT">upper_bound</field>
             <value name="VAL">
-              <block type="LLL_input" id="138">
+              <block type="LLL_input" id="139">
                 <field name="INDEX">1</field>
               </block>
             </value>
             <next>
-              <block type="LLL_mstore" id="139" inline="true">
+              <block type="LLL_mstore" id="140" inline="true">
                 <field name="SPOT">seed</field>
                 <value name="VAL">
-                  <block type="LLL_input" id="140">
+                  <block type="LLL_input" id="141">
                     <field name="INDEX">2</field>
                   </block>
                 </value>
                 <next>
-                  <block type="LLL_mstore" id="141" inline="false">
+                  <block type="LLL_mstore" id="142" inline="false">
                     <field name="SPOT">range</field>
                     <value name="VAL">
-                      <block type="LLL_math" id="142" inline="true">
+                      <block type="LLL_math" id="143" inline="true">
                         <field name="OP">+</field>
                         <value name="A">
-                          <block type="LLL_math" id="143" inline="true">
+                          <block type="LLL_math" id="144" inline="true">
                             <field name="OP">-</field>
                             <value name="A">
-                              <block type="LLL_mval" id="144">
+                              <block type="LLL_mval" id="145">
                                 <field name="VAL">upper_bound</field>
                               </block>
                             </value>
                             <value name="B">
-                              <block type="LLL_mval" id="145">
+                              <block type="LLL_mval" id="146">
                                 <field name="VAL">lower_bound</field>
                               </block>
                             </value>
                           </block>
                         </value>
                         <value name="B">
-                          <block type="LLL_val" id="146">
+                          <block type="LLL_val" id="147">
                             <field name="VAL">1</field>
                           </block>
                         </value>
                       </block>
                     </value>
                     <next>
-                      <block type="LLL_array_make" id="147" inline="true">
-                        <field name="SPOT">hash_fodder</field>
+                      <block type="LLL_reserve" id="174" inline="true">
                         <value name="LEN">
-                          <block type="LLL_val" id="173">
-                            <field name="VAL">2</field>
+                          <block type="LLL_val" id="175">
+                            <field name="VAL">3</field>
                           </block>
                         </value>
                         <next>
-                          <block type="LLL_array_set" id="264" inline="true">
-                            <field name="SPOT">hash_fodder</field>
-                            <value name="ORDINAL">
-                              <block type="LLL_val" id="265">
+                          <block type="LLL_store" id="176" inline="true">
+                            <field name="POOL">mstore</field>
+                            <value name="SPOT">
+                              <block type="LLL_val" id="177">
                                 <field name="VAL">1</field>
                               </block>
                             </value>
                             <value name="VAL">
-                              <block type="LLL_blockinfo" id="172">
+                              <block type="LLL_blockinfo" id="178">
                                 <field name="PROP">prevhash</field>
                               </block>
                             </value>
                             <next>
-                              <block type="LLL_array_set" id="266" inline="true">
-                                <field name="SPOT">hash_fodder</field>
-                                <value name="ORDINAL">
-                                  <block type="LLL_val" id="267">
+                              <block type="LLL_store" id="179" inline="true">
+                                <field name="POOL">mstore</field>
+                                <value name="SPOT">
+                                  <block type="LLL_val" id="180">
                                     <field name="VAL">2</field>
                                   </block>
                                 </value>
                                 <value name="VAL">
-                                  <block type="LLL_mval" id="269">
+                                  <block type="LLL_mval" id="181">
                                     <field name="VAL">seed</field>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="LLL_mstore" id="171" inline="false">
+                                  <block type="LLL_mstore" id="182" inline="false">
                                     <field name="SPOT">random_piece</field>
                                     <value name="VAL">
-                                      <block type="LLL_hash" id="169" inline="false">
+                                      <block type="LLL_hash" id="183" inline="false">
                                         <value name="DATA_START">
-                                          <block type="LLL_array" id="270">
-                                            <field name="SPOT">hash_fodder</field>
+                                          <block type="LLL_val" id="184">
+                                            <field name="VAL">1</field>
                                           </block>
                                         </value>
                                         <value name="DATA_LEN">
-                                          <block type="LLL_val" id="148">
-                                            <field name="VAL">64</field>
+                                          <block type="LLL_val" id="185">
+                                            <field name="VAL">2</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="LLL_mstore" id="306" inline="false">
-                                        <field name="SPOT">result</field>
+                                      <block type="LLL_store" id="186" inline="true">
+                                        <field name="POOL">mstore</field>
+                                        <value name="SPOT">
+                                          <block type="LLL_val" id="187">
+                                            <field name="VAL">3</field>
+                                          </block>
+                                        </value>
                                         <value name="VAL">
-                                          <block type="LLL_math" id="304" inline="false">
-                                            <field name="OP">+</field>
-                                            <value name="A">
-                                              <block type="LLL_mval" id="305">
-                                                <field name="VAL">lower_bound</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="LLL_math" id="170" inline="true">
-                                                <field name="OP">mod</field>
-                                                <value name="A">
-                                                  <block type="LLL_mval" id="271">
-                                                    <field name="VAL">random_piece</field>
-                                                  </block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="LLL_mval" id="303">
-                                                    <field name="VAL">range</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
+                                          <block type="LLL_mval" id="188">
+                                            <field name="VAL">result</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="LLL_array_make" id="298" inline="true">
-                                            <field name="SPOT">reply</field>
-                                            <value name="LEN">
-                                              <block type="LLL_val" id="299">
+                                          <block type="LLL_return" id="189" inline="false">
+                                            <value name="DATA_START">
+                                              <block type="LLL_val" id="190">
+                                                <field name="VAL">3</field>
+                                              </block>
+                                            </value>
+                                            <value name="DATA_LEN">
+                                              <block type="LLL_val" id="191">
                                                 <field name="VAL">1</field>
                                               </block>
                                             </value>
-                                            <next>
-                                              <block type="LLL_array_set" id="301" inline="true">
-                                                <field name="SPOT">reply</field>
-                                                <value name="ORDINAL">
-                                                  <block type="LLL_val" id="302">
-                                                    <field name="VAL">1</field>
-                                                  </block>
-                                                </value>
-                                                <value name="VAL">
-                                                  <block type="LLL_mval" id="307">
-                                                    <field name="VAL">result</field>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="LLL_return" id="297" inline="false">
-                                                    <value name="DATA_START">
-                                                      <block type="LLL_array" id="308">
-                                                        <field name="SPOT">result</field>
-                                                      </block>
-                                                    </value>
-                                                    <value name="DATA_LEN">
-                                                      <block type="LLL_val" id="309">
-                                                        <field name="VAL">1</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
                                           </block>
                                         </next>
                                       </block>
