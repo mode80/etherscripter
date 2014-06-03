@@ -10,9 +10,15 @@ Visual smart contract builder for Ethereum
     . lll
   . labels
 
+* is it (balance) or (balance (addreess))?
+
+* make a global "success" var 
 * erradicate bytes and target the Serpent subset?
 * storage "arrays?"
 * relentlessly simplify remaining blocks 
+  . make signed arthmatic / comparison the default and bury unsigned
+  . make a [_1st/2nd/etc_ response] block like the one for input
+  . make blocks that take numbered slots+length take "inline array blocks" instead
 
 * pull input out of "data at ___ spot",  replace with [__th input] and (maybe) [__bytes starting at byte ___ of _/memory/input_]
 * consider changing val block to require explicit quotes 
