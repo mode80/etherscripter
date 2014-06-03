@@ -56,36 +56,10 @@ Blockly.Blocks.ordinals =
    ['20th', '19'],
    ]
 
-// Blockly.Blocks['LLL_items'] = {
-//   init: function() {
-//     this.setTooltip('The numbered reply items to be sent with then next call block.') 
-//     this.setColour(ARRAY_COLOR)
-//     this.appendValueInput()
-//       .appendField(new Blockly.FieldDropdown(Blockly.Blocks.ordinals), 'INDEX')
-//       .appendField('item of data set =')
-//     this.setInputsInline(false)
-//     this.setPreviousStatement(true);
-//     this.setNextStatement(true);
-//   }
-// }
-
-Blockly.Blocks['LLL_reply'] = {
-  init: function() {
-    this.setTooltip('Ends the contract execution and replies to the caller with give number of formerly set reply items.')
-    this.setColour(PROCEDURE_COLOR);
-    this.appendValueInput('DATA_LEN')
-      .appendField('reply with first ')
-    this.appendDummyInput()
-      .appendField('items of data set')
-    this.setPreviousStatement(true)
-    this.setInputsInline(false)
-  }
-}
-
 Blockly.Blocks['LLL_reserve'] = {
   init: function() {
     this.setTooltip('Reserves the given amount of numbered temp slots. Using numbered temp slots without reserving them first yields unpredictable results.')
-    this.setColour(ARRAY_COLOR);
+    this.setColour(VAR_COLOR);
     this.appendValueInput('LEN')
       .appendField('reserve')
     this.appendDummyInput()
@@ -341,7 +315,7 @@ Blockly.Blocks['LLL_mstore'] = {
     this.setTooltip('Labels a temporary result. This stores the result at a temp spot identified by the @-prefixed label. This is a compact form of the [in temp spot __ put __] block. Data in a temp spot is cleared after the contract stops running this time.')
     this.setColour(VAR_COLOR)
     this.appendValueInput('VAL')
-      .appendField('var')
+      .appendField('label')
       .appendField(new Blockly.FieldTextInput('', varValidator ), 'SPOT')
       .appendField('=')
     this.setInputsInline(true)
@@ -371,7 +345,7 @@ Blockly.Blocks['LLL_mval'] = {
     this.setTooltip('The data in a given temp spot. It is a compact form of the [data at temp spot ___] block.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
-        .appendField('var')
+        .appendField('')
         .appendField(new Blockly.FieldTextInput('', varValidator ), 'VAL')
     this.setOutput(true)
   }
@@ -463,8 +437,8 @@ Blockly.Blocks['LLL_contract'] = {
   init: function() {
     this.setTooltip('Provides info about this contract.\n _address_ is this contract\'s address. _caller_ is the address of the contract caller (could be a contract). _balance_ is this contract\'s balance measured in wei. _1st_input_ is the first (32 bytes of) input provided by the caller. _input_count_ is the number of (32 byte) inputs provided. _calldata_length_ is the total length of all contract input (in bytes). _code_length_ is the length of this contract\'s code (in bytes). _temp_storage_size_ is the current memory usage in bytes. ')
     var VALS =
-      [['address', 'address'],
-       ['caller', 'caller'], 
+      [['caller', 'caller'],
+       ['address', 'address'],
        ['balance', 'balance'],
        ['1st input', '_input'],
        ['input count', '_input_count'],

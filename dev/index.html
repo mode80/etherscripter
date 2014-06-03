@@ -43,7 +43,7 @@
             <li><a onclick="showLLL(panes)">Show LLL</a></li>
           </ul>
         </li>
-        <!-- Toolbox -->
+        <!-- Tool Menu -->
         <li class="dropdown"> 
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Toolbox<b class="caret"></b> </a>
           <ul class="dropdown-menu" id="toolboxmenu" >
@@ -53,27 +53,31 @@
             <li class="divider"></li> 
             <li onclick="toggleTool(event)" id="comment"><a>comment</a></li>
             <li onclick="toggleTool(event)" id="val"><a>value</a></li>
-            <li onclick="toggleTool(event)" id="textval"><a>text value</a></li>
+            <!-- <li onclick="toggleTool(event)" id="textval"><a>text value</a></li> -->
             <li onclick="toggleTool(event)" id="currency"><a>currency</a></li>
-            <li onclick="toggleTool(event)" id="blockinfo"><a>block info</a></li>
-            <li onclick="toggleTool(event)" id="contract"><a>contract info</a></li>
             <li onclick="toggleTool(event)" id="tx"><a>transaction info</a></li>
+            <li onclick="toggleTool(event)" id="contract"><a>contract info</a></li>
+            <li onclick="toggleTool(event)" id="blockinfo"><a>block info</a></li>
             <li onclick="toggleTool(event)" id="input"><a>input</a></li>
             <li onclick="toggleTool(event)" id="thinput"><a>open input</a></li>
-            <!-- <li onclick="toggleTool(event)" id="items"><a>data items</a></li> -->
             <li onclick="toggleTool(event)" id="math"><a>math</a></li>
             <li onclick="toggleTool(event)" id="compare"><a>compare</a></li>
             <li onclick="toggleTool(event)" id="logic"><a>logic</a></li>
-            <li onclick="toggleTool(event)" id="store"><a>store</a></li>
-            <li onclick="toggleTool(event)" id="load"><a>load</a></li>
             <li onclick="toggleTool(event)" id="mstore"><a>temp store</a></li>
             <li onclick="toggleTool(event)" id="mval"><a>temp value</a></li>
+            <!--
             <li onclick="toggleTool(event)" id="sstore"><a>storage store</a></li>
             <li onclick="toggleTool(event)" id="sval"><a>storage value</a></li>
-            <li onclick="toggleTool(event)" id="reserve"><a>reserve array</a></li>
+            -->
+            <li onclick="toggleTool(event)" id="reserve"><a>reserve</a></li>
+            <li onclick="toggleTool(event)" id="load"><a>load</a></li>
+            <li onclick="toggleTool(event)" id="store"><a>store</a></li>
+            <!--        
+            <li onclick="toggleTool(event)" id="array_make"><a>array make</a></li>
             <li onclick="toggleTool(event)" id="array_set"><a>array set</a></li>
             <li onclick="toggleTool(event)" id="array_get"><a>array get</a></li>
             <li onclick="toggleTool(event)" id="array"><a>array</a></li>
+            -->        
             <li onclick="toggleTool(event)" id="spend"><a>spend</a></li>
             <li onclick="toggleTool(event)" id="stop"><a>stop</a></li>
             <li onclick="toggleTool(event)" id="suicide"><a>self destruct</a></li>
@@ -81,17 +85,18 @@
             <li onclick="toggleTool(event)" id="if"><a>if</a></li>
             <li onclick="toggleTool(event)" id="whileloop"><a>while loop</a></li>
             <li onclick="toggleTool(event)" id="init"><a>init</a></li>
-            <li onclick="toggleTool(event)" id="bitlogic"><a>bit logic</a></li>
-            <li onclick="toggleTool(event)" id="prefixop"><a>prefix</a></li>
-            <li onclick="toggleTool(event)" id="byte"><a>byte</a></li>
             <li onclick="toggleTool(event)" id="hash"><a>hash</a></li>
             <li onclick="toggleTool(event)" id="return"><a>return</a></li>
-            <li onclick="toggleTool(event)" id="reply"><a>reply</a></li>
+            <li onclick="toggleTool(event)" id="call"><a>call</a></li>
+            <!--
+            <li onclick="toggleTool(event)" id="prefixop"><a>prefix</a></li>
+            <li onclick="toggleTool(event)" id="bitlogic"><a>bit logic</a></li>
+            <li onclick="toggleTool(event)" id="byte"><a>byte</a></li>
+            <li onclick="toggleTool(event)" id="forloop"><a>for loop</a></li>
             <li onclick="toggleTool(event)" id="copy"><a>copy</a></li>
             <li onclick="toggleTool(event)" id="compile_max"><a>compile</a></li>
-            <li onclick="toggleTool(event)" id="call"><a>call</a></li>
             <li onclick="toggleTool(event)" id="create"><a>create</a></li>
-            <li onclick="toggleTool(event)" id="forloop"><a>for loop</a></li>
+            -->
           </ul>
         </li>
         <!-- Workspace -->
@@ -135,9 +140,7 @@
     <div id="pane1"style="position:relative; float:left; width:100%; height:10000px">
       <div id="content-BLL" 
         style="z-index:3; position:absolute; width:100%; height:10000px" ></div>
-<!--       <textarea id="content-XML" wrap="off" class="code" onkeydown="window.xml_dirty=true" 
-        style="z-index:2; position:absolute; width:100%; height:10000px"></textarea>
- -->      <div class="btn-group-vertical" style="position:absolute; top:10px; right:10px ; z-index:10">
+        <div class="btn-group-vertical" style="position:absolute; top:10px; right:10px ; z-index:10">
         <li id="btn-BLL1" class="btn btn-default btn-show active" onclick="showBLL(1)" ontouchstart="showBLL(1)">Blocks</li>
         <li id="btn-HLL1" class="btn btn-default btn-show 1pane-only" onclick="showHLL(panes)" ontouchstart="showHLL(panes)">Serpent</li>
         <!--<li id="btn-GLL1" class="btn btn-default btn-show 1pane-only" onclick="showGLL(panes)" ontouchstart="showGLL(panes)">Show GLL</li>-->
@@ -162,49 +165,54 @@
 
 <!-- Toolbox --> 
   <xml id="toolbox" style="display:none">
+    <!-- Blocks commented out below have working functionality but deemed overkill for typical usage -->
     <block type="LLL_comment"></block>
     <block type="LLL_val"><field name="VAL">0</field></block>
-    <block type="LLL_textval"><field name="VAL">text</field></block>
+    <!-- <block type="LLL_textval"><field name="VAL">text</field></block> -->
     <block type="LLL_currency"> <field name="DENOM">ether</field> <value name="AMT"> <block type="LLL_val"> <field name="VAL">0</field> </block> </value> </block>
-    <block type="LLL_blockinfo"></block>
-    <block type="LLL_contract"></block>
     <block type="LLL_tx"></block>
+    <block type="LLL_contract"></block>
+    <block type="LLL_blockinfo"></block>
     <block type="LLL_input"></block>
     <block type="LLL_thinput"></block>
-    <!-- <block type="LLL_items"></block> -->
     <block type="LLL_math"></block>
     <block type="LLL_compare"></block>
     <block type="LLL_logic"></block>
-    <block type="LLL_store"></block>
     <!-- <block type="LLL_save"></block> -->
-    <block type="LLL_load"></block>
     <block type="LLL_mstore"></block>
     <block type="LLL_mval"></block>
+    <!--     
     <block type="LLL_sstore"></block>
     <block type="LLL_sval"></block>
+     -->    
     <block type="LLL_reserve"></block>
+    <block type="LLL_load"></block>
+    <block type="LLL_store"></block>
+    <!--     
     <block type="LLL_array_make"></block>
     <block type="LLL_array_set"></block>
     <block type="LLL_array_get"></block>
     <block type="LLL_array"></block>
+     -->    
     <block type="LLL_spend"></block>
     <block type="LLL_stop"></block>
     <block type="LLL_suicide"></block>
     <block type="LLL_when"></block>
     <block type="LLL_if"></block>
     <block type="LLL_whileloop"></block>
-    <block type="LLL_forloop"></block>
+    <!-- <block type="LLL_forloop"></block> -->
     <block type="LLL_init"></block>
-    <block type="LLL_bitlogic"></block>
-    <block type="LLL_prefixop"></block>
-    <block type="LLL_byte"></block>
     <block type="LLL_hash"></block>
     <block type="LLL_return"></block>
-    <block type="LLL_reply"></block>
     <block type="LLL_call"></block>
+    <!--
+    <block type="LLL_bitlogic"></block>
+    <block type="LLL_byte"></block>
+    <block type="LLL_prefixop"></block>
+    <block type="LLL_copy"></block>
     <block type="LLL_create"></block>
     <block type="LLL_compile_max"></block>
-    <block type="LLL_copy"></block>
+    -->
   </xml>
 
 <!-- build:js -->

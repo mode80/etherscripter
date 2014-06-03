@@ -4,8 +4,6 @@ Visual smart contract builder for Ethereum
 
 ### TODO
 
-* fix lll to work with new temp array paradigm
-
 * switch to slots and slotlengths 
   . code expectations
     . serpent
