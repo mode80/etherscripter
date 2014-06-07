@@ -64,7 +64,7 @@ Blockly.LLL['LLL_array'] = function(block) {
 
 Blockly.LLL['LLL_input'] = function(block) {
   var index = block.getFieldValue('INDEX') || 0
-  var code = '(calldataload (* 32' + index + '))' 
+  var code = '(calldataload (* 32 ' + index + '))' 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
 
