@@ -58,7 +58,7 @@ Blockly.Blocks.ordinals =
 
 Blockly.Blocks['LLL_reserve'] = {
   init: function() {
-    this.setTooltip('Reserves the given amount of numbered temp slots. Using numbered temp slots without reserving them first yields unpredictable results.')
+    this.setTooltip('Reserves the given amount of numbered temp slots. Using numbered temp slots without reserving them first may cause unpredictable conflicts with named temp slots.')
     this.setColour(VAR_COLOR);
     this.appendValueInput('LEN')
       .appendField('reserve')
@@ -128,7 +128,7 @@ Blockly.Blocks['LLL_array'] = {
 
 Blockly.Blocks['LLL_input'] = {
   init: function() {
-    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: Here the first item is "1st" not 0)')
+    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. The first item is "1th", second is "2th" etc.)')
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
     this.appendDummyInput()
@@ -140,7 +140,7 @@ Blockly.Blocks['LLL_input'] = {
 
 Blockly.Blocks['LLL_thinput'] = {
   init: function() {
-    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: Here the first item is 1 not 0)')
+    this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: the first item is 1 not 0)')
     this.setColour(VALUE_COLOR)
     this.setOutput(true)
     this.appendValueInput('ORDINAL')
@@ -213,6 +213,7 @@ Blockly.Blocks['LLL_create'] = {
 
 Blockly.Blocks['LLL_init'] = {
   init: function() {
+    this.setTooltip('Code inside "init" runs one time only at contract creation. Code inside "body" is the code that gets run on every other contact with the contract. An init block is required for valid LLL.')
     this.setColour(LOOP_COLOR)
     this.appendStatementInput('INIT')
       .appendField('init')
@@ -274,7 +275,7 @@ var varValidator = function(given) {return given.replace(/^[0-9]+|[^a-z0-9_]/gi,
 
 Blockly.Blocks['LLL_mstore'] = {
   init: function() {
-    this.setTooltip('Labels a temporary result. This stores the result at a temp slot identified by the @-prefixed label. This is a compact form of the [in temp slot __ put __] block. Data in a temp slot is cleared after the contract stops running this time.')
+    this.setTooltip('Labels a temporary result. This stores the result at a temp slot identified by the given label. This is a compact form of the [in temp slot __ put __] block which only accepts text labels. Data in a temp slot is cleared after the contract stops running each time.')
     this.setColour(VAR_COLOR)
     this.appendValueInput('VAL')
       .appendField('label')
@@ -288,7 +289,7 @@ Blockly.Blocks['LLL_mstore'] = {
 
 Blockly.Blocks['LLL_sstore'] = {
   init: function() {
-    this.setTooltip('Labels a saved result. This stores the result in a save slot identified by the @@-prefixed label. This is a compact form of the [in save slot __ put __] block. Data in save slots are still available the next time this contract runs.')
+    this.setTooltip('Labels a saved result. This stores the result in a save slot identified by the given label. This is a compact form of the [in save slot __ put __] block which only accepts text labels. Data in save slots are still available the next time this contract runs.')
     this.setColour(VAR_COLOR)
     this.appendDummyInput()
       .appendField('save at')
@@ -397,7 +398,7 @@ Blockly.Blocks['LLL_tx'] = {
 
 Blockly.Blocks['LLL_contract'] = {
   init: function() {
-    this.setTooltip('Provides info about this contract.\n _address_ is this contract\'s address. _caller_ is the address of the contract caller (could be a contract). _balance_ is this contract\'s balance measured in wei. _1st_input_ is the first (32 bytes of) input provided by the caller. _input_count_ is the number of (32 byte) inputs provided. _calldata_length_ is the total length of all contract input (in bytes). _code_length_ is the length of this contract\'s code (in bytes). _temp_storage_size_ is the current memory usage in bytes. ')
+    this.setTooltip('Provides info about this contract.\n _caller_ is the address of the contract caller (could be a contract). _address_ is this contract\'s address. _balance_ is this contract\'s balance measured in wei. _1st_input_ is the first (32 bytes of) input provided by the caller. _input_count_ is the number of (32 byte) inputs provided.')
     var VALS =
       [['caller', 'caller'],
        ['address', 'address'],
@@ -418,7 +419,7 @@ Blockly.Blocks['LLL_contract'] = {
 
 Blockly.Blocks['LLL_hash'] = {
   init: function() {
-    this.setTooltip('Provides a "fingerprint" for the data in temp storage from the given start slot with the given length (in slots). Identical data always gives the same fingerprint.')
+    this.setTooltip('Provides a "fingerprint" (also known as a hash) for the data in temp storage starting at the given start slot with the given length (in slots). Identical data always gives the same fingerprint.')
     this.setColour(MATH_COLOR);
     this.setOutput(true)
     this.appendDummyInput()
@@ -433,7 +434,7 @@ Blockly.Blocks['LLL_hash'] = {
 
 Blockly.Blocks['LLL_return'] = {
   init: function() {
-    this.setTooltip('Ends the contract execution and provides the temp data starting at the given start slot and length (in slots) as a reply to this contract\'s caller.')
+    this.setTooltip('Provides the temp data starting at the given start slot and length (in slots) as a reply to this contract\'s caller then ends this contract\'s execution.')
     this.setColour(PROCEDURE_COLOR);
     this.appendDummyInput()
       .appendField('reply with data')
@@ -499,7 +500,7 @@ Blockly.Blocks['LLL_whileloop'] = {
 
 Blockly.Blocks['LLL_call'] = {
   init: function() {
-    this.setTooltip('Sends data and currency to another contract, causing that contract to run and reply with data, if any. Returns 0 upon failure or 1 upon success. _address_ is given for the receiving contract. _amount_ is the number of ethereum currency units to send. _fee_budget_ is the maximum number of minimal-cost run steps this contract will pay for. (This defaults to "all available" when not supplied). A _start_lpot_ and length (in slots) must be given for temp data to be sent and reply data to be received.')
+    this.setTooltip('Sends data and currency to another contract, causing that contract to run and reply with data, if any. Results in a 0 upon failure or 1 upon success. _address_ is given for the receiving contract. _amount_ is the number of ethereum currency units to send. _fee_budget_ is the maximum number of minimal-cost run steps this contract will pay for. A _temp_slot_#_ and length (in slots) must be given for the temp data to be sent and the reply data to be received.')
     this.setColour(PROCEDURE_COLOR)
     this.appendDummyInput()
       .appendField('call contract')
@@ -538,7 +539,7 @@ Blockly.Blocks['LLL_call'] = {
 Blockly.Blocks['LLL_val'] = {
   // validating input block for LLL-legal values
   init: function() {
-    this.setTooltip('Represents a number. Text provided here is converted to a number behind the scenes. Hex formated numbers, such as ethereum addresses, should be prefixed here with 0x.')
+    this.setTooltip('Represents a number. Quoted text provided here is converted to a number behind the scenes. Hex formated numbers, such as an ethereum addresses, should be prefixed here with 0x.')
     var validator = function(given) {
       var retval = given ? given : ''
       var is_hexprefixed = ((retval+'').substr(0,2).toUpperCase()=='0X') 
@@ -602,7 +603,7 @@ Blockly.Blocks['LLL_currency'] = {
 
 Blockly.Blocks['LLL_if'] = {
   init: function() {
-    this.setTooltip('Tests an _if_ condition and proceeds with the contents of _then_ when true or _else_ when false. A condition is usually supplied using a [compare] block. A result of 0 provided as a condition is considered false; anything else is considered true.')
+    this.setTooltip('Tests an _if_ condition and proceeds with the contents of _then_ when true or _else_ when false. A condition is usually supplied using a [compare] block. A result of 0 provided as a condition is considered false; any other number is considered true.')
     this.setColour(FLOW_COLOR);
     this.appendValueInput('COND')
         .setCheck('Boolean')
@@ -618,7 +619,7 @@ Blockly.Blocks['LLL_if'] = {
 
 Blockly.Blocks['LLL_when'] = {
   init: function() {
-    this.setTooltip('Tests a _when_ condition and proceeds with the contents of _then_ if it\'s true, or skips to the next block if it\'s false. A condition is usually supplied with a [compare] block. A result of 0 provided as a condition is considered false; anything else is considered true.')
+    this.setTooltip('Tests a _when_ condition and proceeds with the contents of _then_ if it\'s true, or skips to the next block if it\'s false. A condition is usually supplied with a [compare] block. A result of 0 provided as a condition is considered false; any other number is considered true.')
     var WORDS =
       [['when','when'],
       ['unless','unless']]
@@ -656,7 +657,7 @@ Blockly.Blocks['LLL_bitlogic'] = {
 
 Blockly.Blocks['LLL_compare'] = {
   init: function() {
-    this.setTooltip('Compares two results for use in other blocks that require a condition. (Signed variations treat very large numbers above 2^128 as being negative.)')
+    this.setTooltip('Compares two results for use in other blocks that require a condition.') // (Signed variations treat very large numbers above 2^128 as being negative.)')
     var OPERATORS =
       [['=', '='],
       ['>', '>'],
@@ -664,8 +665,9 @@ Blockly.Blocks['LLL_compare'] = {
       ['\u2260', '!='],
       ['\u2264', '<='],
       ['\u2265', '>='],
-      ['(signed >)', 'sgt'],
-      ['(signed <)', 'slt']]
+      // ['(signed >)', 'sgt'],
+      // ['(signed <)', 'slt']
+      ]
     this.setColour(MATH_COLOR);
     this.setOutput(true);
     this.appendValueInput('A')
@@ -679,11 +681,11 @@ Blockly.Blocks['LLL_compare'] = {
 
 Blockly.Blocks['LLL_logic'] = {
   init: function() {
-    this.setTooltip('Builds a new condition from two other conditions. _and_ has the same meaning as the English word. _or_ means either one or both. (_xor_ is rare. It means one or the other, but not both.)')
+    this.setTooltip('Builds a new condition from two other conditions. _and_ has the same meaning as the English word. _or_ means either one or both.')
     var OPERATORS =
       [['or', '||'] ,
       ['and', '&&'],
-      ['(xor)', 'xor'] ,
+      // ['(xor)', 'xor'] ,
       ];
     this.setColour(MATH_COLOR);
     this.setOutput(true);
@@ -698,7 +700,7 @@ Blockly.Blocks['LLL_logic'] = {
 
 Blockly.Blocks['LLL_math'] = {
   init: function() {
-    this.setTooltip('Represents the result of a math operation on two numbers. _+_ adds, _x_ multiplies, _-_ subtracts as expected. _÷_ divides, but gives the answer a "rounded down" whole number with no decimal places. _modulo_ gives the remainder after dividing the two numbers. _raised_to_ gives the result of the 1st number raised to the power of the 2nd number. (Traditional negative numbers are not available. Rather, numbers less than 0 "wrap around" to very large numbers between 2^128 and 2^255. The signed variations of _÷_ and _modulo_ treat these very large numbers as negative for the purpose of the calculation.)')
+    this.setTooltip('Represents the result of a math operation on two numbers. _+_ adds, _x_ multiplies, _-_ subtracts as expected. _÷_ divides, but gives the answer a "rounded down" whole number with no decimal places. _modulo_ gives the remainder after dividing the two numbers. _raised_to_ gives the result of the 1st number raised to the power of the 2nd number. ') //(Traditional negative numbers are not available. Rather, numbers less than 0 "wrap around" to very large numbers between 2^128 and 2^255. The signed variations of _÷_ and _modulo_ treat these very large numbers as negative for the purpose of the calculation.)')
     var OPERATORS =
       [['+', '+'],
       ['×', '*'],
@@ -706,8 +708,8 @@ Blockly.Blocks['LLL_math'] = {
       ['÷', 'div'],
       ['raised to', 'exp'],
       ['modulo', 'mod'],
-      ['(signed ÷)', 'sdiv'], // assumes top of the number range represents negative numbers 
-      ['(signed mod)', 'smod'] // "
+      // ['(signed ÷)', 'sdiv'], // assumes top of the number range represents negative numbers 
+      // ['(signed mod)', 'smod'] // "
       ] // ditto above for 'mod' 
     this.setColour(MATH_COLOR);
     this.setOutput(true);
@@ -722,7 +724,7 @@ Blockly.Blocks['LLL_math'] = {
 
 Blockly.Blocks['LLL_load'] = {
   init: function() {
-    this.setTooltip('Represents the data item stored at the given slot within temp storage or save storage. ')
+    this.setTooltip('Represents the data item stored at the given (named or numbered) location within temp storage or save storage. ')
     var PLACES = 
     [['save slot', 'sload'],
     ['temp slot', 'mload'],]
@@ -753,7 +755,7 @@ Blockly.Blocks['LLL_byte'] = {
 
 Blockly.Blocks['LLL_comment'] = {
   init: function() {
-    this.setTooltip('Has no effect on contract behaviour but provides for English notes on the nearby code.')
+    this.setTooltip('Has no effect on contract behaviour but provides for human notes on the nearby code.')
     this.setColour(COMMENT_COLOR);
     this.appendDummyInput()
       .appendField('note:')
@@ -786,7 +788,7 @@ Blockly.Blocks['LLL_suicide'] = {
 
 Blockly.Blocks['LLL_store'] = {
   init: function() {
-    this.setTooltip('Stores a result at a given temp or save location. Data in temp locations are only available while the contract runs this time. Data in save locations will also be available the next time it runs. Locations can be designated with either numbers or text labels.')
+    this.setTooltip('Stores a result at a given temp or save location. Data in temp locations are only available while the contract runs this time. Data in save locations will also be available the next time it runs. Locations here can be designated with either numbers or text labels.')
     var POOLS = 
 	  [['save slot', 'sstore'],
     ['temp slot', 'mstore']]
