@@ -94,7 +94,7 @@ Blockly.HLL['LLL_init'] = function(block) {
   // wrapper for contract init and body 
   var init = Blockly.HLL.statementToCode(block, 'INIT');
   var body = Blockly.HLL.statementToCode(block, 'BODY');
-  return 'if not (contract.storage["_CREATED_"]):\n' + init + '  contract.storage["_CREATED_"] = 1\nelse:\n' + body + '\n' 
+  return 'init:\n' + init + 'code:\n' + body + '\n' 
 }
 
 Blockly.HLL['LLL_byte'] = function(block) {

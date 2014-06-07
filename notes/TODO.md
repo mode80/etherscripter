@@ -4,35 +4,24 @@ Visual smart contract builder for Ethereum
 
 ### TODO
 
-* switch to slots and slotlengths 
-  . code expectations
-    . serpent
-    . lll
-  . labels
+* test 
+* revisit tooltips
+* rename blocks with consistent underscores, rename xml fields ?
+* sample to test calling a contract that returns 
+* RELEASE
 
-* is it (balance) or (balance (addreess))?
+* is it (balance) or (balance (address))?
 
-* make a global "success" var 
-* erradicate bytes and target the Serpent subset?
-* storage "arrays?"
 * relentlessly simplify remaining blocks 
   . make signed arthmatic / comparison the default and bury unsigned
+
+* improve approachability of calling other contracts
+  . make a global "success" var 
   . make a [_1st/2nd/etc_ response] block like the one for input
   . make blocks that take numbered slots+length take "inline array blocks" instead
 
-* pull input out of "data at ___ spot",  replace with [__th input] and (maybe) [__bytes starting at byte ___ of _/memory/input_]
-* consider changing val block to require explicit quotes 
-* look for other places require quote removal when used a spot identifiers
+* need [__bytes starting at byte ___ of _/memory/input_] ?
 
-* revisit tooltips
-
-* sample to test new POC-5 blocks
-* check order of operations are correct in block combos
-
-* rename blocks with consistent underscores, rename xml fields ?
-  . return -> reply
-
-* RELEASE
 
 * add Mutan? would need to post-process in order to add var definitions
 * save functionality using appengine(?) cloud storage (gitlab?)
