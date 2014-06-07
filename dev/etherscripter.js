@@ -237,27 +237,27 @@ function someToolsOn(event){
     var set = {}
     set.none = []
     set.minimal = [
-      'comment',
-      'val',
-      'tx',
-      'contract',
-      'blockinfo',
-      'math',
-      'compare',
-      'logic',
-      'store',
-      'load',
-      'spend',
-      'stop',
-      'when',
-      'whileloop',
-      'init',
+      'COMMENT',
+      'VAL',
+      'TX',
+      'CONTRACT',
+      'BLOCKINFO',
+      'MATH',
+      'COMPARE',
+      'LOGIC',
+      'STORE',
+      'LOAD',
+      'SPEND',
+      'STOP',
+      'WHEN',
+      'WHILELOOP',
+      'INIT',
     ]
     set.typical = set.minimal.concat([
-      'input',
-      'mstore',
-      'mval',
-      'if',
+      'INPUT',
+      'MSTORE',
+      'MVAL',
+      'IF',
     ])
   // which set was picked?
     var classname = event.target.className

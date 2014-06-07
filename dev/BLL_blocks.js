@@ -56,7 +56,7 @@ Blockly.Blocks.ordinals =
    ['20th', '19'],
    ]
 
-Blockly.Blocks['reserve'] = {
+Blockly.Blocks['RESERVE'] = {
   init: function() {
     this.setTooltip('Reserves the given amount of numbered temp slots. Using numbered temp slots without reserving them first may cause unpredictable conflicts with named temp slots.')
     this.setColour(VAR_COLOR);
@@ -70,7 +70,7 @@ Blockly.Blocks['reserve'] = {
   }
 };
 
-Blockly.Blocks['array_make'] = {
+Blockly.Blocks['ARRAY_MAKE'] = {
   init: function() {
     this.setTooltip('Makes a new named data set of the given size.')
     this.setColour(ARRAY_COLOR);
@@ -85,7 +85,7 @@ Blockly.Blocks['array_make'] = {
   }
 };
 
-Blockly.Blocks['array_get'] = {
+Blockly.Blocks['ARRAY_GET'] = {
   init: function() {
     this.setTooltip('Get the numbered data item from the named set. The "1th" item is the first item in the set. "2th" is second, etc.')
     this.setColour(ARRAY_COLOR);
@@ -99,7 +99,7 @@ Blockly.Blocks['array_get'] = {
   }
 };
 
-Blockly.Blocks['array_set'] = {
+Blockly.Blocks['ARRAY_SET'] = {
   init: function() {
     this.setTooltip('Set the numbered data item in the named set. The "1th" item is the first item in the set. "2th" is second, etc.')
     this.setColour(ARRAY_COLOR);
@@ -115,7 +115,7 @@ Blockly.Blocks['array_set'] = {
   }
 };
 
-Blockly.Blocks['array'] = {
+Blockly.Blocks['ARRAY'] = {
   init: function() {
     this.setTooltip('A reference to a previously created named data set.')
     this.setColour(ARRAY_COLOR)
@@ -126,7 +126,7 @@ Blockly.Blocks['array'] = {
   }
 }
 
-Blockly.Blocks['input'] = {
+Blockly.Blocks['INPUT'] = {
   init: function() {
     this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. The first item is "1th", second is "2th" etc.)')
     this.setColour(VALUE_COLOR)
@@ -138,7 +138,7 @@ Blockly.Blocks['input'] = {
   }
 }
 
-Blockly.Blocks['thinput'] = {
+Blockly.Blocks['THINPUT'] = {
   init: function() {
     this.setTooltip('The numbered input provided to this contract by the caller, as specified by the given ordinal number. (Programmers note: the first item is 1 not 0)')
     this.setColour(VALUE_COLOR)
@@ -150,7 +150,7 @@ Blockly.Blocks['thinput'] = {
   }
 }
 
-Blockly.Blocks['copy'] = {
+Blockly.Blocks['COPY'] = {
   init: function() {
     var OPS =
         [
@@ -173,7 +173,7 @@ Blockly.Blocks['copy'] = {
 }
 
 
-Blockly.Blocks['compile_max'] = {
+Blockly.Blocks['COMPILE_MAX'] = {
   init: function() {
     this.setTooltip('Compiles code to the temp slot provided, and returns the compiled length, measured in bytes. Compiled code will be truncated if necessary so as not to exceed the maximum length provided in slots.')
     this.setColour(PROCEDURE_COLOR)
@@ -190,7 +190,7 @@ Blockly.Blocks['compile_max'] = {
   }
 };
 
-Blockly.Blocks['create'] = {
+Blockly.Blocks['CREATE'] = {
   init: function() {
     this.setTooltip('Creates a new contract from the compiled code at the given temp slot, endows it with the given amount of currency, and returns the address of the new contract (or 0 if it fails).')
     this.setColour(PROCEDURE_COLOR);
@@ -211,7 +211,7 @@ Blockly.Blocks['create'] = {
   }
 }
 
-Blockly.Blocks['init'] = {
+Blockly.Blocks['INIT'] = {
   init: function() {
     this.setTooltip('Code inside "init" runs one time only at contract creation. Code inside "body" is the code that gets run on every other contact with the contract. An init block is required for valid LLL.')
     this.setColour(LOOP_COLOR)
@@ -226,7 +226,7 @@ Blockly.Blocks['init'] = {
 };
 
 
-// Blockly.Blocks['balance'] = {
+// Blockly.Blocks['BALANCE'] = {
 //   init: function() {
 //     this.setTooltip('Represents the currency unit balance of the provided address.')
 //     this.setColour(MATH_COLOR);
@@ -237,7 +237,7 @@ Blockly.Blocks['init'] = {
 //   }
 // };
 
-// Blockly.Blocks['send'] = {
+// Blockly.Blocks['SEND'] = {
 //   init: function() {
 //     this.setTooltip('Sends data and ethereum currency to another contract, causing that contract to run and reply with data, if any. _address_ is given for the receiving contract. _amount_ is the number of ethereum currency units to send. _fee_budget_ is the maximum number of minimal-cost run steps this contract will pay for. A _start_slot_ and _end_slot_ must be given for temp data to be sent and the location of reply data to be received.')
 //     this.setColour(PROCEDURE_COLOR)
@@ -273,7 +273,7 @@ Blockly.Blocks['init'] = {
 var valValidator = function(given) {return given.replace(/[^a-z0-9_]/gi,'')}
 var varValidator = function(given) {return given.replace(/^[0-9]+|[^a-z0-9_]/gi,'')}
 
-Blockly.Blocks['mstore'] = {
+Blockly.Blocks['MSTORE'] = {
   init: function() {
     this.setTooltip('Labels a temporary result. This stores the result at a temp slot identified by the given label. This is a compact form of the [in temp slot __ put __] block which only accepts text labels. Data in a temp slot is cleared after the contract stops running each time.')
     this.setColour(VAR_COLOR)
@@ -287,7 +287,7 @@ Blockly.Blocks['mstore'] = {
   }
 }
 
-Blockly.Blocks['sstore'] = {
+Blockly.Blocks['SSTORE'] = {
   init: function() {
     this.setTooltip('Labels a saved result. This stores the result in a save slot identified by the given label. This is a compact form of the [in save slot __ put __] block which only accepts text labels. Data in save slots are still available the next time this contract runs.')
     this.setColour(VAR_COLOR)
@@ -303,7 +303,7 @@ Blockly.Blocks['sstore'] = {
 }
 
 
-Blockly.Blocks['mval'] = {
+Blockly.Blocks['MVAL'] = {
   init: function() {
     this.setTooltip('The data in a given temp slot. It is a compact form of the [data at temp slot ___] block.')
     this.setColour(VAR_COLOR)
@@ -314,7 +314,7 @@ Blockly.Blocks['mval'] = {
   }
 }
 
-Blockly.Blocks['sval'] = {
+Blockly.Blocks['SVAL'] = {
   init: function() {
     this.setTooltip('The data in a given save slot. It is a compact form of the [data at save slot ___] block.')
     this.setColour(VAR_COLOR)
@@ -325,7 +325,7 @@ Blockly.Blocks['sval'] = {
   }
 }
 
-Blockly.Blocks['textval'] = {
+Blockly.Blocks['TEXTVAL'] = {
   init: function() {
     this.setTooltip('Represents a string of text up to 32 letters long.')
     var validator = function(given) {return given.substr(0,32)}
@@ -342,7 +342,7 @@ Blockly.Blocks['textval'] = {
 // New POC-4 blocks 
 ///////
 
-Blockly.Blocks['spend'] = {
+Blockly.Blocks['SPEND'] = {
   init: function() {
     this.setTooltip('Spends the given amount of ethereum currency to the given address. The currency amount can be provided as a simple number representing the amount of wei, or using a [__ ether] block for various other denominations.')
 
@@ -358,7 +358,7 @@ Blockly.Blocks['spend'] = {
   }
 }
 
-Blockly.Blocks['blockinfo'] = {
+Blockly.Blocks['BLOCKINFO'] = {
   init: function() {
     this.setTooltip('Provides info about this blockchain block.\n _timestamp_ is when the block was mined, measured as the number of seconds since 1970 UTC.\n _number_ is the block number.\n _previous_hash_ is the data fingerprint for the last block (not this one).\n _coinbase_ is the address of the miner rewarded for finding this block.\n _difficulty_ is a measure of the current difficulty for mining this block.\n _total_gas_ is the total of all fees available for contract execution on this block, measured in gas units.\n')
     var VALS =
@@ -378,7 +378,7 @@ Blockly.Blocks['blockinfo'] = {
   }
 }
 
-Blockly.Blocks['tx'] = {
+Blockly.Blocks['TX'] = {
   init: function() {
     this.setTooltip('Provides info about this transaction. A transaction is any interaction with a contract.\n _amount_ is the monetary value sent in this transaction, measured in wei. _origin_ is the address of the original sender (never a contract). _gas_left_ is the remaining fees available for execution, measured in gas units. _gas_price_ is the amount of wei on offer as a fee for 1 unit of gas. (1 wei is the smallest unit of ethereum currency. 1 unit of gas is the minimum cost for an execution step.)\n')
     var VALS =
@@ -396,7 +396,7 @@ Blockly.Blocks['tx'] = {
   }
 }
 
-Blockly.Blocks['contract'] = {
+Blockly.Blocks['CONTRACT'] = {
   init: function() {
     this.setTooltip('Provides info about this contract.\n _caller_ is the address of the contract caller (could be a contract). _address_ is this contract\'s address. _balance_ is this contract\'s balance measured in wei. _1st_input_ is the first (32 bytes of) input provided by the caller. _input_count_ is the number of (32 byte) inputs provided.')
     var VALS =
@@ -417,7 +417,7 @@ Blockly.Blocks['contract'] = {
   }
 }
 
-Blockly.Blocks['hash'] = {
+Blockly.Blocks['HASH'] = {
   init: function() {
     this.setTooltip('Provides a "fingerprint" (also known as a hash) for the data in temp storage starting at the given start slot with the given length (in slots). Identical data always gives the same fingerprint.')
     this.setColour(MATH_COLOR);
@@ -432,7 +432,7 @@ Blockly.Blocks['hash'] = {
   }
 }
 
-Blockly.Blocks['return'] = {
+Blockly.Blocks['RETURN'] = {
   init: function() {
     this.setTooltip('Provides the temp data starting at the given start slot and length (in slots) as a reply to this contract\'s caller then ends this contract\'s execution.')
     this.setColour(PROCEDURE_COLOR);
@@ -447,7 +447,7 @@ Blockly.Blocks['return'] = {
   }
 }
 
-Blockly.Blocks['prefixop'] = {
+Blockly.Blocks['PREFIXOP'] = {
   init: function() {
     this.setTooltip('Prefix operators. _not_ reverses a condition\'s result. _negative_ translates a positive numbers to its negative form. ')
     var OPERATORS =
@@ -462,7 +462,7 @@ Blockly.Blocks['prefixop'] = {
   }
 }
 
-Blockly.Blocks['forloop'] = {
+Blockly.Blocks['FORLOOP'] = {
   init: function() {
     this.setTooltip('Sets up a loop of repeating code where: the _once_do_ statements happen first, then a _while_ condition is tested which either skips to the next block when false, or otherwise carries out the contents of _repeatedly_, followed by the contents of _each_time_ before looping back to test the _while_ condition once again, etc.')
     var OPERATORS =
@@ -481,7 +481,7 @@ Blockly.Blocks['forloop'] = {
   }
 }
 
-Blockly.Blocks['whileloop'] = {
+Blockly.Blocks['WHILELOOP'] = {
   init: function() {
     this.setTooltip('Sets up a loop of repeating code where: a _while_ or _until_ condition is tested, causing execution to either skip to the next block or otherwise carry out the contents of the _repeat_ section before looping back to test the condition once again, and so forth.')
     var OPERATORS =
@@ -498,7 +498,7 @@ Blockly.Blocks['whileloop'] = {
   }
 }
 
-Blockly.Blocks['call'] = {
+Blockly.Blocks['CALL'] = {
   init: function() {
     this.setTooltip('Sends data and currency to another contract, causing that contract to run and reply with data, if any. Results in a 0 upon failure or 1 upon success. _address_ is given for the receiving contract. _amount_ is the number of ethereum currency units to send. _fee_budget_ is the maximum number of minimal-cost run steps this contract will pay for. A _temp_slot_#_ and length (in slots) must be given for the temp data to be sent and the reply data to be received.')
     this.setColour(PROCEDURE_COLOR)
@@ -536,7 +536,7 @@ Blockly.Blocks['call'] = {
 
 // Value blocks 
 
-Blockly.Blocks['val'] = {
+Blockly.Blocks['VAL'] = {
   // validating input block for LLL-legal values
   init: function() {
     this.setTooltip('Represents a number. Quoted text provided here is converted to a number behind the scenes. Hex formated numbers, such as an ethereum addresses, should be prefixed here with 0x.')
@@ -564,7 +564,7 @@ Blockly.Blocks['val'] = {
   }
 };
 
-Blockly.Blocks['currency'] = {
+Blockly.Blocks['CURRENCY'] = {
   init: function() {
     this.setTooltip('Represents an amount of ethereum currency units.')
     var DENOMS =
@@ -601,7 +601,7 @@ Blockly.Blocks['currency'] = {
 
 // Flow control blocks
 
-Blockly.Blocks['if'] = {
+Blockly.Blocks['IF'] = {
   init: function() {
     this.setTooltip('Tests an _if_ condition and proceeds with the contents of _then_ when true or _else_ when false. A condition is usually supplied using a [compare] block. A result of 0 provided as a condition is considered false; any other number is considered true.')
     this.setColour(FLOW_COLOR);
@@ -617,7 +617,7 @@ Blockly.Blocks['if'] = {
   }
 };
 
-Blockly.Blocks['when'] = {
+Blockly.Blocks['WHEN'] = {
   init: function() {
     this.setTooltip('Tests a _when_ condition and proceeds with the contents of _then_ if it\'s true, or skips to the next block if it\'s false. A condition is usually supplied with a [compare] block. A result of 0 provided as a condition is considered false; any other number is considered true.')
     var WORDS =
@@ -636,7 +636,7 @@ Blockly.Blocks['when'] = {
 
 // Function value blocks 
 
-Blockly.Blocks['bitlogic'] = {
+Blockly.Blocks['BITLOGIC'] = {
   init: function() {
     this.setTooltip('Performs bitwise logic operations. These are almost never needed but if you do, you\'ll already know what they are.')
     var OPERATORS =
@@ -655,7 +655,7 @@ Blockly.Blocks['bitlogic'] = {
   }
 };
 
-Blockly.Blocks['compare'] = {
+Blockly.Blocks['COMPARE'] = {
   init: function() {
     this.setTooltip('Compares two results for use in other blocks that require a condition.') // (Signed variations treat very large numbers above 2^128 as being negative.)')
     var OPERATORS =
@@ -679,7 +679,7 @@ Blockly.Blocks['compare'] = {
   }
 };
 
-Blockly.Blocks['logic'] = {
+Blockly.Blocks['LOGIC'] = {
   init: function() {
     this.setTooltip('Builds a new condition from two other conditions. _and_ has the same meaning as the English word. _or_ means either one or both.')
     var OPERATORS =
@@ -698,7 +698,7 @@ Blockly.Blocks['logic'] = {
   }
 };
 
-Blockly.Blocks['math'] = {
+Blockly.Blocks['MATH'] = {
   init: function() {
     this.setTooltip('Represents the result of a math operation on two numbers. _+_ adds, _x_ multiplies, _-_ subtracts as expected. _÷_ divides, but gives the answer a "rounded down" whole number with no decimal places. _modulo_ gives the remainder after dividing the two numbers. _raised_to_ gives the result of the 1st number raised to the power of the 2nd number. ') //(Traditional negative numbers are not available. Rather, numbers less than 0 "wrap around" to very large numbers between 2^128 and 2^255. The signed variations of _÷_ and _modulo_ treat these very large numbers as negative for the purpose of the calculation.)')
     var OPERATORS =
@@ -722,7 +722,7 @@ Blockly.Blocks['math'] = {
   }
 };
 
-Blockly.Blocks['load'] = {
+Blockly.Blocks['LOAD'] = {
   init: function() {
     this.setTooltip('Represents the data item stored at the given (named or numbered) location within temp storage or save storage. ')
     var PLACES = 
@@ -738,7 +738,7 @@ Blockly.Blocks['load'] = {
   }
 };
 
-Blockly.Blocks['byte'] = {
+Blockly.Blocks['BYTE'] = {
   init: function() {
     this.setTooltip('Represents the byte of data (often a "letter") numbered from 0 to 31 within the given data item.')
     this.setColour(MATH_COLOR);
@@ -753,7 +753,7 @@ Blockly.Blocks['byte'] = {
 
 // Statements
 
-Blockly.Blocks['comment'] = {
+Blockly.Blocks['COMMENT'] = {
   init: function() {
     this.setTooltip('Has no effect on contract behaviour but provides for human notes on the nearby code.')
     this.setColour(COMMENT_COLOR);
@@ -765,7 +765,7 @@ Blockly.Blocks['comment'] = {
   }
 };
 
-Blockly.Blocks['stop'] = {
+Blockly.Blocks['STOP'] = {
   init: function() {
     this.setTooltip('Stops executing code (until the contract is called the next time)')
     this.setColour(STATEMENT_COLOR);
@@ -775,7 +775,7 @@ Blockly.Blocks['stop'] = {
   }
 };
 
-Blockly.Blocks['suicide'] = {
+Blockly.Blocks['SUICIDE'] = {
   init: function() {
     this.setTooltip('Destroys the contract along with any saved data, sending any ethereum currency balance to the provided address.')
     this.setColour(STATEMENT_COLOR);
@@ -786,7 +786,7 @@ Blockly.Blocks['suicide'] = {
   }
 };
 
-Blockly.Blocks['store'] = {
+Blockly.Blocks['STORE'] = {
   init: function() {
     this.setTooltip('Stores a result at a given temp or save location. Data in temp locations are only available while the contract runs this time. Data in save locations will also be available the next time it runs. Locations here can be designated with either numbers or text labels.')
     var POOLS = 
