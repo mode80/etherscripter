@@ -128,7 +128,7 @@ Blockly.HLL['LLL_sstore'] = function(block) {
 Blockly.HLL['LLL_mval'] = function(block) {
   // gets value from a memory spot 
   var order = Blockly.HLL.ORDER_NONE;
-  var spot = block.getFieldValue('VAL') || 0  
+  var spot = block.getFieldValue('SPOT') || 0  
   var code = '' + spot + ''
   return [code, Blockly.HLL.ORDER_ATOMIC]
 }
@@ -136,7 +136,7 @@ Blockly.HLL['LLL_mval'] = function(block) {
 Blockly.HLL['LLL_sval'] = function(block) {
   // gets value from a storage spot 
   var order = Blockly.HLL.ORDER_NONE;
-  var spot = block.getFieldValue('VAL') || 0  
+  var spot = block.getFieldValue('SPOT') || 0  
   spot = Blockly.HLL.smartVal(spot)
   var code = 'contract.storage[' + spot + ']'
   return [code, Blockly.HLL.ORDER_ATOMIC]
@@ -197,9 +197,9 @@ Blockly.HLL['LLL_call'] = function(block) {
   var money = Blockly.HLL.valueToCode(block, 'MONEY', Blockly.HLL.ORDER_NONE) || 0
   var gas = Blockly.HLL.valueToCode(block, 'GAS', Blockly.HLL.ORDER_NONE) || Blockly.HLL.MAX_GAS 
   var send_start = Blockly.HLL.valueToCode(block, 'SEND_DATA_START', Blockly.HLL.ORDER_NONE) || 0
-  var send_len= Blockly.HLL.valueToCode(block, 'SEND_DATA_BYTES', Blockly.HLL.ORDER_NONE) || 0
+  var send_len= Blockly.HLL.valueToCode(block, 'SEND_DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
   var reply_start = Blockly.HLL.valueToCode(block, 'REPLY_DATA_START', Blockly.HLL.ORDER_NONE) || 0
-  var reply_len= Blockly.HLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.HLL.ORDER_NONE) || 0
+  var reply_len= Blockly.HLL.valueToCode(block, 'REPLY_DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
   send_start = 'temp+' + send_start + '*32' 
   reply_start= 'temp+' + reply_start + '*32' 
   // msg(to, value, gas, datastart, datalen, outputstart, outputlen)

@@ -66,12 +66,12 @@ random: fnCommentToString(function(){/*!
                             <field name="OP">-</field>
                             <value name="A">
                               <block type="LLL_mval" id="60">
-                                <field name="VAL">upper_bound</field>
+                                <field name="SPOT">upper_bound</field>
                               </block>
                             </value>
                             <value name="B">
                               <block type="LLL_mval" id="61">
-                                <field name="VAL">lower_bound</field>
+                                <field name="SPOT">lower_bound</field>
                               </block>
                             </value>
                           </block>
@@ -113,7 +113,7 @@ random: fnCommentToString(function(){/*!
                                 </value>
                                 <value name="VAL">
                                   <block type="LLL_mval" id="70">
-                                    <field name="VAL">seed</field>
+                                    <field name="SPOT">seed</field>
                                   </block>
                                 </value>
                                 <next>
@@ -141,7 +141,7 @@ random: fnCommentToString(function(){/*!
                                             <field name="OP">+</field>
                                             <value name="A">
                                               <block type="LLL_mval" id="168">
-                                                <field name="VAL">lower_bound</field>
+                                                <field name="SPOT">lower_bound</field>
                                               </block>
                                             </value>
                                             <value name="B">
@@ -149,12 +149,12 @@ random: fnCommentToString(function(){/*!
                                                 <field name="OP">mod</field>
                                                 <value name="A">
                                                   <block type="LLL_mval" id="164">
-                                                    <field name="VAL">randomness</field>
+                                                    <field name="SPOT">randomness</field>
                                                   </block>
                                                 </value>
                                                 <value name="B">
                                                   <block type="LLL_mval" id="165">
-                                                    <field name="VAL">range</field>
+                                                    <field name="SPOT">range</field>
                                                   </block>
                                                 </value>
                                               </block>
@@ -171,7 +171,7 @@ random: fnCommentToString(function(){/*!
                                             </value>
                                             <value name="VAL">
                                               <block type="LLL_mval" id="77">
-                                                <field name="VAL">result</field>
+                                                <field name="SPOT">result</field>
                                               </block>
                                             </value>
                                             <next>
@@ -392,7 +392,7 @@ mitch_jack_bet: fnCommentToString(function(){/*!
                                                     <field name="NOTE">If BTC is over 2000 pay off Mitch</field>
                                                     <next>
                                                       <block type="LLL_spend" id="120" inline="true">
-                                                        <value name="MONEY">
+                                                        <value name="AMOUNT">
                                                           <block type="LLL_contract" id="121">
                                                             <field name="PROP">balance</field>
                                                           </block>
@@ -416,7 +416,7 @@ mitch_jack_bet: fnCommentToString(function(){/*!
                                                     <field name="NOTE">Otherwise it must not be over 2000 so pay off Jack</field>
                                                     <next>
                                                       <block type="LLL_spend" id="125" inline="true">
-                                                        <value name="MONEY">
+                                                        <value name="AMOUNT">
                                                           <block type="LLL_contract" id="126">
                                                             <field name="PROP">balance</field>
                                                           </block>
@@ -510,7 +510,7 @@ coin_flip: fnCommentToString(function(){/*!
                 <field name="NOTE">On a winning flip, the sender gets double their money back</field>
                 <next>
                   <block type="LLL_spend" id="511" inline="true">
-                    <value name="MONEY">
+                    <value name="AMOUNT">
                       <block type="LLL_math" id="512" inline="true">
                         <field name="OP">*</field>
                         <value name="A">
@@ -684,7 +684,7 @@ sales: fnCommentToString(function(){/*!
                     </value>
                     <next>
                       <block type="LLL_spend" id="109" inline="true">
-                        <value name="MONEY">
+                        <value name="AMOUNT">
                           <block type="LLL_contract" id="110">
                             <field name="PROP">balance</field>
                           </block>
@@ -831,7 +831,7 @@ last_will: fnCommentToString(function(){/*!
                                                     <field name="OP">&lt;=</field>
                                                     <value name="A">
                                                       <block type="LLL_mval" id="81">
-                                                        <field name="VAL">i</field>
+                                                        <field name="SPOT">i</field>
                                                       </block>
                                                     </value>
                                                     <value name="B">
@@ -852,7 +852,7 @@ last_will: fnCommentToString(function(){/*!
                                                             <field name="OP">+</field>
                                                             <value name="A">
                                                               <block type="LLL_mval" id="94">
-                                                                <field name="VAL">i</field>
+                                                                <field name="SPOT">i</field>
                                                               </block>
                                                             </value>
                                                             <value name="B">
@@ -875,7 +875,7 @@ last_will: fnCommentToString(function(){/*!
                                                                 </value>
                                                                 <value name="B">
                                                                   <block type="LLL_mval" id="87">
-                                                                    <field name="VAL">i</field>
+                                                                    <field name="SPOT">i</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
@@ -884,7 +884,7 @@ last_will: fnCommentToString(function(){/*!
                                                               <block type="LLL_thinput" id="147" inline="true">
                                                                 <value name="ORDINAL">
                                                                   <block type="LLL_mval" id="148">
-                                                                    <field name="VAL">i</field>
+                                                                    <field name="SPOT">i</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
@@ -903,7 +903,7 @@ last_will: fnCommentToString(function(){/*!
                                                         <field name="OP">&lt;=</field>
                                                         <value name="A">
                                                           <block type="LLL_mval" id="98">
-                                                            <field name="VAL">i</field>
+                                                            <field name="SPOT">i</field>
                                                           </block>
                                                         </value>
                                                         <value name="B">
@@ -929,7 +929,7 @@ last_will: fnCommentToString(function(){/*!
                                                                 <field name="OP">+</field>
                                                                 <value name="A">
                                                                   <block type="LLL_mval" id="109">
-                                                                    <field name="VAL">i</field>
+                                                                    <field name="SPOT">i</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
@@ -952,7 +952,7 @@ last_will: fnCommentToString(function(){/*!
                                                                     </value>
                                                                     <value name="B">
                                                                       <block type="LLL_mval" id="105">
-                                                                        <field name="VAL">i</field>
+                                                                        <field name="SPOT">i</field>
                                                                       </block>
                                                                     </value>
                                                                   </block>
@@ -1078,7 +1078,7 @@ last_will: fnCommentToString(function(){/*!
                                                         <field name="OP">&lt;</field>
                                                         <value name="A">
                                                           <block type="LLL_mval" id="133">
-                                                            <field name="VAL">i</field>
+                                                            <field name="SPOT">i</field>
                                                           </block>
                                                         </value>
                                                         <value name="B">
@@ -1095,9 +1095,9 @@ last_will: fnCommentToString(function(){/*!
                                                     </value>
                                                     <statement name="DO">
                                                       <block type="LLL_spend" id="136" inline="true">
-                                                        <value name="MONEY">
+                                                        <value name="AMOUNT">
                                                           <block type="LLL_mval" id="137">
-                                                            <field name="VAL">PORTION</field>
+                                                            <field name="SPOT">PORTION</field>
                                                           </block>
                                                         </value>
                                                         <value name="TO">
@@ -1113,7 +1113,7 @@ last_will: fnCommentToString(function(){/*!
                                                                 </value>
                                                                 <value name="B">
                                                                   <block type="LLL_mval" id="141">
-                                                                    <field name="VAL">i</field>
+                                                                    <field name="SPOT">i</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
@@ -1128,7 +1128,7 @@ last_will: fnCommentToString(function(){/*!
                                                                 <field name="OP">+</field>
                                                                 <value name="A">
                                                                   <block type="LLL_mval" id="144">
-                                                                    <field name="VAL">i</field>
+                                                                    <field name="SPOT">i</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
@@ -1501,7 +1501,7 @@ marriage: fnCommentToString(function(){/*!
                                     <field name="NOTE">If a withdraw request is already pending from the other partner and this request matches, then do it.</field>
                                     <next>
                                       <block type="LLL_spend" id="360" inline="true">
-                                        <value name="MONEY">
+                                        <value name="AMOUNT">
                                           <block type="LLL_load" id="361" inline="true">
                                             <field name="POOL">sload</field>
                                             <value name="SPOT">
@@ -1656,7 +1656,7 @@ marriage: fnCommentToString(function(){/*!
                                                 </value>
                                                 <next>
                                                   <block type="LLL_spend" id="393" inline="true">
-                                                    <value name="MONEY">
+                                                    <value name="AMOUNT">
                                                       <block type="LLL_load" id="394" inline="true">
                                                         <field name="POOL">mload</field>
                                                         <value name="SPOT">
@@ -1678,7 +1678,7 @@ marriage: fnCommentToString(function(){/*!
                                                     </value>
                                                     <next>
                                                       <block type="LLL_spend" id="398" inline="true">
-                                                        <value name="MONEY">
+                                                        <value name="AMOUNT">
                                                           <block type="LLL_load" id="399" inline="true">
                                                             <field name="POOL">mload</field>
                                                             <value name="SPOT">
@@ -1872,7 +1872,7 @@ toothfairy: fnCommentToString(function(){/*!
                     </value>
                     <statement name="THEN">
                       <block type="LLL_spend" id="73" inline="true">
-                        <value name="MONEY">
+                        <value name="AMOUNT">
                           <block type="LLL_contract" id="74">
                             <field name="PROP">balance</field>
                           </block>
@@ -1894,7 +1894,7 @@ toothfairy: fnCommentToString(function(){/*!
                         <field name="NOTE">Anyone else calling just gets their funds back</field>
                         <next>
                           <block type="LLL_spend" id="78" inline="true">
-                            <value name="MONEY">
+                            <value name="AMOUNT">
                               <block type="LLL_tx" id="79">
                                 <field name="PROP">callvalue</field>
                               </block>
@@ -2202,7 +2202,7 @@ insurance: fnCommentToString(function(){/*!
                                                 </value>
                                                 <value name="B">
                                                   <block type="LLL_mval" id="386">
-                                                    <field name="VAL">POLICY_MONTHS</field>
+                                                    <field name="SPOT">POLICY_MONTHS</field>
                                                   </block>
                                                 </value>
                                               </block>
@@ -2221,7 +2221,7 @@ insurance: fnCommentToString(function(){/*!
                                         </value>
                                         <statement name="THEN">
                                           <block type="LLL_spend" id="389" inline="true">
-                                            <value name="MONEY">
+                                            <value name="AMOUNT">
                                               <block type="LLL_input" id="395">
                                                 <field name="INDEX">0</field>
                                               </block>
@@ -2326,7 +2326,7 @@ vote_registry: fnCommentToString(function(){/*!
                             <field name="POOL">sstore</field>
                             <value name="SPOT">
                               <block type="LLL_mval" id="570">
-                                <field name="VAL">VOTED_ITEM</field>
+                                <field name="SPOT">VOTED_ITEM</field>
                               </block>
                             </value>
                             <value name="VAL">
@@ -2337,7 +2337,7 @@ vote_registry: fnCommentToString(function(){/*!
                                     <field name="POOL">sload</field>
                                     <value name="SPOT">
                                       <block type="LLL_mval" id="573">
-                                        <field name="VAL">VOTED_ITEM</field>
+                                        <field name="SPOT">VOTED_ITEM</field>
                                       </block>
                                     </value>
                                   </block>
@@ -2362,7 +2362,7 @@ vote_registry: fnCommentToString(function(){/*!
                                     </value>
                                     <value name="VAL">
                                       <block type="LLL_mval" id="578">
-                                        <field name="VAL">VOTED_ITEM</field>
+                                        <field name="SPOT">VOTED_ITEM</field>
                                       </block>
                                     </value>
                                   </block>
@@ -2392,7 +2392,7 @@ vote_registry: fnCommentToString(function(){/*!
                                     </value>
                                     <value name="B">
                                       <block type="LLL_sval" id="584">
-                                        <field name="VAL">ADMIN</field>
+                                        <field name="SPOT">ADMIN</field>
                                       </block>
                                     </value>
                                   </block>
@@ -2402,7 +2402,7 @@ vote_registry: fnCommentToString(function(){/*!
                                     <field name="OP">not</field>
                                     <value name="A">
                                       <block type="LLL_mval" id="586">
-                                        <field name="VAL">VOTED_ITEM</field>
+                                        <field name="SPOT">VOTED_ITEM</field>
                                       </block>
                                     </value>
                                   </block>
@@ -2411,14 +2411,14 @@ vote_registry: fnCommentToString(function(){/*!
                             </value>
                             <statement name="THEN">
                               <block type="LLL_spend" id="587" inline="true">
-                                <value name="MONEY">
+                                <value name="AMOUNT">
                                   <block type="LLL_contract" id="588">
                                     <field name="PROP">balance</field>
                                   </block>
                                 </value>
                                 <value name="TO">
                                   <block type="LLL_sval" id="589">
-                                    <field name="VAL">ADMIN</field>
+                                    <field name="SPOT">ADMIN</field>
                                   </block>
                                 </value>
                               </block>
@@ -2481,7 +2481,7 @@ swear_jar: fnCommentToString(function(){/*!
                     <field name="OP">=</field>
                     <value name="A">
                       <block type="LLL_mval" id="408">
-                        <field name="VAL">CALLER_TOTAL</field>
+                        <field name="SPOT">CALLER_TOTAL</field>
                       </block>
                     </value>
                     <value name="B">
@@ -2496,7 +2496,7 @@ swear_jar: fnCommentToString(function(){/*!
                     <field name="POOL">sstore</field>
                     <value name="SPOT">
                       <block type="LLL_sval" id="411">
-                        <field name="VAL">NEXT_MEMBER_SPOT</field>
+                        <field name="SPOT">NEXT_MEMBER_SPOT</field>
                       </block>
                     </value>
                     <value name="VAL">
@@ -2512,7 +2512,7 @@ swear_jar: fnCommentToString(function(){/*!
                             <field name="OP">+</field>
                             <value name="A">
                               <block type="LLL_sval" id="415">
-                                <field name="VAL">NEXT_MEMBER_SPOT</field>
+                                <field name="SPOT">NEXT_MEMBER_SPOT</field>
                               </block>
                             </value>
                             <value name="B">
@@ -2562,7 +2562,7 @@ swear_jar: fnCommentToString(function(){/*!
                             <field name="OP">+</field>
                             <value name="A">
                               <block type="LLL_mval" id="425">
-                                <field name="VAL">CALLER_TOTAL</field>
+                                <field name="SPOT">CALLER_TOTAL</field>
                               </block>
                             </value>
                             <value name="B">
@@ -2583,7 +2583,7 @@ swear_jar: fnCommentToString(function(){/*!
                                     <field name="OP">&lt;</field>
                                     <value name="A">
                                       <block type="LLL_sval" id="430">
-                                        <field name="VAL">LAST_EMPTY_TIME</field>
+                                        <field name="SPOT">LAST_EMPTY_TIME</field>
                                       </block>
                                     </value>
                                     <value name="B">
@@ -2638,12 +2638,12 @@ swear_jar: fnCommentToString(function(){/*!
                                                         <field name="OP">&lt;</field>
                                                         <value name="A">
                                                           <block type="LLL_mval" id="443">
-                                                            <field name="VAL">i</field>
+                                                            <field name="SPOT">i</field>
                                                           </block>
                                                         </value>
                                                         <value name="B">
                                                           <block type="LLL_sval" id="444">
-                                                            <field name="VAL">NEXT_MEMBER_SPOT</field>
+                                                            <field name="SPOT">NEXT_MEMBER_SPOT</field>
                                                           </block>
                                                         </value>
                                                       </block>
@@ -2656,7 +2656,7 @@ swear_jar: fnCommentToString(function(){/*!
                                                             <field name="POOL">sload</field>
                                                             <value name="SPOT">
                                                               <block type="LLL_mval" id="447">
-                                                                <field name="VAL">i</field>
+                                                                <field name="SPOT">i</field>
                                                               </block>
                                                             </value>
                                                           </block>
@@ -2669,7 +2669,7 @@ swear_jar: fnCommentToString(function(){/*!
                                                                 <field name="POOL">sload</field>
                                                                 <value name="SPOT">
                                                                   <block type="LLL_mval" id="450">
-                                                                    <field name="VAL">ONE_MEMBER</field>
+                                                                    <field name="SPOT">ONE_MEMBER</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
@@ -2682,12 +2682,12 @@ swear_jar: fnCommentToString(function(){/*!
                                                                     <field name="OP">&lt;</field>
                                                                     <value name="A">
                                                                       <block type="LLL_mval" id="453">
-                                                                        <field name="VAL">ONE_MEMBER_TOTAL</field>
+                                                                        <field name="SPOT">ONE_MEMBER_TOTAL</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
                                                                       <block type="LLL_mval" id="454">
-                                                                        <field name="VAL">BEST_TOTAL</field>
+                                                                        <field name="SPOT">BEST_TOTAL</field>
                                                                       </block>
                                                                     </value>
                                                                   </block>
@@ -2700,7 +2700,7 @@ swear_jar: fnCommentToString(function(){/*!
                                                                         <field name="SPOT">BEST_MEMBER</field>
                                                                         <value name="VAL">
                                                                           <block type="LLL_mval" id="457">
-                                                                            <field name="VAL">ONE_MEMBER</field>
+                                                                            <field name="SPOT">ONE_MEMBER</field>
                                                                           </block>
                                                                         </value>
                                                                         <next>
@@ -2708,7 +2708,7 @@ swear_jar: fnCommentToString(function(){/*!
                                                                             <field name="SPOT">BEST_TOTAL</field>
                                                                             <value name="VAL">
                                                                               <block type="LLL_mval" id="459">
-                                                                                <field name="VAL">ONE_MEMBER_TOTAL</field>
+                                                                                <field name="SPOT">ONE_MEMBER_TOTAL</field>
                                                                               </block>
                                                                             </value>
                                                                             <next>
@@ -2719,7 +2719,7 @@ swear_jar: fnCommentToString(function(){/*!
                                                                                     <field name="POOL">sstore</field>
                                                                                     <value name="SPOT">
                                                                                       <block type="LLL_mval" id="462">
-                                                                                        <field name="VAL">ONE_MEMBER</field>
+                                                                                        <field name="SPOT">ONE_MEMBER</field>
                                                                                       </block>
                                                                                     </value>
                                                                                     <value name="VAL">
@@ -2750,7 +2750,7 @@ swear_jar: fnCommentToString(function(){/*!
                                                                         <field name="OP">+</field>
                                                                         <value name="A">
                                                                           <block type="LLL_mval" id="467">
-                                                                            <field name="VAL">i</field>
+                                                                            <field name="SPOT">i</field>
                                                                           </block>
                                                                         </value>
                                                                         <value name="B">
@@ -2770,14 +2770,14 @@ swear_jar: fnCommentToString(function(){/*!
                                                     </statement>
                                                     <next>
                                                       <block type="LLL_spend" id="469" inline="true">
-                                                        <value name="MONEY">
+                                                        <value name="AMOUNT">
                                                           <block type="LLL_contract" id="471">
                                                             <field name="PROP">balance</field>
                                                           </block>
                                                         </value>
                                                         <value name="TO">
                                                           <block type="LLL_mval" id="470">
-                                                            <field name="VAL">BEST_MEMBER</field>
+                                                            <field name="SPOT">BEST_MEMBER</field>
                                                           </block>
                                                         </value>
                                                       </block>
@@ -2924,7 +2924,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                 </value>
                 <value name="B">
                   <block type="LLL_mval" id="654">
-                    <field name="VAL">PLAYER_NUM</field>
+                    <field name="SPOT">PLAYER_NUM</field>
                   </block>
                 </value>
               </block>
@@ -2947,7 +2947,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                     </value>
                     <value name="B">
                       <block type="LLL_mval" id="659">
-                        <field name="VAL">PLAYER_NUM</field>
+                        <field name="SPOT">PLAYER_NUM</field>
                       </block>
                     </value>
                   </block>
@@ -3071,12 +3071,12 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                 <field name="OP">=</field>
                                                 <value name="A">
                                                   <block type="LLL_mval" id="687">
-                                                    <field name="VAL">CHOICE1</field>
+                                                    <field name="SPOT">CHOICE1</field>
                                                   </block>
                                                 </value>
                                                 <value name="B">
                                                   <block type="LLL_mval" id="688">
-                                                    <field name="VAL">CHOICE2</field>
+                                                    <field name="SPOT">CHOICE2</field>
                                                   </block>
                                                 </value>
                                               </block>
@@ -3101,7 +3101,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                 <field name="OP">=</field>
                                                                 <value name="A">
                                                                   <block type="LLL_mval" id="695">
-                                                                    <field name="VAL">CHOICE1</field>
+                                                                    <field name="SPOT">CHOICE1</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
@@ -3119,7 +3119,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                     <field name="OP">=</field>
                                                                     <value name="A">
                                                                       <block type="LLL_mval" id="699">
-                                                                        <field name="VAL">CHOICE1</field>
+                                                                        <field name="SPOT">CHOICE1</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
@@ -3134,7 +3134,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                     <field name="OP">=</field>
                                                                     <value name="A">
                                                                       <block type="LLL_mval" id="702">
-                                                                        <field name="VAL">CHOICE1</field>
+                                                                        <field name="SPOT">CHOICE1</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
@@ -3156,7 +3156,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                 <field name="OP">=</field>
                                                                 <value name="A">
                                                                   <block type="LLL_mval" id="706">
-                                                                    <field name="VAL">CHOICE2</field>
+                                                                    <field name="SPOT">CHOICE2</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
@@ -3174,7 +3174,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                     <field name="OP">=</field>
                                                                     <value name="A">
                                                                       <block type="LLL_mval" id="710">
-                                                                        <field name="VAL">CHOICE2</field>
+                                                                        <field name="SPOT">CHOICE2</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
@@ -3189,7 +3189,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                     <field name="OP">=</field>
                                                                     <value name="A">
                                                                       <block type="LLL_mval" id="713">
-                                                                        <field name="VAL">CHOICE2</field>
+                                                                        <field name="SPOT">CHOICE2</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
@@ -3219,7 +3219,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                 <field name="OP">=</field>
                                                                 <value name="A">
                                                                   <block type="LLL_mval" id="719">
-                                                                    <field name="VAL">CHOICE1</field>
+                                                                    <field name="SPOT">CHOICE1</field>
                                                                   </block>
                                                                 </value>
                                                                 <value name="B">
@@ -3236,7 +3236,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                     <field name="OP">=</field>
                                                                     <value name="A">
                                                                       <block type="LLL_mval" id="723">
-                                                                        <field name="VAL">CHOICE2</field>
+                                                                        <field name="SPOT">CHOICE2</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
@@ -3276,7 +3276,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                     <field name="OP">=</field>
                                                                     <value name="A">
                                                                       <block type="LLL_mval" id="731">
-                                                                        <field name="VAL">CHOICE1</field>
+                                                                        <field name="SPOT">CHOICE1</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
@@ -3293,7 +3293,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                         <field name="OP">=</field>
                                                                         <value name="A">
                                                                           <block type="LLL_mval" id="735">
-                                                                            <field name="VAL">CHOICE2</field>
+                                                                            <field name="SPOT">CHOICE2</field>
                                                                           </block>
                                                                         </value>
                                                                         <value name="B">
@@ -3333,7 +3333,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                         <field name="OP">=</field>
                                                                         <value name="A">
                                                                           <block type="LLL_mval" id="743">
-                                                                            <field name="VAL">CHOICE1</field>
+                                                                            <field name="SPOT">CHOICE1</field>
                                                                           </block>
                                                                         </value>
                                                                         <value name="B">
@@ -3350,7 +3350,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                             <field name="OP">=</field>
                                                                             <value name="A">
                                                                               <block type="LLL_mval" id="747">
-                                                                                <field name="VAL">CHOICE2</field>
+                                                                                <field name="SPOT">CHOICE2</field>
                                                                               </block>
                                                                             </value>
                                                                             <value name="B">
@@ -3387,7 +3387,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                         <field name="NOTE">Pay the winner</field>
                                                                         <next>
                                                                           <block type="LLL_spend" id="754" inline="true">
-                                                                            <value name="MONEY">
+                                                                            <value name="AMOUNT">
                                                                               <block type="LLL_contract" id="755">
                                                                                 <field name="PROP">balance</field>
                                                                               </block>
@@ -3405,7 +3405,7 @@ rock_paper_scissors: fnCommentToString(function(){/*!
                                                                                     </value>
                                                                                     <value name="B">
                                                                                       <block type="LLL_mval" id="759">
-                                                                                        <field name="VAL">WINNER</field>
+                                                                                        <field name="SPOT">WINNER</field>
                                                                                       </block>
                                                                                     </value>
                                                                                   </block>

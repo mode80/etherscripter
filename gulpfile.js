@@ -1,4 +1,4 @@
-var deploy_dir = 'deploy/0-5-0'
+var deploy_dir = 'deploy/0-5-1'
 
 var gulp = require('gulp');
 var es = require('event-stream'); 

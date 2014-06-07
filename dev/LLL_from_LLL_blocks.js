@@ -137,7 +137,7 @@ Blockly.LLL['LLL_sstore'] = function(block) {
 Blockly.LLL['LLL_mval'] = function(block) {
   // gets value from a memory spot 
   var order = Blockly.LLL.ORDER_NONE;
-  var spot = block.getFieldValue('VAL') || 0  
+  var spot = block.getFieldValue('SPOT') || 0  
   var code = '@' + spot 
   return [code, Blockly.LLL.ORDER_ATOMIC]
 }
@@ -145,7 +145,7 @@ Blockly.LLL['LLL_mval'] = function(block) {
 Blockly.LLL['LLL_sval'] = function(block) {
   // gets value from a storage spot 
   var order = Blockly.LLL.ORDER_NONE;
-  var spot = block.getFieldValue('VAL') || 0  
+  var spot = block.getFieldValue('SPOT') || 0  
   spot = Blockly.LLL.smartVal(spot)
   var code = '@@' + spot 
   return [code, Blockly.LLL.ORDER_ATOMIC]
@@ -163,7 +163,7 @@ Blockly.LLL['LLL_spend'] = function(block) {
   // spend statement (a stripped version of call that just spends)
   var order = Blockly.LLL.ORDER_NONE;
   var address = Blockly.LLL.valueToCode(block,'TO', order) || 0  
-  var money = Blockly.LLL.valueToCode(block,'MONEY', order) || '0wei' 
+  var money = Blockly.LLL.valueToCode(block,'AMOUNT', order) || '0wei' 
   var op = 'call'
   var gas = '(- (gas) 100)'
   var send_start_i = '0'
@@ -204,12 +204,12 @@ Blockly.LLL['LLL_call'] = function(block) {
   // call 
   var op = 'call' 
   var address = Blockly.LLL.valueToCode(block, 'ADDRESS', Blockly.LLL.ORDER_NONE) || '0x0' 
-  var money = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE) || 0
+  var money = Blockly.LLL.valueToCode(block, 'AMOUNT', Blockly.LLL.ORDER_NONE) || 0
   var gas = Blockly.LLL.valueToCode(block, 'GAS', Blockly.LLL.ORDER_NONE) || '(- (gas) 100)'
   var send_start_i = Blockly.LLL.valueToCode(block, 'SEND_DATA_START', Blockly.LLL.ORDER_NONE) || 0
-  var send_bytes = Blockly.LLL.valueToCode(block, 'SEND_DATA_BYTES', Blockly.LLL.ORDER_NONE) || 0
+  var send_bytes = Blockly.LLL.valueToCode(block, 'SEND_DATA_LEN', Blockly.LLL.ORDER_NONE) || 0
   var reply_start_i = Blockly.LLL.valueToCode(block, 'REPLY_DATA_START', Blockly.LLL.ORDER_NONE) || 0
-  var reply_bytes = Blockly.LLL.valueToCode(block, 'REPLY_DATA_BYTES', Blockly.LLL.ORDER_NONE) || 0
+  var reply_bytes = Blockly.LLL.valueToCode(block, 'REPLY_DATA_LEN', Blockly.LLL.ORDER_NONE) || 0
   send_start_i = '(+ temp (* ' + send_start_i + ' 32))'
   send_bytes = '(* 32 ' + send_bytes + ')' 
   reply_start_i = '(+ temp (* ' + reply_start_i + ' 32))'
@@ -238,7 +238,7 @@ Blockly.LLL['LLL_return'] = function(block) {
 Blockly.LLL['LLL_create'] = function(block) {
   // create 
   var op = 'create' 
-  var a = Blockly.LLL.valueToCode(block, 'MONEY', Blockly.LLL.ORDER_NONE) || 0
+  var a = Blockly.LLL.valueToCode(block, 'AMOUNT', Blockly.LLL.ORDER_NONE) || 0
   var b = Blockly.LLL.valueToCode(block, 'DATA_START', Blockly.LLL.ORDER_NONE) || 0
   var c = Blockly.LLL.valueToCode(block, 'DATA_LEN', Blockly.LLL.ORDER_NONE) || 0
   var code = '(' + op + ' ' + a + ' (+ temp (* 32 ' + b + ')) (* 32 ' + c + ') )' 
