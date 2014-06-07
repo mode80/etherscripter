@@ -13,10 +13,10 @@ var htmlreplace = require('gulp-html-replace');
 gulp.task('min', function() {
     return gulp.src([
     			'dev/LLL.js',
-                'dev/LLL_blocks.js',
-                'dev/LLL_from_LLL_blocks.js',
+                'dev/BLL_blocks.js',
+                'dev/LLL_from_BLL.js',
                 'dev/HLL.js',
-                'dev/HLL_from_LLL_blocks.js',
+                'dev/HLL_from_BLL.js',
     			'dev/storage.js',
     			'dev/messages.js',
                 'dev/codemirror_LLL.js',

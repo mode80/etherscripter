@@ -218,7 +218,7 @@ function activeToolboxString(){
 function toggleTool(event) {
   var menuitem = $(event.currentTarget) 
   menuitem.toggleClass('active')  
-  $('#toolbox block[type="LLL_' +menuitem.attr('id')+ '"]')
+  $('#toolbox block[type="' +menuitem.attr('id')+ '"]')
     .attr('active',menuitem.hasClass('active'))
   Blockly.updateToolbox(activeToolboxString())
   event.stopPropagation() // stop menu vanish 
@@ -270,7 +270,7 @@ function someToolsOn(event){
     while (i--){
       var id = toolset[i]
       $('#'+id).addClass('active')  
-      $('#toolbox block[type="LLL_'+id+'"]').attr('active','true')
+      $('#toolbox block[type="'+id+'"]').attr('active','true')
     }
     $('#' + event.target.className + '-on').addClass('active')
   // render result

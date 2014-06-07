@@ -166,52 +166,52 @@
 <!-- Toolbox --> 
   <xml id="toolbox" style="display:none">
     <!-- Blocks commented out below have working functionality but deemed overkill for typical usage -->
-    <block type="LLL_comment"></block>
-    <block type="LLL_val"><field name="VAL">0</field></block>
-    <!-- <block type="LLL_textval"><field name="VAL">text</field></block> -->
-    <block type="LLL_currency"> <field name="DENOM">ether</field> <value name="AMT"> <block type="LLL_val"> <field name="VAL">0</field> </block> </value> </block>
-    <block type="LLL_tx"></block>
-    <block type="LLL_contract"></block>
-    <block type="LLL_blockinfo"></block>
-    <block type="LLL_input"></block>
-    <block type="LLL_thinput"></block>
-    <block type="LLL_math"></block>
-    <block type="LLL_compare"></block>
-    <block type="LLL_logic"></block>
-    <!-- <block type="LLL_save"></block> -->
-    <block type="LLL_mstore"><field name="SPOT">x</field></block>
-    <block type="LLL_mval"><field name="SPOT">x</field></block>
+    <block type="comment"></block>
+    <block type="val"><field name="VAL">0</field></block>
+    <!-- <block type="textval"><field name="VAL">text</field></block> -->
+    <block type="currency"> <field name="DENOM">ether</field> <value name="AMT"> <block type="val"> <field name="VAL">0</field> </block> </value> </block>
+    <block type="tx"></block>
+    <block type="contract"></block>
+    <block type="blockinfo"></block>
+    <block type="input"></block>
+    <block type="thinput"></block>
+    <block type="math"></block>
+    <block type="compare"></block>
+    <block type="logic"></block>
+    <!-- <block type="save"></block> -->
+    <block type="mstore"><field name="SPOT">x</field></block>
+    <block type="mval"><field name="SPOT">x</field></block>
     <!--     
-    <block type="LLL_sstore"></block>
-    <block type="LLL_sval"></block>
+    <block type="sstore"></block>
+    <block type="sval"></block>
      -->    
-    <block type="LLL_reserve"></block>
-    <block type="LLL_load"></block>
-    <block type="LLL_store"></block>
+    <block type="reserve"></block>
+    <block type="load"></block>
+    <block type="store"></block>
     <!--     
-    <block type="LLL_array_make"></block>
-    <block type="LLL_array_set"></block>
-    <block type="LLL_array_get"></block>
-    <block type="LLL_array"></block>
+    <block type="array_make"></block>
+    <block type="array_set"></block>
+    <block type="array_get"></block>
+    <block type="array"></block>
      -->    
-    <block type="LLL_spend"></block>
-    <block type="LLL_stop"></block>
-    <block type="LLL_suicide"></block>
-    <block type="LLL_when"></block>
-    <block type="LLL_if"></block>
-    <block type="LLL_whileloop"></block>
-    <!-- <block type="LLL_forloop"></block> -->
-    <block type="LLL_init"></block>
-    <block type="LLL_hash"></block>
-    <block type="LLL_return"></block>
-    <block type="LLL_call"></block>
+    <block type="spend"></block>
+    <block type="stop"></block>
+    <block type="suicide"></block>
+    <block type="when"></block>
+    <block type="if"></block>
+    <block type="whileloop"></block>
+    <!-- <block type="forloop"></block> -->
+    <block type="init"></block>
+    <block type="hash"></block>
+    <block type="return"></block>
+    <block type="call"></block>
     <!--
-    <block type="LLL_bitlogic"></block>
-    <block type="LLL_byte"></block>
-    <block type="LLL_prefixop"></block>
-    <block type="LLL_copy"></block>
-    <block type="LLL_create"></block>
-    <block type="LLL_compile_max"></block>
+    <block type="bitlogic"></block>
+    <block type="byte"></block>
+    <block type="prefixop"></block>
+    <block type="copy"></block>
+    <block type="create"></block>
+    <block type="compile_max"></block>
     -->
   </xml>
 
@@ -220,10 +220,10 @@
   <script src="blockly_compressed.js"></script>
   <script src="messages.js"></script>
   <script src="LLL.js"></script>
-  <script src="LLL_blocks.js"></script>
-  <script src="LLL_from_LLL_blocks.js"></script>
+  <script src="BLL_blocks.js"></script>
+  <script src="LLL_from_BLL.js"></script>
   <script src="HLL.js"></script>
-  <script src="HLL_from_LLL_blocks.js"></script>
+  <script src="HLL_from_BLL.js"></script>
   <!--<script src="GLL.js"></script>-->
   <!--<script src="GLL_from_LLL_blocks.js"></script>-->
   <script src="storage.js"></script>
