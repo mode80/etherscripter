@@ -5,11 +5,9 @@ Visual smart contract builder for Ethereum
 ### TODO
 
 * test 
-* revisit tooltips
-* rename blocks with consistent underscores, rename xml fields ?
 * sample to test calling a contract that returns 
 * RELEASE
-
+* "Found a small bug in EtherScripter: Once you click LLL, then whenever you go to XML, the LLL-script will also be displayed at the bottom.
 * is it (balance) or (balance (address))?
 
 * relentlessly simplify remaining blocks 

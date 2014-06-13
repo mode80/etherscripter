@@ -160,7 +160,7 @@ Blockly.HLL['SPEND'] = function(block) {
   // spend statement (a stripped version of call that just spends)
   var order = Blockly.HLL.ORDER_NONE;
   var address = Blockly.HLL.valueToCode(block,'TO', order) || 0  
-  var money = Blockly.HLL.valueToCode(block,'MONEY', order) || '0wei' 
+  var money = Blockly.HLL.valueToCode(block,'AMOUNT', order) || '0wei' 
   var gas = Blockly.HLL.MAX_GAS 
   var code = 'send('+ address +', '+ money +', '+ gas +')\n'
   return code
@@ -194,7 +194,7 @@ Blockly.HLL['CALL'] = function(block) {
   // call = msg in serpent 
   var op = 'msg' 
   var address = Blockly.HLL.valueToCode(block, 'ADDRESS', Blockly.HLL.ORDER_NONE) || '0x0' 
-  var money = Blockly.HLL.valueToCode(block, 'MONEY', Blockly.HLL.ORDER_NONE) || 0
+  var money = Blockly.HLL.valueToCode(block, 'AMOUNT', Blockly.HLL.ORDER_NONE) || 0
   var gas = Blockly.HLL.valueToCode(block, 'GAS', Blockly.HLL.ORDER_NONE) || Blockly.HLL.MAX_GAS 
   var send_start = Blockly.HLL.valueToCode(block, 'SEND_DATA_START', Blockly.HLL.ORDER_NONE) || 0
   var send_len= Blockly.HLL.valueToCode(block, 'SEND_DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
@@ -227,7 +227,7 @@ Blockly.HLL['RETURN'] = function(block) {
 Blockly.HLL['CREATE'] = function(block) {
   // create 
   var op = 'create' 
-  var a = Blockly.HLL.valueToCode(block, 'MONEY', Blockly.HLL.ORDER_NONE) || 0
+  var a = Blockly.HLL.valueToCode(block, 'AMOUNT', Blockly.HLL.ORDER_NONE) || 0
   var b = Blockly.HLL.valueToCode(block, 'DATA_START', Blockly.HLL.ORDER_NONE) || 0
   var c = Blockly.HLL.valueToCode(block, 'DATA_LEN', Blockly.HLL.ORDER_NONE) || 0
   var gas = Blockly.HLL.MAX_GAS
