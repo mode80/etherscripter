@@ -9,7 +9,7 @@ if (process.env.NODE_ENV=='development') {
 } else {  // production settings
 	var port = 80
 	var dir = __dirname + '/deploy' 
-  var current_ver = '0-4-0'
+  var current_ver = '0-5-1'
 }
 
 connect()
