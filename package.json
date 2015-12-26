@@ -22,9 +22,7 @@
     "www.etherscripter.com"
   ],
   "subdomain": "etherscripter",
-  "scripts": {
-    "start": "server.js"
-  },
+  "main":"server.js",
   "engines": {
     "node": "0.10.x"
   }

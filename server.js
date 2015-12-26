@@ -7,7 +7,7 @@ if (process.env.NODE_ENV=='development') {
 	var dir = __dirname 
   var current_ver = 'dev'
 } else {  // production settings
-	var port = 80
+	var port = process.env.PORT 
 	var dir = __dirname + '/deploy' 
   var current_ver = '0-5-1'
 }
